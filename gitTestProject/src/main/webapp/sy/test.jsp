@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>장영우</h1>
-	<p>test</p>
+	<h1>내가 만듬!!</h1>
 </body>
 </html>
