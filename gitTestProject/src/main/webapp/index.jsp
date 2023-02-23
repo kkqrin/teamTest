@@ -10,5 +10,6 @@
 	<h1>GIT 연동 성공!</h1>
 	<hr>
 	<a href="/test.do">서블릿테스트</a>
+	<h1>김포이광수</h1>
 </body>
 </html>
