@@ -19,7 +19,7 @@
             <div class="site-logo">
                 <a href="/">중고사자</a>
                 <div class="site-img">
-                    <img src="/img/lion (1).png" style="width:50px;">
+                    <img src="/img/lion (1).png" style="width:45px;">
                 </div>
             </div>
             <div class="search-box">

@@ -70,10 +70,15 @@ header>.header-top{
     margin-right: 10px;
     font-family: ONE-Mobile-Title;
 }
+.site-img>img{
+	 width:45px;
+	 padding-top:10px;
+}
 .search-box{
     width: 600px;
     padding: 10px;
     padding-top: 20px;
+    position: relative;
 }
 .member-link{
     width: 300px;
@@ -97,10 +102,8 @@ header>.header-top{
     border: none;
     margin-top: 10px;
     position: absolute;
-    top: 46px;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    top:12px;
+    left:450px;
 }
 .search-icon>span{
     color: #848485;
@@ -174,16 +177,12 @@ header> .sub-navi{
 
 /* input 디자인  */
 .input-form {
-    width: 50%;
+    width: 70%;
     outline: none;
-    border: none;
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ccc;
     background-color: #fff;
     display: inline-block;
     height: 40px;
-    position: relative;
     padding-left: 20px;
 }
 
