@@ -13,7 +13,7 @@
         <div class="header-link">
             <a class="btn bc11">로그인</a>
             <a class="btn bc11">회원가입</a>
-            <a class="btn bc11">고객센터</a>
+            <a href="/custmoService.do" class="btn bc11">고객센터</a>
         </div>
         <div class="header-top">
             <div class="site-logo">
@@ -31,8 +31,6 @@
                 </button>
             </div>
             <div class="member-link">
-                <!-- <button class="btn bc1">마이페이지</button> -->
-                <!-- <a class="btn bc1">관심상품</a> -->
                 <a href="#" class="btn">
                     <span class="material-symbols-outlined">account_circle</span>
                     <p>마이페이지</p>
@@ -48,14 +46,6 @@
                 <li><a href="#">메뉴-1</a></li>
                 <li class="category">
                     <a href="#">카테고리</a>
-                    <!-- <ul class="sub-navi">
-                        <li><a href="#">sub-1</a></li>
-                        <li><a href="#">sub-2</a></li>
-                        <li><a href="#">sub-3</a></li>
-                        <li><a href="#">sub-4</a></li>
-                        <li><a href="#">sub-5</a></li>
-                        <li><a href="#">sub-6</a></li>
-                    </ul> -->
                 </li>
                 <li><a href="#">메뉴-3</a></li>
                 <li><a href="#">메뉴-4</a></li>
