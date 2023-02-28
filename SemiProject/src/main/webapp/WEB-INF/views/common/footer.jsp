@@ -1,21 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> footer </title>
-    <%-- 기본 CSS --%>
-    <link rel="stylesheet" href="css/footer.css">
-</head>
-<body>
     <footer>
         <div class="footer-wrap">
             <div class="sns-img">
-                <a href="#"><img src="image/in.png" style="width: 20px;"></a>
-                <a href="#"><img src="image/face.png" style="width: 22px;"></a>
+                <a href="#"><img src="/img/in.png" style="width: 20px;"></a>
+                <a href="#"><img src="/img/face.png" style="width: 22px;"></a>
             </div>
             <div class="footer-title">
                 <p>(주)중고사자 사업자 정보</p>
@@ -39,6 +28,6 @@
             </div>
         </div>
     </footer>
-</body>
-</html>
+    
+    <script src="/js/header.js"></script>
     

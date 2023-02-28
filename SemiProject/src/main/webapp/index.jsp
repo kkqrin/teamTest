@@ -3,10 +3,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>중 고 사 자</title>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<div class="page-content">
+	
+	<h1>메인페이지</h1>	
+	
+	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

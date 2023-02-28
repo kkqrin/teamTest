@@ -1,20 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>중고사자</title>
     <!-- 기본 css -->
     <link rel="stylesheet" href="/css/liondefault.css"></link>
+    <link rel="stylesheet" href="/css/footer.css"></link>
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- 제이쿼리 -->
     <script src="js/jquery-3.6.3.min.js"></script>
-</head>
-<body>
+
     <header>
         <div class="header-link">
             <a class="btn bc11">로그인</a>
@@ -23,7 +17,7 @@
         </div>
         <div class="header-top">
             <div class="site-logo">
-                <a href="#">중고사자</a>
+                <a href="/">중고사자</a>
                 <div class="site-img">
                     <img src="/img/lion (1).png" style="width:50px;">
                 </div>
@@ -99,22 +93,4 @@
                 <li><a href="#">sub-26</a></li>
             </div>
         </ul>
-
-
-
     </header>
-    <script>
-        $(".sub-navi").hide();
-        $(".category").on("mouseenter", function(){
-            $(".sub-navi").show();
-            $("nav").css("border-bottom", "none");
-            $(".sub-navi").on("mouseleave", function(){
-                $(".sub-navi").hide();
-                $("nav").css("border-bottom", "1px solid #ccc");
-            });
-        });
-
-
-    </script>
-</body>
-</html>
