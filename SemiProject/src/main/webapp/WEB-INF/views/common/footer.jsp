@@ -9,7 +9,12 @@
             <div class="footer-title">
                 <p>(주)중고사자 사업자 정보</p>
             </div>
-          
+          	<div class="footer-service">
+                <strong>고객센터 1577 - 1234</strong>
+                <p>평일 : 9:00 - 18:00</p>
+                <p>점심시간 : 13:00 - 14:00제외, 주말/공휴일 제외</p>
+                <button type="button">자주묻는 질문</button>
+            </div>
             <div class="footer-content">
                 <p>(주)중고사자 <span class="divder"></span> 대표자 : 김규린</p>
                 <p>사업자 등록번호 : 211-11-12345</p>
