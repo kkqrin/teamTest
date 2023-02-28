@@ -14,8 +14,8 @@
     <footer>
         <div class="footer-wrap">
             <div class="sns-img">
-                <a href="#"><img src="image/in.png" style="width: 20px;"></a>
-                <a href="#"><img src="image/face.png" style="width: 22px;"></a>
+                <a href="#"><img src="/img/in.png" style="width: 20px;"></a>
+                <a href="#"><img src="/img/face.png" style="width: 22px;"></a>
             </div>
             <div class="footer-title">
                 <p>(주)중고사자 사업자 정보</p>
