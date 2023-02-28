@@ -14,7 +14,7 @@ public class JDBCTemplate {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.10.18:1521:xe", "webserver", "1234");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@1.220.236.74:15214:xe", "lionUser", "1234");
 			// 자동으로 commit 되는 기능을 비활성화
 
 			conn.setAutoCommit(false);
