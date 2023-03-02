@@ -7,7 +7,29 @@
 <title>Insert title here</title>
 <style>
 	.naviHide{
-	display: none;
+		display: none;
+	}
+	body>.page-content{
+		width: 1000px;
+		overflow: hidden;
+	}
+	
+	.content-tab{
+		width: 150px;
+		float: left;
+	}
+	.content-tab>div{
+		height: 40px;
+		font-size: 20px;
+		line-height: 40px;
+		text-align : right;
+		border: 1px solid black;
+		box-sizing: border-box;
+	}
+	.content-main{
+		width: 850px;
+				float: left;
+		
 	}
 </style>
 </head>
@@ -60,6 +82,7 @@
                     </tr>
                 </table>
             </div>
+	</div>
 	</div>
 	<%@ include file = "/WEB-INF/views/common/footer.jsp" %>
 	
