@@ -17,7 +17,7 @@ public class MemberDao {
 		
 		ArrayList<Member> list = new ArrayList<Member>();
 		
-		String query = "select * from member_tbl doder by 1";
+		String query = "select * from member_tbl order by 1";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
