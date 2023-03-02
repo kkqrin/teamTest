@@ -17,14 +17,14 @@ import sp.member.vo.Member;
 /**
  * Servlet implementation class AdminPageMemberServlet
  */
-@WebServlet(name = "AdminPageMember", urlPatterns = { "/adminPageMember.do" })
-public class AdminPageMemberServlet extends HttpServlet {
+@WebServlet(name = "AdminPageGrade", urlPatterns = { "/adminPageGrade.do" })
+public class AdminPageGradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPageMemberServlet() {
+    public AdminPageGradeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,7 +42,7 @@ public class AdminPageMemberServlet extends HttpServlet {
 		MemberService service = new MemberService();
 		ArrayList<Member> list = service.selectAllMember();
 		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/adminPageMember.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/adminPageGrade.jsp");
 		request.setAttribute("list", list);
 		view.forward(request, response);
 	}
