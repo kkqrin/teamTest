@@ -5,7 +5,8 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private String memberEmail;
+	private String memberPhone;
+ 	private String memberEmail;
 	private int memberGrade;
 	private String enrollDate;
 	private String postNumber;
@@ -17,14 +18,15 @@ public class Member {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberEmail,
-			int memberGrade, String enrollDate, String postNumber, String memberAddr, String memberAddr2,
-			int memberPoint, int memberTemp) {
+	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberPhone,
+			String memberEmail, int memberGrade, String enrollDate, String postNumber, String memberAddr,
+			String memberAddr2, int memberPoint, int memberTemp) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
 		this.memberPw = memberPw;
 		this.memberName = memberName;
+		this.memberPhone = memberPhone;
 		this.memberEmail = memberEmail;
 		this.memberGrade = memberGrade;
 		this.enrollDate = enrollDate;
@@ -57,6 +59,12 @@ public class Member {
 	}
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
+	}
+	public String getMemberPhone() {
+		return memberPhone;
+	}
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
 	}
 	public String getMemberEmail() {
 		return memberEmail;
@@ -106,5 +114,6 @@ public class Member {
 	public void setMemberTemp(int memberTemp) {
 		this.memberTemp = memberTemp;
 	}
+
 	
 }
