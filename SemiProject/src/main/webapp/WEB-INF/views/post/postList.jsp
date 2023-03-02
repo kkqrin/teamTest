@@ -1,5 +1,14 @@
+<%@page import="sp.post.vo.Post"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
+    	String pageNavi = (String)request.getAttribute("pageNavi");
+    	int start = (int)request.getAttribute("start");
+    	int totalCount = (int)request.getAttribute("totalCount");
+    	int notRead = (int)request.getAttribute("notRead");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +21,8 @@
 	body>.page-content{
 		width: 1000px;
 		overflow: hidden;
-		background-color: #252a34;
-    	color: #fff;
+		background-color: #fff;
+    	color: #252a34;
 	}
 	
 	.content-tab{
@@ -28,8 +37,8 @@
 		text-align : right;
 		border: 1px solid #787f86;
 		box-sizing: border-box;
-		background-color: #252a34;
-    	color: #fff;
+		background-color: #fff;
+    	color: #252a34;
     	padding-right: 10px;
     	border-top: 0;
     	border-right: 0;
@@ -59,8 +68,8 @@
 	.main-title{
 		text-align: right;
 		height: 40px;
-		background-color: #252a34;
-    	color: #fff;
+		background-color: #fff;
+    	color: #252a34;
     	line-height: 60px;
     	padding-right: 20px;
     	box-sizing: border-box;
@@ -80,8 +89,8 @@
 	}
 	
 	table td,th{
-		background-color: #252a34;
-    	color: #fff;
+		background-color: #fff;
+    	color: #252a34;
     	font-size: 11px;
 		
 	}
@@ -90,7 +99,7 @@
 		margin-top: 10px 10px;
 	}
 	span{
-	color: #fff;
+	color: #252a34;
 	}
 	table th,.post-id,.post-content,.post-time{
 		border-bottom: 1px solid #787f86;
@@ -99,8 +108,8 @@
 	.post-btn{
 		width: 70px;
 		text-align: center;
-		background-color: #252a34;
-    	color: #fff;
+		background-color: #fff;
+    	color: #252a34;
     	
 	}
 	.post-time{
@@ -131,157 +140,33 @@
             <div class="letterBox bc1">전체 보관함</div>
         </div>
         <div class="content-main">
-            <div class="main-title"><span>알림</span>안읽은쪽지[ <span>0</span> ]통 | 전체 쪽지 [ <span>10</span> ] 통</div>
+            <div class="main-title"><span>알림</span>안읽은쪽지[ <span><%=notRead %></span> ]통 | 전체 쪽지 [ <span><%=totalCount %></span> ] 통</div>
             <div class="message">
                 <table>
+                <%for(int i=0;i<list.size();i++) {%>
+                <% Post p = list.get(i); %>
                     <tr>
                         <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">1</th>
+                        <th rowspan="2" class="post-count"><%=p.getPostNo()  %></th>
                         <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
+                        <td colspan="2" class="post-title"><%=p.getPostTitle() %></td>
+                        <%if(p.getIdentify() == 1){ %>
                         <td class="read">안읽음</td>
+                        <%}else{ %>
+                        <td class="read">읽음</td>
+                        <%} %>
                         <th rowspan="2" class="post-btn bc02">답장하기</th>
                         <th rowspan="2" class="post-btn bc02">삭제하기</th>
                     </tr>
+              
                     <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
+                        <td class="post-id"><%=p.getPostSender() %></td>
+                        <td class="post-content"><%=p.getPostContent() %></td>
+                        <td class="post-time"><%=p.getRegDate() %></td>
                     </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">2</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                        <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                    <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">3</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">4</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">5</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">6</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">7</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">8</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">9</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
-                       </tr>
-                       <tr>
-                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count">10</th>
-                        <th rowspan="2" class="th-img">사진</th>
-                        <td colspan="2" class="post-title">받은쪽지함</td>
-                        <td class="read">안읽음</td>
-                         <th rowspan="2" class="post-btn bc02">답장하기</th>
-                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
-                    </tr>
-                    <tr>
-                        <td class="post-id">발신자</td>
-                        <td class="post-content">아 언제하냐 힘들다</td>
-                        <td class="post-time">2023-02-27 09:15:17</td>
-                    </tr>
+                <%} %>
                 </table>
-                <div id="pageNavi"><%-- <%=pageNavi %> --%></div>
+                <div id="pageNavi"><%=pageNavi %></div>
             </div>
       
             </div>
