@@ -15,3 +15,12 @@ $(".sub-navi").on("mouseleave", function(){
     $(".sub-navi").hide();
     $("nav").css("border-bottom", "1px solid #ccc");
 });
+
+$(".more-btn").on("click", function(event){
+    $(this).parent().parent().next().show();
+    // 버블링 막기
+    event.stopPropagation();
+});
+$(document).on("click", function(){
+    $(".comment-update").hide();
+});
