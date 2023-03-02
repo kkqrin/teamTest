@@ -20,15 +20,59 @@
 				<!-- 한 행에 4칸 -->
 				<tr class="tr-1">
 					<!--<td><img src="#"></td>-->
-					<td><button type="button" class="btn bc1 bs2">사진등록</button></td>
+					<td colspan="3" ><button type="button" class="btn bc1 bs2">사진등록</button></td>
 				</tr>
 				<tr class="tr-1">
-					<td>
+					<td colspan="3">
 						<input type="text" name="productTitle" class="input-form" placeholder="제목">
 					</td>
 				</tr>
 				<tr class="tr-1">
-					<td><input type="text" class="input-form"></td>
+					<td>
+						<select class="input-form">
+						<option value="1" selected>카테고리</option>
+						<option value="2">패션의류</option>
+						<option value="3">패션잡화</option>
+						<option value="4">뷰티</option>
+						<option value="5">출산/유아동</option>
+						<option value="6">모바일/태블릿</option>
+						<option value="7">가전제품</option>
+						<option value="8">노트북/PC</option>
+						<option value="9">카메라/캠코더</option>
+						<option value="3">가구/인테리어</option>
+						<option value="3">리빙/생활</option>
+						<option value="3">게임</option>
+						<option value="3">반려동물/취미</option>
+						<option value="3">도서/음반/문구</option>
+						<option value="3">티켓/쿠폰</option>
+						<option value="3">스포츠</option>
+						<option value="3">레저/여행</option>
+						<option value="3">공구/산업용품</option>	
+					</select>
+					</td>
+					<td>>>>></td>
+					<td>
+						<select class="input-form">
+						<option value="1" selected>하위 카테고리</option>
+						<option value="2">패션의류</option>
+						<option value="3">패션잡화</option>
+						<option value="4">뷰티</option>
+						<option value="5">출산/유아동</option>
+						<option value="6">모바일/태블릿</option>
+						<option value="7">가전제품</option>
+						<option value="8">노트북/PC</option>
+						<option value="9">카메라/캠코더</option>
+						<option value="3">가구/인테리어</option>
+						<option value="3">리빙/생활</option>
+						<option value="3">게임</option>
+						<option value="3">반려동물/취미</option>
+						<option value="3">도서/음반/문구</option>
+						<option value="3">티켓/쿠폰</option>
+						<option value="3">스포츠</option>
+						<option value="3">레저/여행</option>
+						<option value="3">공구/산업용품</option>	
+					</select>
+					</td>
 				</tr>
 				<tr class="tr-1">
 					<td colspan="4"><input type="text" class="input-form" placeholder="가격"></td>
