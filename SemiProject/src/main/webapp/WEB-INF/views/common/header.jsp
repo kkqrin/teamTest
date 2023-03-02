@@ -11,7 +11,7 @@
 
     <header>
         <div class="header-link">
-            <a href="/postList.do" class="btn bc0">쪽지함</a>
+            <a href="/postList.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
             <a class="btn bc0">로그인</a>
             <a class="btn bc0">회원가입</a>
             <a href="/custmoService.do" class="btn bc0">고객센터</a>
@@ -39,6 +39,10 @@
                 <a href="#" class="btn">
                     <span class="material-symbols-outlined">favorite</span>
                     <p>관심상품</p>
+                </a>
+                <a href="/insertProduct.do" class="btn">
+	                <span class="material-symbols-outlined">edit</span>
+                    <p>판매하기</p>
                 </a>
             </div>
         </div>

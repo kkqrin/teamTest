@@ -1,8 +1,7 @@
 package sp.post.vo;
 
 public class Post {
-	private int postNO;
-	private int memberNo;
+	private int postNo;
 	private String postSender;
 	private String postReseiver;
 	private String postTitle;
@@ -13,11 +12,10 @@ public class Post {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Post(int postNO, int memberNo, String postSender, String postReseiver, String postTitle, String postContent,
+	public Post(int postNo, String postSender, String postReseiver, String postTitle, String postContent,
 			String regDate, int identify) {
 		super();
-		this.postNO = postNO;
-		this.memberNo = memberNo;
+		this.postNo = postNo;
 		this.postSender = postSender;
 		this.postReseiver = postReseiver;
 		this.postTitle = postTitle;
@@ -25,17 +23,11 @@ public class Post {
 		this.regDate = regDate;
 		this.identify = identify;
 	}
-	public int getPostNO() {
-		return postNO;
+	public int getPostNo() {
+		return postNo;
 	}
-	public void setPostNO(int postNO) {
-		this.postNO = postNO;
-	}
-	public int getMemberNo() {
-		return memberNo;
-	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
 	}
 	public String getPostSender() {
 		return postSender;
