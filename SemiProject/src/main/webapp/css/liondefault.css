@@ -27,7 +27,26 @@
 }
 
 /* 사이트 사용 색상
-
+    color: #252a34;
+    color: #1b1b1b;
+    color: #4e4e4e;
+    color: #6d6d6d;
+    color: #eee;
+    color: #eb3c4e;
+    color: #236cda;
+    color: #2f9746;
+    color: #f87d2a;
+    color: #8258f7;
+    background-color: #252a34;
+    background-color: #1b1b1b;
+    background-color: #4e4e4e;
+    background-color: #6d6d6d;
+    background-color: #eee;
+    background-color: #e9c2c6;
+    background-color: #c5e9e1;
+    background-color: #d2e5f3;
+    background-color: #f2e5c7;
+    background-color: #e2dcf3;
 */
 
 
@@ -90,13 +109,6 @@ header>.header-top {
     margin-right: 10px;
     font-family: ONE-Mobile-Title;
 }
-<<<<<<< HEAD
-.site-img>img{
-	 width:45px;
-	 padding-top:10px;
-}
-.search-box{
-=======
 
 .site-img>img {
     width: 45px;
@@ -105,7 +117,6 @@ header>.header-top {
 }
 
 .search-box {
->>>>>>> kyr_br
     width: 600px;
     padding: 10px;
     padding-top: 20px;
@@ -137,13 +148,8 @@ header>.header-top {
     border: none;
     margin-top: 10px;
     position: absolute;
-<<<<<<< HEAD
-    top:12px;
-    left:450px;
-=======
     top: 12px;
     left: 450px;
->>>>>>> kyr_br
 }
 
 .search-icon>span {
@@ -233,17 +239,6 @@ header>.sub-navi {
     z-index: 0;
 }
 
-<<<<<<< HEAD
-/* input 디자인  */
-.input-form {
-    width: 70%;
-    outline: none;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    display: inline-block;
-    height: 40px;
-    padding-left: 20px;
-=======
 
 
 /* font 클래스 */
@@ -441,7 +436,6 @@ header>.sub-navi {
 
 .tbl.tbl-hover .tr-6:hover {
     background-color: rgba(222, 216, 240, 0.7);
->>>>>>> kyr_br
 }
 
 
