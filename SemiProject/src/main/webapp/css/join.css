@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+.join-wrap{
+    margin: 0 auto;
+    margin-top: 150px;
+    width: 1200px;
+   
+}
+.mid-input{
+    width: 300px;
+}
+.long-input{
+    width: 400px;
+}
+.join-header{
+    width: 400px;
+    margin: 0 auto;
+   text-align: center;
+}
+.join-content{
+    width: 400px;
+    margin: 0 auto;
+}
+.join-input-wrap input{
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+.join-input-wrap{
+    margin: 10px 0;
+}
+.dup-btn{
+    width: 94px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+.agree-check{
+    margin: 20px 0;
+    position: relative;
+    padding-left: 30px;
+}
+.agree-check>input{
+    width: 18px;
+    position: absolute;
+    left: 0;
+    top: 3px;
+}
+.join-btn-wrap>button{
+    border-style: none;
+    width: 400px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #ebebeb;
+    margin-top: 20px;
+}
+.plusImg{
+    position: relative;   
+   
+}
+.plusImg>img{
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+   width: 18px;
+   
+}
+.sub-agree-check{
+    margin: 20px 0;
+    position: relative;
+    padding-left: 30px;
+}
+.sub-agree-check>input{
+    width: 18px;
+    position: absolute;
+    left: 0;
+    top: 3px;
+}
+.sub-agree-check>.check-message{
+    overflow: hidden;
+}
+.sub-agree-check>.check-message>a{
+    float: right;
+}
+
+.sub-agree-check2{
+    margin: 20px 0;
+    position: relative;
+    padding-left: 30px;
+}
+.sub-agree-check2>input{
+    width: 18px;
+    position: absolute;
+    left: 0;
+    top: 3px;
+}
+.sub-agree-check2>.check-message{
+    overflow: hidden;
+}
+.sub-agree-check2>.check-message>a{
+    float: right;
+}
+
+input[type="checkbox"]{
+    display:none
+}
+input[type="checkbox"]+label{
+  display:inline-block;
+  width: 18px;
+  height:18px;
+  background:url(../img/unchecked-checkbox-24.png);
+  vertical-align:middle;
+  background-size: cover;
+}
+input[type="checkbox"]:checked + label{
+    width: 18px;
+    height: 18px;
+  background:url(../img/checkbox-24.png); 
+  background-size: cover;
+}
+.minusImg{
+    position: relative; 
+     
+}
+.minusImg>img{
+    position: absolute;
+    bottom: 3px;
+    right: 0;
+   display: none;
+   width: 18px;
+}
+
+.sub-agree-check{
+    display: none;
+}
+
+.sub-agree-check2{
+    display: none;
+}
+
+
