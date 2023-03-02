@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <title>회원가입</title>
+    <title>회원가입</title>
     <link rel = "stylesheet" href= "css/join.css">
     <script src = "js/jquery-3.6.3.min.js"></script>
 </head>
