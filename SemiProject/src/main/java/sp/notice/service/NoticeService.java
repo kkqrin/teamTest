@@ -76,5 +76,18 @@ public class NoticeService {
 		NoticePageData npd = new NoticePageData(list, pageNavi, start);
 		return npd;
 	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateReadCount(conn,noticeNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+			Notice n = dao.selectOneNotice(conn, noticeNo);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return null;
+	}
 	
 }
