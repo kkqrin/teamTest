@@ -8,6 +8,10 @@
     	int start = (int)request.getAttribute("start");
     	int totalCount = (int)request.getAttribute("totalCount");
     	int notRead = (int)request.getAttribute("notRead");
+    	
+    	ArrayList<Post> list1 = (ArrayList<Post>)request.getAttribute("list1");
+    	String pageNavi1 = (String)request.getAttribute("pageNavi1");
+    	int start1 = (int)request.getAttribute("start1");
     %>
 <!DOCTYPE html>
 <html>
@@ -128,6 +132,14 @@
 	.th-btn{
 		border-left: 1px solid #787f86;
 	}
+	.post-content>div{
+		width : 300px;
+		height : 20px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		line-height: 20px;
+	}
 </style>
 </head>
 <body>
@@ -135,7 +147,7 @@
 	<div class="page-content">
 		<div class="content-tab">
             <div class="letterBox">쪽지함</div>
-            <div class="letterBox bc1">받은 쪽지함</div>
+            <div class="letterBox bc1">안읽은 쪽지함</div>
             <div class="letterBox bc1">보낸 쪽지함</div>
             <div class="letterBox bc1">전체 보관함</div>
         </div>
@@ -143,11 +155,37 @@
             <div class="main-title"><span>알림</span>안읽은쪽지[ <span><%=notRead %></span> ]통 | 전체 쪽지 [ <span><%=totalCount %></span> ] 통</div>
             <div class="message">
                 <table>
+                <%for(int i=0;i<list1.size();i++) {%>
+                <% Post p = list1.get(i); %>
+                    <tr>
+                        <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
+                        <th rowspan="2" class="post-count"><%=i+start1  %></th>
+                        <th rowspan="2" class="th-img">사진</th>
+                        <td colspan="2" class="post-title"><%=p.getPostTitle() %></td>
+                        <%if(p.getIdentify() == 1){ %>
+                        <td class="read">안읽음</td>
+                        <%}%>
+                        <th rowspan="2" class="post-btn bc02 openWindow">읽기<input type="text" value="<%=p.getPostNo()%>"></th>
+                        <th rowspan="2" class="post-btn bc02">삭제하기</th>
+                    </tr>
+              
+                    <tr>
+                        <td class="post-id"><%=p.getPostSender() %></td>
+                        <td class="post-content"><div><%=p.getPostContent() %></div></td>
+                        <td class="post-time"><%=p.getRegDate() %></td>
+                    </tr>
+                <%} %>
+                </table>
+                <div id="pageNavi"><%=pageNavi1 %></div>
+            </div>
+            
+            <div class="message">
+                <table>
                 <%for(int i=0;i<list.size();i++) {%>
                 <% Post p = list.get(i); %>
                     <tr>
                         <th rowspan="2" class="th-btn"><input type="checkbox" name="check"></th>
-                        <th rowspan="2" class="post-count"><%=p.getPostNo()  %></th>
+                        <th rowspan="2" class="post-count"><%=i+start  %></th>
                         <th rowspan="2" class="th-img">사진</th>
                         <td colspan="2" class="post-title"><%=p.getPostTitle() %></td>
                         <%if(p.getIdentify() == 1){ %>
@@ -155,13 +193,13 @@
                         <%}else{ %>
                         <td class="read">읽음</td>
                         <%} %>
-                        <th rowspan="2" class="post-btn bc02">답장하기</th>
+                        <th rowspan="2" class="post-btn bc02 openWindow">읽기<input type="text" value="<%=p.getPostNo()%>"></th>
                         <th rowspan="2" class="post-btn bc02">삭제하기</th>
                     </tr>
               
                     <tr>
                         <td class="post-id"><%=p.getPostSender() %></td>
-                        <td class="post-content"><%=p.getPostContent() %></td>
+                        <td class="post-content"><div><%=p.getPostContent() %></div></td>
                         <td class="post-time"><%=p.getRegDate() %></td>
                     </tr>
                 <%} %>
@@ -176,7 +214,13 @@
             		$('.message').eq($('.letterBox').index(this)-1).show();
             	});
             	
-            	$('.letterBox').eq(0).click();
+            	$('.letterBox').eq(1).click();
+            	
+            	$('.openWindow').on('click',function(){
+            		const postNo = $(this).children().val();
+            		 window.open("/postViewFrm.do?postNo="+postNo,"1","left=700px,top=400px,width=570px,height=460px,menubar=no,status=no");
+            		
+            	});
             </script>
 	</div>
 
