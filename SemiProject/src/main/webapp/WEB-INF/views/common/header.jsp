@@ -11,6 +11,7 @@
 
     <header>
         <div class="header-link">
+            <a href="/postList.do" class="btn bc11">쪽지함</a>
             <a class="btn bc11">로그인</a>
             <a class="btn bc11">회원가입</a>
             <a href="/custmoService.do" class="btn bc11">고객센터</a>
@@ -42,7 +43,7 @@
             </div>
         </div>
         <nav>
-            <ul class="navi">
+            <ul class="navi naviHide">
                 <li><a href="#">메뉴-1</a></li>
                 <li class="category">
                     <a href="#">카테고리</a>
@@ -52,7 +53,7 @@
                 <li><a href="#">메뉴-5</a></li>
             </ul>
         </nav>
-        <ul class="sub-navi">
+        <ul class="sub-navi naviHide">
             <div>
                 <p>CATEGORY</p>
                 <li><a href="#">sub-1</a></li>
