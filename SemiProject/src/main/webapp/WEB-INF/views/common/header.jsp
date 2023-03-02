@@ -11,10 +11,10 @@
 
     <header>
         <div class="header-link">
-            <a href="/postList.do" class="btn bc11">쪽지함</a>
-            <a class="btn bc11">로그인</a>
-            <a class="btn bc11">회원가입</a>
-            <a href="/custmoService.do" class="btn bc11">고객센터</a>
+            <a href="/postList.do" class="btn bc0">쪽지함</a>
+            <a class="btn bc0">로그인</a>
+            <a class="btn bc0">회원가입</a>
+            <a href="/custmoService.do" class="btn bc0">고객센터</a>
         </div>
         <div class="header-top">
             <div class="site-logo">
