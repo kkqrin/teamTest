@@ -14,6 +14,7 @@
 
 <!-- alert 라이브러리 -->
 <script src="/js/sweetalert.min.js"></script> 
+
 </head>
 <body>
 	<div style="display : none;">
@@ -33,6 +34,7 @@
 			icon : icon
 		}).then(function(){
 			location.href = loc; // 메인페이지 이동 '/'			
+
 		});
 	</script>
 </body>
