@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.post.service.PostService;
-import sp.post.vo.PostPageData;
 
 /**
- * Servlet implementation class PostListServlet
+ * Servlet implementation class PostSendServlet
  */
-@WebServlet(name = "PostList", urlPatterns = { "/postList.do" })
-public class PostListServlet extends HttpServlet {
+@WebServlet(name = "PostSend", urlPatterns = { "/postSend.do" })
+public class PostSendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostListServlet() {
+    public PostSendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,24 @@ public class PostListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String memberId = request.getParameter("memberId");
-		PostService service = new PostService();
-		PostPageData ppd = service.selectPostAllList(reqPage,memberId);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
+		String reseiver = request.getParameter("postReseiver");
+		String postTitle = request.getParameter("post-title");
+		String postContent = request.getParameter("post-content");
 		
-		request.setAttribute("list", ppd.getList());
-		request.setAttribute("start",ppd.getStart());
-		request.setAttribute("pageNavi", ppd.getPageNavi());
-		request.setAttribute("totalCount", ppd.getTotalCount());
-		request.setAttribute("notRead", ppd.getNotRead());
-		request.setAttribute("allCount", ppd.getAllCount());
+		PostService service = new PostService();
+		int result = service.insertPost(reseiver,postTitle,postContent);
+		if(result == 0 ) {
+			request.setAttribute("title", "메세지 전송 실패");
+			request.setAttribute("msg", "관리자에게 문의하세요");
+			request.setAttribute("icon", "error");
+			request.setAttribute("loc", "/");
+		}else {
+			request.setAttribute("title", "메세지 전송 성공");
+			request.setAttribute("msg", "메세지 전송에 성공했습니다.");
+			request.setAttribute("icon", "success");
+			request.setAttribute("loc", "/postListNotRead.do?reqPage=1&memberId=admin");
+		}
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
 		view.forward(request, response);
 	}
 

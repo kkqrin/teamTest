@@ -1,6 +1,7 @@
-package sp.post.controller;
+package sp.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,21 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.ViewFactory;
 
-import sp.post.service.PostService;
-import sp.post.vo.PostPageData;
+import sp.member.service.MemberService;
+import sp.member.vo.Member;
 
 /**
- * Servlet implementation class PostListServlet
+ * Servlet implementation class AdminPageMemberServlet
  */
-@WebServlet(name = "PostList", urlPatterns = { "/postList.do" })
-public class PostListServlet extends HttpServlet {
+@WebServlet(name = "AdminPageGrade", urlPatterns = { "/adminPageGrade.do" })
+public class AdminPageGradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostListServlet() {
+    public AdminPageGradeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,19 +33,17 @@ public class PostListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String memberId = request.getParameter("memberId");
-		PostService service = new PostService();
-		PostPageData ppd = service.selectPostAllList(reqPage,memberId);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
-		
-		request.setAttribute("list", ppd.getList());
-		request.setAttribute("start",ppd.getStart());
-		request.setAttribute("pageNavi", ppd.getPageNavi());
-		request.setAttribute("totalCount", ppd.getTotalCount());
-		request.setAttribute("notRead", ppd.getNotRead());
-		request.setAttribute("allCount", ppd.getAllCount());
+		//2. 값추출
+//		HttpSession session = request.getSession(false);
+//		Member m = (Member) session.getAttribute("m");
+		//3. 비즈니스로직
+		MemberService service = new MemberService();
+		ArrayList<Member> list = service.selectAllMember();
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/admin/adminPageGrade.jsp");
+		request.setAttribute("list", list);
 		view.forward(request, response);
 	}
 

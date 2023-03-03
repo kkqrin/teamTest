@@ -54,3 +54,16 @@ $(".plus2").on("click",function(){
         $(".sub-agree-check2").css("display","none");
     }
 });
+$("[name = memberPw]").on("change",function(){
+    const pwReg = /^[a-zA-Z0-9!@#$^]{8,16}$/;
+    const inputPw = $(this).val();
+    const check = pwReg.test(inputPw);
+    if(check){
+        $(this).next().text("안전한 비밀번호 입니다.");
+        $(this).next().css("color","green");
+    }else{
+         $(this).next().text("비밀번호는 영어 소문자, 대문자, 숫자로 8~16글자 입니다.");
+        $(this).next().css("color","red");
+    }
+});
+

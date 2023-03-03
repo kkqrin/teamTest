@@ -1,6 +1,7 @@
 package sp.post.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.post.service.PostService;
-import sp.post.vo.PostPageData;
+import sp.post.vo.Post;
 
 /**
- * Servlet implementation class PostListServlet
+ * Servlet implementation class PostViewFrmServlet
  */
-@WebServlet(name = "PostList", urlPatterns = { "/postList.do" })
-public class PostListServlet extends HttpServlet {
+@WebServlet(name = "PostViewFrm", urlPatterns = { "/postViewFrm.do" })
+public class PostViewFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostListServlet() {
+    public PostViewFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +33,14 @@ public class PostListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String memberId = request.getParameter("memberId");
+		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		PostService service = new PostService();
-		PostPageData ppd = service.selectPostAllList(reqPage,memberId);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
-		
-		request.setAttribute("list", ppd.getList());
-		request.setAttribute("start",ppd.getStart());
-		request.setAttribute("pageNavi", ppd.getPageNavi());
-		request.setAttribute("totalCount", ppd.getTotalCount());
-		request.setAttribute("notRead", ppd.getNotRead());
-		request.setAttribute("allCount", ppd.getAllCount());
-		view.forward(request, response);
-	}
+		int result = service.updatePostCount(postNo);
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>중 고 사 자</title>
+<style>
+    select{
+        width: 400px;
+    }
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -29,8 +34,9 @@
 				</tr>
 				<tr class="tr-1">
 					<td>
-						<select class="input-form">
-						<option value="1" selected>카테고리</option>
+						<select class="input-form first-category">
+						<option value="0" selected>카테고리</option>
+						<option value="1">수입명품</option>	
 						<option value="2">패션의류</option>
 						<option value="3">패션잡화</option>
 						<option value="4">뷰티</option>
@@ -39,39 +45,22 @@
 						<option value="7">가전제품</option>
 						<option value="8">노트북/PC</option>
 						<option value="9">카메라/캠코더</option>
-						<option value="3">가구/인테리어</option>
-						<option value="3">리빙/생활</option>
-						<option value="3">게임</option>
-						<option value="3">반려동물/취미</option>
-						<option value="3">도서/음반/문구</option>
-						<option value="3">티켓/쿠폰</option>
-						<option value="3">스포츠</option>
-						<option value="3">레저/여행</option>
-						<option value="3">공구/산업용품</option>	
+						<option value="10">가구/인테리어</option>
+						<option value="11">리빙/생활</option>
+						<option value="12">게임</option>
+						<option value="13">반려동물/취미</option>
+						<option value="14">도서/음반/문구</option>
+						<option value="15">티켓/쿠폰</option>
+						<option value="16">스포츠</option>
+						<option value="17">레저/여행</option>
+						<option value="18">공구/산업용품</option>
 					</select>
 					</td>
 					<td>>>>></td>
 					<td>
-						<select class="input-form">
-						<option value="1" selected>하위 카테고리</option>
-						<option value="2">패션의류</option>
-						<option value="3">패션잡화</option>
-						<option value="4">뷰티</option>
-						<option value="5">출산/유아동</option>
-						<option value="6">모바일/태블릿</option>
-						<option value="7">가전제품</option>
-						<option value="8">노트북/PC</option>
-						<option value="9">카메라/캠코더</option>
-						<option value="3">가구/인테리어</option>
-						<option value="3">리빙/생활</option>
-						<option value="3">게임</option>
-						<option value="3">반려동물/취미</option>
-						<option value="3">도서/음반/문구</option>
-						<option value="3">티켓/쿠폰</option>
-						<option value="3">스포츠</option>
-						<option value="3">레저/여행</option>
-						<option value="3">공구/산업용품</option>	
-					</select>
+						<select class="input-form sub-category">
+						<option value="0" selected>하위 카테고리</option>	
+						</select>
 					</td>
 				</tr>
 				<tr class="tr-1">
@@ -133,8 +122,41 @@
 			contentType : enctype="application/x-www-form-urlencoded;charset=UTF-8" (default)
 			 -> 파일 전송을 위해서 enctype 기본값을 제거 (false)
 			*/
-			
 		}
+		
+		// 하위 카테고리 선택 ajax
+		$(".first-category").on("change", function(){
+			const subCategory = $(".sub-category");
+			subCategory.empty();
+			const optionVal = $(this).val();
+			
+			$.ajax({
+				url : "/subCategorySelected.do",
+				type : "post",
+				data : {categoryRef : optionVal},
+				dataType : "json",
+				success : function(data){
+
+					if(optionVal == 0){
+						const option0Selected = $("<option value='0' selected>하위카테고리</option>");
+						subCategory.append(option0Selected);
+					}
+					
+					for(let i=0;i<data.length;i++){
+						const option = $("<option></option>");
+						option.val(data[i]);
+						option.text(data[i].categoryName);
+						
+						subCategory.append(option);
+					}
+				}
+			})
+		});
+		
+		
+		
+		
+		
 	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

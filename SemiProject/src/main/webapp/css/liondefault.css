@@ -201,12 +201,11 @@ header>.sub-navi {
     transition-duration: 1s;
     border-bottom: 1px solid #ccc;
     background-color: #fff;
-    z-index: 1;
+    /* z-index: 1;*/
     position: relative;
 }
 
 .sub-navi>div {
-    width: 800px;
     margin: 0 auto;
 }
 
@@ -236,7 +235,7 @@ header>.sub-navi {
     margin: 100px auto;
     margin-bottom: 10px;
     flex-grow: 1;
-    z-index: 0;
+    /* z-index: 0;*/
 }
 .page-title {
   font-family: nn-b;
@@ -364,7 +363,8 @@ header>.sub-navi {
 
 .tbl .tr-1 {
     /* background-color: rgba(238, 238, 238, 0.7); */
-    background-color: rgba(231, 231, 231, 0.486);
+    /* background-color: rgba(231, 231, 231, 0.486); */
+    background-color: rgba(251, 251, 251, 0.7);
 }
 
 .tbl .tr-2 {
@@ -1065,3 +1065,4 @@ textarea.input-form {
 .close-icon:hover {
     cursor: pointer;
 }
+

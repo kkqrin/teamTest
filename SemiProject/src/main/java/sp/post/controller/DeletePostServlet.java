@@ -10,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.post.service.PostService;
-import sp.post.vo.PostPageData;
 
 /**
- * Servlet implementation class PostListServlet
+ * Servlet implementation class DropPostServlet
  */
-@WebServlet(name = "PostList", urlPatterns = { "/postList.do" })
-public class PostListServlet extends HttpServlet {
+@WebServlet(name = "DeletePost", urlPatterns = { "/deletePost.do" })
+public class DeletePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostListServlet() {
+    public DeletePostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +31,21 @@ public class PostListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		String memberId = request.getParameter("memberId");
+		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		PostService service = new PostService();
-		PostPageData ppd = service.selectPostAllList(reqPage,memberId);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
-		
-		request.setAttribute("list", ppd.getList());
-		request.setAttribute("start",ppd.getStart());
-		request.setAttribute("pageNavi", ppd.getPageNavi());
-		request.setAttribute("totalCount", ppd.getTotalCount());
-		request.setAttribute("notRead", ppd.getNotRead());
-		request.setAttribute("allCount", ppd.getAllCount());
+		int result = service.deletePost(postNo);
+		if(result == 0 ) {
+			request.setAttribute("title", "메세지 삭제 실패");
+			request.setAttribute("msg", "이미 삭제된 메세지 입니다");
+			request.setAttribute("icon", "error");
+			request.setAttribute("loc", "/");
+		}else {
+			request.setAttribute("title", "메세지 삭제 성공");
+			request.setAttribute("msg", "메세지를 삭제했습니다.");
+			request.setAttribute("icon", "success");
+			request.setAttribute("loc", "/postListNotRead.do?reqPage=1&memberId=admin");
+		}
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		view.forward(request, response);
 	}
 
