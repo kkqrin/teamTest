@@ -24,10 +24,11 @@
             <a href="/postList.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
             <%if(m==null){ %>
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
-            <%} else{%>
-            <a href="/logout.do" class="btn bc0"><%=m.getMemberName() %></a>
-            <%} %>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
+            <%} else{%>
+            <a href="/logout.do" class="btn bc0">로그아웃</a>
+			<a href="#" class="btn bc0"><%=m.getMemberName() %></a>
+            <%} %>
             <a href="/custmoService.do" class="btn bc0">고객센터</a>
         </div>
         <div class="header-top">
