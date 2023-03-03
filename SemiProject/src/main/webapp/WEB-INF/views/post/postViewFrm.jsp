@@ -22,120 +22,123 @@
     outline: 0;
 }
 
-
-.page-content{
-    width: 500px;
-    height: 500px;
-    border: 1px solid black;
-    margin: 0 auto;
-}
-
-.page-title{
-    font-size: 30px;
-}
-
-.page-content>div{
-    border: 1px solid black;
-    box-sizing: border-box;
-}
-
-#message-content{
-    margin: 10px 10px;
-    resize: none;
-    overflow: auto;
-}
-.hide-content{
-    display: none;
-}
-
-.content-mid>p{
-    font-size: 13px;
-    float: right;
-}
-
-.content-mid{
-    overflow: hidden;
-}
-	.btnDiv{
-		width: 500px;
-	}
-	.btnDiv2>div,.btnDiv>div{
-		width: 50%;
-	}
-	.page-title{
-		padding-left: 10px;
-	}
-
-	.content-mid>p{
-		margin: 0px 10px;
-		line-height: 20px;
-	}
-	.content-mid>span{
-		margin: 0px 10px;
-		width: 60px;
-	}
-	.message-title>span{
-		margin: 0px 10px;
-		width: 60px;
-		display: inline-block;
-	}
-	
-	.input{
-	width : 150px;
-	height: 20px;
-    padding: 0.8rem;
-    background-color: #fff;
-    outline: none;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    }
-    
     .bs1{
     	width: 50px;
     }
+    #login-modal{
+    display: block;
+    }
+    .shortbox{
+    overflow: hidden;
+    }
+	.modal-content>.heightbox{
+		height: 30px;
+		padding: 10px;
+		line-height: 30px;
+		text-align: center;
+	}
+    
+    .shortbox>*{
+    	line-height : 40px;
+    	float: left;
+    }
+    .time{
+    float: right;
+    }
+    .senderId{
+    	margin-left: 10px;
+    }
+    .midbox{
+    	width: 470px;
+    	height: 30px;
+    	float: right;
+    }
+    .modal-content>.areabox{
+    	height: 300px;
+    	padding: 10px;
+	    line-height: 30px;
+	    text-align: center;
+
+    }
+    
+    
+    .areabox>textarea{
+    	width: 470px;
+    	height: 300px;
+    	float : right;
+    	resize: none;
+    	overflow: auto;
+    }
 </style>
 <title>받은메세지</title>
-<style>
-	body{
-		width: 500px;
-		height: 500px;
-	}
-</style>
 </head>
 <body>
-	<div class="page-content">
-        <div class="page-title">받은 쪽지</div>
-        <div class="content-mid"><span>보낸사람</span><input class="input"type="text" name="sender" id="sender" value="<%=p.getPostSender() %>" readonly><p class="time"><%=p.getRegDate() %></p><p>보낸 시간</p></div>
-        <div class="message-title"><span>제목</span><input class="input" type="text" name="message-title" id="message-title" readonly value="<%=p.getPostTitle()%>"></div>
-        <div class="message-content"><textarea name="message-content" id="message-content" readonly style="width: 478px; height: 206px; overflow: auto;"><%=p.getPostContent() %></textarea></div>
-        <div class="btnDiv"><div class="btn bc1 bs1">답장</div><div class="btn bc1 bs1">취소</div></div>
-    </div>
-    <div class="hide-content">
-        <div class="page-title">답장</div>
-        <div class="content-mid"><span>보낸사람</span><input class="input" type="text" name="sender" id="sender" value="kh@naver.com" readonly></div>
-        <div class="message-title"><span>제목</span><input class="input" type="text" name="message-title" id="message-title" value="메세지 제목"></div>
-        <div class="message-content"><textarea name="message-content" id="message-content" style="width: 478px; height: 206px;"></textarea></div>
-        <div class="btnDiv2"><div class="btn bc1 bs1">답장</div><div class="btn bc1 bs1">취소</div></div>
-    </div>
+		<div id="login-modal" class="modal-bg">
+			<div class="modal-wrap page-content">
+				<div class="modal-head">
+					<h2>받은쪽지</h2>
+					<span class="material-icons close-icon modal-close">close</span>
+				</div>
+					<div class="modal-content">
+						<div class="input-box heightbox shortbox">
+							<span>보낸 사람 : </span> <span class="senderId">아이디</span>
+							<span class="time">보낸시간 2023-03-01 11:22:34</span>
+						</div>
+						<div class="input-box heightbox">
+							<label for="title">제목</label> <input type="text"
+								name="title" id="title" class="input-form midbox"
+								value="title" readonly>
+						</div>
+						<div class="input-box heightbox areabox">
+							<label for="content" readonly>내용</label> <textarea ></textarea>
+						</div>
+
+					</div>
+					<div class="modal-foot">
+						<button type="submit" class="btn bc11">답장하기</button>
+						<button type="button" class="btn bc1 modal-close">취소</button>
+					</div>
+			</div>
+				<div class="modal-wrap hide-content">
+				<div class="modal-head">
+					<h2>받은쪽지</h2>
+					<span class="material-icons close-icon modal-close">close</span>
+				</div>
+					<div class="modal-content">
+						<div class="input-box heightbox shortbox">
+							<span>받을 사람 : </span> <span class="senderId">아이디</span>
+							<span class="time">보낸시간 2023-03-01 11:22:34</span>
+						</div>
+						<div class="input-box heightbox">
+							<label for="title">제목</label> <input type="text"
+								name="title" id="title" class="input-form midbox"
+								value="title">
+						</div>
+						<div class="input-box heightbox areabox">
+							<label for="content">내용</label> <textarea ></textarea>
+						</div>
+
+					</div>
+					<div class="modal-foot">
+						<button type="button" class="btn bc11">하잇</button>
+						<button type="button" class="btn bc1 modal-close">취소</button>
+					</div>
+			</div>
+		</div>
     <script>
-    $('.btnDiv>div').on('click',function(){
-        const index = $('.btnDiv>div').index(this);
-        if(index == 0){
+    $('.modal-close').on('click',function(){
+    	self.close();
+    });
+    
+    $('.modal-foot>button').on('click',function(){
+        const index = $('.modal-foot>button').index(this);
             $('.page-content').hide();
             $('.hide-content').show();
-        }else if(index == 1){
-            self.close();
-        }
+		console.log(index);
     });
 
 
-    $('.btnDiv2>div').on('click',function(){
-        const index = $('.btnDiv2>div').index(this);
-        if(index == 0){
-        }else if(index == 1){
-            self.close();
-        }
-    });
+
 
     //받는사람 입력할때 input의 value 비워주는것
     $('.hide-content>div>#message-title').on('click',function(){
