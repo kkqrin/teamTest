@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>중고사자 Ref</title>
 <style>
 .flex-wrap {
     display: flex;

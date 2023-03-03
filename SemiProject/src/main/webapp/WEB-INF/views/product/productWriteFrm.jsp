@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>중 고 사 자</title>
+<style>
+    select{
+        width: 400px;
+    }
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -53,9 +58,9 @@
 					</td>
 					<td>>>>></td>
 					<td>
-						<select class="input-form">
+						<select class="input-form sub-category">
 						<option value="0" selected>하위 카테고리</option>	
-					</select>
+						</select>
 					</td>
 				</tr>
 				<tr class="tr-1">
@@ -121,14 +126,29 @@
 		
 		// 하위 카테고리 선택 ajax
 		$(".first-category").on("change", function(){
-			// alert($(this).val());
+			const subCategory = $(".sub-category");
+			subCategory.empty();
+			const optionVal = $(this).val();
 			
 			$.ajax({
 				url : "/subCategorySelected.do",
 				type : "post",
+				data : {categoryRef : optionVal},
 				dataType : "json",
 				success : function(data){
-					// 해당 하위카테고리 수 만큼 select>option태그 생성해야함!
+
+					if(optionVal == 0){
+						const option0Selected = $("<option value='0' selected>하위카테고리</option>");
+						subCategory.append(option0Selected);
+					}
+					
+					for(let i=0;i<data.length;i++){
+						const option = $("<option></option>");
+						option.val(data[i]);
+						option.text(data[i].categoryName);
+						
+						subCategory.append(option);
+					}
 				}
 			})
 		});

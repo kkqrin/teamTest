@@ -21,9 +21,11 @@ public class ProductService {
 		return 0;
 	}
 
-	public ArrayList<Category> selectOneSubCategory() {
+	public ArrayList<Category> selectOneSubCategory(int categoryRef) {
 		Connection conn = JDBCTemplate.getConnection();
-		ArrayList<Category> list = dao.selectOneSubCategory(conn);
-		return null;
+		ArrayList<Category> list = dao.selectOneSubCategory(conn, categoryRef);
+		
+		JDBCTemplate.close(conn);
+		return list;
 	}
 }
