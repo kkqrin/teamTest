@@ -52,6 +52,7 @@
             </div>
         </div>
     </div>
+     <script src = "js/login.js"></script>
     <%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
