@@ -25,7 +25,7 @@
             <%if(m==null){ %>
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
             <%} else{%>
-            <a href="/logout.do" class="btn bc0">로그아웃</a>
+            <a href="/logout.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <a href="/custmoService.do" class="btn bc0">고객센터</a>
