@@ -6,8 +6,23 @@
 <meta charset="UTF-8">
 <title>중 고 사 자</title>
 <style>
+    .img-box>td{
+        width: calc(100%/6);
+        height: 200px;
+        border: 1px solid black;
+    }
     select{
         width: 400px;
+    }
+    #priceInput{
+        width: 700px;
+        display: inline-block;
+    }
+    .price>td>span{
+        width: 30px;
+        padding: 10px;
+        font-family: nn-b;
+        color: #4b4b4b;
     }
 </style>
 </head>
@@ -18,22 +33,26 @@
 	<script src="/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/summernote/summernote-lite.css">
 	
-	<div class="page-content">
+		<div class="page-content">
 		<div class="page-title">판매상품 등록하기</div>
 		<form action="/productWrite.do" method="post" enctype="multipart/form-data">
 			<table class="tbl" id="productWrite">
-				<!-- 한 행에 4칸 -->
-				<tr class="tr-1">
-					<!--<td><img src="#"></td>-->
-					<td colspan="3" ><button type="button" class="btn bc1 bs2">사진등록</button></td>
+				<!-- 한 행에 6칸 -->
+                <tr class="tr-1 img-box">
+                    <td colspan="2"><img src="#"></td>
+                    <td colspan="2"><img src="#"></td>
+                    <td colspan="2"><img src="#"></td>
+                </tr>
+				<tr class="tr-0">
+					<td colspan="6"><button type="button" class="btn bc2 bs1">사진등록</button></td>
 				</tr>
 				<tr class="tr-1">
-					<td colspan="3">
+					<td colspan="6">
 						<input type="text" name="productTitle" class="input-form" placeholder="제목">
 					</td>
 				</tr>
 				<tr class="tr-1">
-					<td>
+					<td colspan="2">
 						<select class="input-form first-category">
 						<option value="0" selected>카테고리</option>
 						<option value="1">수입명품</option>	
@@ -56,29 +75,31 @@
 						<option value="18">공구/산업용품</option>
 					</select>
 					</td>
-					<td>>>>></td>
-					<td>
-						<select class="input-form sub-category">
+					<td colspan="4">
+						<select class="input-form sub-category" name="categoryNo">
 						<option value="0" selected>하위 카테고리</option>	
 						</select>
 					</td>
 				</tr>
-				<tr class="tr-1">
-					<td colspan="4"><input type="text" class="input-form" placeholder="가격"></td>
+				<tr class="tr-1 price">
+					<td colspan="6"><span>\ </span><input id="priceInput" type="text" name="productPrice" class="input-form" placeholder="가격"><span> 원</span></td>
 				</tr>
 				<tr class="tr-1">
-					<td colspan="4" style="text-align:left;">
+					<td colspan="6" style="text-align:left;">
 						<textarea id="productContent" name="productContent" class="input-form"></textarea>
 					</td>
 				</tr>
-				<tr class="tr-1">
-					<td colspan="4">
-						<button type="submit" class="btn bc1 bs4">상품등록</button>
+				<tr class="tr-0">
+					<td colspan="6">
+						<button type="submit" class="btn bc2 bs4">상품등록</button>
 					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
+	
+	
+	
 	<script>
 		$("#productContent").summernote({
 			height : 400,
@@ -153,7 +174,34 @@
 			})
 		});
 		
-		
+		$("#priceInput").on("focus", function(){
+			$(this).val("");
+		});
+		$("#priceInput").on("change", function(){
+			// alert($(this).val());
+			let priceInputVal = $(this).val();
+			
+			// 12,345원
+			// 1,234,567원
+			// const man = priceInputVal / 10000 ; // 1
+			const bakman = Math.floor(priceInputVal / 1000000); // 1
+			priceInputVal = priceInputVal - bakman*1000000; 
+			const chun = Math.floor(priceInputVal / 1000); // 234
+			const ilsipbak = priceInputVal % 1000; // 567
+			
+			// Math.floor(3.9)
+			console.log(bakman);
+			console.log(chun);
+			console.log(ilsipbak);
+			
+			if(bakman == 0){
+				$(this).val(chun+","+ilsipbak);				
+			}else{
+				$(this).val(bakman+","+chun+","+ilsipbak);				
+			}
+			
+
+		});
 		
 		
 		
