@@ -1,5 +1,10 @@
+<%@page import="sp.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+       <%	// SigninServlet에서 로그인한 정보를 세션에서 m이라는 키값으로 로그인한 사람의 정보인member라는 결과를 가진 세션을 저장한걸
+    	//	꺼내줌
+    	Member m =(Member)session.getAttribute("m");//세션에 member를 저장해준 키값이 m이라고 등록되었으므로 m을 넣어줌
+    %>
     <title>중고사자</title>
     <!-- 구글 아이콘 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -17,7 +22,11 @@
     <header>
         <div class="header-link">
             <a href="/postList.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
+            <%if(m==null){ %>
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
+            <%} else{%>
+            <a href="/logout.do" class="btn bc0">로그아웃</a>
+            <%} %>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <a href="/custmoService.do" class="btn bc0">고객센터</a>
         </div>
