@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="search-box">
-                <input type="text" class="input-form" placeholder="검색어를 입력하세요.">
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요.">
                 <button type="submit" class="search-icon">
                     <span class="material-symbols-outlined">
                         search
