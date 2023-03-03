@@ -98,5 +98,17 @@ public class NoticeService {
 		JDBCTemplate.close(conn);
 		return n;
 	}
+
+	public int insertNotice(Notice n) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertNotice(conn,n);
+		if(result > 0 ) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	
 }
