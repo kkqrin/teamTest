@@ -31,6 +31,7 @@
 					<td>
 						<select class="input-form">
 						<option value="1" selected>카테고리</option>
+						<option value="3">수입명품</option>	
 						<option value="2">패션의류</option>
 						<option value="3">패션잡화</option>
 						<option value="4">뷰티</option>
@@ -47,7 +48,7 @@
 						<option value="3">티켓/쿠폰</option>
 						<option value="3">스포츠</option>
 						<option value="3">레저/여행</option>
-						<option value="3">공구/산업용품</option>	
+						<option value="3">공구/산업용품</option>
 					</select>
 					</td>
 					<td>>>>></td>

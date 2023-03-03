@@ -64,32 +64,26 @@
         <ul class="sub-navi naviHide">
             <div>
                 <p>CATEGORY</p>
-                <li><a href="#">sub-1</a></li>
-                <li><a href="#">sub-2</a></li>
-                <li><a href="#">sub-3</a></li>
-                <li><a href="#">sub-4</a></li>
-                <li><a href="#">sub-5</a></li>
-                <li><a href="#">sub-6</a></li>
-                <li><a href="#">sub-7</a></li>
-                <li><a href="#">sub-8</a></li>
-                <li><a href="#">sub-9</a></li>
-                <li><a href="#">sub-10</a></li>
-                <li><a href="#">sub-11</a></li>
-                <li><a href="#">sub-12</a></li>
-                <li><a href="#">sub-13</a></li>
-                <li><a href="#">sub-14</a></li>
-                <li><a href="#">sub-15</a></li>
-                <li><a href="#">sub-16</a></li>
-                <li><a href="#">sub-17</a></li>
-                <li><a href="#">sub-18</a></li>
-                <li><a href="#">sub-19</a></li>
-                <li><a href="#">sub-20</a></li>
-                <li><a href="#">sub-21</a></li>
-                <li><a href="#">sub-22</a></li>
-                <li><a href="#">sub-23</a></li>
-                <li><a href="#">sub-24</a></li>
-                <li><a href="#">sub-25</a></li>
-                <li><a href="#">sub-26</a></li>
+                <li><a href="#">수입명품</a></li>
+                <li><a href="#">패션의류</a></li>
+                <li><a href="#">모바일/태블릿</a></li>
+                <li><a href="#">가구/인테리어</a></li>
+                <li><a href="#">도서/음반/문구</a></li>
+                
+                <li><a href="#">패션잡화</a></li>
+                <li><a href="#">가전제품</a></li>
+                <li><a href="#">노트북/PC</a></li>
+                <li><a href="#">카메라/캠코더</a></li>
+                
+                <li><a href="#">뷰티</a></li>
+                <li><a href="#">리빙/생활</a></li>
+                <li><a href="#">게임</a></li>
+                <li><a href="#">반려동물/취미</a></li>
+                
+                <li><a href="#">출산/유아동</a></li>
+                <li><a href="#">티켓/쿠폰</a></li>
+                <li><a href="#">스포츠</a></li>
+                <li><a href="#">레저/여행</a></li>
             </div>
         </ul>
     </header>
