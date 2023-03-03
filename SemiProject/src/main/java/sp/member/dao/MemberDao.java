@@ -148,5 +148,22 @@ public class MemberDao {
 		return member;
 		
 	}
+	public int changeGrade(Connection conn, int memberNo, int memberGrade) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update member_tbl set member_grade=? where member_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberGrade);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 }

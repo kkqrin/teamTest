@@ -51,8 +51,13 @@ public class MemberService {
 			}
 		}
 		if(result) {
-
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
 		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	public Member selectOneMember(String memberId) {
 		Connection conn =JDBCTemplate.getConnection();
 		Member m =dao.selectOneMember(conn,memberId);
@@ -84,4 +89,5 @@ public class MemberService {
 
 	
 }
-}
+
+

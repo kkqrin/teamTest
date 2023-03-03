@@ -32,14 +32,14 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1.인코딩
+		
 		request.setCharacterEncoding("utf-8");
+		
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
-		// 3.비즈니스로직
-		//로그인을 하면 자기의 나머지 정보를 모두 가져오는 것이니까
-		//member 타입으로 정보를 받아냄
-		Member m = new Member();//m은 받은 아이디와 비밀번호를 저장해서 받아주는 역할을 함
+		
+		
+		Member m = new Member();
 		m.setMemberId(memberId);
 		m.setMemberPw(memberPw);
 		MemberService service = new MemberService();
@@ -64,18 +64,10 @@ public class LoginServlet extends HttpServlet {
 						request.setAttribute("icon", "warning");
 						request.setAttribute("loc", "/");//로그인에 실패했다면 메인페이지로 이동하게 해줌
 					} else {
-						// 관리자 또는 정회원인 경우
-						//아이디/비밀번호가 일치하는 경우
-						// 회원 정보를 세션에 저장 서버가 회원정보를 기억)
-						// session은 브라우저 닫을 때까지 정보를 유지함
-						// ->세션의 정보를 파기하거나, 일정시간이 지나면 로그인이 풀림(30분이 기본임)
+					
 						HttpSession session = request.getSession();//세션을 불러옴
 						session.setAttribute("m", member);//세션을 등록함 member로 정보결과를 받았으니까 member로 받음
-						//session에 등록하므로써 브라우저를 끌때까지 계속 정보를 쓸 수 있도록 저장하게 되어짐
-						//이 session정보를 헤더에서 꺼내줌
 						
-						//request에다가 setAttribute를 해놓으면 request는 바로 다음 페이지에까지밖에 못쓰므로
-						//msg.jsp까지밖에 못씀
 						request.setAttribute("title", "로그인 성공");
 						request.setAttribute("msg", "환영합니다");
 						request.setAttribute("icon", "success");

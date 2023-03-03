@@ -18,7 +18,7 @@
             <h2>secondhand Lion</h2>
         </div>
         <div class="login-content-wrap">
-            <form action ="#" method = "post">
+            <form action ="/login.do" method = "post">
                 <div class="login-content">
                     <div class="id">
                         <label for="memberId">아이디</label>
