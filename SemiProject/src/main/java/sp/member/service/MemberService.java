@@ -24,6 +24,7 @@ public class MemberService {
 		return list;
 	}
 
+
 	public int changeGrade(int memberNo, int memberGrade) {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = dao.changeGrade(conn, memberNo, memberGrade);
@@ -50,6 +51,20 @@ public class MemberService {
 			}
 		}
 		if(result) {
+
+		}
+	public Member selectOneMember(String memberId) {
+		Connection conn =JDBCTemplate.getConnection();
+		Member m =dao.selectOneMember(conn,memberId);
+		JDBCTemplate.close(conn);
+		return m;
+	}
+
+	public int insertMember(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertMember(conn,m);
+		if(result>0) {
+
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -57,5 +72,16 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public Member selectOneMember(Member m) {
+		Connection conn =JDBCTemplate.getConnection();
+		Member member= dao.selectOneMember(conn,m);//m은 사용자로부터 입력받은 아이디와 비번임
+		JDBCTemplate.close(conn);
+		return member;//member는 조회결과임
+		
+	}
+
+
 	
+}
 }

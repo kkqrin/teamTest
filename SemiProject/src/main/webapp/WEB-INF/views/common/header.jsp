@@ -16,9 +16,9 @@
 
     <header>
         <div class="header-link">
-            <a href="/postListNotRead.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
-            <a class="btn bc0">로그인</a>
-            <a href="/WEB-INF/views/member/join.jsp" class="btn bc0">회원가입</a>
+            <a href="/postList.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
+            <a href="/login.do"class="btn bc0">로그인</a>
+            <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <a href="/custmoService.do" class="btn bc0">고객센터</a>
         </div>
         <div class="header-top">
