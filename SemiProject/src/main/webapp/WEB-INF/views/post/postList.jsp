@@ -242,9 +242,9 @@ table th, .post-id, .post-content, .post-time {
 						}
 						%>
 						<th rowspan="2" class="post-btn bc02 modal-open-btn modalOpen"
-							target="#login-modal">읽기<input type="text" value="<%=p.getPostNo()%>">
+							target="#login-modal">읽기<input type="hidden" value="<%=p.getPostNo()%>">
 						</th>
-						<th rowspan="2" class="post-btn bc02">삭제하기</th>
+						<th rowspan="2" class="post-btn bc02 dropPost">삭제하기</th>
 					</tr>
 
 					<tr>
@@ -296,43 +296,60 @@ table th, .post-id, .post-content, .post-time {
 				<div class="input-box heightbox shortbox">
 					<span>받을 사람 : </span> <span class="senderId">아이디</span> <span
 						class="time">보낸시간 <span></span></span>
-						<input type="hidden" id="postReseiver">
+						<input type="hidden" id="postReseiver" name="postReseiver" >
 				</div>
 				<div class="input-box heightbox">
-					<label for="title">제목</label> <input type="text" name="title"
-						id="title" class="input-form midbox" value="title">
+					<label for="title">제목</label> <input type="text" name="post-title"
+						id="post-title" class="input-form midbox">
 				</div>
 				<div class="input-box heightbox areabox">
 					<label for="content">내용</label>
-					<textarea></textarea>
+					<textarea id="post-content" name="post-content"></textarea>
 				</div>
 			</div>
-			</form>
 			<div class="modal-foot">
-				<button type="button" class="btn bc11">하잇</button>
+				<button type="submit" class="btn bc11">보내기</button>
 				<button type="button" class="btn bc11 modal-close">취소</button>
 			</div>
+			</form>
 		</div>
 		</div>
 
 	<script>
 		$('.modalOpen').on('click',function() {
-					const title = $('.post-title').eq(
-							$('.modalOpen').index(this)).text();
-					$('.title-post').val(title);
-					const senderId = $('.post-id').eq($('.modalOpen').index(this)).text();
-					$('.senderId').text(senderId);
-					const content = $('.post-content').eq(
-							$('.modalOpen').index(this)).text();
-					$('.content-post').text(content);
-					const time = $('.post-time').eq($('.modalOpen').index(this)).text();
-					$('.time>span').text(time);
-					console.log(time);
-					console.log(title);
-					console.log(senderId);
-					console.log(content);
-
+				const postNo = $('.modalOpen').eq($('.modalOpen').index(this)).children().val();
+				console.log(postNo);
+				$.ajax({
+					url : "/postViewFrm.do",
+					type : "post",
+					data : {postNo : postNo},
+					success : function(data){
+						if(data != 0){
+						const title = $('.post-title').eq(
+								$('.modalOpen').index(this)).text();
+						$('.title-post').text(title);
+						const senderId = $('.post-id').eq($('.modalOpen').index(this)).text();
+						$('.senderId').text(senderId);
+						const content = $('.post-content').eq(
+								$('.modalOpen').index(this)).text();
+						$('.content-post').text(content);
+						const time = $('.post-time').eq($('.modalOpen').index(this)).text();
+						$('.time>span').text(time);
+						$('#postReseiver').val(senderId);
+						}
+					}
 				});
+				});
+		
+		
+		$('.dropPost').on('click',function(){
+			const index =$('.dropPost').index(this); 
+			const postNo = $('.dropPost').eq(index).prev().children().val();
+			if(confirm("쪽지를 삭제하시겠습니까?")){
+				location.href = "/deletePost.do?postNo="+postNo;
+			}
+			
+		});
 		
 		$('.letterBox').eq(1).click();
 
@@ -343,6 +360,8 @@ table th, .post-id, .post-content, .post-time {
 			if (($('.letterBox').index(this) - 1) == 0) {
 				location.href = "/postListNotRead.do?reqPage=1&memberId=admin"
 			} else if (($('.letterBox').index(this) - 1) == 1) {
+				location.href = "/postSendList.do?reqPage=1&memberId=admin"
+			} else if (($('.letterBox').index(this) - 1) == 2){
 				location.href = "/postList.do?reqPage=1&memberId=admin"
 			}
 		});
@@ -358,7 +377,7 @@ table th, .post-id, .post-content, .post-time {
 			}
 		});
 	</script>
-	</div>
+
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 

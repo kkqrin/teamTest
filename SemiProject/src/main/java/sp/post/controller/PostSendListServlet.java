@@ -1,7 +1,6 @@
 package sp.post.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.post.service.PostService;
-import sp.post.vo.Post;
+import sp.post.vo.PostPageData;
 
 /**
- * Servlet implementation class PostViewFrmServlet
+ * Servlet implementation class PostSendListServlet
  */
-@WebServlet(name = "PostViewFrm", urlPatterns = { "/postViewFrm.do" })
-public class PostViewFrmServlet extends HttpServlet {
+@WebServlet(name = "PostSendList", urlPatterns = { "/postSendList.do" })
+public class PostSendListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostViewFrmServlet() {
+    public PostSendListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +31,20 @@ public class PostViewFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		PostService service = new PostService();
-		int result = service.updatePostCount(postNo);
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
-		}
-
+			request.setCharacterEncoding("utf-8");
+			int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+			String memberId = request.getParameter("memberId");
+			PostService service = new PostService();
+			PostPageData ppd = service.selectPostSendList(reqPage, memberId);
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
+			request.setAttribute("list", ppd.getList());
+			request.setAttribute("start",ppd.getStart());
+			request.setAttribute("pageNavi", ppd.getPageNavi());
+			request.setAttribute("totalCount", ppd.getTotalCount());
+			request.setAttribute("notRead", ppd.getNotRead());
+			request.setAttribute("allCount", ppd.getAllCount());
+			view.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
