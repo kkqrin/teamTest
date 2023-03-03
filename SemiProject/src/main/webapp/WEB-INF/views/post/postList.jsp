@@ -372,9 +372,8 @@ table th, .post-id, .post-content, .post-time {
 				$('.hide-content').show();
 			}
 		});
-		$('.hide-content>.modal-foot>button').on('click',function(){
-			if($('.page-content>.modal-foot>button').index(this) == 0){
-			}
+		$('.modal-close').on('click',function(){
+				location.reload();
 		});
 	</script>
 
