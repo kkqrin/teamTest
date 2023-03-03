@@ -1,7 +1,6 @@
 package sp.post.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.post.service.PostService;
-import sp.post.vo.Post;
 
 /**
- * Servlet implementation class PostViewFrmServlet
+ * Servlet implementation class DropPostServlet
  */
-@WebServlet(name = "PostViewFrm", urlPatterns = { "/postViewFrm.do" })
-public class PostViewFrmServlet extends HttpServlet {
+@WebServlet(name = "DeletePost", urlPatterns = { "/deletePost.do" })
+public class DeletePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostViewFrmServlet() {
+    public DeletePostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,12 +33,21 @@ public class PostViewFrmServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		PostService service = new PostService();
-		int result = service.updatePostCount(postNo);
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
+		int result = service.deletePost(postNo);
+		if(result == 0 ) {
+			request.setAttribute("title", "메세지 삭제 실패");
+			request.setAttribute("msg", "이미 삭제된 메세지 입니다");
+			request.setAttribute("icon", "error");
+			request.setAttribute("loc", "/");
+		}else {
+			request.setAttribute("title", "메세지 삭제 성공");
+			request.setAttribute("msg", "메세지를 삭제했습니다.");
+			request.setAttribute("icon", "success");
+			request.setAttribute("loc", "/postListNotRead.do?reqPage=1&memberId=admin");
 		}
-
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		view.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
