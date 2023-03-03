@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="member-link">
-                <a href="#" class="btn">
+                <a href="/adminPageGrade.do" class="btn">
                     <span class="material-symbols-outlined">account_circle</span>
                     <p>마이페이지</p>
                 </a>

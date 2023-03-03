@@ -1,7 +1,13 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="sp.report.vo.Report"%>
 <%@page import="sp.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <% Member m = (Member)request.getAttribute("m"); %>
+    <%
+    Member m = (Member)request.getAttribute("m");
+    Report r = (Report)request.getAttribute("r");	
+    ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +26,14 @@
                 <th>신고번호</th>
                 <th>신고자</th>
                 <th>신고유형</th>
+                <th>신고 당한 자</th>
                 <th>상태</th>
+                <th>정보변경</th>
             </tr>
+            <%for(Report report : list){ %>
             <tr>
-                <td>ㄴㅁㅇ</td>
+                <td><%=report.getReportMember() %></td>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td>
@@ -33,7 +43,11 @@
                         <option value="2">무죄</option>
                     </select>
                 </td>
+                <td>
+                    <button class="changeGrade">정보변경</button>
+                </td>
             </tr>
+            <%} %>
         </table>
     </div>  
 </body>

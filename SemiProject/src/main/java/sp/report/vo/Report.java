@@ -4,7 +4,7 @@ public class Report {
 	private int reportNo;
 	private int memberNo;
 	private String reportMember;
-	private String enroll_date;
+	private String enrollDate;
 	private int reportType;
 	private String reportContent;
 	private int reportPrice;
@@ -15,13 +15,13 @@ public class Report {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Report(int reportNo, int memberNo, String reportMember, String enroll_date, int reportType,
+	public Report(int reportNo, int memberNo, String reportMember, String enrollDate, int reportType,
 			String reportContent, int reportPrice, String filename, String filepath, int pactCheck) {
 		super();
 		this.reportNo = reportNo;
 		this.memberNo = memberNo;
 		this.reportMember = reportMember;
-		this.enroll_date = enroll_date;
+		this.enrollDate = enrollDate;
 		this.reportType = reportType;
 		this.reportContent = reportContent;
 		this.reportPrice = reportPrice;
@@ -47,11 +47,11 @@ public class Report {
 	public void setReportMember(String reportMember) {
 		this.reportMember = reportMember;
 	}
-	public String getEnroll_date() {
-		return enroll_date;
+	public String getEnrollDate() {
+		return enrollDate;
 	}
-	public void setEnroll_date(String enroll_date) {
-		this.enroll_date = enroll_date;
+	public void setEnrollDate(String enrollDate) {
+		this.enrollDate = enrollDate;
 	}
 	public int getReportType() {
 		return reportType;
@@ -89,4 +89,5 @@ public class Report {
 	public void setPactCheck(int pactCheck) {
 		this.pactCheck = pactCheck;
 	}
+
 }
