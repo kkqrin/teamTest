@@ -55,6 +55,10 @@ public class Notice {
 	public void setNoticeContent(String noticeContent) {
 		this.noticeContent = noticeContent;
 	}
+	public String getNoticeContentBr() {
+		return noticeContent.replaceAll("\r\n", "<br>");
+	}
+	
 	public int getReadCount() {
 		return readCount;
 	}
