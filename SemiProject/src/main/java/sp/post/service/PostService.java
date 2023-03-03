@@ -24,6 +24,7 @@ public class PostService {
 		ArrayList<Post> list = dao.selectPostAllList(conn,memberId,start,end);
 		//페이징 시작
 		int totalCount = dao.selectPostCount(conn,memberId);
+		int allCount = dao.selectPostCount(conn, memberId);
 		int notRead = dao.selectNotRead(conn,memberId);
 		
 		int totalPage = 0;
@@ -86,7 +87,7 @@ public class PostService {
 		}
 		pageNavi += "</ul>";
 		
-		PostPageData ppd = new PostPageData(list, pageNavi, start, totalCount, notRead);
+		PostPageData ppd = new PostPageData(list, pageNavi, start, totalCount, notRead, allCount);
 		JDBCTemplate.close(conn);
 		return ppd;
 	}
@@ -112,7 +113,8 @@ public class PostService {
 		int start = end - numPerPage+1;
 		ArrayList<Post> list = dao.selectPostNoReadList(conn,memberId,start,end);
 		//페이징 시작
-		int totalCount = dao.selectPostCount(conn,memberId);
+		int totalCount = dao.selectNoReadPostCount(conn,memberId);
+		int allCount = dao.selectPostCount(conn, memberId);
 		int notRead = dao.selectNotRead(conn,memberId);
 		
 		int totalPage = 0;
@@ -137,23 +139,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(1)+"&memberId=admin'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo-1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo-1)+"&memberId=admin'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item active-page' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId=admin'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId=admin'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -165,17 +167,17 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId=admin'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(totalPage)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(totalPage)+"&memberId=admin'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
 		pageNavi += "</ul>";
 		
-		PostPageData ppd1 = new PostPageData(list, pageNavi, start, totalCount, notRead);
+		PostPageData ppd1 = new PostPageData(list, pageNavi, start, totalCount, notRead, allCount);
 		JDBCTemplate.close(conn);
 		return ppd1;
 	}

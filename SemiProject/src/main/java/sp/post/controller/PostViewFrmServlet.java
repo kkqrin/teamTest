@@ -39,7 +39,7 @@ public class PostViewFrmServlet extends HttpServlet {
 			request.setAttribute("title", "성공");
 			request.setAttribute("msg", "삭제된 게시물 입니다.");
 			request.setAttribute("icon", "error");
-			request.setAttribute("loc", "/postList.do?reqPage=1&memberId=admin");
+			request.setAttribute("loc", "/postListNotRead.do?reqPage=1&memberId=admin");
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			view.forward(request, response);
 		}else {

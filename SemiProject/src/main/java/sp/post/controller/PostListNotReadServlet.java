@@ -13,16 +13,16 @@ import sp.post.service.PostService;
 import sp.post.vo.PostPageData;
 
 /**
- * Servlet implementation class PostListServlet
+ * Servlet implementation class PostListNotReadServlet
  */
-@WebServlet(name = "PostList", urlPatterns = { "/postList.do" })
-public class PostListServlet extends HttpServlet {
+@WebServlet(name = "PostListNotRead", urlPatterns = { "/postListNotRead.do" })
+public class PostListNotReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostListServlet() {
+    public PostListNotReadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,9 +35,8 @@ public class PostListServlet extends HttpServlet {
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		String memberId = request.getParameter("memberId");
 		PostService service = new PostService();
-		PostPageData ppd = service.selectPostAllList(reqPage,memberId);
+		PostPageData ppd = service.selectPostNoReadList(reqPage, memberId);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
-		
 		request.setAttribute("list", ppd.getList());
 		request.setAttribute("start",ppd.getStart());
 		request.setAttribute("pageNavi", ppd.getPageNavi());
