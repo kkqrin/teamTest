@@ -8,6 +8,7 @@
 <style>
 	.btn{
 		margin-bottom : 10px;
+		font-size : 30px;
 	}
 </style>
 </head>

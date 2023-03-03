@@ -13,6 +13,10 @@
 	#noticeView th, #noticeView td{
 		border : 1px solid #eee;
 	}
+	#noticeContent{
+		text-align : left;
+		min-height : 300px;
+	}
 </style>
 </head>
 <body>
@@ -20,18 +24,36 @@
 	<div class="page-content">
 		<div class="page-title">공지사항</div>
 		<table class="tbl" id="noticeView">
-			<tr class="tr-3">
+			<tr class="bg-5">
 				<th colspan="6"><%=n.getNoticeTitle() %></th>
 			</tr>
 			<tr class="tr-1">
 				<th class="td-1">작성자</th>
 				<% if(n.getMemberNo() == 1) {%>
-				<td>중고사자 관리자</td>
+				<td class="td-0">중고사자 관리자</td>
 				<%} %>	
 				<th class="td-1">작성일</th>
-				<td><%=n.getEnrollDate() %></td>
+				<td class="td-0"><%=n.getEnrollDate() %></td>
 				<th class="td-1">조회수</th>
-				<td><%=n.getReadCount() %></td>
+				<td class="td-0"><%=n.getReadCount() %></td>
+			</tr>
+			<tr class="td-0">
+				<th class="td-1">첨부파일</th>
+				<td colspan="5">
+					<%if(n.getFilename() != null) {%>			
+					<img src="/img/file.png" width="16px">
+					<a href="/noticeFileDown.do?noticeNo=<%=n.getNoticeNo() %>">
+						<%=n.getFilename() %>
+					</a>
+					<%} %>
+				</td>
+			</tr>
+			<tr class="td-0">
+				<th colspan="6">
+					<div id="noticeContent">
+						<%=n.getNoticeContentBr() %>
+					</div>
+				</th>
 			</tr>
 		</table>
 	</div>

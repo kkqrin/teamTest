@@ -17,15 +17,18 @@
 		font-size : 40px;
 		font-weight : bold;
 	}
+	.tr-0{
+		border-bottom : 1px solid #EEEEEE;
+	}
 </style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="page-title">공지사항</div>
-		<%if(n!=null && m.getMemberNo() == 1) {%>
+		<%--<%if(n!=null && n.getMemberNo() == 1) {%>--%>
 		<a class="btn bc1 bs1" href="#">글쓰기</a>
-		<%} %>
+		<%--<%} %>--%>
 		<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:10%">번호</th>

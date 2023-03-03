@@ -39,17 +39,10 @@ public class NoticeViewServlet extends HttpServlet {
 		NoticeService service = new NoticeService();
 		Notice n = service.selectOneNotice(noticeNo);
 		//4. 결과처리
-		if(n == null) {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-			request.setAttribute("title", "조회실패");
-			request.setAttribute("msg", "게시글이 존재하지 않습니다.");
-			request.setAttribute("icon", "info");
-			request.setAttribute("loc", "/noticeList.do?reqPage=1");
-			view.forward(request, response);
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp");
-			view.forward(request, response);
-		}
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeView.jsp");
+		request.setAttribute("n", n);
+		view.forward(request, response);
+		
 	}
 
 	/**

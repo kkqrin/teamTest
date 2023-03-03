@@ -83,11 +83,20 @@ public class NoticeService {
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 			Notice n = dao.selectOneNotice(conn, noticeNo);
+			JDBCTemplate.close(conn);
+			return n;
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
 		return null;
+	}
+
+	public Notice getNotice(int noticeNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Notice n = dao.selectOneNotice(conn, noticeNo);
+		JDBCTemplate.close(conn);
+		return n;
 	}
 	
 }
