@@ -12,10 +12,6 @@
     <!-- 기본 js -->
     <script src="/js/default.js"></script>
     <script src="/js/sweetalert.min.js"></script>
-    <!-- 구글 아이콘 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- 제이쿼리 -->
-    <script src="js/jquery-3.6.3.min.js"></script>
 
 
     <header>

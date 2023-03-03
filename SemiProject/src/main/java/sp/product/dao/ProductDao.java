@@ -18,7 +18,7 @@ public class ProductDao {
 		return 0;
 	}
 
-	public ArrayList<Category> selectOneSubCategory(Connection conn) {
+	public ArrayList<Category> selectOneSubCategory(Connection conn, int categoryRef) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Category> list = new ArrayList<Category>();
@@ -27,6 +27,7 @@ public class ProductDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, categoryRef);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -43,8 +44,7 @@ public class ProductDao {
 			JDBCTemplate.close(rset);
 		}
 		
-		
-		return null;
+		return list;
 	}
 
 }
