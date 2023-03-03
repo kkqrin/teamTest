@@ -34,16 +34,16 @@ public class ReportMemberSelectServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+//		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		//3. 비즈니스로직
-		MemberService service = new MemberService();
-		Member m = service.selectMemberNo(memberNo);
+//		MemberService service = new MemberService();
+//		Member m = service.selectMemberNo(memberNo);
 		//4. 결과처리
-		if (m != null & m.getMemberGrade() == 1) {
+//		if (m != null & m.getMemberGrade() == 1) {
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/report.jsp");
-			request.setAttribute("m", m);
+//			request.setAttribute("m", m);
 			view.forward(request, response);
-		}
+//		}
 	}
 
 	/**
