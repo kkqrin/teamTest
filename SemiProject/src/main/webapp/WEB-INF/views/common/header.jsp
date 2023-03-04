@@ -27,7 +27,7 @@
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <%} else{%>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
-			<a href="#" class="btn bc0"><%=m.getMemberName() %></a>
+			<a href="/myPage.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>
             <a href="/custmoService.do" class="btn bc0">고객센터</a>
         </div>
@@ -47,7 +47,7 @@
                 </button>
             </div>
             <div class="member-link">
-                <a href="#" class="btn">
+                <a href="/myPage.do" class="btn">
                     <span class="material-symbols-outlined">account_circle</span>
                     <p>마이페이지</p>
                 </a>
