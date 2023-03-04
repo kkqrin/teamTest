@@ -46,7 +46,7 @@ public class ChangePactCheckServlet extends HttpServlet {
 			request.setAttribute("icon", "success");
 		}else {
 			request.setAttribute("title", "정보 변경 실패");
-			request.setAttribute("msg", "정보 변경을 실페하였습니다.");
+			request.setAttribute("msg", "정보 변경을 실패하였습니다.");
 			request.setAttribute("icon", "error");
 		}
 		request.setAttribute("loc", "/reportSelect.do");
