@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import common.JDBCTemplate;
 import sp.product.vo.Category;
+import sp.product.vo.Product;
 
 public class ProductDao {
 
@@ -45,6 +46,33 @@ public class ProductDao {
 		}
 		
 		return list;
+	}
+
+	public int insertProduct(Connection conn, Product p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into product values(product_seq.nextval, ?, ?, ?, 0, ?, 0, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, p.getCategoryNo());
+			pstmt.setString(2, p.getSellerId());
+			pstmt.setString(3, p.getProductTitle());
+			pstmt.setInt(4, p.getProductPrice());
+			pstmt.setString(5, p.getProductContent());
+			pstmt.setString(6, p.getProductArea());
+			pstmt.setString(7, p.getFilename());
+			pstmt.setString(8, p.getFilepath());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
