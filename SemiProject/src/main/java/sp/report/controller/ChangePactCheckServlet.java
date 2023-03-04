@@ -1,7 +1,6 @@
 package sp.report.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,23 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import sp.member.vo.Member;
 import sp.report.service.ReportService;
-import sp.report.vo.Report;
 
 /**
- * Servlet implementation class ReportServlet
+ * Servlet implementation class ChangePactCheckServlet
  */
-@WebServlet(name = "ReportSelect", urlPatterns = { "/reportSelect.do" })
-public class ReporSelectServlet extends HttpServlet {
+@WebServlet(name = "ChangePactCheck", urlPatterns = { "/changePactCheck.do" })
+public class ChangePactCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReporSelectServlet() {
+    public ChangePactCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,29 +33,24 @@ public class ReporSelectServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-//		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		
-//		세선에서 memberNo 데이터 추출
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("m");
-		int memberNo  = m.getMemberNo();
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int pactCheck = Integer.parseInt(request.getParameter("pactCheck"));
 		//3. 비즈니스로직
-//		MemberService service = new MemberService();
-//		Member m = service.selectMemberNo(memberNo);
-		
 		ReportService service = new ReportService();
-//		Report r = service.selectAllReport(memberNo);
-		ArrayList<Report> list = service.selectAllReport(memberNo);
+		int result = service.changePactCheck(memberNo,pactCheck);
 		//4. 결과처리
-//		if (m != null & m.getMemberGrade() == 1) {
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/report.jsp");
-			request.setAttribute("list", list);
-			view.forward(request, response);
-//			request.setAttribute("r", r);
-//			view.forward(request, response);
-//			request.setAttribute("m", m);
-//			view.forward(request, response);
-//		}
+		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("title", "정보 변경 성공");
+			request.setAttribute("msg", "정보 변경을 성공하였습니다.");
+			request.setAttribute("icon", "success");
+		}else {
+			request.setAttribute("title", "정보 변경 실패");
+			request.setAttribute("msg", "정보 변경을 실페하였습니다.");
+			request.setAttribute("icon", "error");
+		}
+		request.setAttribute("loc", "/reportSelect.do");
+		view.forward(request, response);
 	}
 
 	/**
