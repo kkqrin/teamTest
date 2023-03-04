@@ -11,12 +11,13 @@ public class Report {
 	private String filename;
 	private String filepath;
 	private int pactCheck;
+	private String memberId;
 	public Report() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Report(int reportNo, int memberNo, String reportMember, String enrollDate, int reportType,
-			String reportContent, int reportPrice, String filename, String filepath, int pactCheck) {
+			String reportContent, int reportPrice, String filename, String filepath, int pactCheck, String memberId) {
 		super();
 		this.reportNo = reportNo;
 		this.memberNo = memberNo;
@@ -28,6 +29,7 @@ public class Report {
 		this.filename = filename;
 		this.filepath = filepath;
 		this.pactCheck = pactCheck;
+		this.memberId = memberId;
 	}
 	public int getReportNo() {
 		return reportNo;
@@ -89,5 +91,12 @@ public class Report {
 	public void setPactCheck(int pactCheck) {
 		this.pactCheck = pactCheck;
 	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	
 
 }
