@@ -47,21 +47,25 @@
                 </button>
             </div>
             <div class="member-link">
-                <a href="/myPage.do" class="btn">
-                <%--<a href="/adminPageGrade.do" class="btn">--%>
-                    <span class="material-symbols-outlined">account_circle</span>
-                    <p>마이페이지</p>
-                </a>
+               <%if(m !=null && (m.getMemberGrade()==2||m.getMemberGrade()==3)){ %>
+		               <a href="/myPage.do" class="btn">
+		               		<span class="material-symbols-outlined">account_circle</span>
+		                    <p>마이페이지</p> 
+		               </a>
                 <a href="#" class="btn">
                     <span class="material-symbols-outlined">favorite</span>
                     <p>관심상품</p>
                 </a>
-                <%if(m!=null) {%>
                 <a href="/insertProduct.do" class="btn">
 	                <span class="material-symbols-outlined">edit</span>
                     <p>판매하기</p>
                 </a>
-                <%} %>
+               <%}else if(m !=null && m.getMemberGrade()==1) { %>
+	                <a href="/adminPageGrade.do" class="btn">
+	                 <span class="material-symbols-outlined">account_circle</span>
+	                 <p>관리자페이지</p> 
+	                </a>
+               <%}%>
             </div>
         </div>
         <nav>
