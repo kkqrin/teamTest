@@ -48,6 +48,7 @@
             </div>
             <div class="member-link">
                 <a href="/myPage.do" class="btn">
+                <%--<a href="/adminPageGrade.do" class="btn">--%>
                     <span class="material-symbols-outlined">account_circle</span>
                     <p>마이페이지</p>
                 </a>
@@ -55,10 +56,12 @@
                     <span class="material-symbols-outlined">favorite</span>
                     <p>관심상품</p>
                 </a>
+                <%if(m!=null) {%>
                 <a href="/insertProduct.do" class="btn">
 	                <span class="material-symbols-outlined">edit</span>
                     <p>판매하기</p>
                 </a>
+                <%} %>
             </div>
         </div>
         <nav>

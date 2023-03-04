@@ -36,6 +36,11 @@
 		<div class="page-content">
 		<div class="page-title">판매상품 등록하기</div>
 		<form action="/productWrite.do" method="post" enctype="multipart/form-data">
+		<!-- 세션의 작성자도 submit -->
+		<input type="hidden" name="productWriter" value="<%=m.getMemberId()%>">
+		<input type="hidden" name="memberAddr" value="<%=m.getMemberAddr()%>">
+		<input type="text" name="productPrice">
+		<input type="file" name="upfile">
 			<table class="tbl" id="productWrite">
 				<!-- 한 행에 6칸 -->
                 <tr class="tr-1 img-box">
@@ -82,7 +87,7 @@
 					</td>
 				</tr>
 				<tr class="tr-1 price">
-					<td colspan="6"><span>\ </span><input id="priceInput" type="text" name="productPrice" class="input-form" placeholder="가격"><span> 원</span></td>
+					<td colspan="6"><span>\ </span><input id="priceInput" type="text" class="input-form" placeholder="가격"><span> 원</span></td>
 				</tr>
 				<tr class="tr-1">
 					<td colspan="6" style="text-align:left;">
@@ -101,6 +106,10 @@
 	
 	
 	<script>
+	
+	
+	
+	
 		$("#productContent").summernote({
 			height : 400,
 			lang : "ko-KR",
@@ -161,38 +170,40 @@
 					if(optionVal == 0){
 						const option0Selected = $("<option value='0' selected>하위카테고리</option>");
 						subCategory.append(option0Selected);
+					}else{
+						const option0Selected = $("<option value='none' selected>선택해주세요</option>");
+						subCategory.append(option0Selected);
 					}
 					
 					for(let i=0;i<data.length;i++){
 						const option = $("<option></option>");
-						option.val(data[i]);
+						option.val(data[i].categoryNo);
 						option.text(data[i].categoryName);
 						
 						subCategory.append(option);
 					}
+					console.log("optionVal : "+optionVal);
 				}
 			})
 		});
 		
+		
+		// 화폐 단위 설정 ////////////////////////////////////////////////이상함!!!!!!!!!!!!!!!!!
 		$("#priceInput").on("focus", function(){
 			$(this).val("");
 		});
 		$("#priceInput").on("change", function(){
-			// alert($(this).val());
 			let priceInputVal = $(this).val();
+			
+			// 화폐 단위 표시전 정수형은 따로 input에 담아서 submit
+			$("[name=productPrice]").val(priceInputVal);
 			
 			// 12,345원
 			// 1,234,567원
-			// const man = priceInputVal / 10000 ; // 1
 			const bakman = Math.floor(priceInputVal / 1000000); // 1
 			priceInputVal = priceInputVal - bakman*1000000; 
 			const chun = Math.floor(priceInputVal / 1000); // 234
 			const ilsipbak = priceInputVal % 1000; // 567
-			
-			// Math.floor(3.9)
-			console.log(bakman);
-			console.log(chun);
-			console.log(ilsipbak);
 			
 			if(bakman == 0){
 				$(this).val(chun+","+ilsipbak);				
@@ -203,7 +214,11 @@
 
 		});
 		
-		
+		///////////////// 하위카테고리 첫번째거는 val 못가져옴!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		// 콘솔용
+		$(".sub-category").on("change", function(){
+			console.log($(".sub-category").val());
+		});
 		
 	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
