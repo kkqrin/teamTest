@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import sp.product.dao.ProductDao;
 import sp.product.vo.Category;
+import sp.product.vo.Product;
 
 public class ProductService {
 	private ProductDao dao;
@@ -27,5 +28,19 @@ public class ProductService {
 		
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public int insertProduct(Product p) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertProduct(conn, p);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
 	}
 }
