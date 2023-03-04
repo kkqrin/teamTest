@@ -58,14 +58,8 @@ li{
     list-style-type: none;
 }
 
-
-
-.title{
-    padding-top: 50px;
+.table-title{
+    padding-top: 30px;
     padding-left: 350px;
 }
-.tbl{
-    width: 80%;   
-    border-collapse: collapse;
 
-}
