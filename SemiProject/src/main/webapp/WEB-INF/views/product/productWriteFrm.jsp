@@ -39,7 +39,7 @@
 		<!-- 세션의 작성자도 submit -->
 		<input type="hidden" name="productWriter" value="<%=m.getMemberId()%>">
 		<input type="hidden" name="memberAddr" value="<%=m.getMemberAddr()%>">
-		<input type="text" name="productPrice">
+		<input type="hidden" name="productPrice">
 		<input type="file" name="upfile">
 			<table class="tbl" id="productWrite">
 				<!-- 한 행에 6칸 -->
@@ -53,7 +53,7 @@
 				</tr>
 				<tr class="tr-1">
 					<td colspan="6">
-						<input type="text" name="productTitle" class="input-form" placeholder="제목">
+						<input type="text" name="productTitle" class="input-form" placeholder="제목" required>
 					</td>
 				</tr>
 				<tr class="tr-1">
@@ -87,7 +87,7 @@
 					</td>
 				</tr>
 				<tr class="tr-1 price">
-					<td colspan="6"><span>\ </span><input id="priceInput" type="text" class="input-form" placeholder="가격"><span> 원</span></td>
+					<td colspan="6"><span>\ </span><input id="priceInput" type="text" class="input-form" placeholder="가격" required><span> 원</span></td>
 				</tr>
 				<tr class="tr-1">
 					<td colspan="6" style="text-align:left;">
@@ -106,26 +106,21 @@
 	
 	
 	<script>
-	
-	
-	
-	
+		// 숨겨진 textarea에 본문 내용 작성후 submit
 		$("#productContent").summernote({
 			height : 400,
 			lang : "ko-KR",
-			// 이미지 업로드시 ajax 처리 -> 글 올려서 새로고침 하면 사라짐
 			callbacks : {
+			// 이미지 업로드시 ajax 처리 -> 글 올려서 새로고침 하면 사라짐
 				onImageUpload : function(files){
 					uploadImage(files[0], this);
 				}
 			}
 		});
-		
 		function uploadImage(file, editor){
 			// ajax를 통해 서버에 이미지를 업로드
 			// 업로드된 이미지의 경로를 받아오는 역할
 			// 받아온 이후 -> editor에 이미지 경로를 전달해서 화면에 표현
-			
 			// <form> 태그의 역할
 			const form = new FormData();
 			form.append("file", file);
@@ -134,7 +129,6 @@
 				<input type="file" name="file">
 			</form>
 			*/
-			
 			$.ajax({
 				url : "/uploadImage.do",
 				type : "post",
@@ -154,6 +148,9 @@
 			*/
 		}
 		
+		
+		
+		
 		// 하위 카테고리 선택 ajax
 		$(".first-category").on("change", function(){
 			const subCategory = $(".sub-category");
@@ -168,10 +165,10 @@
 				success : function(data){
 
 					if(optionVal == 0){
-						const option0Selected = $("<option value='0' selected>하위카테고리</option>");
+						const option0Selected = $("<option value='0' selected>하위 카테고리</option>");
 						subCategory.append(option0Selected);
 					}else{
-						const option0Selected = $("<option value='none' selected>선택해주세요</option>");
+						const option0Selected = $("<option value='none' selected>카테고리를 선택해주세요</option>");
 						subCategory.append(option0Selected);
 					}
 					
@@ -182,43 +179,121 @@
 						
 						subCategory.append(option);
 					}
-					console.log("optionVal : "+optionVal);
 				}
 			})
 		});
+
 		
+		// 상품 등록 유효성 검사 (사진, 카테고리, 가격, 내용)
+		const result = [false, false, true, false];
+	
 		
-		// 화폐 단위 설정 ////////////////////////////////////////////////이상함!!!!!!!!!!!!!!!!!
-		$("#priceInput").on("focus", function(){
-			$(this).val("");
-		});
-		$("#priceInput").on("change", function(){
-			let priceInputVal = $(this).val();
+		// 사진 업로드 여부 유효성 검사
+		$("[name=upfile]").on("change", function(){
 			
-			// 화폐 단위 표시전 정수형은 따로 input에 담아서 submit
-			$("[name=productPrice]").val(priceInputVal);
+			console.log($("[name=upfile]").val());
 			
-			// 12,345원
-			// 1,234,567원
-			const bakman = Math.floor(priceInputVal / 1000000); // 1
-			priceInputVal = priceInputVal - bakman*1000000; 
-			const chun = Math.floor(priceInputVal / 1000); // 234
-			const ilsipbak = priceInputVal % 1000; // 567
-			
-			if(bakman == 0){
-				$(this).val(chun+","+ilsipbak);				
+			if(!($(this).val())){
+				// console.log("첨부파일 없음");
+				result[0] =  false;
 			}else{
-				$(this).val(bakman+","+chun+","+ilsipbak);				
+				// console.log("첨부파일 있음");
+				result[0] = true;
 			}
 			
-
 		});
 		
-		///////////////// 하위카테고리 첫번째거는 val 못가져옴!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		// 콘솔용
+		
+		// 하위 카테고리 선택되었는지 유효성 검사
 		$(".sub-category").on("change", function(){
-			console.log($(".sub-category").val());
+			// console.log($(".sub-category").val());
+			if($(this).val() != "none"){
+				result[1] = true;
+			}else{
+				result[1] = false;				
+			}
 		});
+		
+		
+		// 가격 input 유효성 검사 -> 정규표현식으로 숫자가 아니면 false, 맨 앞자리가 0이면 안됨 ㅠㅠ
+		
+		
+		
+		// 화폐 단위 표시
+		$("#priceInput").on("focus", function(){
+			// input 초기화
+			$(this).val("");
+			// 숨긴 input 초기화
+			$("[name=productPrice]").val("");
+		});
+		$("#priceInput").on("change", function(){
+			// placeholder 초기화
+			$(this).attr("placeholder", "가격");
+			
+			// 숫자인지 유효성 검사
+			const priceReg = /^[0-9]+$/;
+			const priceInputVal = $(this).val();
+			// 화폐 단위 표시
+			const commaMoney = priceInputVal.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+						
+			if(priceReg.test(priceInputVal)){
+				//console.log("숫자맞음");
+				
+				// 가격은 0으로 시작하면 안됨
+				const zeroFirstReg = /^0/;
+				
+				if(zeroFirstReg.test(priceInputVal)){
+					const justZeroReg = /^0$/;
+					
+					if(!(justZeroReg.test(priceInputVal))){						
+						//result[2] = false;
+						$(this).val("");
+						$(this).attr("placeholder", "상품 가격은 0으로 시작할 수 없습니다. 다시 입력해주세요.");
+					}else{
+						// 무료나눔
+						$("[name=productPrice]").val(priceInputVal);
+						$(this).val(priceInputVal + " (무료나눔)");
+						
+						//result[2] = true;
+					}
+				}else{
+					// 화폐 단위 표시전 숫자형 가격은 따로 input에 담아서 submit
+					$("[name=productPrice]").val(priceInputVal);
+					$(this).val(commaMoney);
+					
+					//result[2] = true;
+				}
+			}else{
+				//console.log("숫자아님");
+				//result[2] = false;
+				$(this).val("");
+				$(this).attr("placeholder", "상품 가격은 숫자로 입력해주세요.");
+			}
+			
+			console.log(result);
+			console.log($("[name=upfile]").val());
+		});
+		
+
+		
+		$("[type=submit]").on("click", function(event){
+			
+			if($("#productContent").val() != ""){
+				result[3] = true;
+			}else{
+				result[3] = false;
+			}
+			
+			
+			
+			// 유효성 검사 만족못하면 submit 안됨
+		     if (!(result[0] && result[1] && result[2] && result[3])) {
+    	     // 해당 이벤트의 기본이벤트를 제거 (ex. submit버튼의 form 제출 이벤트)
+	         event.preventDefault();
+	      }
+		});
+		
+
 		
 	</script>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
