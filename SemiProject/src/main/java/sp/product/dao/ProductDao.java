@@ -121,15 +121,21 @@ public class ProductDao {
 		return list;
 	}
 
-	public int selectProductList(Connection conn) {
+	public int selectProductList(Connection conn, int category, int clickCategory) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String query = "";
 		int totalCount = 0;
 		
-		String query = "select count(*) as cnt from product";
+		if(clickCategory == 0) {
+			query = "select count(*) as cnt from product p left join category c using (category_no) where c.category_ref=?";			
+		}else if(clickCategory == 1) {
+			query = "select count(*) as cnt from product where category_no=?";
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, category);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {

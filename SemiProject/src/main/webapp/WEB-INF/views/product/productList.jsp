@@ -42,6 +42,10 @@
     .list-subCategory>li>a{
     	font-size: 14px;
     }
+    #pageNavi{
+    	padding-top: 30px;
+    	padding-bottom: 30px;
+    }
     .naviHide {
 	display: none;
 	}
@@ -59,7 +63,7 @@
 						<%for(int i=0;i<cList.size();i++) {%>
 						<%Category c = cList.get(i); %>
 				           <li>
-				               <a href="#"><%=c.getCategoryName() %></a>
+				               <a><%=c.getCategoryName() %></a>
 				               <ul class="list-subCategory naviHide">
 				               		<li><a href="/productList.do?category=<%=category%>&reqPage=1">전체</a></li>
 				               		<%for(Category sc : cSubList) {%>
@@ -104,309 +108,14 @@
 			                </div>
 			            </div>
 					<%} %>
-				            <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	                        <div class="posting-item">
-	                <div class="posting-img">
-	                    <img src="img/file.png" />
-	                </div>
-	                <div class="posting-content">
-	                    <p class="posting-price">1,000,000원</p>
-	                    <p class="posting-title">[미개봉/새상품] 아이폰 12 Pro 실버 256GB</p>
-	                    <div class="posting-detail">
-	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
-	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
-	                            </div>
-	                        </div>
-	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
+				           
+				           
+				           
+				           
 				</div>
 			</div>
         </div>
+        <div id="pageNavi"><%=pageNavi %></div>
 	</div>
 	
 	<script>
