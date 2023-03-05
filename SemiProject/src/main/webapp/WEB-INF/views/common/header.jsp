@@ -33,10 +33,9 @@
         </div>
         <div class="header-top">
             <div class="site-logo">
-                <a href="/">중고사자</a>
-                <div class="site-img">
-                    <img src="/img/lion (1).png">
-                </div>
+                <a href="/">중고사자
+                	<div class="site-img"><img src="/img/lion.png"></div>
+                </a>
             </div>
             <div class="search-box">
                 <input type="text" class="search-input" placeholder="검색어를 입력하세요.">
@@ -82,7 +81,7 @@
         <ul class="sub-navi naviHide">
             <div>
                 <p>CATEGORY</p>
-                <li><a href="/productList.do?categoryNo=1&reqPage=1">수입명품</a></li>
+                <li><a href="/productList.do?category=1&reqPage=1">수입명품</a></li>
                 <li><a href="#">패션의류</a></li>
                 <li><a href="#">모바일/태블릿</a></li>
                 <li><a href="#">가구/인테리어</a></li>
