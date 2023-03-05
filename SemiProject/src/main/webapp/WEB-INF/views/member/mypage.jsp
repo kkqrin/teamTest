@@ -51,7 +51,11 @@
 
                 <div class="mypage-info-right">
                     <div class="myPage-info-grade">
-                        <p><%=m.getMemberGrade()%></p>
+                    <%if(m.getMemberGrade()==2){%>
+                        <p>이메일 인증회원</p>
+                    <%}else{ %>
+                    	<p>이메일 미인증회원</p>
+                    <%} %>
                     </div>
                     <div class="bank">
                         <p>예치금 <span class="fc-6"><%=m.getMemberPoint() %></span>원</p>

@@ -25,7 +25,10 @@
             <%if(m==null){ %>
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
-            <%} else{%>
+            <%}else if(m.getMemberGrade()==1){%>
+            <a href="/logout.do" class="btn bc0">로그아웃</a>
+			<a href="/adminPageGrade.do" class="btn bc0"><%=m.getMemberName() %></a>
+            <%}else{ %>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/myPage.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>

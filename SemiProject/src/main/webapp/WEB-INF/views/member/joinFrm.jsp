@@ -167,7 +167,7 @@
                     </div>
                 </div>
                 <div class = "join-btn-wrap">
-                    <button type="submit b">회원가입</button>
+                    <button type="submit ">회원가입</button>
                 </div>
             </form>
         </div>

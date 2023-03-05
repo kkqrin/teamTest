@@ -59,9 +59,10 @@ ul{
     margin-bottom: 20px;
 }
 .myPage-info-box{
-    width: 300px;
+    width: 500px;
   /*display: flex;*/
     float: left;
+    
 }
 .myPage-info-image{
     display: inline-block;
@@ -70,6 +71,7 @@ ul{
 
 .myPage-info-user{
     float: right;
+    
 }
 .myPage-info-user>div{
     margin-top: 10px;
@@ -170,7 +172,7 @@ ul{
     margin-left: 200px;
     width: 1000px;
     height: 100px;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: #ebebeb;
     text-align: center;
     line-height: 18px;

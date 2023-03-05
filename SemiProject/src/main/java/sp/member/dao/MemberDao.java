@@ -198,4 +198,32 @@ public class MemberDao {
 		return m;
 	}
 
+	public int updateInfo(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update member_tbl set member_pw=?, member_name=?, member_phone=?, member_email=?, post_number=?, member_addr=?, member_addr2=? where member_id=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberPw());
+			pstmt.setString(2, member.getMemberName());
+			pstmt.setString(3, member.getMemberPhone());
+			pstmt.setString(4, member.getMemberEmail());
+			pstmt.setString(5, member.getPostNumber());
+			pstmt.setString(6, member.getMemberAddr());
+			pstmt.setString(7, member.getMemberAddr2());
+			pstmt.setString(8, member.getMemberId());
+			
+			result=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

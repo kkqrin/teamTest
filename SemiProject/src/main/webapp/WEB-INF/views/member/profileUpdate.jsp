@@ -7,7 +7,13 @@
     <title>Insert title here</title>
     <link rel="stylesheet" href="css/liondefault.css">
     <link rel="stylesheet" href="css/profileUpdate.css">
-    <script src="/js/jquery-3.6.3.min.js"></script>   
+    <script src="/js/jquery-3.6.3.min.js"></script>
+     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <style>
+    .emailCheck{
+    	display:none;
+    }
+    </style>
 </head>
     <body>
      <%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -39,8 +45,8 @@
                         <img src="/img/user-100.png">
                     </div>
                     <div class="myPage-info-user">
-                        <div>sadaasd</div>
-                        <p>asdasdas@naver.com</p>
+                        <div><%=m.getMemberName() %></div>
+                        <p><%=m.getMemberEmail() %></p>
                         <button><a href="#">사진 변경</a></button>
                         <button><a href="#">사진 삭제</a></button>
                     </div>
@@ -48,14 +54,21 @@
 
                 <div class="mypage-info-right">
                     <div class="myPage-info-grade">
-                        <p>일반 회원</p>
+                    <%if(m.getMemberGrade()==2){%>
+                        <p>이메일 인증회원</p>
+                    <%}else{ %>
+                    	<p>이메일 미인증회원</p>
+                    <%} %>
                     </div>
                     <div class="bank">
-                        <p>예치금 0원</p>
-                    </div>   
+                        <p>예치금 <span class="fc-6"><%=m.getMemberPoint() %></span>원</p>
+                    </div>
+                    <div class="temp">
+                        <p>온도 <span class="fc-9"><%=m.getMemberTemp() %></span>도</p>
+                    </div>    
                 </div>
             </div>
-            <form action="#" method="post">
+            <form action="/updateInfo.do" method="post">
                 <div class="login-info">
                           <div class="join-input-wrap">
                               <h3>로그인 정보</h3>
@@ -64,7 +77,7 @@
                                   <label for="memberId">아이디</label>
                               </div>
                               <div>
-                                  <input type="text" name="memberId" id="memberId" class = "long-input" readonly>
+                                  <input type="text" name="memberId" id="memberId" class = "long-input" value="<%=m.getMemberId() %>" readonly>
                               </div>
                           </div>
                           <div class="join-input-wrap">
@@ -73,8 +86,7 @@
                                   <span class = "comment"></span>
                               </div>
                               <div>
-                                  <input type="password" name="memberPw" id="memberPw" class = "long-input" placeholder="영문,숫자,특수문자 조합 8-16자" required>
-                                  <button type="button" class="bc1 dup-btn">변경하기</button>
+                                  <input type="password" name="memberPw" id="memberPw" class = "long-input" placeholder="영문,숫자,특수문자 조합 8-16자" value="<%=m.getMemberPw() %>" required>
                                   <span class = "comment"></span>
                               </div>
                           </div>
@@ -87,8 +99,7 @@
                                   <label for="memberName">이름</label>
                               </div>
                               <div>
-                                  <input type="text" name="memberName" id="memberName" class = "long-input" required>
-                                  <button type="button" class="bc1 dup-btn">변경하기</button>
+                                  <input type="text" name="memberName" id="memberName" class = "long-input" value="<%=m.getMemberName() %>" required>
                               </div>
                           </div>
                           <div class="join-input-wrap">
@@ -96,8 +107,7 @@
                                   <label for="memberPhone">전화번호</label>
                               </div>
                               <div>
-                                  <input type="text" name="memberPhone" id="memberPhone" class = "long-input">
-                                  <button type="button" class="bc1 dup-btn">변경하기</button>
+                                  <input type="text" name="memberPhone" id="memberPhone" class = "long-input" value="<%=m.getMemberPhone() %>">
                               </div>
                           </div>
                           <div class="join-input-wrap">
@@ -105,17 +115,17 @@
                                   <label for="email" >이메일</label>
                               </div>
                               <div>
-                                  <input type="text" name="email" id="email" class="long-input" placeholder="예) secondhandlion@lion.com">
-                                  <button class="bc1 dup-btn" id="sendBtn">메일전송</button>
+                                  <input type="text" name="email" id="email" class="mid-input" placeholder="예) secondhandlion@lion.com" value="<%=m.getMemberEmail()%>">
+                                  <button type="button" class="bc2 dup-btn" id="sendBtn">메일변경</button>
                               </div>
                           </div>
-                          <div class="join-input-wrap">
+                          <div class="join-input-wrap emailCheck">
                               <div>
                                   <label for="email" >이메일 인증하기</label>
                               </div>
                               <div>
-                                  <input type="text" name="email" id="authCode" class="long-input" placeholder="인증번호 입력">
-                                  <button class="bc1 dup-btn"id="authBtn">인증하기</button>
+                                  <input type="text" name="email" id="authCode" class="mid-input" placeholder="인증번호 입력">
+                                  <button type="button" class="bc2 dup-btn"id="authBtn">인증하기</button>
                                   <span id="timeZone"></span>
                                   <span id="authMsg"></span>
                               </div>
@@ -125,7 +135,7 @@
                                   <label for="post" >우편번호</label>
                               </div>
                               <div>
-                                  <input type="text" name="postcode" id="postcode" class="long-input" readonly>
+                                  <input type="text" name="postcode" id="postcode" class="long-input" value="<%=m.getPostNumber() %>" readonly>
                               </div>
                           </div>
                           <div class="join-input-wrap">
@@ -133,7 +143,7 @@
                                   <label for="addr" >주소</label>
                               </div>
                               <div>
-                                  <input type="text" name="address" id="address" class="long-input" readonly>
+                                  <input type="text" name="address" id="address" class="long-input" value="<%=m.getMemberAddr()%>"readonly>
                               </div>
                           </div>
                           <div class="join-input-wrap bottomAddr">
@@ -141,14 +151,19 @@
                                   <label for="addr2" >상세주소</label>
                               </div>
                               <div>
-                                  <input type="text" name="detailAddress" id="detailAddress" class="long-input">
-                                  <button class="bc1 dup-btn" onclick="searchAddr();">주소변경</button>
+                                  <input type="text" name="detailAddress" id="detailAddress" class="mid-input" value="<%=m.getMemberAddr2()%>">
+                                  <button type="button" class="bc2 dup-btn" onclick="searchAddr();">주소변경</button>
                               </div>
+                          </div>
+                          <div class="updateComplete">
+                              <button type="submit" class="bc2">수정하기</button>
                           </div>
                   </form>
         </div>
         <script>
-        	
+        	$("#sendBtn").on("click",function(){
+        		$(".emailCheck").css("display","block");
+        	});
         	
             $(".sub-title").on("click", function(){
                 $(this).next().slideToggle();
@@ -162,6 +177,7 @@
             });
 
         </script>
+        <script src = "js/emailApi.js"></script>
         <%@include file="/WEB-INF/views/common/footer.jsp" %>
     </body>
     </html>
