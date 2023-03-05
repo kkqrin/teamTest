@@ -56,7 +56,7 @@ public class ProductService {
 		// 화면 출력을 위한 해당 카테고리 이름 불러오기
 		Category cn = dao.selectFirstCategoryName(conn, category, clickCategory);
 		
-		int totalCount = dao.selectProductList(conn);
+		int totalCount = dao.selectProductList(conn, category, clickCategory);
 		
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
@@ -73,7 +73,11 @@ public class ProductService {
 		// 이전버튼은 첫 페이지네비가 아닐때
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/productList.do?category="+category+"&reqPage="+(pageNo-1)+"'>";
+			if(clickCategory == 0) {
+				pageNavi += "<a class='page-item' href='/productList.do?category="+category+"&reqPage="+(pageNo-1)+"'>";				
+			}else if(clickCategory == 1) {
+				pageNavi += "<a class='page-item' href='/productSubList.do?category="+category+"&reqPage="+(pageNo-1)+"'>";
+			}
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
@@ -82,12 +86,20 @@ public class ProductService {
 		for(int i=0;i < pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/productList.do?category="+category+"&reqPage="+(pageNo)+"'>";
+				if(clickCategory == 0) {
+					pageNavi += "<a class='page-item active-page' href='/productList.do?category="+category+"&reqPage="+(pageNo)+"'>";					
+				}else if(clickCategory == 1) {
+					pageNavi += "<a class='page-item active-page' href='/productSubList.do?category="+category+"&reqPage="+(pageNo)+"'>";
+				}
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/productList.do?category="+category+"&reqPage="+(pageNo)+"'>";
+				if(clickCategory == 0) {
+					pageNavi += "<a class='page-item' href='/productList.do?category="+category+"&reqPage="+(pageNo)+"'>";					
+				}else {
+					pageNavi += "<a class='page-item' href='/productSubList.do?category="+category+"&reqPage="+(pageNo)+"'>";
+				}
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -101,15 +113,17 @@ public class ProductService {
 		// 다음 버튼
 		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/productList.do?category="+category+"&reqPage="+(pageNo)+"'>";
-			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			if(clickCategory == 0) {
+				pageNavi += "<a class='page-item' href='/productList.do?category="+category+"&reqPage="+(pageNo)+"'>";				
+			}else if(clickCategory == 1) {
+				pageNavi += "<a class='page-item' href='/productSubList.do?category="+category+"&reqPage="+(pageNo)+"'>";
+			}
+			pageNavi += "<span class='material-icons'>chevron_right</span>";				
 			pageNavi += "</a></li>";
 		}
 		pageNavi += "</ul>";
 		
-		JDBCTemplate.close(conn);
 		
-		//ProductPageData ppd = new ProductPageData(list, pageNavi, start, category, cn.getfCategoryName());
 		ProductPageData ppd = new ProductPageData();
 		ppd.setList(list);
 		ppd.setPageNavi(pageNavi);
@@ -121,6 +135,7 @@ public class ProductService {
 		}
 		ppd.setfCategoryName(cn.getfCategoryName());
 		
+		JDBCTemplate.close(conn);
 		return ppd;
 	}
 
