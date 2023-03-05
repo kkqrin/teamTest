@@ -4,17 +4,19 @@ public class Category {
 	private int categoryNo;
 	private String categoryName;
 	private int categoryRef;
+	private String fCategoryName;
 
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(int categoryNo, String categoryName, int categoryRef) {
+	public Category(int categoryNo, String categoryName, int categoryRef, String fCategoryName) {
 		super();
 		this.categoryNo = categoryNo;
 		this.categoryName = categoryName;
 		this.categoryRef = categoryRef;
+		this.fCategoryName = fCategoryName;
 	}
 
 	public int getCategoryNo() {
@@ -39,6 +41,14 @@ public class Category {
 
 	public void setCategoryRef(int categoryRef) {
 		this.categoryRef = categoryRef;
+	}
+
+	public String getfCategoryName() {
+		return fCategoryName;
+	}
+
+	public void setfCategoryName(String fCategoryName) {
+		this.fCategoryName = fCategoryName;
 	}
 
 }

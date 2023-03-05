@@ -75,16 +75,23 @@ public class ProductDao {
 		return result;
 	}
 
-	public ArrayList<Product> selectProductList(Connection conn, int start, int end, int categoryNo) {
+	public ArrayList<Product> selectProductList(Connection conn, int start, int end, int category, int clickCategory) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Product> list  = new ArrayList<Product>();
+		String query = "";
 		
-		String query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM (SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, ENROLL_DATE, FILEPATH FROM PRODUCT WHERE CATEGORY_NO=? ORDER BY 1 DESC)N) WHERE RNUM BETWEEN ? AND ?";
+		if(clickCategory == 0) {
+			// 상위카테고리 category_ref기준
+			query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, ENROLL_DATE, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) WHERE CATEGORY_ref=? ORDER BY 1 DESC )N) WHERE RNUM BETWEEN ? AND ?";			
+		}else if(clickCategory == 1) {
+			// 하위카테고리 category_no기준
+			query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, ENROLL_DATE, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) WHERE CATEGORY_NO=? ORDER BY 1 DESC )N) WHERE RNUM BETWEEN ? AND ?";
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, categoryNo);
+			pstmt.setInt(1, category);
 			pstmt.setInt(2, start);
 			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
@@ -193,6 +200,39 @@ public class ProductDao {
 		}
 		
 		return list;
+	}
+
+	public Category selectFirstCategoryName(Connection conn, int category, int clickCategory) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Category cn = null;
+		String query = "";
+		
+		if(clickCategory == 0) {
+			// 상위 카테고리의 전체
+			query = "select c1.category_name as cn from category c1 left join category c2 on(c1.category_no=c2.category_ref) where c2.category_ref=?";
+		}else if(clickCategory == 1) {
+			query = "select c2.category_name as cn from category c1 left join category c2 on(c1.category_no=c2.category_ref) where c2.category_no=?";
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, category);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				cn = new Category();
+				cn.setfCategoryName(rset.getString("cn"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return cn;
 	}
 
 }
