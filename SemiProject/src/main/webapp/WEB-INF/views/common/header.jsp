@@ -85,7 +85,7 @@
         <ul class="sub-navi naviHide">
             <div>
                 <p>CATEGORY</p>
-                <li><a href="#">수입명품</a></li>
+                <li><a href="/productList.do?categoryNo=1&reqPage=1">수입명품</a></li>
                 <li><a href="#">패션의류</a></li>
                 <li><a href="#">모바일/태블릿</a></li>
                 <li><a href="#">가구/인테리어</a></li>

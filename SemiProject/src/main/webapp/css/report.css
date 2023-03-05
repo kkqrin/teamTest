@@ -60,11 +60,10 @@ li{
 
 
 
-.tabletitle{
+.table-title{
     padding-top: 50px;
     padding-left: 350px;
 }
 .table{
     width: 80%;   
-    border-collapse: collapse;
 }

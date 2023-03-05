@@ -75,4 +75,124 @@ public class ProductDao {
 		return result;
 	}
 
+	public ArrayList<Product> selectProductList(Connection conn, int start, int end, int categoryNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list  = new ArrayList<Product>();
+		
+		String query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM (SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, ENROLL_DATE, FILEPATH FROM PRODUCT WHERE CATEGORY_NO=? ORDER BY 1 DESC)N) WHERE RNUM BETWEEN ? AND ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, categoryNo);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setFilepath(rset.getString("filepath"));
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+	public int selectProductList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int totalCount = 0;
+		
+		String query = "select count(*) as cnt from product";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalCount = rset.getInt("cnt");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return totalCount;
+	}
+
+	public ArrayList<Category> selectCategoryList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Category> list = new ArrayList<Category>();
+		
+		String query = "select * from category where category_ref is null order by 1";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Category c = new Category();
+				c.setCategoryName(rset.getString("category_name"));
+				c.setCategoryNo(rset.getInt("category_no"));
+				c.setCategoryRef(rset.getInt("category_ref"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Category> selectSubCategoryList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Category> list = new ArrayList<Category>();
+		
+		String query = "select * from category where category_ref is not null order by 1";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Category c = new Category();
+				c.setCategoryName(rset.getString("category_name"));
+				c.setCategoryNo(rset.getInt("category_no"));
+				c.setCategoryRef(rset.getInt("category_ref"));
+				list.add(c);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
 }

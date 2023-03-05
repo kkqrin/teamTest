@@ -21,17 +21,23 @@ public class ReportService {
 	}
 	public int changePactCheck(int memberNo, int pactCheck) {
 		Connection conn = JDBCTemplate.getConnection();
+		//신고 게시판 상태 변경
 		int result = dao.changePactCheck(conn, memberNo, pactCheck);
 		if(result>0) {
 			// 멤버 등급 변경
 			result = dao.changeMemberGrade(conn, memberNo,pactCheck);
-			// 상품 삭제
-//			result = dao.deleteProduct(conn,memberNo);
-			if(result>0) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
-			}
+			
+//			if(result>0) {
+				// 상품 삭제
+//				result = dao.deleteProduct(conn,memberNo);
+				if(result>0) {
+					JDBCTemplate.commit(conn);
+				}else {
+					JDBCTemplate.rollback(conn);
+				}
+//			}else {
+//				JDBCTemplate.rollback(conn);
+//			}
 		}else {
 			JDBCTemplate.rollback(conn);
 		}

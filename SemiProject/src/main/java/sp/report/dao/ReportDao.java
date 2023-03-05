@@ -20,6 +20,7 @@ public class ReportDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
+//			pstmt.setInt(1, memberNo);
 			rset = pstmt.executeQuery();
 			while(rset.next()){
 				Report r = new Report();
@@ -33,6 +34,7 @@ public class ReportDao {
 				r.setReportNo(rset.getInt("report_No"));
 				r.setReportPrice(rset.getInt("report_Price"));
 				r.setReportType(rset.getInt("report_Type"));
+				r.setMemberId(rset.getString("member_Id"));
 				list.add(r);
 			}
 		} catch (SQLException e) {
@@ -71,7 +73,7 @@ public class ReportDao {
 		String query = null;
 		if(pactCheck == 1) {
 			query = "update member_tbl set member_grade=4 where member_no=?";
-			
+			deleteProduct(conn, memberNo);
 		}else if(pactCheck ==2) {
 			query = "update member_tbl set member_grade=2 where member_no=?";			
 		}
@@ -83,7 +85,7 @@ public class ReportDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
 		}
 		return result;
 	}
@@ -91,7 +93,7 @@ public class ReportDao {
 	public int deleteProduct(Connection conn, int memberNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "delete from product where member_no=?";
+		String query = "delete from product where seller_id = (select member_id from REPORT_RECEVIED left join member_tbl using(member_no) where member_no=?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memberNo);
@@ -100,7 +102,7 @@ public class ReportDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
