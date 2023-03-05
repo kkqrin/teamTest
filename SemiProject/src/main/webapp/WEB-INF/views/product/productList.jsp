@@ -88,7 +88,7 @@
 			                </div>
 			                <div class="posting-content">
 			                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
-			                    <p class="posting-title"><%=p.getProductTitle() %></p>
+			                    <p class="posting-title"><a href="/productView.do?productNo=<%=p.getProductNo()%>"><%=p.getProductTitle() %></a></p>
 			                    <div class="posting-detail">
 			                       <!--<div class="posting-icon">
 			                            <div class="heart-div">
