@@ -13,7 +13,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/admin.jsp" %>
 	<div class="member-grade table-title">
-        <div class="grade-title"><h1>회원관리</h1></div>
+        <div class="title"><h1>회원관리</h1></div>
         <table class="grad-table tbl tbl-hover" style="width:90%;">
             <tr class="tr-1">
                 <th>선택</th>
@@ -28,7 +28,7 @@
             </tr>
             <%for (Member member : list){ %>
             <tr class="tr-0">
-                <td><input type="checkbox"></td>
+                <td><input type="checkbox" class="chk"></td>
                 <td><%=member.getMemberNo() %></td>
                 <td><%=member.getMemberId() %></td>
                 <td><%=member.getMemberName() %></td>

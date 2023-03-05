@@ -1,3 +1,4 @@
+<%@page import="sp.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/css/admin.css"></link>
@@ -35,8 +36,15 @@
         </ul>
     </div>
     <div>
-        <div style="margin-left: 250px;"></div>
+        <div style="margin-left: 250px;">
+			 <div class="site-logo">
+                <a href="/">중고사자
+                	<div class="site-img"><img src="/img/lion.png"></div>
+                </a>
+     </div>
+		</div>
     </div>
+    
 <script>
     $(".more").on("click", function(){
         $(this).next().slideToggle();

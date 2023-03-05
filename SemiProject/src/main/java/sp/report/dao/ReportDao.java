@@ -11,7 +11,7 @@ import sp.report.vo.Report;
 
 public class ReportDao {
 
-	public ArrayList<Report> selectAllReport(Connection conn, int memberNo) {
+	public ArrayList<Report> selectAllReport(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Report> list = new ArrayList<Report>();
@@ -106,6 +106,39 @@ public class ReportDao {
 		}
 		
 		return result;
+	}
+
+	public Report selectOneReport(Connection conn, int reportNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Report r = null;
+		String query = "select * from member_tbl join report_recevied using(member_no) where report_no=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, reportNo);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				r = new Report();
+				r.setEnrollDate(rset.getString("enroll_date"));
+				r.setFilename(rset.getString("filename"));
+				r.setFilepath(rset.getString("filepath"));
+				r.setMemberId(rset.getString("member_id"));
+				r.setMemberNo(rset.getInt("member_no"));
+				r.setPactCheck(rset.getInt("pact_check"));
+				r.setReportContent(rset.getString("report_content"));
+				r.setReportMember(rset.getString("report_member"));
+				r.setReportNo(rset.getInt("report_no"));
+				r.setReportPrice(rset.getInt("report_price"));
+				r.setReportType(rset.getInt("report_type"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return r;
 	}
 
 }

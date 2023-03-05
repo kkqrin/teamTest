@@ -1,7 +1,6 @@
 package sp.report.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,23 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import sp.member.vo.Member;
 import sp.report.service.ReportService;
-import sp.report.vo.Report;
 
 /**
- * Servlet implementation class ReportServlet
+ * Servlet implementation class CheckedChangePactCheckServlet
  */
-@WebServlet(name = "ReportSelect", urlPatterns = { "/reportSelect.do" })
-public class ReporSelectServlet extends HttpServlet {
+@WebServlet(name = "CheckedChangePactCheck", urlPatterns = { "/checkedChangePactCheck.do" })
+public class CheckedChangePactCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReporSelectServlet() {
+    public CheckedChangePactCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,14 +33,24 @@ public class ReporSelectServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-		
-		//3. 비즈니스로직		
+		String no = request.getParameter("no");
+		String pact = request.getParameter("pact");
+		//3. 비즈니스로직
 		ReportService service = new ReportService();
-		ArrayList<Report> list = service.selectAllReport();
+		boolean result = service.checkedChangePactCheck(no,pact);
 		//4. 결과처리
-			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/report.jsp");
-			request.setAttribute("list", list);
-			view.forward(request, response);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result) {
+			request.setAttribute("title", "정보변경 성공");
+			request.setAttribute("msg", "요청이 처리되었습니다.");
+			request.setAttribute("icon", "success");
+		}else {
+			request.setAttribute("title", "정보변경 실패");
+			request.setAttribute("msg", "요청이 처리중 문제가 발생했습니다.");
+			request.setAttribute("icon", "error");
+		}
+		request.setAttribute("loc", "/reportSelect.do");
+		view.forward(request, response);
 	}
 
 	/**
