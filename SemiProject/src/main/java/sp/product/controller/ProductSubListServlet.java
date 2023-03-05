@@ -15,16 +15,16 @@ import sp.product.vo.Category;
 import sp.product.vo.ProductPageData;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class ProductSubListServlet
  */
-@WebServlet(name = "ProductList", urlPatterns = { "/productList.do" })
-public class ProductListServlet extends HttpServlet {
+@WebServlet(name = "ProductSubList", urlPatterns = { "/productSubList.do" })
+public class ProductSubListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public ProductSubListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +33,18 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 상위카테고리 , 하위 카테고리 전체 게시글 출력됨
-		// 수입명품
+		// 하위카테고리에 해당하는 게시글만 출력
+		// 하위카테고리 이름, 여성신발
 		
 		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		// 2. 값 추출
-		// 현재 요청한 카테고리 페이지
-		int categoryRef = Integer.parseInt(request.getParameter("category"));
+		int categoryNo = Integer.parseInt(request.getParameter("category"));
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
 		
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
-		// 게시글 목록 보기 + 페이징 처리
-		//  clickCategory 0이면 상위카테고리 전체이므로 ref, 1이면 하위카테고리 no
-		ProductPageData ppd = service.selectProductList(categoryRef, reqPage, 0);
+		ProductPageData ppd = service.selectProductList(categoryNo, reqPage, 1);
 		ArrayList<Category> cList = service.selectCategoryList();
 		ArrayList<Category> cSubList = service.selectSubCategoryList();
 		
@@ -57,12 +54,14 @@ public class ProductListServlet extends HttpServlet {
 		request.setAttribute("list", ppd.getList());
 		request.setAttribute("pageNavi", ppd.getPageNavi());
 		request.setAttribute("start", ppd.getStart());
-		request.setAttribute("category", ppd.getCategoryRef());
+		request.setAttribute("category", ppd.getCategoryNo());
 		request.setAttribute("fCategoryName", ppd.getfCategoryName());
 		request.setAttribute("cList", cList);
 		request.setAttribute("cSubList", cSubList);
 		
 		view.forward(request, response);
+		
+		
 	}
 
 	/**
