@@ -33,8 +33,8 @@
                     <div class="mypage-content-list more">
                         <div class="sub-title">내 정보</div>
                         <ul class="sub-menu">
-                            <li><a href="#">프로필 정보</a></li>
-                             <li><a href="#">회원탈퇴</a></li>
+                              <li><a href="/myPage.do">내 정보보기</a></li>
+                             <li><a href="/deleteMember.do">회원탈퇴</a></li>
                         </ul>
                     </div>
                 </div>

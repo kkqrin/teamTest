@@ -226,4 +226,22 @@ public class MemberDao {
 		return result;
 	}
 
+	public int deleteMember(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from member_tbl where member_id=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

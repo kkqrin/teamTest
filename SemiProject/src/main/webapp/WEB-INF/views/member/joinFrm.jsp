@@ -217,7 +217,8 @@
  																//새창을 열면 중복체크를 위한 아이디를 입력할 수 있는 칸이 나오게 됨
  				$("[name=checkIdFrm]").submit();
  			});
-
+		
+ 		//mail Api위한것
 		let mailCode;
 		$("#sendBtn").on("click",function(){
 			const email = $("#email").val();
@@ -290,6 +291,7 @@
 			}
 		}
 		
+		//addressApi위한것
 		function searchAddr(){
 			new daum.Postcode({
 		        oncomplete: function(data) {
