@@ -61,7 +61,7 @@
 		               		<span class="material-symbols-outlined">account_circle</span>
 		                    <p>마이페이지</p> 
 		               </a>
-                <a href="/wishProduct.do" class="btn">
+                <a href="/myWishProduct.do?memberNo=<%=m.getMemberNo() %>" class="btn">
                     <span class="material-symbols-outlined">favorite</span>
                     <p>관심상품</p>
                 </a>

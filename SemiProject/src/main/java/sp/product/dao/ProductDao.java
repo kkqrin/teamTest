@@ -432,4 +432,14 @@ public class ProductDao {
 		return result;
 	}
 
+	public ArrayList<Product> selectMyWishProduct(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "";
+		
+		return null;
+	}
+
 }

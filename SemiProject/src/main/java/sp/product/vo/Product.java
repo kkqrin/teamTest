@@ -14,6 +14,9 @@ public class Product {
 	private String filename;
 	private String filepath;
 
+	private int memberNo;
+	private int wishProductNo;
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -21,7 +24,7 @@ public class Product {
 
 	public Product(int productNo, int categoryNo, String sellerId, String productTitle, int productStatus,
 			int productPrice, int viewCount, String productContent, String enrollDate, String productArea,
-			String filename, String filepath) {
+			String filename, String filepath, int memberNo, int wishProductNo) {
 		super();
 		this.productNo = productNo;
 		this.categoryNo = categoryNo;
@@ -35,6 +38,8 @@ public class Product {
 		this.productArea = productArea;
 		this.filename = filename;
 		this.filepath = filepath;
+		this.memberNo = memberNo;
+		this.wishProductNo = wishProductNo;
 	}
 
 	public int getProductNo() {
@@ -131,6 +136,22 @@ public class Product {
 
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public int getWishProductNo() {
+		return wishProductNo;
+	}
+
+	public void setWishProductNo(int wishProductNo) {
+		this.wishProductNo = wishProductNo;
 	}
 
 }

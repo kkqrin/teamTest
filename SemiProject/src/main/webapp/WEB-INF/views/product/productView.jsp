@@ -80,7 +80,7 @@
 	                                <span><%=p.getProductPrice() %>원</span>
 	                            </div>
 	                            <div class="wish-box">
-	                                <span class="material-symbols-outlined wish-btn">favorite</span>
+	                                <a href="/insertWishProduct.do?productNo=<%=p.getProductNo()%>"><span class="material-symbols-outlined wish-btn">favorite</span></a>
 	                            </div>
 	                        </div>
 	                    </div>
