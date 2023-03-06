@@ -57,6 +57,10 @@ public class ReportDao {
 			pstmt.setInt(1, pactCheck);
 			pstmt.setInt(2, memberNo);
 			result = pstmt.executeUpdate();
+			if(result>0) {
+				result = changeMemberGrade(conn, memberNo,pactCheck);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
