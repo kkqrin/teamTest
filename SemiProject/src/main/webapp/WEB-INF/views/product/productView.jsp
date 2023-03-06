@@ -333,7 +333,7 @@
 			// [1] form태그를 생성해서 전송
 			// 댓글내용, 댓글번호, 공지사항 번호
 			
-		/*	// 1. form태그 생성
+			// 1. form태그 생성
 			const form = $("<form style='display:none;' action='updateProductComment.do' method='post'></form>");
 		
 			// 2. input 태그 2개 숨김
@@ -352,11 +352,10 @@
 			$("body").append(form);
 			
 			// 6. form태그 전송
-			form.submit();*/
-			//location.href="/updateProductComment.do?pdNo="+pdNo+"&productNo="+productNo;
+			form.submit();
 		}
 		
-		function deleteComment(obj, ncNo, noticeNo){
+		function deleteComment(obj, pdNo, productNo){
 			if(confirm("댓글을 삭제하시겠습니까?")){
 				location.href="/deleteProductComment.do?pdNo="+pdNo+"&productNo="+productNo;
 			}
