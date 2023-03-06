@@ -45,4 +45,22 @@ public class DealDao {
 		return list;
 	}
 
+	public int updateReserve(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update product set product_status=1 where productNo=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
