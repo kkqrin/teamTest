@@ -88,9 +88,9 @@ public class BoardService {
 		}
 		pageNavi += "</ul>";
 		
-		NoticePageData npd = new NoticePageData(list,pageNavi,start);
+		//NoticePageData npd = new NoticePageData(list,pageNavi,start);
 		JDBCTemplate.close(conn);
-		return npd;
+		//return npd;
 		return null;
 	}
 	
