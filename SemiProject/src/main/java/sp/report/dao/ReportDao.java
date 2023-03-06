@@ -57,6 +57,10 @@ public class ReportDao {
 			pstmt.setInt(1, pactCheck);
 			pstmt.setInt(2, memberNo);
 			result = pstmt.executeUpdate();
+			if(result>0) {
+				result = changeMemberGrade(conn, memberNo,pactCheck);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,7 +77,7 @@ public class ReportDao {
 		String query = null;
 		if(pactCheck == 1) {
 			query = "update member_tbl set member_grade=4 where member_no=?";
-			deleteProduct(conn, memberNo);
+//			deleteProduct(conn, memberNo);
 		}else if(pactCheck ==2) {
 			query = "update member_tbl set member_grade=2 where member_no=?";			
 		}

@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NoticeQuestionServlet
+ * Servlet implementation class NoticeQuestionWriteFrmServlet
  */
-@WebServlet(name = "NoticeQuestion", urlPatterns = { "/noticeQuestion.do" })
-public class NoticeQuestionServlet extends HttpServlet {
+@WebServlet(name = "NoticeQuestionWriteFrm", urlPatterns = { "/noticeQuestionWriteFrm.do" })
+public class NoticeQuestionWriteFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeQuestionServlet() {
+    public NoticeQuestionWriteFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class NoticeQuestionServlet extends HttpServlet {
 		//2. 값추출
 		//3. 비지니스로직
 		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/noticeQustion/noticeQustionList.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/noticeQuestion/noticeQuestionWriteFrm.jsp");
 		view.forward(request, response);
 	}
 
