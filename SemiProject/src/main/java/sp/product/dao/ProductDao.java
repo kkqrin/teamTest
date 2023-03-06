@@ -367,4 +367,69 @@ public class ProductDao {
 		return list;
 	}
 
+	public int insertProductComment(Connection conn, ProductComment pc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into product_comment values(product_comment_seq.nextval, ?, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pc.getPdWriter());
+			pstmt.setString(2, pc.getPdContent());
+			pstmt.setInt(3, pc.getProductRef());
+			if(pc.getPdRef() == 0) {
+				pstmt.setString(4, null);
+			}else {
+				pstmt.setInt(4, pc.getPdRef());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateProductComment(Connection conn, ProductComment pc) {
+		PreparedStatement pstmt = null;
+		int result = 0; 
+		
+		String query = "update product_comment set pd_content=? where pd_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pc.getPdContent());
+			pstmt.setInt(2, pc.getPdNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteProductComment(Connection conn, int pdNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from product_comment where pd_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pdNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

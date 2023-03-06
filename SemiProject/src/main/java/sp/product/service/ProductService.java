@@ -184,4 +184,46 @@ public class ProductService {
 			return null;
 		}
 	}
+
+	public int insertProductComment(ProductComment pc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertProductComment(conn, pc);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateProductComment(ProductComment pc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateProductComment(conn, pc);
+
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteProductComment(int pdNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.deleteProductComment(conn, pdNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }
