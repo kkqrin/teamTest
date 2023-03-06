@@ -41,7 +41,6 @@
 			</tr>
 			<th class="td-1">유형</th>
 				<td class="td-0"><%=nq.getFaqCategory() %></td>
-				<td colspan="5">
 			<tr class="td-0">
 				<th colspan="6">
 					<div id="noticeQuestionContent">
