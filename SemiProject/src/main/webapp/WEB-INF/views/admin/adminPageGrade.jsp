@@ -8,13 +8,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/admin.jsp" %>
-	<div class="member-grade title">
-        <div class="grade-title"><h1>회원관리</h1></div>
-        <table border="1" class="grad-table tbl">
-            <tr>
+	<div class="member-grade table-title">
+        <div class="title"><h1>회원관리</h1></div>
+        <table class="grad-table tbl tbl-hover" style="width:90%;">
+            <tr class="tr-1">
                 <th>선택</th>
                 <th>회원번호</th>
                 <th>아이디</th>
@@ -26,7 +27,7 @@
                 <th>등급변경</th>
             </tr>
             <%for (Member member : list){ %>
-            <tr>
+            <tr class="tr-0">
                 <td><input type="checkbox" class="chk"></td>
                 <td><%=member.getMemberNo() %></td>
                 <td><%=member.getMemberId() %></td>
@@ -36,28 +37,28 @@
                 <td><%=member.getEnrollDate() %></td>
                 <td>
                 	<%if(member.getMemberGrade() ==1) {%>
-                    <select>
+                    <select class="btn bc0 bs1">
                         <option value="1" selected>관리자</option>   
                         <option value="2">이메일 인증 회원</option>   
                         <option value="3">이메일 미인증 회원</option>   
                         <option value="4">사기회원</option> 
                     </select>
                     <%}else if(member.getMemberGrade() == 2){ %>
-                    <select>
+                    <select class="btn bc0 bs1">
                         <option value="1">관리자</option>   
                         <option value="2" selected>이메일 인증 회원</option>   
                         <option value="3">이메일 미인증 회원</option>   
                         <option value="4">사기회원</option> 
                     </select>
                     <%}else if(member.getMemberGrade() == 3){%>
-                    <select>
+                    <select class="btn bc0 bs1">
                         <option value="1">관리자</option>   
                         <option value="2">이메일 인증 회원</option>   
                         <option value="3" selected>이메일 미인증 회원</option>   
                         <option value="4">사기회원</option> 
                     </select>
                     <%}else if(member.getMemberGrade() == 4){ %>
-                    <select>
+                    <select class="btn bc0 bs1">
                         <option value="1">관리자</option>   
                         <option value="2">이메일 인증 회원</option>   
                         <option value="3">이메일 미인증 회원</option>   
@@ -67,13 +68,13 @@
                     
                 </td>
                 <td>
-                    <button class="changeGrade">등급변경</button>
+                    <button class="changeGrade btn bc11 bs1" >등급변경</button>
                 </td>
             </tr>
             <%} %>
             <tr>
                 <th colspan="9">
-                    <button class="checkedChangeGrade">회원등급변경</button>
+                    <button class="checkedChangeGrade btn bc1 bs4">회원등급변경</button>
                 </th>
             </tr>
         </table>

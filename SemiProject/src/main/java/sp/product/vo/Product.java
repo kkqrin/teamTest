@@ -2,6 +2,7 @@ package sp.product.vo;
 
 public class Product {
 	private int productNo;
+	private int categoryNo;
 	private String sellerId;
 	private String productTitle;
 	private int productStatus;
@@ -18,11 +19,12 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(int productNo, String sellerId, String productTitle, int productStatus, int productPrice,
-			int viewCount, String productContent, String enrollDate, String productArea, String filename,
-			String filepath) {
+	public Product(int productNo, int categoryNo, String sellerId, String productTitle, int productStatus,
+			int productPrice, int viewCount, String productContent, String enrollDate, String productArea,
+			String filename, String filepath) {
 		super();
 		this.productNo = productNo;
+		this.categoryNo = categoryNo;
 		this.sellerId = sellerId;
 		this.productTitle = productTitle;
 		this.productStatus = productStatus;
@@ -121,6 +123,14 @@ public class Product {
 
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
+	}
+
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
 	}
 
 }

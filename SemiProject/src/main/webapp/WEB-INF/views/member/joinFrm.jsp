@@ -91,7 +91,7 @@
                         <label for="post" >우편번호<sup>*</sup></label>
                     </div>
                     <div>
-                        <input type="text" name="postcode" id="postcode" class="input-form" readonly>
+                        <input type="text" name="postcode" id="postcode" class="long-input" readonly>
                     </div>
                 </div>
                 <div class="join-input-wrap">
@@ -99,7 +99,7 @@
                         <label for="addr" >주소<sup>*</sup></label>
                     </div>
                     <div>
-                        <input type="text" name="address" id="address" class="input-form" readonly>
+                        <input type="text" name="address" id="address" class="long-input" readonly>
                     </div>
                 </div>
                 <div class="join-input-wrap">
@@ -107,7 +107,7 @@
                         <label for="addr2" >상세주소<sup>*</sup></label>
                     </div>
                     <div>
-                        <input type="text" name="detailAddress" id="detailAddress" class="input-form mid-input" >
+                        <input type="text" name="detailAddress" id="detailAddress" class="mid-input" >
                         <button type="button" class="bc1 dup-btn" onclick="searchAddr();">주소찾기</button>
                     </div>
                 </div>
@@ -167,7 +167,7 @@
                     </div>
                 </div>
                 <div class = "join-btn-wrap">
-                    <button type="submit b">회원가입</button>
+                    <button type="submit ">회원가입</button>
                 </div>
             </form>
         </div>
@@ -217,7 +217,8 @@
  																//새창을 열면 중복체크를 위한 아이디를 입력할 수 있는 칸이 나오게 됨
  				$("[name=checkIdFrm]").submit();
  			});
-
+		
+ 		//mail Api위한것
 		let mailCode;
 		$("#sendBtn").on("click",function(){
 			const email = $("#email").val();
@@ -290,6 +291,7 @@
 			}
 		}
 		
+		//addressApi위한것
 		function searchAddr(){
 			new daum.Postcode({
 		        oncomplete: function(data) {

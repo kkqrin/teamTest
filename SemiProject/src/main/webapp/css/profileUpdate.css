@@ -1,0 +1,203 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    list-style-type: none;
+}
+
+.myPage-wrap{
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    padding: 40px 40px 160px;
+    overflow: hidden;
+    margin-top: 100px;
+    
+}
+.myPage-menu{
+    float: left;
+    width: 180px;
+    margin-right: 20px;
+    
+}
+.myPage-title>h2{
+    font-size: 24px;
+    padding-bottom: 20px;
+    line-height: 30px;
+    color: #222222;
+    
+}
+.sub-title{
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #222222;
+    font-family: nn-b;
+    
+}
+.sub-menu{
+    margin-bottom: 30px;
+}
+.sub-menu>li{
+    margin-bottom: 10px;
+}
+.sub-menu>li>a{
+    color: #22222280;
+}
+.myPage-info{
+    width: 1000px;
+    padding: 20px 0 20px 20px;
+    border: 1px solid #ebebeb;
+    float: left;
+    box-sizing: border-box;
+    border-radius: 20px;
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 100px;
+    
+}
+.myPage-info-box{
+    width: 500px;
+  /*display: flex;*/
+    float: left;
+   
+}
+.myPage-info-image{
+    display: inline-block;
+    margin-right: px;
+}
+
+.myPage-info-user{
+    float: right;
+}
+.myPage-info-user>div{
+    margin-top: 10px;
+    font-family: nn-b;
+    font-size: 18px;
+}
+.myPage-info-user>p{
+    color: #22222280;
+}
+.myPage-info-user>button{
+    margin-top: 8px;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 8px;
+    background-color: #fff;
+}
+.mypage-info-right{
+    text-align: right;
+    float: right;
+    width: 400px;
+    margin-left: 50px;
+ }
+.myPage-info-grade{
+    width: 150px;
+    height: 100px;
+    line-height: 100px;
+    float: left;
+    text-align: center;
+   
+}
+.myPage-info-grade>p{
+    font-family: nn-b;
+}
+.bank{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    text-align: center;
+    border-left: 1px solid #ebebeb;
+}
+.bank>p{
+    font-family: nn-b;
+
+}
+.temp{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    float: left;
+    text-align: center;
+    border-left: 1px solid #ebebeb;
+}
+.temp>p{
+    font-family: nn-b;
+}
+.join-input-wrap{
+    margin-left: 200px;
+}
+
+.login-info{
+padding-top: 50px;
+    margin-left: 366.6px;
+}
+.login-info2{
+   
+    margin-top: 50px;
+    margin-left: 366.6px;
+
+}
+
+
+.long-input{
+    width: 500px;
+
+}
+.mid-input{
+    width: 400px;
+}
+.dup-btn{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.join-content{
+    width: 400px;
+    margin: 0 auto;
+}
+.join-input-wrap input{
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.join-input-wrap{
+    margin: 20px 0;
+}
+
+#detailAddress{
+    width: 400px;
+}
+#postcode{
+    width: 500px;
+}
+
+#address{
+    width: 500px;
+}
+.updateComplete{
+    width:500px;
+    margin-bottom: 150px;
+}
+
+.updateComplete>button{
+    width: 500px;
+    height: 72px;
+    border: none;
+    border-radius: 10px;
+}
+
+input[type=text]{
+    margin-top: 10px;
+}
+input[type=password]{
+    margin-top: 10px;
+}
+

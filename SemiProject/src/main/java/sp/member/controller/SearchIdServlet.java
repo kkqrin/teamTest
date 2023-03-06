@@ -6,19 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LogoutServlet
+ * Servlet implementation class SearchIdServlet
  */
-@WebServlet(name = "Logout", urlPatterns = { "/logout.do" })
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "SearchId", urlPatterns = { "/searchId.do" })
+public class SearchIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogoutServlet() {
+    public SearchIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +28,6 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session = request.getSession(false);
-		if(session!= null) {
-		
-			session.invalidate();
-		}
-		
-		response.sendRedirect("/");
 	}
 
 	/**

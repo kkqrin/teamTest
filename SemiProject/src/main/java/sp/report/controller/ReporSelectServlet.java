@@ -1,6 +1,7 @@
-package sp.product.controller;
+package sp.report.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,20 +9,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import sp.product.service.ProductService;
+import sp.member.vo.Member;
+import sp.report.service.ReportService;
+import sp.report.vo.Report;
 
 /**
- * Servlet implementation class BuyProductServlet
+ * Servlet implementation class ReportServlet
  */
-@WebServlet(name = "ReserveProduct", urlPatterns = { "/reserveProduct.do" })
-public class ReserveProductServlet extends HttpServlet {
+@WebServlet(name = "ReportSelect", urlPatterns = { "/reportSelect.do" })
+public class ReporSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveProductServlet() {
+    public ReporSelectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +37,14 @@ public class ReserveProductServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		//3. 비즈니스로직
-		ProductService service = new ProductService();
-		int result = service.reserveProduct(productNo);
-		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
-		if(result>0) {
-			request.setAttribute("title", "예약 성공");
-			request.setAttribute("msg", "예약을 성공하셨습니다.");
-			request.setAttribute("icon", "success");
-		}else {
-			request.setAttribute("title", "예약 실패");
-			request.setAttribute("msg", "예약을 실패하셨습니다.");
-			request.setAttribute("icon", "error");
-			
-		}
 		
+		//3. 비즈니스로직		
+		ReportService service = new ReportService();
+		ArrayList<Report> list = service.selectAllReport();
+		//4. 결과처리
+			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/report.jsp");
+			request.setAttribute("list", list);
+			view.forward(request, response);
 	}
 
 	/**

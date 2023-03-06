@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.product.service.ProductService;
+import sp.product.vo.ProductViewData;
 
 /**
- * Servlet implementation class BuyProductServlet
+ * Servlet implementation class ProductViewServlet
  */
-@WebServlet(name = "ReserveProduct", urlPatterns = { "/reserveProduct.do" })
-public class ReserveProductServlet extends HttpServlet {
+@WebServlet(name = "ProductView", urlPatterns = { "/productView.do" })
+public class ProductViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReserveProductServlet() {
+    public ProductViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +31,31 @@ public class ReserveProductServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 인코딩
+		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		//2. 값추출
+		// 2. 값 추출
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
-		//3. 비즈니스로직
-		ProductService service = new ProductService();
-		int result = service.reserveProduct(productNo);
-		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
-		if(result>0) {
-			request.setAttribute("title", "예약 성공");
-			request.setAttribute("msg", "예약을 성공하셨습니다.");
-			request.setAttribute("icon", "success");
-		}else {
-			request.setAttribute("title", "예약 실패");
-			request.setAttribute("msg", "예약을 실패하셨습니다.");
-			request.setAttribute("icon", "error");
-			
-		}
 		
+		// 3. 비즈니스 로직
+		ProductService service = new ProductService();
+		// 게시글, 댓글, 대댓글 조회
+		ProductViewData pvd = service.selectOneProduct(productNo);
+		
+		// 4. 결과 처리
+		if(pvd == null) {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+			request.setAttribute("title", "조회 실패");
+			request.setAttribute("msg", "게시글이 존재하지 않습니다.");
+			request.setAttribute("icon", "info");
+			request.setAttribute("loc", "productList.do?category=1&reqPage=1");
+			view.forward(request, response);
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/productView.jsp");
+			request.setAttribute("p", pvd.getP());
+			request.setAttribute("commentList", pvd.getCommentList());
+			request.setAttribute("reCommentList", pvd.getReCommentList());
+			view.forward(request, response);
+		}
 	}
 
 	/**

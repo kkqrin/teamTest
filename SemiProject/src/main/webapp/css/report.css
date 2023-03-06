@@ -58,13 +58,12 @@ li{
     list-style-type: none;
 }
 
+
+
 .table-title{
-    padding-top: 30px;
+    padding-top: 50px;
     padding-left: 350px;
 }
-.title{
-	margin-bottom:20px;
-}
-.header-top{
-	margig-left:350px
+.table{
+    width: 80%;   
 }

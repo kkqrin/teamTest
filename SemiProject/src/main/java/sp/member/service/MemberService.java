@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import org.apache.catalina.startup.ConnectorCreateRule;
+
 import common.JDBCTemplate;
 import sp.member.dao.MemberDao;
 import sp.member.vo.Member;
@@ -84,6 +86,38 @@ public class MemberService {
 		JDBCTemplate.close(conn);
 		return member;//member는 조회결과임
 		
+	}
+
+	public Member selectMemberNo(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Member m = dao.selectMemberNo(conn, memberNo);
+		JDBCTemplate.close(conn);
+		return m;
+	}
+
+	public int updateInfo(Member member) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateInfo(conn,member);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteMember(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.deleteMember(conn,memberId);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 
