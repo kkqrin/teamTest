@@ -21,6 +21,9 @@
 	<a href="/noticeList.do?reqPage=1" class="btn bc11">공지사항</a><br>
 	<a href="/noticeQuestionList.do?reqPage=1" class="btn bc11">자주묻는질문</a><br>
 	<a href="#" class="btn bc11">신고접수</a>
+	<a href="/noticeQuestion.do" class="btn bc11">자주묻는질문</a><br>
+	<a href="#" class="btn bc11">신고접수</a>
+
 	
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>

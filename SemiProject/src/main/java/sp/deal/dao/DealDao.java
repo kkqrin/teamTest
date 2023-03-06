@@ -17,7 +17,7 @@ public class DealDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Deal> list = new ArrayList<Deal>();
-		String query = "select * from deal left join member_tbl using(member_no) left join product on(seller_id=member_id)";
+		String query = "select * from deal left join member_tbl using (member_no) left join product using (product_no)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
