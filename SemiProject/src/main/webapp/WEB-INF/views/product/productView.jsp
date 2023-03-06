@@ -149,45 +149,95 @@
 		                <span class="material-icons">face</span>
 		            </li>
 		            <li>
-	                <p class="comment-info">
-	                	<span><%=pc.getPdWriter() %></span>
-	                	<span><%=pc.getPdDate() %></span>
-	                </p>
-	                <p class="comment-content"><%=pc.getPdContent() %></p>
-	                <!-- 수정용 textarea -->
-	                <textarea name="pcContent" class="input-form" style="min-height:96px;display:none;"><%=pc.getPdContent() %></textarea>
-	                <p class="comment-link">
-	                	<!-- 로그인 상태일때 -->
-	                	<%if(m != null) {%>
-	                			<!-- 답글 버튼 -->
-			                    <a href="javascript:void(0)" class="recShow">
-			                        <span class="material-symbols-outlined comment-reply">
-			                            reply
-			                        </span> 
-			                    </a>
-	                		<!-- 로그인 회원과 작성자가 같을 때 -->
-	                		<%if(m.getMemberId().equals(pc.getPdWriter())) {%>
-			                    <!-- 수정/삭제 버튼 -->
-	                			<a class="comment-more">
-			                        <span class="material-symbols-outlined more-btn">
-			                            more_vert
-			                        </span>
-			                    </a>
-	                		<%} %>
-	                	<%} %>
-	                </p>
-	                <div class="comment-update">
-	                    <a href="javascript:void(0)" onclick="modifyComment(this,<%=pc.getPdNo()%>,<%=p.getProductNo()%>);">수정</a>
-	                    <a href="javascript:void(0)" onclick="deleteComment(this,<%=pc.getPdNo()%>,<%=p.getProductNo()%>);">삭제</a>
-	                </div>
-	            </li>
-            </ul>
-            
-            <!-- 대댓글 출력 -->
-            
-            
-            
-	    	<%} %>
+		                <p class="comment-info">
+		                	<span><%=pc.getPdWriter() %></span>
+		                	<span><%=pc.getPdDate() %></span>
+		                </p>
+		                <p class="comment-content"><%=pc.getPdContent() %></p>
+		                <!-- 수정용 textarea -->
+		                <textarea name="pdContent" class="input-form" style="min-height:96px;display:none;"><%=pc.getPdContent() %></textarea>
+		                <p class="comment-link">
+		                	<!-- 로그인 상태일때 -->
+		                	<%if(m != null) {%>
+		                			<!-- 답글 버튼 -->
+				                    <a href="javascript:void(0)" class="recShow">
+				                        <span class="material-symbols-outlined comment-reply">reply</span> 
+				                    </a>
+		                		<!-- 로그인 회원과 작성자가 같을 때 -->
+		                		<%if(m.getMemberId().equals(pc.getPdWriter())) {%>
+				                    <!-- 더보기 -->
+		                			<a class="comment-more">
+				                        <span class="material-symbols-outlined more-btn">more_vert</span>
+				                    </a>
+		                		<%} %>
+		                	<%} %>
+		                </p>
+		                <!-- 수정/삭제 버튼 -->
+		                <div class="comment-update">
+		                    <a href="javascript:void(0)" onclick="modifyComment(this,<%=pc.getPdNo()%>,<%=p.getProductNo()%>);">수정</a>
+		                    <a href="javascript:void(0)" onclick="deleteComment(this,<%=pc.getPdNo()%>,<%=p.getProductNo()%>);">삭제</a>
+		                </div>
+	            	</li>
+           		</ul>
+	            <!-- 대댓글 출력 -->
+	            <%for(ProductComment pcc : reCommentList) {%>
+	            	<!-- 대댓글의 번호랑 참조하는 댓글의 번호가 같을 때 -->
+	            	<%if(pcc.getPdRef() == pc.getPdNo()) {%>
+	            		<ul class="posting-comment reply">
+			                <li>
+			                    <span class="material-icons">subdirectory_arrow_right</span>
+			                    <span class="material-icons">face_6</span>
+			                </li>
+			                <li>
+			                    <p class="comment-info">
+			                    	<span><%=pcc.getPdWriter() %></span>
+			                    	<span><%=pcc.getPdDate() %></span>
+			                    </p>
+			                    <p class="comment-content"><%=pcc.getPdContent() %></p>
+			                    <!-- 수정용 textarea -->
+								<textarea name="pdContent" class="input-form" style="min-height:96px;display:none;"><%=pcc.getPdContent() %></textarea>
+			                    <p class="comment-link">
+			                    	<!-- 로그인 & 로그인된 회원과 작성자 일치 -->
+			                    	<%if(m != null && m.getMemberId().equals(pcc.getPdWriter())) {%>
+			                    	 <!-- 수정/삭제 버튼 -->
+		                			<a class="comment-more">
+				                        <span class="material-symbols-outlined more-btn">more_vert</span>
+				                    </a>
+			                    	<%} %>
+			                    </p>
+			                    <div class="comment-update">
+			                        <a href="javascript:void(0)" onclick="modifyComment(this,<%=pcc.getPdNo()%>,<%=p.getProductNo()%>);">수정</a>
+			                        <a href="javascript:void(0)" onclick="deleteComment(this,<%=pcc.getPdNo()%>,<%=p.getProductNo()%>);">삭제</a>
+			                    </div>
+			                </li>
+			            </ul>
+	            	<%} // if문 %>
+	            <%} //대댓글 출력 for문 %>
+	            
+            	<!-- 댓글에 대한 대댓글 입력 양식 -->		
+				<%if(m != null) {%>
+				<div class="inputCommentBox inputRecommentBox">
+					<form action="/insertProductComment.do" method="post">
+						<ul>
+							<li>
+								<span class="material-icons" style="font-size:40px;color:#6d6d6d;">subdirectory_arrow_right</span>
+							</li>
+							<li>
+								<input type="hidden" name="pdWriter" value="<%=m.getMemberId() %>">
+								<input type="hidden" name="productRef" value="<%=p.getProductNo() %>">
+								<!-- 현재 출력되고 있는 댓글의 번호 -->
+								<input type="hidden" name="pdRef" value="<%=pc.getPdNo() %>">
+								<textarea name="pdContent" class="input-form"></textarea>
+							</li>
+							<li>
+								<button type="submit" class="btn bc3 bs3">등록</button>
+							</li>							
+						</ul>
+					</form>
+				</div>
+				<%} %>
+				
+	    	<%} //댓글 출력 for문 %>
 	    </div>
 	    
 	    <!-- 댓글 입력창은 맨밑에 하나만 존재하므로 for문안에 있을 필요 x -->
@@ -201,11 +251,11 @@
 					</li>
 					<li>
 						<!-- 입력받진 않지만 값 전달해야 하는 경우 hidden 이용해 전달 -->
-						<input type="hidden" name="ncWriter" value="<%=m.getMemberId() %>">
-						<input type="hidden" name="noticeRef" value="<%=p.getProductNo() %>">
+						<input type="hidden" name="pdWriter" value="<%=m.getMemberId() %>">
+						<input type="hidden" name="productRef" value="<%=p.getProductNo() %>">
 						<!-- 댓글은 댓글참조 번호 null이므로 일단 0 주고 dao에서 0이면 null 대입 -->
-						<input type="hidden" name="ncRef" value="0">
-						<textarea name="ncContent" class="input-form"></textarea>
+						<input type="hidden" name="pdRef" value="0">
+						<textarea name="pdContent" class="input-form"></textarea>
 					</li>
 					<li>
 						<button type="submit" class="btn bc3 bs3">등록</button>
@@ -222,6 +272,96 @@
 		$(".wish-btn").on("click", function(){
 			$(this).toggleClass("fill-wish");
 		});
+		
+		$(".recShow").on("click", function(){
+			// 몇번째 답글달기 버튼을 클릭했는지 
+			const idx = $(".recShow").index(this);
+			
+			if($(this).children().text() == "reply"){
+				$(this).children().text("close");					
+			}else if($(this).children().text() == "close"){
+				$(this).children().text("reply");
+			}
+			
+			$(".inputRecommentBox").eq(idx).toggle();
+			$(".inputRecommentBox").eq(idx).find("textarea").focus();
+		});
+		
+		function modifyComment(obj, pdNo, productNo){
+			// 수정시 플로팅 버튼 삭제 (답글,더보기)
+			$(obj).parent().prev().children().first().hide();
+			//$(obj).parent().prev().children().last().children().hide();
+			// 숨겨놓은 textarea를 화면에 보여줌
+			$(obj).parent().prev().prev().show();
+			// 화면에 있던 댓글내용(p태그)를 숨김
+			$(obj).parent().prev().prev().prev().hide();
+			
+			// 수정 -> 수정완료
+			const completeBtn = $("<a href='javascript:void(0)'>").append($("<span class='material-symbols-outlined'>check</span>")).append("</a>") 			
+			$(obj).parent().prev().prepend(completeBtn);
+			$(obj).parent().prev().children().first().attr("onclick", "modifyComplete(this,"+pdNo+","+productNo+")");
+			
+			// 삭제 -> 수정취소
+			$(obj).parent().prev().children().next().children().text("close");
+			$(obj).parent().prev().children().next().children().attr("style", "font-size: 22px; color: #4e4e4e; bottom: 5.5px;")
+			$(obj).parent().prev().children().next().children().off("click");
+			$(obj).parent().prev().children().next().children().attr("onclick", "modifyCancel(this,"+pdNo+","+productNo+")");
+			
+		}
+		
+		function modifyCancel(obj, pdNo, productNo){
+			// 수정 취소
+			$(obj).parent().parent().prev().hide(); // 수정용 textarea 숨김
+			$(obj).parent().parent().prev().prev().show(); // 기존 댓글 다시 보여줌
+			// 수정 완료 -> 답글
+			$(obj).parent().parent().children().first().remove();
+			$(obj).parent().parent().find(".recShow").show();
+			$(obj).parent().parent().find(".recShow").children().text("reply");
+			$(obj).removeAttr("onclick");
+			$(obj).parent().parent().find(".recShow").children().removeAttr("onclick");
+			//$(obj).prev().attr("onclick", "modifyComment(this,"+ncNo+","+noticeNo+")");
+			
+			// 수정 취소 -> 삭제
+			$(obj).text("more_vert");
+			$(obj).removeAttr("style");
+			$(obj).on("click",moreFunc());
+			//$(obj).attr("onclick", "deleteComment(this,"+ncNo+","+noticeNo+")");
+		}
+		
+		function modifyComplete(obj, pdNo, productNo){
+			// 방법 2개 : form, a(location.href)
+			// [1] form태그를 생성해서 전송
+			// 댓글내용, 댓글번호, 공지사항 번호
+			
+		/*	// 1. form태그 생성
+			const form = $("<form style='display:none;' action='updateProductComment.do' method='post'></form>");
+		
+			// 2. input 태그 2개 숨김
+			const pdNoInput = $("<input type='text' name='pdNo'>");
+			pdNoInput.val(pdNo);
+			const productNoInput = $("<input type='text' name='productNo'>");
+			productNoInput.val(productNo);
+			
+			// 3. textarea
+			const pdContent = $(obj).parent().prev();
+			
+			// 4. form태그에 input, textarea를 모두 포함
+			form.append(pdNoInput).append(productNoInput).append(pdContent);
+			
+			// 5. 생성된 form태그를 body태그에 추가
+			$("body").append(form);
+			
+			// 6. form태그 전송
+			form.submit();*/
+			//location.href="/updateProductComment.do?pdNo="+pdNo+"&productNo="+productNo;
+		}
+		
+		function deleteComment(obj, ncNo, noticeNo){
+			if(confirm("댓글을 삭제하시겠습니까?")){
+				location.href="/deleteProductComment.do?pdNo="+pdNo+"&productNo="+productNo;
+			}
+		}
+		
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
