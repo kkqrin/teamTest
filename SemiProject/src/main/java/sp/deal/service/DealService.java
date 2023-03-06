@@ -40,6 +40,23 @@ public class DealService {
 		return result;
 	}
 
+	public int updateComplete(int productNo, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateComplete(conn, productNo, memberNo);
+		if(result>0) {
+			result = dao.insertDeal2(conn,productNo,memberNo);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 
 }
