@@ -26,17 +26,17 @@
 		<form action="/noticeWrite.do" method="post" enctype="multipart/form-data">
 			<table class="tbl" id="noticeWrite">
 				<tr class="tr-1">
-					<th class="td-3">제목</th>
+					<th class="td-1">제목</th>
 					<td colspan="3">
 						<input type="text" name="noticeTitle" class="input-form">
 					</td>
 				</tr>
-				<tr class="tr-1">
-					<th class="td-3">작성자</th>
+				<tr class="tr-0">
+					<th class="td-1">작성자</th>
 					<td>
 						<input type="hidden" name="noticeWriter" value="1">
 					</td>
-					<th class="td-3">첨부파일</th>
+					<th class="td-1">첨부파일</th>
 					<td><input type="file" name="upfile"></td>
 				</tr>
 				<tr class="tr-1">

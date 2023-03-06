@@ -35,22 +35,16 @@
 		<input id="nq" type="text" class="input-form bs5" placeholder="검색">
 		<div class="nq-tab">
 			<ul>
-				<li id="all" class="btn bc22">전체</li>
-				<li class="btn bc22">이용정책</li>
-				<li class="btn bc22">공통</li>
-				<li class="btn bc22">구매</li>
-				<li class="btn bc22">판매</li>
+				<li class="btn bc22"><a href="#">전체</a></li>
+				<li class="btn bc22"><a href="#">이용정책</a></li>
+				<li class="btn bc22"><a href="#">공통</a></li>
+				<li class="btn bc22"><a href="#">구매</a></li>
+				<li class="btn bc22"><a href="#">판매</a></li>
 				<li class="btn bc22"></li>
 			</ul>
 		</div>		
  	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
-	<script>
-	$("#all").on("click",function(){
-		$.ajax({
-			url : ""
-		});
-	});
-	</script>
+	
 </body>
 </html>
