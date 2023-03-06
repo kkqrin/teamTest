@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import sp.member.service.MemberService;
 import sp.member.vo.Member;
+import sp.post.service.PostService;
+import sp.post.vo.PostPageData;
 
 /**
  * Servlet implementation class LoginServlet
@@ -60,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 					} else {
 						HttpSession session = request.getSession();
 						session.setAttribute("m", member);
+						PostService pservice = new PostService();
 						request.setAttribute("title", "로그인 성공");
 						request.setAttribute("msg", "환영합니다");
 						request.setAttribute("icon", "success");

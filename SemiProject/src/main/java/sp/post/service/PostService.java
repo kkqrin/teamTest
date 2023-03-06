@@ -49,23 +49,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(1)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo-1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item active-page' href='/postList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId"+memberId+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -77,11 +77,11 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(totalPage)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(totalPage)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -139,23 +139,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(1)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo-1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item active-page' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -167,11 +167,11 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(totalPage)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(totalPage)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -227,23 +227,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(1)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo-1)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postSendList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item active-page' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+				pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -255,11 +255,11 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(totalPage)+"&memberId=admin'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(totalPage)+"&memberId="+memberId+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -293,6 +293,15 @@ public class PostService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int notReadCount(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.selectNotRead(conn, memberId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+
 }
 	
 
