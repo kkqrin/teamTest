@@ -5,27 +5,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<div class="page-title">사진게시판 작성</div>
+		<div class="page-title">신고게시판 작성</div>
 		<%--사진 첨부시 post, multipart 항상 고정 --%>
 		<form action="/photoWrite.do" method="post" enctype="multipart/form-data">
-			<table class="tbl photoWrite">
+			<table class="tbl reportWrite">
 				<tr class="tr-1">
 					<th class="td-2">신고유형</th>
-					<td colspan="3" style="text-align: left; padding-left:20px;">
+					<td colspan="3" style="padding-left:20px; font-size:14px">
 						<label for="report-type1"><input type="radio" id="report-type1" name="report" values="0">입금</label>
-						<label for="report-type2"><input type="radio" id="report-type2" name="report" values="1">배송</label>
+						<label for="report-type2" style="margin-left: 30px;"><input type="radio" id="report-type2" name="report" values="1">배송</label>
+					</td>
+				</tr>
+				<tr class="tr-1">
+					<th class="td-2">거래 내역</th>
+					<td colspan="3">
+						<strong>거래 내역을 선택해주세요▶<button type="button" class="btn bc11 modal-open-btn" target="#test-modal" style="margin-left:10px;" >거래 내역 조회</button></strong>
 					</td>
 				</tr>
 				<tr class="tr-1">
 					<th class="td-2">신고자</th>
 					<td>
 						<%=m.getMemberId() %>
-						<input type="hidden" name="photoWriter" value="<%=m.getMemberId() %>">
+						<input type="hidden" name="reportMember" value="<%=m.getMemberId() %>">
 					</td>
+					
 					<th class="td-2">이미지</th>
 					<td>
 						<%--accept 허용 할 확장자 onchange : 미리보기(이미지)--%>
@@ -40,20 +48,22 @@
 						</div>
 					</td>
 				</tr>
+			
 				<tr class="tr-1">
 					<th class="td-2">내용</th>
 					<td colspan="3">
-						<textarea name="photoContent" class="input-form"></textarea>
+						<textarea name="reportContent" class="input-form"></textarea>
 					</td>
 				</tr>
 				<tr class="tr-1">
 					<th colspan="4">
-						<button type="submit" class="btn bc2 bs4">등록</button>
+						<button type="submit" class="btn bc44">등록</button>
 					</th>
 				</tr>
 			</table>
 		</form>
 	</div>
+	
 	<script>
 		function loadImg(f){
 			//첨부파일이 여러개일 수 있어서 항상 배열처리
@@ -75,5 +85,24 @@
 		}
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
+	<div id="test-modal" class="modal-bg">
+       <div class="modal-wrap">
+           <div class="modal-head">
+           <h2>전체 거래 내역 조회</h2>
+           <span class="material-icons close-icon modal-close">close</span>
+           </div>
+           <div class="modal-content">
+           <p>모달내용</p>
+           <p>모달내용</p>
+           <p>모달내용</p>
+           <p>모달내용</p>
+           </div>
+           <div class="modal-foot">
+           <button class="btn bc11">확인</button>
+           <button class="btn bc1 modal-close">취소</button>
+           </div>
+       </div>
+       </div>	
+	
 </body>
 </html>

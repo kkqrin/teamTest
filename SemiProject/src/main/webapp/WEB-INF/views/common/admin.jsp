@@ -17,7 +17,7 @@
        		</a>
                 <ul class="sub-menu">
                     <li><a href="/adminPageGrade.do">회원등급 변경</a></li>
-                    <li><a href="#">전체 거래내역 조회</a></li>
+                    <li><a href="/dealList.do">전체 거래내역 조회</a></li>
                     <li><a href="/reportSelect.do">신고접수 리스트</a></li>
                 </ul>
             </li>

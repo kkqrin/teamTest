@@ -8,20 +8,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.grad-table{
+	font-size: 14px;
+}
+.grad-table th{
+	width:100px;
+}
+.grad-table th.th-long{
+	width:150px;
+}
+</style>
 
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/admin.jsp" %>
 	<div class="member-grade table-title">
         <div class="title"><h1>회원관리</h1></div>
-        <table class="grad-table tbl tbl-hover" style="width:90%;">
+        <table class="grad-table tbl tbl-hover" style="width:1200px;">
             <tr class="tr-1">
                 <th>선택</th>
                 <th>회원번호</th>
                 <th>아이디</th>
                 <th>이름</th>
-                <th>전화번호</th>
-                <th>주소</th>
+                <th class="th-long">전화번호</th>
+                <th class="th-long">주소</th>
                 <th>가입일</th>
                 <th>회원등급</th>
                 <th>등급변경</th>
