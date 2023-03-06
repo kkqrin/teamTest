@@ -14,7 +14,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/admin.jsp" %>
 	<div class="member-grade table-title">
-        <div class="title"><h1>회원관리</h1></div>
+        <div class="title"><h1>예약/거래완료 내역 조회</h1></div>
         <table class="grad-table tbl tbl-hover" style="width:90%;">
             <tr class="tr-1">
                 <th>거래내역번호</th>
@@ -35,21 +35,15 @@
                 <td><%=d.getProductPrice() %></td>
                 <td><%=d.getMemberId() %></td>
                 <td>
-                	<%if(d.getProductStatus()==0) {%>
-                    <select class="btn bc0 bs1">
-                        <option value="1" selected>판매중</option>   
-                        <option value="2">예약중</option>   
-                        <option value="3">거래완료</option>   
-                    </select>
-                    <%}else if(d.getProductStatus() == 1){ %>
+                	<%if(d.getProductStatus()== 1) {%>
                     <select class="btn bc0 bs1">
                         <option value="1">판매중</option>   
                         <option value="2" selected>예약중</option>   
-                        <option value="3">거래완료</option> 
+                        <option value="3">거래완료</option>   
                     </select>
-                    <%}else if(d.getProductStatus() == 2){%>
+                    <%}else if(d.getProductStatus() == 2){ %>
                     <select class="btn bc0 bs1">
-             			<option value="1">판매중</option>   
+                        <option value="1">판매중</option>   
                         <option value="2">예약중</option>   
                         <option value="3" selected>거래완료</option> 
                     </select>
