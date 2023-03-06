@@ -20,11 +20,10 @@
 </style>
 </head>
 <body>
-		<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="page-title">자주묻는질문</div>
 	</div>
-		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 		<table class="tbl" id="noticeQuestionView">
 			<tr class="bg-5">
 				<th colspan="6"><%=nq.getFaqTitle()%></th>
@@ -39,8 +38,10 @@
 				<th class="td-1">조회수</th>
 				<td class="td-0"><%=nq.getFaqCount() %></td>
 			</tr>
-			<th class="td-1">유형</th>
+			<tr>
+				<th class="td-1">유형</th>
 				<td class="td-0"><%=nq.getFaqCategory() %></td>
+			</tr>
 			<tr class="td-0">
 				<th colspan="6">
 					<div id="noticeQuestionContent">
@@ -49,5 +50,6 @@
 				</th>
 			</tr>
 		</table>
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
