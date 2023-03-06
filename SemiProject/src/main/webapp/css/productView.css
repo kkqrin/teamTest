@@ -1,7 +1,7 @@
 .view-product-img {
     width: 600px;
     height: 600px;
-    border: 1px solid #4b4b4b;
+    border: 1px solid #4e4e4e;
 }
 .view-product-img>img{
 	width: 100%;
@@ -173,6 +173,7 @@
 .view-seller-info>.seller{
     font-size: 64px;
     width: 64px;
+    color: #4b4b4b;
 }
 .view-seller-desc{
     width: 160px;
