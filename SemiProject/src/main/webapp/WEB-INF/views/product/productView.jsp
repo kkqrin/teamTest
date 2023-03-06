@@ -104,8 +104,8 @@
 	                    <div class="view-product-btn">
 	                        <a href="#" class="btn bc1 bs3">사기 조회</a>
 	                        <a href="#" class="btn bc1 bs3">판매자에게 쪽지보내기</a>
-	                        <a href="#" class="btn bc1 bs3">예약하기</a>
-	                        <a href="#" class="btn bc1 bs3" style="display:none;">거래완료</a>
+	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>" class="btn bc1 bs3">예약하기</a>
+	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>" class="btn bc1 bs3" style="display:none;">거래완료</a>
 	                    </div>
 	                </div>
 	        </div>
