@@ -53,33 +53,15 @@ public class ReportService {
 		while(sT1.hasMoreTokens()) {
 			int memberNo = Integer.parseInt(sT1.nextToken());
 			int pactCheck = Integer.parseInt(sT2.nextToken());
+			// 신고게시판 pactCheck 업데이트 -> 멤버등급(사기꾼) -> 사기꾼 게시글 삭제
 			int changeResult = dao.changePactCheck(conn, memberNo, pactCheck);
-			System.out.println(memberNo);
-			System.out.println(pactCheck);
-			System.out.println(changeResult);
 			if(changeResult == 0) {
 				result = false;
 				break;
 			}
 		}
 		if(result) {
-			while(sT1.hasMoreTokens()) {
-				int memberNo = Integer.parseInt(sT1.nextToken());
-				int pactCheck = Integer.parseInt(sT2.nextToken());
-				int changeResult = dao.changeMemberGrade(conn, memberNo,pactCheck);
-				System.out.println(memberNo);
-				System.out.println(pactCheck);
-				System.out.println(changeResult);
-				if(changeResult == 0) {
-					result = false;
-					break;
-				}
-			}
-			if(result) {
-				JDBCTemplate.commit(conn);
-			}else {
-				JDBCTemplate.rollback(conn);
-			}
+			JDBCTemplate.commit(conn);			
 		}else {
 			JDBCTemplate.rollback(conn);
 		}
