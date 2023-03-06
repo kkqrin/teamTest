@@ -23,6 +23,23 @@ public class DealService {
 		return list;
 	}
 
+	public int updateReserve(int productNo, int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateReserve(conn, productNo);
+		if(result>0) {
+			result = dao.insertDeal(conn, productNo, memberNo);
+			if(result>0) {
+				JDBCTemplate.commit(conn);
+			}else {
+				JDBCTemplate.rollback(conn);
+			}
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 
 }

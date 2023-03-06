@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sp.deal.service.DealService;
+
 /**
  * Servlet implementation class ReserveServlet
  */
@@ -32,11 +34,24 @@ public class ReserveServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		//3. 비즈니스로직
-		//4. 결과처리
-//		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		DealService service = new DealService();
+		int result = service.updateReserve(productNo, memberNo);
 		
-//		view.forward(request, response);
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result>0) {
+			request.setAttribute("title", "예약 성공");
+			request.setAttribute("msg", "예약을 성공하셨습니다.");
+			request.setAttribute("icon", "success");
+		}else {
+			request.setAttribute("title", "예약 실패");
+			request.setAttribute("msg", "예약을 실패하셨습니다.");
+			request.setAttribute("icon", "error");
+		}
+		request.setAttribute("loc", "/productView.do?productNo="+productNo);
+		view.forward(request, response);			
 	}
 
 	/**

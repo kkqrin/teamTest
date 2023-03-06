@@ -48,7 +48,7 @@ public class DealDao {
 	public int updateReserve(Connection conn, int productNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update product set product_status=1 where productNo=?";
+		String query = "update product set product_status=1 where product_No=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, productNo);
@@ -63,4 +63,57 @@ public class DealDao {
 		return result;
 	}
 
+	public int insertDeal(Connection conn, int productNo, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into deal values(deal_seq.nextval,?,?,to_char(sysdate, 'yyyy-mm-dd hh:mi:ss'),null)";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateComplete(Connection conn, int productNo, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update product set product_status=2 where product_No=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(conn);
+		}
+		return result;
+		
+	}
+
+	public int insertDeal2(Connection conn, int productNo, int memberNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "insert into deal values(deal_seq.nextval,?,?,null,to_char(sysdate, 'yyyy-mm-dd hh:mi:ss'))";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			pstmt.setInt(2, memberNo);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 }
