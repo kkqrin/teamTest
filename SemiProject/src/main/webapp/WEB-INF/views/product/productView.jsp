@@ -15,6 +15,46 @@
 <title>Insert title here</title>
     <!-- 상품 상세보기 css-->
     <link rel="stylesheet" href="/css/productView.css">
+    
+<style>
+	.inputCommentBox{
+		margin : 50px;
+	}
+	.inputCommentBox>form>ul{
+		list-style-type : none;
+		display : flex;
+	}
+	.inputCommentBox>form>ul>li:first-child{
+		width : 15%;
+		display : flex;
+		justify-content : center;
+		align-items : center;
+	}
+	.inputCommentBox>form>ul>li:first-child>span{
+		font-size : 80px;
+		color : #4b4b4b;
+	}
+	.inputCommentBox>form>ul>li:nth-child(2){
+		width : 75%;
+	}
+	.inputCommentBox>form>ul>li:nth-child(2)>textarea{
+		height : 96px;
+		min-height : 96px;
+	}
+	.inputCommentBox>form>ul>li:last-child{
+		width: 10%;
+	    text-align: center;
+    	line-height: 96px;
+    	margin: 0px 3px;
+	}
+	.commentBox{
+		margin : 50px;
+	}
+	.inputRecommentBox{
+		margin : 30px 0px;
+		display : none;
+	}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
@@ -157,7 +197,7 @@
 			<form action="/insertProductComment.do" method="post">
 				<ul>
 					<li>
-						<span class="material-icons">account_box</span>
+						<span class="material-icons">face</span>
 					</li>
 					<li>
 						<!-- 입력받진 않지만 값 전달해야 하는 경우 hidden 이용해 전달 -->
@@ -168,7 +208,7 @@
 						<textarea name="ncContent" class="input-form"></textarea>
 					</li>
 					<li>
-						<button type="submit" class="btn bc1 bs4">등록</button>
+						<button type="submit" class="btn bc3 bs3">등록</button>
 					</li>
 				</ul>
 			</form>
