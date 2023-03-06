@@ -17,15 +17,21 @@
     <!-- 기본 js -->
     <script src="/js/default.js"></script>
     <script src="/js/sweetalert.min.js"></script>
-
+	<style>
+	.pc{
+		color: red;
+		font-size: 12px;
+		margin-left: 2px; 
+	}
+</style>
 
     <header>
         <div class="header-link">
-            <a href="/postList.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
             <%if(m==null){ %>
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <%} else{%>
+            <a href="/postList.do?reqPage=1&memberId=<%=m.getMemberId() %>" class="btn bc0">쪽지함<span class="pc"></span></a>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/myPage.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>
@@ -74,7 +80,7 @@
                 <li class="category">
                     <a href="#">카테고리</a>
                 </li>
-                <li><a href="#">메뉴-3</a></li>
+                <li><a href="/boardList.do?reqPage=1">커뮤니티</a></li>
                 <li><a href="#">메뉴-4</a></li>
                 <li><a href="#">메뉴-5</a></li>
             </ul>
@@ -105,3 +111,20 @@
             </div>
         </ul>
     </header>
+<script>
+<%if(m!= null){%>
+ $(document).ready(function(){
+	 
+	 const memberId = '<%=m.getMemberId()%>';
+	 $.ajax({
+		 url: "/postReadCount.do",
+		 type : "POST",
+		 data : {memberId : memberId},
+		 success : function(data){
+			 $('.pc').text(data);
+		 }
+	 });
+ });
+ <%}%>
+
+</script>
