@@ -57,37 +57,42 @@
 </head>
 <body>
  		<%@include file="/WEB-INF/views/common/admin.jsp" %>
- 		<div class="page-content">
+ 		<div class="page-content" style="margin:0; margin-left: 290px;">
 		<div class="page-title">신고게시판</div>
 		<table class="tbl" id="boardView">
-			<tr class="tr-3">
+			<tr class="tr-4">
 				<th colspan="6">신고게시판</th>
 			</tr>
-			<tr class="tr-1">
-				<th class="td-3">신고자</th>
+			<tr class="tr-0">
+				<th class="td-4">신고자</th>
 				<td><%=r.getReportMember() %></td>
-				<th class="td-3">작성일</th>
+				<th class="td-4">작성일</th>
 				<td><%=r.getEnrollDate() %></td>
-				<th class="td-3">사기꾼</th>
+				<th class="td-4">사기꾼</th>
 				<td><%=r.getMemberId() %></td>
 			</tr>
-			<tr class="tr-1">
-				<th class="td-3">첨부파일</th>
+			<tr class="tr-0">
+				<th class="td-4">첨부파일</th>
 				<td colspan="5">
 					<%if(r.getFilename() != null){ %>
 					<img src="/img/file.png" width="16px">
-					<a href="/boardFileDown.do?reportNo=<%=r.getReportNo() %>">
+					<a href="/reportFileDown.do?reportNo=<%=r.getReportNo() %>">
 						<%=r.getFilename() %>
 					</a>
 					<%} %>
 				</td>
 			</tr>
-			<tr class="tr-1">
+			<tr class="tr-0">
 				<td colspan="6">
 					<div id="boardContent">
 						<%=r.getReportContent() %>
 					</div>
 				</td>
+			</tr>
+			<tr class="tr-0">
+				<th colspan="6">
+					<a class="btn bc44" href="/reportSelect.do">목록</a>
+				</th>
 			</tr>
 			</table>
 			</div>

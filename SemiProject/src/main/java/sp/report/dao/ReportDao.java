@@ -77,7 +77,7 @@ public class ReportDao {
 		String query = null;
 		if(pactCheck == 1) {
 			query = "update member_tbl set member_grade=4 where member_no=?";
-			deleteProduct(conn, memberNo);
+//			deleteProduct(conn, memberNo);
 		}else if(pactCheck ==2) {
 			query = "update member_tbl set member_grade=2 where member_no=?";			
 		}
