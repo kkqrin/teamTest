@@ -61,7 +61,7 @@
 		               		<span class="material-symbols-outlined">account_circle</span>
 		                    <p>마이페이지</p> 
 		               </a>
-                <a href="#" class="btn">
+                <a href="/wishProduct.do" class="btn">
                     <span class="material-symbols-outlined">favorite</span>
                     <p>관심상품</p>
                 </a>
@@ -92,27 +92,21 @@
             <div>
                 <p>CATEGORY</p>
                 <li><a href="/productList.do?category=1&reqPage=1">수입명품</a></li>
-                
                 <li><a href="/productList.do?category=2&reqPage=1">패션의류</a></li>
-                
                 <li><a href="/productList.do?category=3&reqPage=1">패션잡화</a></li>
-                
                 <li><a href="/productList.do?category=4&reqPage=1">뷰티</a></li>
+                <li><a href="/productList.do?category=5&reqPage=1">출산/유아동</a></li>
                 
-                
-                
-                <li><a href="/productList.do?category=3&reqPage=1">모바일/태블릿</a></li>
-                <li><a href="/productList.do?category=4&reqPage=1">가구/인테리어</a></li>
-                <li><a href="/productList.do?category=5&reqPage=1">도서/음반/문구</a></li>
-                
+                <li><a href="/productList.do?category=6&reqPage=1">모바일/태블릿</a></li>
                 <li><a href="/productList.do?category=7&reqPage=1">가전제품</a></li>
                 <li><a href="/productList.do?category=8&reqPage=1">노트북/PC</a></li>
                 <li><a href="/productList.do?category=9&reqPage=1">카메라/캠코더</a></li>
+                <li><a href="/productList.do?category=10&reqPage=1">가구/인테리어</a></li>                
                 
                 <li><a href="/productList.do?category=11&reqPage=1">리빙/생활</a></li>
                 <li><a href="/productList.do?category=12&reqPage=1">게임</a></li>
                 <li><a href="/productList.do?category=13&reqPage=1">반려동물/취미</a></li>
-                <li><a href="/productList.do?category=14&reqPage=1">출산/유아동</a></li>
+                <li><a href="/productList.do?category=14&reqPage=1">도서/음반/문구</a></li>
                 <li><a href="/productList.do?category=15&reqPage=1">티켓/쿠폰</a></li>
                 
                 <li><a href="/productList.do?category=16&reqPage=1">스포츠</a></li>
