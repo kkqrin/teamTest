@@ -1,7 +1,6 @@
 package sp.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,19 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import sp.board.service.BoardService;
 import sp.board.vo.Board;
-import sp.board.vo.BoardPageData;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class BoardUpdateFrmServlet
  */
-@WebServlet(name = "BoardList", urlPatterns = { "/boardList.do" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet(name = "BoardUpdateFrm", urlPatterns = { "/boardUpdateFrm.do" })
+public class BoardUpdateFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public BoardUpdateFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,15 +32,11 @@ public class BoardListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		BoardService service = new BoardService();
-		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		int npp = Integer.parseInt(request.getParameter("npp"));
-		BoardPageData bpd = service.selectBoardList(reqPage,npp);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp");
-		request.setAttribute("list", bpd.getList());
-		request.setAttribute("start", bpd.getStart());
-		request.setAttribute("pageNavi", bpd.getPageNavi());
-		request.setAttribute("npp", npp);
+		Board b  = service.getBoard(boardNo); 
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/board/boardUpdateFrm.jsp");
+		request.setAttribute("b", b);
 		view.forward(request, response);
 	}
 

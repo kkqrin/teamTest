@@ -31,6 +31,7 @@
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <%}else if(m.getMemberGrade()==1){%>
+            <a href="/postList.do?reqPage=1&memberId=<%=m.getMemberId() %>" class="btn bc0">쪽지함<span class="pc"></span></a>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/adminPageGrade.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%}else{ %>
@@ -82,7 +83,7 @@
                 <li class="category">
                     <a href="#">카테고리</a>
                 </li>
-                <li><a href="/boardList.do?reqPage=1">커뮤니티</a></li>
+                <li><a href="/boardList.do?reqPage=1&npp=10">커뮤니티</a></li>
                 <li><a href="#">메뉴-4</a></li>
                 <li><a href="#">메뉴-5</a></li>
             </ul>

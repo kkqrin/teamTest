@@ -1,7 +1,6 @@
-package sp.board.controller;
+package sp.noticeQuestion.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sp.board.service.BoardService;
-import sp.board.vo.Board;
-import sp.board.vo.BoardPageData;
+import sp.noticeQuestion.service.NoticeQuestionService;
+import sp.noticeQuestion.vo.NoticeQuestionPageData;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class NoticeQuestionServlet
  */
-@WebServlet(name = "BoardList", urlPatterns = { "/boardList.do" })
-public class BoardListServlet extends HttpServlet {
+@WebServlet(name = "NoticeQuestionList", urlPatterns = { "/noticeQuestionList.do" })
+public class NoticeQuestionListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public NoticeQuestionListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +31,18 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		BoardService service = new BoardService();
+		//2. 값추출
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
-		int npp = Integer.parseInt(request.getParameter("npp"));
-		BoardPageData bpd = service.selectBoardList(reqPage,npp);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp");
-		request.setAttribute("list", bpd.getList());
-		request.setAttribute("start", bpd.getStart());
-		request.setAttribute("pageNavi", bpd.getPageNavi());
-		request.setAttribute("npp", npp);
+		//3. 비지니스로직
+		NoticeQuestionService service = new NoticeQuestionService();
+		NoticeQuestionPageData qpd = service.selectNoticeQuestionList(reqPage);
+		//4. 결과처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/noticeQuestion/noticeQuestionList.jsp");
+		request.setAttribute("list", qpd.getList());
+		request.setAttribute("pageNavi", qpd.getPageNavi());
+		request.setAttribute("start", qpd.getStart());
 		view.forward(request, response);
 	}
 

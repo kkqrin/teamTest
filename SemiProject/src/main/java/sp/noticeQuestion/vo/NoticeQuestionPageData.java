@@ -1,27 +1,27 @@
-package sp.board.vo;
+package sp.noticeQuestion.vo;
 
 import java.util.ArrayList;
 
-public class BoardPageData {
-	private ArrayList<Board> list;
+import sp.notice.vo.Notice;
+
+public class NoticeQuestionPageData {
+	private ArrayList<NoticeQuestion> list;
 	private String pageNavi;
 	private int start;
-	private int totalCount;
-	public BoardPageData() {
+	public NoticeQuestionPageData() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public BoardPageData(ArrayList<Board> list, String pageNavi, int start, int totalCount) {
+	public NoticeQuestionPageData(ArrayList<NoticeQuestion> list, String pageNavi, int start) {
 		super();
 		this.list = list;
 		this.pageNavi = pageNavi;
 		this.start = start;
-		this.totalCount = totalCount;
 	}
-	public ArrayList<Board> getList() {
+	public ArrayList<NoticeQuestion> getList() {
 		return list;
 	}
-	public void setList(ArrayList<Board> list) {
+	public void setList(ArrayList<NoticeQuestion> list) {
 		this.list = list;
 	}
 	public String getPageNavi() {
@@ -30,19 +30,11 @@ public class BoardPageData {
 	public void setPageNavi(String pageNavi) {
 		this.pageNavi = pageNavi;
 	}
-	public int getTotalCount() {
-		return totalCount;
-	}
-	public void setTotalCount(int totalCount) {
-		this.totalCount = totalCount;
-	}
 	public int getStart() {
 		return start;
 	}
 	public void setStart(int start) {
 		this.start = start;
 	}
-
-	
-	
 }
+	

@@ -36,8 +36,8 @@ public class ReportViewServlet extends HttpServlet {
 		//2. 값추출
 		int reportNo = Integer.parseInt(request.getParameter("reportNo"));
 		//3. 비즈니스로직
-		ReportService serivce = new ReportService();
-		Report r = serivce.selectOneReport(reportNo);
+		ReportService service = new ReportService();
+		Report r = service.selectOneReport(reportNo);
 		//4. 결과처리
 		if(r==null) {
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");

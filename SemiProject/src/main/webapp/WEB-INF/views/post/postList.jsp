@@ -190,8 +190,7 @@ table th, .post-id, .post-content, .post-time {
 
     }
     
-    
-    
+   
     .areabox>textarea{
     	width: 470px;
     	height: 300px;

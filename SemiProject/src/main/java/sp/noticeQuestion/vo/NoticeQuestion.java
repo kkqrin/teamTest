@@ -3,18 +3,20 @@ package sp.noticeQuestion.vo;
 public class NoticeQuestion {
 	private int faqNo;
 	private int memberNo;
-	private String faqCategory;
+	private int faqCategory;
+	private String faqTitle;
 	private String faqContent;
 	private int faqCount;
 	public NoticeQuestion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NoticeQuestion(int faqNo, int memberNo, String faqCategory, String faqContent, int faqCount) {
+	public NoticeQuestion(int faqNo, int memberNo, int faqCategory, String faqTitle, String faqContent, int faqCount) {
 		super();
 		this.faqNo = faqNo;
 		this.memberNo = memberNo;
 		this.faqCategory = faqCategory;
+		this.faqTitle = faqTitle;
 		this.faqContent = faqContent;
 		this.faqCount = faqCount;
 	}
@@ -30,11 +32,17 @@ public class NoticeQuestion {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	public String getFaqCategory() {
+	public int getFaqCategory() {
 		return faqCategory;
 	}
-	public void setFaqCategory(String faqCategory) {
+	public void setFaqCategory(int faqCategory) {
 		this.faqCategory = faqCategory;
+	}
+	public String getFaqTitle() {
+		return faqTitle;
+	}
+	public void setFaqTitle(String faqTitle) {
+		this.faqTitle = faqTitle;
 	}
 	public String getFaqContent() {
 		return faqContent;
