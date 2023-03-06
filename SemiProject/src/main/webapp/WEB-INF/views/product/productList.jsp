@@ -65,7 +65,7 @@
 				           <li>
 				               <a><%=c.getCategoryName() %></a>
 				               <ul class="list-subCategory naviHide">
-				               		<li><a href="/productList.do?category=<%=category%>&reqPage=1">전체</a></li>
+				               		<li><a href="/productList.do?category=<%=c.getCategoryNo()%>&reqPage=1">전체</a></li>
 				               		<%for(Category sc : cSubList) {%>
 					               		<%if(sc.getCategoryRef() == c.getCategoryNo()) {%>
 				                   <li><a href="/productSubList.do?category=<%=sc.getCategoryNo()%>&reqPage=1"><%=sc.getCategoryName() %></a></li>
