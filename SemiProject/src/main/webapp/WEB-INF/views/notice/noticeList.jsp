@@ -45,6 +45,7 @@
 					<a href="/noticeView.do?noticeNo=<%=n.getNoticeNo() %>">
 						<%=n.getNoticeTitle() %>
 					</a>
+				</td>	
 				<% if(n.getMemberNo() == 1) {%>
 				<td>중고사자 관리자</td>
 				<%} %>	
