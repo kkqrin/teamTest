@@ -49,6 +49,9 @@ public class Board {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
+	public String getBoardContentBr() {
+		return boardContent.replaceAll("\r\n", "<br>");
+	}
 	public int getReadCount() {
 		return readCount;
 	}
