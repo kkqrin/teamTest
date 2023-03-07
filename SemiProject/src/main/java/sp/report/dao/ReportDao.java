@@ -145,4 +145,34 @@ public class ReportDao {
 		return r;
 	}
 
+	public ArrayList<Report> selectDeal(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Report> list = new ArrayList<Report>();
+		String query = "select * from deal left join member_tbl using (member_no) left join product using (product_no) where member_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				Report r = new Report();
+				r.setProductNo(rset.getInt("product_No"));
+				r.setProductTitle(rset.getString("product_Title"));
+				r.setSellerId(rset.getString("seller_Id"));
+				r.setProductStatus(rset.getInt("product_Status"));
+				r.setCompleteDate(rset.getString("complete_date"));
+				r.setReserveDate(rset.getString("reserve_date"));
+				list.add(r);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
 }

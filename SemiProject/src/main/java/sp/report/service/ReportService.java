@@ -74,6 +74,12 @@ public class ReportService {
 		JDBCTemplate.close(conn);
 		return r;
 	}
+	public ArrayList<Report> selectDeal(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Report> list = dao.selectDeal(conn, memberNo);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 
 
 }

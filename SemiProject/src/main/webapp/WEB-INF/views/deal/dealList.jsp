@@ -17,13 +17,14 @@
         <div class="title"><h1>예약/거래완료 내역 조회</h1></div>
         <table class="grad-table tbl tbl-hover" style="width:90%;">
             <tr class="tr-1">
-                <th>거래내역번호</th>
+                <th>거래번호</th>
                 <th>상품번호</th>
                 <th>상품제목</th>
                 <th>판매자</th>
                 <th>상품금액</th>
                 <th>구매자</th>
                 <th>거래상태</th>
+                <th>예약완료일</th>
                 <th>거래완료일</th>
             </tr>
             <%for (Deal d : list){ %>
@@ -49,7 +50,17 @@
                     </select>
                     <%} %>
                 </td>
+                
+                <%if(d.getReserveDate()==null){ %>
+                <td>-</td>
+                <%}else{ %>
+                <td><%=d.getReserveDate() %></td>
+                <%} %>
+                   <%if(d.getCompleteDate()==null){ %>
+                <td>-</td>
+                <%}else{ %>
                 <td><%=d.getCompleteDate() %></td>
+                <%} %>
             </tr>
             <%} %>
         </table>

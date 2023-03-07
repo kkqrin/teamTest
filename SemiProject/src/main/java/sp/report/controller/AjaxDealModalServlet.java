@@ -1,26 +1,31 @@
 package sp.report.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.View;
+
+import com.google.gson.Gson;
+
+import sp.report.service.ReportService;
+import sp.report.vo.Report;
 
 /**
- * Servlet implementation class ReportWriteFrmServlet
+ * Servlet implementation class AjaxProductModalServlet
  */
-@WebServlet(name = "ReportWriteFrm", urlPatterns = { "/reportWriteFrm.do" })
-public class ReportWriteFrmServlet extends HttpServlet {
+@WebServlet(name = "AjaxProductModal", urlPatterns = { "/ajaxProductModal.do" })
+public class AjaxDealModalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportWriteFrmServlet() {
+    public AjaxDealModalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,10 +37,16 @@ public class ReportWriteFrmServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		//3. 비즈니스로직
+		ReportService service = new ReportService();
+		ArrayList<Report> list = service.selectDeal(memberNo);
 		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/reportWriteFrm.jsp");
-		view.forward(request, response);
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		Gson gson = new Gson();
+		gson.toJson(list,out);
+//		System.out.println(list);
 	}
 
 	/**
