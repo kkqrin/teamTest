@@ -83,29 +83,31 @@
 					<%for(int i=0; i<list.size();i++) {%>
 						<%Product p = list.get(i); %>
 			            <div class="posting-item">
-			                <div class="posting-img">
-			                <img src="upload/product/<%=p.getFilepath()%>">
-			                </div>
-			                <div class="posting-content">
-			                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
-			                    <p class="posting-title"><a href="/productView.do?productNo=<%=p.getProductNo()%>"><%=p.getProductTitle() %></a></p>
-			                    <div class="posting-detail">
-			                       <!--<div class="posting-icon">
-			                            <div class="heart-div">
-			                                <span class="material-symbols-outlined">favorite</span>
-			                                <span class="heart-count">0</span>
-			                            </div>
-			                            <div class="comment-div">
-			                                <span class="material-symbols-outlined">chat_bubble</span>
-			                                <span class="comment-count">댓글수 그냥조회수로할까</span>
-			                            </div>
-			                        </div> --> 
-			                        <div class="posting-info">
-			                            <span class="posting-area"><%=p.getProductArea() %></span>
-			                            <span class="posting-time"><%=p.getEnrollDate() %></span>
-			                        </div>
-			                    </div>
-			                </div>
+			            	<a href="/productView.do?productNo=<%=p.getProductNo()%>">
+				                <div class="posting-img">
+				                <img src="upload/product/<%=p.getFilepath()%>">
+				                </div>
+				                <div class="posting-content">
+				                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
+				                    <p class="posting-title"><%=p.getProductTitle() %></p>
+				                    <div class="posting-detail">
+				                       <!--<div class="posting-icon">
+				                            <div class="heart-div">
+				                                <span class="material-symbols-outlined">favorite</span>
+				                                <span class="heart-count">0</span>
+				                            </div>
+				                            <div class="comment-div">
+				                                <span class="material-symbols-outlined">chat_bubble</span>
+				                                <span class="comment-count">댓글수 그냥조회수로할까</span>
+				                            </div>
+				                        </div> --> 
+				                        <div class="posting-info">
+				                            <span class="posting-area"><%=p.getProductArea() %></span>
+				                            <span class="posting-time"><%=p.getEnrollDate() %></span>
+				                        </div>
+				                    </div>
+				                </div>
+			                </a>
 			            </div>
 					<%} %>
 				           

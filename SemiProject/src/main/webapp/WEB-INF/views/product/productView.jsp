@@ -7,12 +7,13 @@
     Product p = (Product)request.getAttribute("p");
     ArrayList<ProductComment> commentList = (ArrayList<ProductComment>)request.getAttribute("commentList");
     ArrayList<ProductComment> reCommentList = (ArrayList<ProductComment>)request.getAttribute("reCommentList");
+    ArrayList<Product> wishList = (ArrayList<Product>)request.getAttribute("wishList");
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title><%=p.getProductTitle() %> | 중 고 사 자</title>
     <!-- 상품 상세보기 css-->
     <link rel="stylesheet" href="/css/productView.css">
     
@@ -80,7 +81,11 @@
 	                                <span><%=p.getProductPrice() %>원</span>
 	                            </div>
 	                            <div class="wish-box">
-	                                <a href="/insertWishProduct.do?productNo=<%=p.getProductNo()%>"><span class="material-symbols-outlined wish-btn">favorite</span></a>
+	                                <a href="/insertWishProduct.do?memberNo=<%=m.getMemberNo() %>&productNo=<%=p.getProductNo()%>">
+	                               	<%--for(Product wp : wishList) {--%>
+<!--		                                <%--if(wp.getMemberNo() == m.getMemberNo()) {--%>-->
+		                                <span class="material-symbols-outlined wish-btn">favorite</span> 
+	                               </a> 
 	                            </div>
 	                        </div>
 	                    </div>

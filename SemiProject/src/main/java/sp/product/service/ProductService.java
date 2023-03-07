@@ -173,8 +173,12 @@ public class ProductService {
 			ArrayList<ProductComment> commentList = dao.selectProductComment(conn, productNo);
 			// 2. 대댓글
 			ArrayList<ProductComment> reCommentList = dao.selectProductReComment(conn, productNo);
+			// 3. 관심상품
+			// SELECT MEMBER_NO FROM WISH_PRODUCT WHERE PRODUCT_NO=171에서 조회한 MEMBER_NO랑 로그인세션의 MEMBER_NO랑 맞는 지 비교 -> 맞으면 하트 칠함
+			ArrayList<Product> wishMemberList = dao.selectProductWishTable(conn, productNo);
 			
-			ProductViewData pvd = new ProductViewData(p, commentList, reCommentList);
+			
+			ProductViewData pvd = new ProductViewData(p, commentList, reCommentList, wishMemberList);
 			
 			JDBCTemplate.close(conn);
 			return pvd;
@@ -233,5 +237,19 @@ public class ProductService {
 		
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public int insertWishProduct(int memberNo, int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertWishProduct(conn, memberNo, productNo);
+
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
 	}
 }

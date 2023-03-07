@@ -1,6 +1,7 @@
 $(".sub-navi").hide();
 $(".category").on("mouseenter", function(){
     $(".sub-navi").show();
+    $(".sub-navi-background").show();
     $("nav").css("border-bottom", "none");
 });
 $(".sub-navi").on("mouseenter", function(){
