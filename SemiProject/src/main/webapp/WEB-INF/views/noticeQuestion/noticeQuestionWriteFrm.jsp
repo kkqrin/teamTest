@@ -23,21 +23,27 @@
 	
 	<div class="page-content">
 		<div class="page-title">자주묻는질문 작성</div>
-		<form action="/noticeQuestionWrite.do" method="post" enctype="multipart/form-data">
+		<form action="/noticeQuestionWrite.do" method="post">
 			<table class="tbl" id="noticeQuestionWrite">
 				<tr class="tr-1">
-					<th class="td-3">제목</th>
+					<th class="td-1">제목</th>
 					<td colspan="3">
 						<input type="text" name="noticeQuestionTitle" class="input-form">
 					</td>
 				</tr>
-				<tr class="tr-1">
-					<th class="td-3">작성자</th>
+				<tr class="tr-0">
+					<th class="td-1">작성자</th>
 					<td>
-						<input type="hidden" name="noticeQuestionWriter" value="1">
+						<%=m.getMemberId() %>
+						<input type="hidden" name="noticeQuestionWriter" value="<%=m.getMemberNo() %>">
 					</td>
-					<th class="td-3">유형</th>
-					<td><input type="text" name="noticeQuestionCategory" class="input-form"></td>
+					<th class="td-1">유형</th>
+					<td><select name="noticeQuestionCategory" id="noticeQuestionCategory" class="input-form">
+						<option value="0">공통</option>
+						<option value="1">이용정책</option>
+						<option value="2">구매</option>
+						<option value="3">판매</option>
+					</select></td>
 				</tr>
 				<tr class="tr-1">
 					<td colspan="4" style="text-align:left;">
@@ -53,7 +59,7 @@
 		</form>
 	</div>
 	<script>
-		$("#noticeContent").summernote({
+		$("#noticeQuestionContent").summernote({
 			height : 400,
 			lang : "ko-KR",
 			callbacks : {

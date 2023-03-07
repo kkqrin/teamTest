@@ -4,6 +4,7 @@
     <%
     	Notice n = (Notice)request.getAttribute("n");
     %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,8 @@
 				<tr class="tr-0">
 					<th class="td-1">작성자</th>
 					<td>
-						<input type="hidden" name="noticeWriter" value="1">
+						<%=m.getMemberId() %>
+						<input type="hidden" name="noticeWriter" value="<%=m.getMemberNo() %>">
 					</td>
 					<th class="td-1">첨부파일</th>
 					<td><input type="file" name="upfile"></td>
