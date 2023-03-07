@@ -13,11 +13,6 @@
 
 <script src="js/jquery-3.6.3.min.js"></script>
 <style>
-body {
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-		Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-		sans-serif;
-}
 
 button {
 	border-radius: 10px;
@@ -262,21 +257,25 @@ h1 {
 										style="width: 100%; height: 30px;">메일전송</button>
 								</div>
 								<div class="find-content2" style="margin-top: 20px;">
-									<label for="email">이메일 인증하기</label>
 								</div>
-								<div class="find-input2">
+								<div id="auth" style="display:none" class="find-input2">
+									<label for="email"style="margin-top: 20px;">이메일 인증하기</label>
 									<input type="text" name="emailCheck" id="authCode"
-										placeholder="인증번호 입력">
+										placeholder="인증번호 입력" style="margin-top:20px; ">
 									<button type="button" class="bc1 dup-btn" id="authBtn"
 										style="width: 100%; height: 30px;">인증하기</button>
 									<span id="timeZone"></span> <span id="authMsg"></span>
-								</div>
-								<div class="find-input2">
 									<button type="button" name="searchPwBtn" class="bc1"
-										style="width: 100%; height: 30px; margin-top: 20px;">비밀번호
+										style="width: 100%; height: 30px; display:none; margin-top: 10px;">비밀번호
 										찾기</button>
 								</div>
-								<div class="find-pw"></div>
+								<div class="find-input2">
+								</div>
+								<div class="find-pw">
+								 <p></p>
+									<p></p>
+									<p></p>
+								</div>
 							</div>
 							<button type="button" class="bc1" id="close2"
 								style="width: 100%; height: 30px;">닫기</button>
@@ -357,39 +356,151 @@ h1 {
    openButton2.addEventListener("click",openModal2);
    
    ///////////////////비밀번호찾기 값 받아오기//////////////////
+
  $("[name=searchPwBtn]").on("click",function(){
+	const authCode=$("[name=authCode]");
+	 
 	 const memberId2 = $("[name=memberId2]").val();
 	$.ajax({
 		  url :"/searchPw.do",
 		  type : "post",
 		  data : {memberId2:memberId2},
 		  success : function(data){
-		
+			const findPw = $(".find-pw");
+				findPw.children().first().next().empty();
+			  	findPw.children().first().next().next().empty();
+			 	findPw.children().first().empty();
+			 	
 				  if(data != null){
+				
 					  console.log(data);
-					
+					  const p = $("<p></p>");
+					  const p2 = $("<p></p>");
+					  const p3 = $("<p></p>");
+					  p.text(data);
+					  p2.text("비밀번호는");
+					  p3.text("입니다");
+					  findPw.children().first().next().append(p);
+					  findPw.children().first().append(p2);
+					  findPw.children().first().next().next().append(p3);
 				 
 			  }else if(data==0){
 				  console.log("실패");
 			  }
 			  }
+			
 		 
+	});
+	
+	$("#sendBtn").on("click",function(){
+		const email = $("#email").val();
+		$.ajax({
+			url:"/sendMail.do",
+			data:{email:email},
+			type:"post",
+			success:function(data){
+				if(data=="null"){
+					  $("[name=searchPwBtn]").css("display","none");
+				}else{
+					 $("[name=searchPwBtn]").css("display","block");
+				}
+			}
+		});
 	});
  
  
  });
-   
 
+ let mailCode;
+	$("#sendBtn").on("click",function(){
+		const email = $("#email").val();
+		$.ajax({
+			url:"/sendMail.do",
+			data:{email:email},
+			type:"post",
+			success:function(data){
+				if(data=="null"){
+					alert("이메일 주소를 똑바로 입력하세요");
+				}else{
+					mailCode=data;
+					$("#auth").slideDown();
+					authTime();
+				}
+			},
+			error:function(){
+				console.log("에러");
+			}
+		});
+	});
+	$("#authBtn").on("click",function(){
+		if(mailCode==null){
+			$("#authMsg").text("인증 시간 만료");
+			$("#authMsg").css("color","red");
+		}else{
+		const authCode=$("#authCode").val();
+		if(authCode==mailCode){
+			$("#authMsg").prop("readonly",true);
+			$("#authMsg").text("인증완료");
+			$("#authMsg").css("color","green");
+			window.clearInterval(intervalId);
+			
+			$("[name=searchPwBtn]").show();
+			
+		}else{
+			$("#authMsg").text("인증실패");
+			$("#authMsg").css("color","red");
+		}
+		}
+	});
+	let intervalId;
+	function authTime(){
+		$("#timeZone").html("<span id='min'>0</span> : <span id='sec'>30</span>");
+		intervalId = window.setInterval(function(){
+			timeCount();
+		},1000);
+		
+	}
+	function timeCount() {
+		const min=$("#min").text();
+		const sec =$("#sec").text();
+		if(sec=="00"){
+			if(min!="0"){
+				const newMin=Number(min)-1;
+				$("#min").text(newMin);
+				$("#sec").text(59);		
+			}else{
+				window.clearInterval(intervalId);
+				mailCode = null;
+				$("#authMsg").text("인증 시간 만료");
+				$("#authMsg").css("color","red");
+			}
+		}else{
+			const newSec = Number(sec) - 1;
+			if(newSec<10){
+				$("#sec").text("0"+newSec);
 
-   
-   
-   
-   
-   
-   
+			}else{
+				$("#sec").text(newSec);
+
+			}
+		}
+	}
+	
+	function searchAddr(){
+		new daum.Postcode({
+	        oncomplete: function(data) {
+	        	$("#postcode").val(data.zonecode);
+	        	$("#address").val(data.address);
+	        	$("#detailAddress").focus();
+	            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	        }
+	    }).open();		
+	}
+	
    
 	   </script>
-	<script src="js/emailApi.js"></script>
+
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>
