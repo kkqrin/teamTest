@@ -502,6 +502,7 @@ public class ProductDao {
 			while(rset.next()) {
 				Product wp = new Product();
 				wp.setMemberNo(rset.getInt("member_no"));
+				list.add(wp);
 			}
 			
 		} catch (SQLException e) {
@@ -513,6 +514,27 @@ public class ProductDao {
 		
 		
 		return list;
+	}
+
+	public int deleteWishProduct(Connection conn, int memberNo, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "DELETE FROM WISH_PRODUCT WHERE MEMBER_NO=? AND PRODUCT_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
