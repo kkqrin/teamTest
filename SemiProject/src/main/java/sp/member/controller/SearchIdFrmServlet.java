@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginFrmServlet
+ * Servlet implementation class SearchIdFrmServlet
  */
-@WebServlet(name = "LoginFrm", urlPatterns = { "/loginFrm.do" })
-public class LoginFrmServlet extends HttpServlet {
+@WebServlet(name = "SearchIdFrm", urlPatterns = { "/searchIdFrm.do" })
+public class SearchIdFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginFrmServlet() {
+    public SearchIdFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,10 +28,10 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		request.setCharacterEncoding("utf-8");
 	
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/loginFrm.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/searchIdFrm.jsp");
 		view.forward(request, response);
 	}
 

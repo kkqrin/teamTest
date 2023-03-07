@@ -244,4 +244,41 @@ public class MemberDao {
 		return result;
 	}
 
+	public Member selectOneMemberPhone(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+	
+		String query = "select * from member_tbl where member_phone=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, m.getMemberPhone());
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				//이제 조회한 결과를 member객체로 member라는 변수에 모든 정보를 세팅함
+				member = new Member();
+				member.setEnrollDate(rset.getString("enroll_date"));
+				member.setMemberAddr(rset.getString("member_addr"));
+				member.setMemberAddr2(rset.getString("member_addr2"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberGrade(rset.getInt("member_grade"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setMemberNo(rset.getInt("member_no"));
+				member.setMemberPhone(rset.getString("member_phone"));
+				member.setMemberPoint(rset.getInt("member_point"));
+				member.setMemberTemp(rset.getInt("member_temp"));
+				member.setPostNumber(rset.getString("post_number"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(rset);
+		}
+		return member;
+	}
+
 }
