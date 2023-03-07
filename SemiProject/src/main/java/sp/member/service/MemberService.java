@@ -128,6 +128,20 @@ public class MemberService {
 		
 	}
 
+	public String selectOneMemberPhone(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		String memberPhone = dao.selectMemberPhone(conn,memberId);
+		JDBCTemplate.close(conn);
+		return memberPhone;
+	}
+
+	public String selectMemberEmail(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		String memberEmail = dao.selectMemberEmail(conn,memberId);
+		JDBCTemplate.close(conn);
+		return memberEmail;
+	}
+
 
 	
 }

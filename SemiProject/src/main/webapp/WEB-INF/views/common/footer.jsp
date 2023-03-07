@@ -35,4 +35,4 @@
     </footer>
     
     <script src="/js/header.js"></script>
-    
+    <script src="/js/bootstrap.min.js"></script>

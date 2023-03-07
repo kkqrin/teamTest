@@ -252,4 +252,18 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int deleteWishProduct(int memberNo, int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.deleteWishProduct(conn, memberNo, productNo);
+
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
 }
