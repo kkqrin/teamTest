@@ -23,7 +23,6 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="page-title">자주묻는질문</div>
-	</div>
 		<table class="tbl" id="noticeQuestionView">
 			<tr class="bg-5">
 				<th colspan="6"><%=nq.getFaqTitle()%></th>
@@ -33,23 +32,33 @@
 				<% if(nq.getMemberNo() == 1) {%>
 				<td class="td-0">중고사자 관리자</td>
 				<%} %>	
-				<th class="td-1">질문번호</th>
+				<th class="td-1">번호</th>
 				<td class="td-0"><%=nq.getFaqNo() %></td>
 				<th class="td-1">조회수</th>
 				<td class="td-0"><%=nq.getFaqCount() %></td>
 			</tr>
-			<tr>
+			<tr class="tr-1"> 
 				<th class="td-1">유형</th>
-				<td class="td-0"><%=nq.getFaqCategory() %></td>
+				<% if(nq.getFaqCategory() == 0) {%>
+				<td class="td-0" colspan="5">공통</td>
+				<%} else if(nq.getFaqCategory() == 1) {%>
+				<td class="td-0" colspan="5">이용정책</td>
+				<%} else if(nq.getFaqCategory() == 2) {%>
+				<td class="td-0" colspan="5">구매</td>
+				<%} else if(nq.getFaqCategory() == 3) {%>
+				<td class="td-0" colspan="5">판매</td>
+				<%} %>
+				
 			</tr>
 			<tr class="td-0">
 				<th colspan="6">
 					<div id="noticeQuestionContent">
-						<%=nq.getFaqContent() %>
+						<%=nq.getFaqCategory() %>
 					</div>
 				</th>
 			</tr>
 		</table>
+	</div>
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

@@ -78,7 +78,9 @@
 		<div class="tab-content">
 			<div class="nq-detail">
 			<%-- for --%>
+			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
+			<%} %>
 			<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:15%">번호</th>
