@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 import common.JDBCTemplate;
+import sp.member.vo.Member;
 import sp.report.dao.ReportDao;
 import sp.report.vo.Report;
 
@@ -73,6 +74,19 @@ public class ReportService {
 		Report r = dao.selectOneReport(conn,reportNo);
 		JDBCTemplate.close(conn);
 		return r;
+	}
+	public int countCheck(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		int check = dao.countCheck(conn,m);
+		JDBCTemplate.close(conn);
+		return check;
+	}
+	public int countPact(Member m) {
+		Connection conn = JDBCTemplate.getConnection();
+		int pact = dao.countCheck(conn,m);
+		JDBCTemplate.close(conn);
+		return pact;
+		
 	}
 
 
