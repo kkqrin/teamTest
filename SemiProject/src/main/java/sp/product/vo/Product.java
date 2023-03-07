@@ -16,6 +16,7 @@ public class Product {
 
 	private int memberNo;
 	private int wishProductNo;
+	private int wishCount;
 
 	public Product() {
 		super();
@@ -24,7 +25,7 @@ public class Product {
 
 	public Product(int productNo, int categoryNo, String sellerId, String productTitle, int productStatus,
 			int productPrice, int viewCount, String productContent, String enrollDate, String productArea,
-			String filename, String filepath, int memberNo, int wishProductNo) {
+			String filename, String filepath, int memberNo, int wishProductNo, int wishCount) {
 		super();
 		this.productNo = productNo;
 		this.categoryNo = categoryNo;
@@ -40,6 +41,7 @@ public class Product {
 		this.filepath = filepath;
 		this.memberNo = memberNo;
 		this.wishProductNo = wishProductNo;
+		this.wishCount = wishCount;
 	}
 
 	public int getProductNo() {
@@ -152,6 +154,14 @@ public class Product {
 
 	public void setWishProductNo(int wishProductNo) {
 		this.wishProductNo = wishProductNo;
+	}
+
+	public int getWishCount() {
+		return wishCount;
+	}
+
+	public void setWishCount(int wishCount) {
+		this.wishCount = wishCount;
 	}
 
 }

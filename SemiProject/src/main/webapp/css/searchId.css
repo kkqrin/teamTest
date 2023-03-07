@@ -1,0 +1,69 @@
+body{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+button{
+    all:unset;
+    background-color: steelblue;
+    color: white;
+    padding: 5px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.modal{
+    /*position을 absolute에서 fixed로 변경
+    왜냐? fixed를 하면 스크롤을 내려도 그 자리에 고정되어 있기때문에*/
+    /*box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    여기에 있던 이것을 modal_content로 이동*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;/*justfy-content는 가로축을 중심축으로 함*/
+    align-items: center;/*align-items는 세로축을 중심축으로 함
+                        즉, center를 넣으면 세로축의 중앙으로 정렬하게 됨*/
+}
+.modal_overlay{
+    /*모달 전체 배경색 설정*/
+    background-color: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+}
+.modal_content{
+    background-color: white;
+    padding: 50px 100px;
+    text-align: center;
+    position: relative;
+    top: 0px;
+    width: 10%;
+    border-radius:10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+h1{
+    margin: 0;
+}
+.hidden{
+    display: none;
+}
+.find-content-wrap{
+margin-top: 20px;
+
+}
+.find-content{
+margin-bottom: 10px;
+font-size: 18px;
+font-weight: bold;
+}
+.find-input>input{
+border: none;
+border-bottom: 1px solid black;
+width: 100%;
+}
+.find-id{
+margin: 10px 0;
+font-size: 18px;
+font-weight: bold;
+}

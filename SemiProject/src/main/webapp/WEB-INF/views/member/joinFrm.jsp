@@ -304,6 +304,7 @@
 		    }).open();		
 		}
 		
+	
 		
 		</script>
       <script src = "js/join.js"></script>

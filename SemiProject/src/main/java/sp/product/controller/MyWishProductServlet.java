@@ -3,6 +3,7 @@ package sp.product.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +40,9 @@ public class MyWishProductServlet extends HttpServlet {
 		ProductService service = new ProductService();
 		ArrayList<Product> list = service.selectMyWishProduct(memberNo);
 		// 4. 결과 처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/wishProduct.jsp");
+		request.setAttribute("list", list);
+		view.forward(request, response);
 	}
 
 	/**

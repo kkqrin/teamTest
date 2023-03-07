@@ -28,7 +28,7 @@ public class LoginFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1.인코딩
+	
 		request.setCharacterEncoding("utf-8");
 	
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/member/loginFrm.jsp");

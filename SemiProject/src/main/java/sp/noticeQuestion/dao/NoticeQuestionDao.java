@@ -78,6 +78,7 @@ public class NoticeQuestionDao {
 				nq.setFaqNo(rset.getInt("faq_no"));
 				nq.setFaqTitle(rset.getString("faq_title"));
 				nq.setMemberNo(rset.getInt("member_no"));
+				nq.setFaqCategory(rset.getInt("faq_category"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -92,7 +93,7 @@ public class NoticeQuestionDao {
 	public int updateReadCount(Connection conn, int faqNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "update faq set read_count = read_count+1 where faq_no=?";
+		String query = "update faq set faq_count = faq_count+1 where faq_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, faqNo);
@@ -124,6 +125,44 @@ public class NoticeQuestionDao {
 		}
 		return result;
 	}
+
+	public int deleteNoticeQuestion(Connection conn, int faqNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from faq where faq_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, faqNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateNoticeQuestion(Connection conn, NoticeQuestion nq) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "update faq set faq_title=?, faq_category=?, faq_content=?  where faq_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, nq.getFaqTitle());
+			pstmt.setInt(2, nq.getFaqCategory());
+			pstmt.setString(3, nq.getFaqContent());
+			pstmt.setInt(4, nq.getFaqNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+		
 
 }
 

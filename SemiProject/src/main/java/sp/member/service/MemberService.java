@@ -82,9 +82,9 @@ public class MemberService {
 
 	public Member selectOneMember(Member m) {
 		Connection conn =JDBCTemplate.getConnection();
-		Member member= dao.selectOneMember(conn,m);//m은 사용자로부터 입력받은 아이디와 비번임
+		Member member= dao.selectOneMember(conn,m);
 		JDBCTemplate.close(conn);
-		return member;//member는 조회결과임
+		return member;
 		
 	}
 
@@ -118,6 +118,28 @@ public class MemberService {
 		}
 		JDBCTemplate.close(conn);
 		return result;
+	}
+
+	public Member selectOneMemberPhone(Member m) {
+		Connection conn =JDBCTemplate.getConnection();
+		Member member= dao.selectOneMemberPhone(conn,m);
+		JDBCTemplate.close(conn);
+		return member;
+		
+	}
+
+	public String selectOneMemberPhone(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		String memberPhone = dao.selectMemberPhone(conn,memberId);
+		JDBCTemplate.close(conn);
+		return memberPhone;
+	}
+
+	public String selectMemberEmail(String memberId) {
+		Connection conn = JDBCTemplate.getConnection();
+		String memberEmail = dao.selectMemberEmail(conn,memberId);
+		JDBCTemplate.close(conn);
+		return memberEmail;
 	}
 
 

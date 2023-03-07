@@ -34,7 +34,11 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 		<div class="page-content">
 			<div class="board-content">
-				<div class="board-top"><button class="bc1 bs1 boardWrite">게시글작성</button><span class="countSpan">보기방식 <select name="listCount" id="listCount">
+				<div class="board-top">
+				<%if(m != null){ %>
+				<button class="bc1 bs1 boardWrite">게시글작성</button>
+				<%} %>
+				<span class="countSpan">보기방식 <select name="listCount" id="listCount">
 					<%if(npp == 10){ %>
 					<option value="10" selected>10개</option>
 					<option value="15">15개</option>
@@ -62,7 +66,11 @@
 						<%Board b = list.get(i); %>
 							<tr class="tr-2">
 								<th><%=i+start %></th>
-								<th><a href="/boardView.do?boardNo=<%=b.getBoardNo()%>"><%=b.getBoardTitle() %></a></th>
+								<th><a href="/boardView.do?boardNo=<%=b.getBoardNo()%>"><%=b.getBoardTitle() %>
+								<%if(b.getFileName()!=null){ %>
+								<img src="/img/file.png" width="16px">
+								<%} %>
+								</a></th>
 								<th><%=b.getBoardWriter() %></th>
 								<th><%=b.getRefDate() %></th>
 								<th><%=b.getReadCount() %></th>

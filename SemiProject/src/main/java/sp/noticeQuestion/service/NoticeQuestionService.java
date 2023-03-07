@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
-import sp.notice.vo.Notice;
 import sp.noticeQuestion.dao.NoticeQuestionDao;
 import sp.noticeQuestion.vo.NoticeQuestion;
 import sp.noticeQuestion.vo.NoticeQuestionPageData;
@@ -85,6 +84,7 @@ public class NoticeQuestionService {
 			JDBCTemplate.commit(conn);
 			NoticeQuestion nq = dao.selectOneNoticeQuestion(conn, faqNo);
 			JDBCTemplate.close(conn);
+			System.out.println(nq);
 			return nq;
 		}else {
 			JDBCTemplate.rollback(conn);
@@ -97,6 +97,39 @@ public class NoticeQuestionService {
 		Connection conn = JDBCTemplate.getConnection();
 		int result = dao.insertNoticeQuestion(conn,nq);
 		if(result > 0 ) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public NoticeQuestion deleteNoticeQuestion(int faqNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeQuestion nq = dao.selectOneNoticeQuestion(conn, faqNo);
+		int result = dao.deleteNoticeQuestion(conn, faqNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+			nq = null;
+		}
+		JDBCTemplate.close(conn);
+		return nq;
+	}
+
+	public NoticeQuestion getNoticeQuestion(int faqNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		NoticeQuestion nq = dao.selectOneNoticeQuestion(conn, faqNo);
+		JDBCTemplate.close(conn);
+		return nq;
+	}
+
+	public int updateNoticeQuestion(NoticeQuestion nq) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateNoticeQuestion(conn, nq);
+		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		}else {
 			JDBCTemplate.rollback(conn);

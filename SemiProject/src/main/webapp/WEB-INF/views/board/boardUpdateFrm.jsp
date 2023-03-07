@@ -13,7 +13,7 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 			<div class="page-content">
-				<div class="page-title">공지사항 수정</div>
+				<div class="page-title"></div>
 				<form action ="/boardUpdate.do" method="post" enctype="multipart/form-data">
 					<table class="tbl" id="boardUpdateFrm">
 						<tr class='tr-1'>

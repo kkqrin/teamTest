@@ -7,12 +7,13 @@
     Product p = (Product)request.getAttribute("p");
     ArrayList<ProductComment> commentList = (ArrayList<ProductComment>)request.getAttribute("commentList");
     ArrayList<ProductComment> reCommentList = (ArrayList<ProductComment>)request.getAttribute("reCommentList");
+    ArrayList<Product> wishList = (ArrayList<Product>)request.getAttribute("wishList");
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title><%=p.getProductTitle() %> | 중 고 사 자</title>
     <!-- 상품 상세보기 css-->
     <link rel="stylesheet" href="/css/productView.css">
     
@@ -57,6 +58,13 @@
 	.view-product-btn>a{
 		display: inline;
 	}
+	.hiddenBox{
+		display: none;
+	}
+	.hiddenBox>h3>span{
+		color : red;
+		font-size: 30px;
+	}
 </style>
 </head>
 <body>
@@ -80,7 +88,26 @@
 	                                <span><%=p.getProductPrice() %>원</span>
 	                            </div>
 	                            <div class="wish-box">
-	                                <a href="/insertWishProduct.do?productNo=<%=p.getProductNo()%>"><span class="material-symbols-outlined wish-btn">favorite</span></a>
+	                            
+	                            	<%int chk = 0; %>
+	                                <%if(m != null) {%>
+	                                	<%if(chk == 0) {%>
+		                                	<% chk = 1; %>
+			                               	<%for(Product wp : wishList) {%>
+			                                	<%if(wp.getMemberNo() == m.getMemberNo()) {%>
+			                                		<!-- 현재 관심상품 -->
+			                                		<a href="/deleteWishProduct.do?memberNo=<%=m.getMemberNo() %>&productNo=<%=p.getProductNo()%>">
+			                                		<span class="material-symbols-outlined wish-btn fill-wish">favorite</span>
+			                                		</a>
+			                                		<% chk = 0; %>
+		                                		<%} %>
+			                               	<%} %>
+		                            	<%}if(chk == 1) {%>
+	                               			<a href="/insertWishProduct.do?memberNo=<%=m.getMemberNo() %>&productNo=<%=p.getProductNo()%>">
+	                                		<span class="material-symbols-outlined wish-btn">favorite</span>
+			                               </a> 
+	                                	<%} %>
+	                                <%} %>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -101,12 +128,14 @@
 	                            </div>
 	                        </div>
 	                    </div>
+	                    <%if(m != null) {%>
 	                    <div class="view-product-btn">
-	                        <a href="#" class="btn bc1 bs3">사기 조회</a>
+	                        <a class="btn bc1 bs3 modal-open-btn" target="#login-modal">사기 조회</a>
 	                        <a href="#" class="btn bc1 bs3">판매자에게 쪽지보내기</a>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3">예약하기</a>
 	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3" style="display:none;">거래완료</a>
 	                    </div>
+	                    <%} %>
 	                </div>
 	        </div>
 	    </div>
@@ -269,11 +298,85 @@
 			</form>
 		</div>
 		<%} %>
-	    
-	    
 	</div>
+			<div id="login-modal" class="modal-bg">
+			<div class="modal-wrap">
+				<div class="modal-head" style="text-align: center;">
+					<h2>사기회원조회</h2>
+					<span class="material-icons close-icon modal-close">close</span>
+				</div>
+				<div class="modal-content">
+					<div class="input-box heightbox">
+						<label for="title">조회할 회원</label> <input type="text" name="sellerId"
+							id="sellerId" class="input-form midbox title-post" value="<%=p.getSellerId() %>"
+							readonly>
+					</div>
+					<div class="input-box heightbox ">
+						<label for="title">조회된 회원 전화번호</label> <input type="text" name="memberPhone"
+							id="memberPhone" class="input-form midbox title-post"readonly>
+					</div>
+					<div class="input-box heightbox ">
+						<label for="title">조회된 회원 이메일</label> <input type="text" name="memberEmail"
+							id="memberEmail" class="input-form midbox title-post"readonly>
+					</div>
+					<div class="input-box heightbox hiddenBox" style="text-align: center;">
+						<h2>결과</h2>
+						<h3 style="margin-top: 10px">신고 누적 [ <span class="check"></span> ]회 사기이력 [ <span class="pact"></span> ]회</h3>
+					</div>
+
+				</div>
+				<div class="modal-foot">
+					<button type="button" class="btn bc11">조회하기</button>
+					<button type="button" class="btn bc11 modal-close">취소</button>
+				</div>
+			</div>
+			</div>
 	
 	<script>
+		$('.modal-open-btn').on('click',function(){
+			const memberId = $('#sellerId').val();
+			$.ajax({
+				url : "/findSelectUser.do",
+				type : "POST",
+				data : {memberId : memberId},
+				dataType : "JSON",
+				success(data){
+					const phone = data.memberPhone;
+					const email = data.memberEmail;
+					$('#memberPhone').val(phone);
+					$('#memberEmail').val(email);
+					}
+				
+			});
+		});
+		
+	
+		$('.modal-foot>button').eq(0).on('click',function(){
+			const memberId = $('#sellerId').val();
+			console.log(memberId); 
+			$.ajax({
+				url : "/findReportUser.do",
+				type : "POST",
+				data : {memberId : memberId},
+				dataType : "JSON",
+				success(data){
+					console.log(data);
+					const check = data.check;
+					$('.check').text(check);
+					const pact = data.pact;
+					$('.pact').text(pact);
+					$('.hiddenBox').show();
+					}
+				
+			});
+		})
+	
+	
+	/* 	$(document).ready(function(){
+			$('.modal-bg').show();
+		}); */
+		<!------->	
+		// 관심상품 하트 채우기
 		$(".wish-btn").on("click", function(){
 			$(this).toggleClass("fill-wish");
 		});

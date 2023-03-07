@@ -39,6 +39,7 @@ public class NoticeQuestionWriteServlet extends HttpServlet {
 		int noticeQuestionCategory = Integer.parseInt(request.getParameter("noticeQuestionCategory"));
 		String noticeQuestionContent = request.getParameter("noticeQuestionContent");
 		
+		
 		NoticeQuestion nq = new NoticeQuestion();
 		nq.setFaqTitle(noticeQuestionTitle);
 		nq.setMemberNo(memberNo);

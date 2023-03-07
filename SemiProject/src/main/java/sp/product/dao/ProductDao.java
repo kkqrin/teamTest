@@ -437,9 +437,144 @@ public class ProductDao {
 		ResultSet rset = null;
 		ArrayList<Product> list = new ArrayList<Product>();
 		
-		String query = "";
+		String query = "SELECT WISH_PRODUCT_NO, PRODUCT_NO, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, ENROLL_DATE, FILEPATH, MEMBER_NO FROM WISH_PRODUCT LEFT JOIN PRODUCT USING (PRODUCT_NO) WHERE MEMBER_NO=?";
 		
-		return null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setWishProductNo(rset.getInt("wish_product_no"));
+				p.setProductNo(rset.getInt("product_no"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setMemberNo(rset.getInt("member_no"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
 	}
+
+	public int insertWishProduct(Connection conn, int memberNo, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "INSERT INTO WISH_PRODUCT VALUES(WISH_PRODUCT_SEQ.NEXTVAL, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Product> selectProductWishTable(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<>();
+		
+		String query = "SELECT MEMBER_NO FROM WISH_PRODUCT WHERE PRODUCT_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product wp = new Product();
+				wp.setMemberNo(rset.getInt("member_no"));
+				list.add(wp);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		
+		return list;
+	}
+
+	public int deleteWishProduct(Connection conn, int memberNo, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "DELETE FROM WISH_PRODUCT WHERE MEMBER_NO=? AND PRODUCT_NO=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			pstmt.setInt(2, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Product> selectPopularProduct(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "select * from (select p.*,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by wish_count desc) where wish_count != 0";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductContent(rset.getString("product_content"));
+				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setFilename(rset.getString("filename"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setWishCount(rset.getInt("wish_count"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+
 
 }

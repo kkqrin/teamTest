@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.member.vo.Member;
 import sp.report.vo.Report;
 
 public class ReportDao {
@@ -145,6 +146,7 @@ public class ReportDao {
 		return r;
 	}
 
+<<<<<<< HEAD
 	public ArrayList<Report> selectDeal(Connection conn, int memberNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -163,16 +165,61 @@ public class ReportDao {
 				r.setCompleteDate(rset.getString("complete_date"));
 				r.setReserveDate(rset.getString("reserve_date"));
 				list.add(r);
+=======
+	public int countCheck(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(pact_check)as cnt from report_recevied where member_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, m.getMemberNo());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+>>>>>>> c1cdccc69448c70be9e53a8fb204179cb9ad50be
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
+<<<<<<< HEAD
 			JDBCTemplate.close(pstmt);
 			JDBCTemplate.close(rset);
 		}
 		
 		return list;
+=======
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+	public int countPact(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String query = "select count(pact_check)as cnt from report_recevied where member_no = ? pact_check = 1";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, m.getMemberNo());
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("cnt");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+
+		return result;
+>>>>>>> c1cdccc69448c70be9e53a8fb204179cb9ad50be
 	}
 
 }
