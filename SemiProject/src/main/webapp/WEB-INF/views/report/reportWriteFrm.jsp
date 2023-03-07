@@ -25,41 +25,44 @@
 	<div class="page-content">
 		<div class="page-title">신고게시판 작성</div>
 		<%--사진 첨부시 post, multipart 항상 고정 --%>
-		<%
-		if (m != null) {
-		%>
-		<%
-		}
-		%>
-		<form action="#" method="post" enctype="multipart/form-data">
+		<%if (m != null) {%>
+		<form action="reportWrite.do" method="post" enctype="multipart/form-data">
 			<table class="tbl reportWrite">
 				<tr class="tr-1">
 					<th class="td-2">신고유형</th>
-					<td colspan="3" style="padding-left: 20px; font-size: 14px"><label
-						for="report-type1"><input type="radio" id="report-type1"
-							name="report" values="0">입금</label> <label for="report-type2"
-						style="margin-left: 30px;"><input type="radio"
-							id="report-type2" name="report" values="1">배송</label></td>
+					<td colspan="3" style="padding-left: 20px; font-size: 14px">
+						<label for="report-type1">
+						<input type="radio" id="report-type1" name="report" values="0">
+						입금
+						</label>
+					 	<label for="report-type2"style="margin-left: 30px;">
+					 	<input type="radio" id="report-type2" name="report" values="1">
+					 	배송
+					 	</label>
+					 </td>
+				</tr>
 				</tr>
 				<tr class="tr-1">
 					<th class="td-2">거래 내역</th>
-					<td colspan="3"><span class="modal-result" style="font-family:nn-b;">거래 내역을 선택해주세요▶</span>
-					<input type="hidden" id="memberNo" value="<%=m.getMemberNo()%>">
-							<button type="button" class="btn bc11 modal-open-btn"
-								id="modal-ajax" target="#test-modal" style="margin-left: 10px;">거래
-								내역 조회</button>
-					</strong></td>
+					<td colspan="3">
+						<span class="modal-result" style="font-family:nn-b;">거래 내역을 선택해주세요▶</span>
+						<%--회원번호 호출(사기꾼) --%>
+						<input type="hidden" id="memberNo" name="memberNo" value="<%=m.getMemberNo()%>">
+						<button type="button" class="btn bc11 modal-open-btn"id="modal-ajax" target="#test-modal" style="margin-left: 10px;">
+						거래 내역 조회
+						</button>
+					</td>
 				</tr>
 				<tr class="tr-1">
 					<th class="td-2">신고자</th>
-					<td><%=m.getMemberId()%> <input type="hidden"
-						name="reportMember" value="<%=m.getMemberId()%>"></td>
+					<td><%=m.getMemberId()%>
+					 	<input type="hidden"name="reportMember" value="<%=m.getMemberId()%>">
+					 </td>
 
 					<th class="td-2">이미지</th>
 					<td>
-						<%--accept 허용 할 확장자 onchange : 미리보기(이미지)--%> <input type="file"
-						name="imageFile" accept=".jpg,.png,.jpeg"
-						onchange="loadImg(this);">
+						<%--accept 허용 할 확장자 onchange : 미리보기(이미지)--%>
+						 <input type="file" name="upfile" accept=".jpg,.png,.jpeg" onchange="loadImg(this);">
 					</td>
 				</tr>
 				<tr class="tr-1">
@@ -73,8 +76,12 @@
 
 				<tr class="tr-1">
 					<th class="td-2">내용</th>
-					<td colspan="3"><textarea name="reportContent"
-							class="input-form"></textarea></td>
+					<td colspan="3">
+						<textarea name="reportContent" class="input-form">
+상세 내용 :
+피해 금액 :
+						</textarea>
+					</td>
 				</tr>
 				<tr class="tr-1">
 					<th colspan="4">
@@ -92,6 +99,7 @@
 				<span class="material-icons close-icon modal-close">close</span>
 			</div>
 			<div class="modal-content">
+				<%-- 거래 내역 조회 --%>
 				<input type="text" name="productNo">
 				<input type="text" name="productTitle">
 				<input type="text" name="sellerId">				
@@ -106,6 +114,7 @@
 		</div>
 	</div>
 	<%@include file="/WEB-INF/views/common/footer.jsp"%>
+		<%}%>
 	<script>
 		function loadImg(f) {
 			//첨부파일이 여러개일 수 있어서 항상 배열처리
@@ -230,11 +239,10 @@
 			 ////const check = $("[name=modalRadio]");
 			 //const checkVal = check.val();
 			// console.log(checkVal);
-			 
 			 const productNo = $("[name=productNo]").val();
 			 const productTitle = $("[name=productTitle]").val();
 			 const sellerId = $("[name=sellerId]").val();
-			 $(".modal-result").text(productNo+" | "+productTitle+" | "+sellerId);
+			 $(".modal-result").text("상품번호 : "+productNo+" / "+" 상품제목 : "+productTitle+" / "+" 판매자 : "+sellerId);
 		});
 		
 		

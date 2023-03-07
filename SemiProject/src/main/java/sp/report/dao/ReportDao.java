@@ -388,6 +388,7 @@
 						r.setProductStatus(rset.getInt("product_Status"));
 						r.setCompleteDate(rset.getString("complete_date"));
 						r.setReserveDate(rset.getString("reserve_date"));
+						r.setMemberNo(rset.getInt("member_no"));
 						list.add(r);
 						}
 				} catch (SQLException e) {
