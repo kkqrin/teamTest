@@ -1,7 +1,6 @@
 package sp.product.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,19 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.product.service.ProductService;
-import sp.product.vo.Product;
 
 /**
- * Servlet implementation class WishProductServlet
+ * Servlet implementation class InsertWishProductServlet
  */
-@WebServlet(name = "MywishProduct", urlPatterns = { "/myWishProduct.do" })
-public class MyWishProductServlet extends HttpServlet {
+@WebServlet(name = "InsertWishProduct", urlPatterns = { "/insertWishProduct.do" })
+public class InsertWishProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyWishProductServlet() {
+    public InsertWishProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,13 +34,25 @@ public class MyWishProductServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		// 2. 값 추출
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
-		ArrayList<Product> list = service.selectMyWishProduct(memberNo);
+		int result = service.insertWishProduct(memberNo, productNo);
+		
 		// 4. 결과 처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/wishProduct.jsp");
-		request.setAttribute("list", list);
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+		if(result > 0) {
+			request.setAttribute("title", "성공");
+			request.setAttribute("msg", "관심상품 등록 완료");
+			request.setAttribute("icon", "success");
+		}else {
+			request.setAttribute("title", "실패");
+			request.setAttribute("msg", "관심상품 등록 실패");
+			request.setAttribute("icon", "error");
+		}
+		request.setAttribute("loc", "/productView.do?productNo="+productNo);
 		view.forward(request, response);
+			
 	}
 
 	/**

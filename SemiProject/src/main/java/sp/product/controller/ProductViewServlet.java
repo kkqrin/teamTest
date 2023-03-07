@@ -38,7 +38,7 @@ public class ProductViewServlet extends HttpServlet {
 		
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
-		// 게시글, 댓글, 대댓글 조회
+		// 게시글, 댓글, 대댓글, 관심상품 테이블에 있는지 조회
 		ProductViewData pvd = service.selectOneProduct(productNo);
 		
 		// 4. 결과 처리
@@ -54,6 +54,7 @@ public class ProductViewServlet extends HttpServlet {
 			request.setAttribute("p", pvd.getP());
 			request.setAttribute("commentList", pvd.getCommentList());
 			request.setAttribute("reCommentList", pvd.getReCommentList());
+			request.setAttribute("wishList", pvd.getWishList());
 			view.forward(request, response);
 		}
 	}
