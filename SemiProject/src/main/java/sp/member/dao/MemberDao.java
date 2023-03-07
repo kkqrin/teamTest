@@ -282,4 +282,53 @@ public class MemberDao {
 		return member;
 	}
 
+	public String selectMemberPhone(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String memberPhone = null;
+	
+		String query = "select substr(member_phone,1,4)||'****'||substr(member_phone,9) as member_phone from member_Tbl where member_id =?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				//이제 조회한 결과를 member객체로 member라는 변수에 모든 정보를 세팅함
+				memberPhone = rset.getString("member_phone");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(rset);
+		}
+		return memberPhone;
+	}
+
+	public String selectMemberEmail(Connection conn, String memberId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String memberEmail = null;
+	
+		String query = "select substr(member_email,0,instr(member_email,'@')-5)||'****'||substr(member_email,instr(member_email,'@')) as member_email from member_Tbl where member_id=?";
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, memberId);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				//이제 조회한 결과를 member객체로 member라는 변수에 모든 정보를 세팅함
+				memberEmail = rset.getString("member_email");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(rset);
+		}
+		return memberEmail;
+	}
+
 }
