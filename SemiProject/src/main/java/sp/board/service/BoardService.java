@@ -180,5 +180,17 @@ public class BoardService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public int updateBoardComment(BoardComment bc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateBoardComment(conn,bc);
+		if(result ==0) {
+			JDBCTemplate.rollback(conn);
+		}else {
+			JDBCTemplate.commit(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	
 }

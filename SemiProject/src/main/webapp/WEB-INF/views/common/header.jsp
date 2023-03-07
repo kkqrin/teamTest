@@ -22,7 +22,11 @@
 		color: red;
 		font-size: 12px;
 		margin-left: 2px; 
+		  transition-duration: 0.5s;
 	}
+	a:hover>.pc{
+	color: #eee;	
+}
 </style>
 
     <header>
