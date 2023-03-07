@@ -443,7 +443,6 @@ h1 {
 			$("#authMsg").text("인증완료");
 			$("#authMsg").css("color","green");
 			window.clearInterval(intervalId);
-			
 			$("[name=searchPwBtn]").show();
 			
 		}else{
