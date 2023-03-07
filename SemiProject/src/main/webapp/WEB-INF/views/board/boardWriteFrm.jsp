@@ -13,7 +13,7 @@
 	<script src="/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/summernote/summernote-lite.css">
 	<div class="page-content">
-	<div class="page-title">공지사항 작성</div>
+	<div class="page-title"></div>
 			<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
 				<table class="tbl"id="noticeWrite">
 					<tr class="tr-1">

@@ -468,6 +468,9 @@ header>.sub-navi {
 .bc0:hover{
     color: #eee;
 }
+a>.pc:hover{
+	color: #eee;	
+}
 
 .bc1 {
     background-color: #252a34;

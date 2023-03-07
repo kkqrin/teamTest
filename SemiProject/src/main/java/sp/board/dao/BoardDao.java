@@ -281,5 +281,26 @@ public class BoardDao {
 		return result;
 	}
 
+	public int updateBoardComment(Connection conn, BoardComment bc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		System.out.println(bc.getBcContent());
+		System.out.println(bc.getBcNo());
+		String query = "update board_comment set bc_content =? where bc_no =?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, bc.getBcContent());
+			pstmt.setInt(2, bc.getBcNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
 	
 }

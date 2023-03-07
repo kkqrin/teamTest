@@ -68,7 +68,7 @@
 <body>
 		<%@include file="/WEB-INF/views/common/header.jsp" %>
 		<div class='page-content'>
-			<div class='page-title'>공지사항</div>
+			<div class='page-title'></div>
 			<table class="tbl" id="BoardView">
 				<tr class="tr-3">
 					<th colspan='6'><%=b.getBoardTitle() %></th>
@@ -86,6 +86,7 @@
 					<td colspan="5">
 						<%if(b.getFileName() !=null){ %>
 						<a href="/boardFileDown.do?boardNo=<%=b.getBoardNo()%>">
+						<img src="/img/file.png" width="16px">
 						<%=b.getFileName() %>
 						</a>
 						<%} %>
@@ -140,7 +141,7 @@
 								<span><%=bc.getBcDate()%></span>
 							</p> 
 							<p class="comment-content"><%=bc.getBcContent()%></p>
-							<textarea name="ncContent" class="input-form" style="min-height: 96px;display: none"><%=bc.getBcContent() %></textarea>
+							<textarea name="bcContent" class="input-form" style="min-height: 96px;display: none"><%=bc.getBcContent() %></textarea>
 							<p class="comment-link">
 								<%if( m != null){ %>
 									<%if(m.getMemberId().equals(bc.getBcWriter())){ %>
@@ -165,7 +166,7 @@
 									<span><%=bcc.getBcDate() %></span>
 								</p>
 								<p class="comment-content"><%=bcc.getBcContent() %></p>
-								<textarea name="ncContent" class="input-form" style="min-height: 96px;display: none"><%=bcc.getBcContent() %></textarea>
+								<textarea name="bcContent" class="input-form" style="min-height: 96px;display: none"><%=bcc.getBcContent() %></textarea>
 								<p class="comment-link">
 									<%if(m!=null && m.getMemberId().equals(bcc.getBcWriter())){ %>
 										<a href="javascript:void(0)" onclick="modifyComment(this,<%=bcc.getBcNo()%>,<%=b.getBoardNo()%>);">수정</a>
@@ -188,7 +189,7 @@
 											<input type="hidden" name="bcWriter" value="<%=m.getMemberId()%>">
 											<input type="hidden" name="boardRef" value="<%=b.getBoardNo()%>">
 											<input type="hidden" name="bcRef" value="<%=bc.getBcNo()%>">
-											<textarea name="bcContent" class="input-form">123123</textarea> 
+											<textarea name="bcContent" class="input-form"></textarea> 
 										</li>
 										<li>
 										<button type="submit" class="btn bc1 bs4">등록</button>
@@ -253,13 +254,14 @@
 					const form = $("<form style='display:none;' action='/updateBoardComment.do' method='post'></form>");
 					//2.input태그 2개 숨김
 					const bcNoInput = $("<input type='text' name='bcNo'>");
-					ncNoInput.val(bcNo);
+					bcNoInput.val(bcNo);
 					const boardNoInput = $("<input type='text' name='boardNo'>");
 					boardNoInput.val(boardNo);
 					//3.textarea 
-					const ncContent = $(obj).parent().prev().clone();
+					const bcContent = $(obj).parent().prev().clone();
 					//4. form태그에 input2개 textarea 모두 포함시키기
 					form.append(bcNoInput).append(boardNoInput).append(bcContent);
+
 					//5.생성된 form태그를 body태그에 추가
 					$('body').append(form);
 					//6.form태그 전송
