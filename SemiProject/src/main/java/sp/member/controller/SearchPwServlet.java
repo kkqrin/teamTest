@@ -3,7 +3,6 @@ package sp.member.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import sp.member.service.MemberService;
 import sp.member.vo.Member;
 
 /**
- * Servlet implementation class SearchIdServlet
+ * Servlet implementation class SearchPwServlet
  */
-@WebServlet(name = "SearchId", urlPatterns = { "/searchId.do" })
-public class SearchIdServlet extends HttpServlet {
+@WebServlet(name = "SearchPw", urlPatterns = { "/searchPw.do" })
+public class SearchPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchIdServlet() {
+    public SearchPwServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,24 +31,23 @@ public class SearchIdServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		request.setCharacterEncoding("utf-8");
-		
-		String memberPhone= request.getParameter("memberPhone");
-		
-		Member m = new Member();
-		m.setMemberPhone(memberPhone);
+		//2.값추출
+		String memberId2= request.getParameter("memberId2");
+		//3.비즈니스로직
 		MemberService service = new MemberService();
-		Member member = service.selectOneMemberPhone(m);
+		Member m = service.selectOneMember(memberId2);
 		
 		PrintWriter out = response.getWriter();
-		if (member == null) {
-		
+		if (m == null) {
+			out.print(0);
 		}else {
-			
-			out.print(member.getMemberId());
+			out.print(m.getMemberPw());
 		}
 	
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
