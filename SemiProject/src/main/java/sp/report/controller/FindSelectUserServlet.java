@@ -13,20 +13,19 @@ import com.google.gson.Gson;
 
 import sp.member.service.MemberService;
 import sp.member.vo.Member;
-import sp.report.service.ReportService;
-import sp.report.vo.PactCheck;
+import sp.report.vo.EmailPhone;
 
 /**
- * Servlet implementation class FineReportUserServlet
+ * Servlet implementation class FindSelectUserServlet
  */
-@WebServlet(name = "FindReportUser", urlPatterns = { "/findReportUser.do" })
-public class FindReportUserServlet extends HttpServlet {
+@WebServlet(name = "FindSelectUser", urlPatterns = { "/findSelectUser.do" })
+public class FindSelectUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FindReportUserServlet() {
+    public FindSelectUserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,16 +36,15 @@ public class FindReportUserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		String memberId = request.getParameter("memberId");
-		MemberService mservice = new MemberService();
-		Member m = mservice.selectOneMember(memberId);
-		ReportService rservice = new ReportService();
-		int check = rservice.countCheck(m); 
-		int pact = rservice.countPact(m);
+		MemberService service = new MemberService();
+		String memberPhone = service.selectOneMemberPhone(memberId);
+		String memberEmail = service.selectMemberEmail(memberId);
+		EmailPhone ep = new EmailPhone(memberPhone, memberEmail);
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
-		PactCheck p = new PactCheck(check, pact);
-		gson.toJson(p,out);
+		gson.toJson(ep,out);
+		
 		
 	}
 
