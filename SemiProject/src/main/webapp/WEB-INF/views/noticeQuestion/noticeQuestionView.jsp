@@ -57,7 +57,22 @@
 					</div>
 				</th>
 			</tr>
+			<%if(m!=null && m.getMemberGrade() == 1) {%>
+			<tr class="tr-1">
+				<th colspan="6">
+					<a class="btn bc44" href="/noticeQuestionUpdateFrm.do?faqNo=<%=nq.getFaqNo() %>">수정</a>
+					<button class="btn bc44" onclick="noticeQuestionDelete(<%=nq.getFaqNo()%>);">삭제</button>
+				</th>
+			</tr>
+			<%}%>
 		</table>
+		<script>
+			function noticeQuestionDelete(faqNo){
+				if(confirm("게시글을 삭제하시겠습니까?")){
+					location.href="/deleteNoticeQuestion.do?faqNo="+faqNo;
+				}
+			}
+		</script>
 	</div>
 		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

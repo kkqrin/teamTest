@@ -56,7 +56,7 @@ public class DeleteNoticeServlet extends HttpServlet {
 			request.setAttribute("loc", "/noticeList.do?reqPage=1");
 		}else {
 			request.setAttribute("title", "삭제실퐤!!!!");
-			request.setAttribute("msg", "용티브잡스에게 문의하세요!!");
+			request.setAttribute("msg", "오류가 발생하였습니다!!");
 			request.setAttribute("icon", "error");
 			request.setAttribute("loc", "/noticeView.do?noticeNo="+noticeNo);
 		}

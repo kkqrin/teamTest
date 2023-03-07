@@ -13,18 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import sp.noticeQuestion.service.NoticeQuestionService;
 import sp.noticeQuestion.vo.NoticeQuestion;
 
-
 /**
- * Servlet implementation class DeleteNoticeQuestionServlet
+ * Servlet implementation class NoticeQuestionUpdateServlet
  */
-@WebServlet(name = "DeleteNoticeQuestion", urlPatterns = { "/deleteNoticeQuestion.do" })
-public class DeleteNoticeQuestionServlet extends HttpServlet {
+@WebServlet(name = "NoticeQuestionUpdate", urlPatterns = { "/noticeQuestionUpdate.do" })
+public class NoticeQuestionUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteNoticeQuestionServlet() {
+    public NoticeQuestionUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,22 +36,30 @@ public class DeleteNoticeQuestionServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
 		int faqNo = Integer.parseInt(request.getParameter("faqNo"));
+		String faqTitle = request.getParameter("faqTitle");
+		String faqContent = request.getParameter("faqContent");
+		int faqCategory = Integer.parseInt(request.getParameter("faqCategory"));
+		NoticeQuestion nq = new NoticeQuestion();
+		nq.setFaqNo(faqNo);
+		nq.setFaqTitle(faqTitle);
+		nq.setFaqContent(faqContent);
+		nq.setFaqCategory(faqCategory);
+		
 		//3. 비지니스로직
 		NoticeQuestionService service = new NoticeQuestionService();
-		NoticeQuestion n = service.deleteNoticeQuestion(faqNo);
+		int result = service.updateNoticeQuestion(nq);
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
-		if(n != null) {
-			request.setAttribute("title", "삭제성공!!!");
-			request.setAttribute("msg", "게시글이 삭제되었습니다!!");
+		if(result > 0) {
+			request.setAttribute("title", "변경완료!!!");
+			request.setAttribute("msg", "공지사항이 수정되었습니다.!!");
 			request.setAttribute("icon", "success");
-			request.setAttribute("loc", "/noticeQuestionList.do?reqPage=1");
 		}else {
-			request.setAttribute("title", "삭제실퐤!!!!");
+			request.setAttribute("title", "변경실퐤!!!!");
 			request.setAttribute("msg", "오류가 발생하였습니다!!");
 			request.setAttribute("icon", "error");
-			request.setAttribute("loc", "/noticeQuestionView.do?noticeNo="+faqNo);
 		}
+		request.setAttribute("loc", "/noticeQuestionView.do?faqNo="+nq.getFaqNo());
 		view.forward(request, response);
 	}
 
