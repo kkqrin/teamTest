@@ -32,10 +32,10 @@
     	cursor: pointer;
 	}
 	.tab>ul>li.active-tab{
-    	border-top: 3px solid black;
+    	border : 3px solid black;
     	color: #000;
     	font-weight: bold;
-    	border-bottom: none;
+    	
 	}
 	.tab-content>div{
     	padding: 50px 30px;
@@ -53,9 +53,6 @@
 	.page-title{
 		font-size : 40px;
 		font-weight : bold;
-	}
-	.tr-0{
-		border-bottom : 1px solid black;
 	}
 	.common{
 		display : none;
@@ -89,20 +86,6 @@
 		</div>
 		<div class="tab-content">
 			<div class="nq-detail">
-			<% for(NoticeQuestion nq : list) { %>
-				<%if(nq.getFaqCategory() == 0){ %>
-					<div class="common category"><%= nq.getFaqTitle() %></div>	
-				<%}else if(nq.getFaqCategory() == 1){ %>
-					<div class="use category"><%= nq.getFaqTitle() %></div>
-				<%}else if(nq.getFaqCategory() == 2){ %>
-					<div class="buy category"><%= nq.getFaqTitle() %></div>
-				<%}else if(nq.getFaqCategory() == 3){ %>
-					<div class="sell category"><%= nq.getFaqTitle() %></div>
-				<%}else { %>
-					<div class="all category"><%= nq.getFaqTitle() %></div>
-				<% } %>
-			<% } %>
-			
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
@@ -323,12 +306,6 @@
 		const activeLi = document.querySelector(".tab>ul>li:first-child");
 		const activeContent = document.querySelector(".tab-content>div:first-child");
 		activeLi.classList.add("active-tab");
-		const list = $(".category");
-		for(let i=0;i<list.length;i++){
-			if(list.eq(i).hasClass(activeLi.innerText) )		
-				list.eq(i).css("display","block");
-		}
-		
 		activeContent.classList.add("active-content");
 	}
 	</script>
