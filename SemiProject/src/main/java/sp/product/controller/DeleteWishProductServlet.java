@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import sp.product.service.ProductService;
 
 /**
- * Servlet implementation class InsertWishProductServlet
+ * Servlet implementation class DeleteWishProductServlet
  */
-@WebServlet(name = "InsertWishProduct", urlPatterns = { "/insertWishProduct.do" })
-public class InsertWishProductServlet extends HttpServlet {
+@WebServlet(name = "DeleteWishProduct", urlPatterns = { "/deleteWishProduct.do" })
+public class DeleteWishProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertWishProductServlet() {
+    public DeleteWishProductServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,20 +37,18 @@ public class InsertWishProductServlet extends HttpServlet {
 		int productNo = Integer.parseInt(request.getParameter("productNo"));
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
-		int result = service.insertWishProduct(memberNo, productNo);
-		
+		int result = service.deleteWishProduct(memberNo, productNo);
 		// 4. 결과 처리
 		if(result > 0) {
 			response.sendRedirect("/productView.do?productNo="+productNo);
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 			request.setAttribute("title", "실패");
-			request.setAttribute("msg", "관심상품 등록 실패");
+			request.setAttribute("msg", "관심상품 해제 실패");
 			request.setAttribute("icon", "error");
 			request.setAttribute("loc", "/productView.do?productNo="+productNo);			
 			view.forward(request, response);
 		}
-			
 	}
 
 	/**

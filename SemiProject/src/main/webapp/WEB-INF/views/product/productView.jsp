@@ -81,11 +81,26 @@
 	                                <span><%=p.getProductPrice() %>원</span>
 	                            </div>
 	                            <div class="wish-box">
-	                                <a href="/insertWishProduct.do?memberNo=<%=m.getMemberNo() %>&productNo=<%=p.getProductNo()%>">
-	                               	<%--for(Product wp : wishList) {--%>
-<!--		                                <%--if(wp.getMemberNo() == m.getMemberNo()) {--%>-->
-		                                <span class="material-symbols-outlined wish-btn">favorite</span> 
-	                               </a> 
+	                            
+	                            	<%int chk = 0; %>
+	                                <%if(m != null) {%>
+	                                	<%if(chk == 0) {%>
+		                                	<% chk = 1; %>
+			                               	<%for(Product wp : wishList) {%>
+			                                	<%if(wp.getMemberNo() == m.getMemberNo()) {%>
+			                                		<!-- 현재 관심상품 -->
+			                                		<a href="/deleteWishProduct.do?memberNo=<%=m.getMemberNo() %>&productNo=<%=p.getProductNo()%>">
+			                                		<span class="material-symbols-outlined wish-btn fill-wish">favorite</span>
+			                                		</a>
+			                                		<% chk = 0; %>
+		                                		<%} %>
+			                               	<%} %>
+		                            	<%}if(chk == 1) {%>
+	                               			<a href="/insertWishProduct.do?memberNo=<%=m.getMemberNo() %>&productNo=<%=p.getProductNo()%>">
+	                                		<span class="material-symbols-outlined wish-btn">favorite</span>
+			                               </a> 
+	                                	<%} %>
+	                                <%} %>
 	                            </div>
 	                        </div>
 	                    </div>
@@ -106,12 +121,14 @@
 	                            </div>
 	                        </div>
 	                    </div>
+	                    <%if(m != null) {%>
 	                    <div class="view-product-btn">
 	                        <a href="#" class="btn bc1 bs3">사기 조회</a>
 	                        <a href="#" class="btn bc1 bs3">판매자에게 쪽지보내기</a>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3">예약하기</a>
 	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3" style="display:none;">거래완료</a>
 	                    </div>
+	                    <%} %>
 	                </div>
 	        </div>
 	    </div>
@@ -329,6 +346,7 @@
 			$('.modal-bg').show();
 		});
 		<!------->	
+		// 관심상품 하트 채우기
 		$(".wish-btn").on("click", function(){
 			$(this).toggleClass("fill-wish");
 		});
