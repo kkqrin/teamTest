@@ -85,6 +85,7 @@ public class NoticeQuestionService {
 			JDBCTemplate.commit(conn);
 			NoticeQuestion nq = dao.selectOneNoticeQuestion(conn, faqNo);
 			JDBCTemplate.close(conn);
+			System.out.println(nq);
 			return nq;
 		}else {
 			JDBCTemplate.rollback(conn);
