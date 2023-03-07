@@ -310,8 +310,9 @@
 	
 	<script>
 		$('.modal-foot>button').eq(0).on('click',function(){
-			const memberId = $('#sellerId').val();
-			console.log(memberId);
+			/* const memberId = $('#sellerId').val();
+			console.log(memberId); */
+			const memberId = "user1";
 			$.ajax({
 				url : "/findReportUser.do",
 				type : "POST",

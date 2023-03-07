@@ -58,6 +58,7 @@ public class MemberDao {
 			pstmt.setString(1, memberId);
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
+				m = new Member();
 				m.setEnrollDate(rset.getString("enroll_date"));
 				m.setMemberAddr(rset.getString("member_addr"));
 				m.setMemberAddr2(rset.getString("member_addr2"));
