@@ -83,7 +83,7 @@ public class ReportService {
 	}
 	public int countPact(Member m) {
 		Connection conn = JDBCTemplate.getConnection();
-		int pact = dao.countCheck(conn,m);
+		int pact = dao.countPact(conn,m);
 		JDBCTemplate.close(conn);
 		return pact;
 		

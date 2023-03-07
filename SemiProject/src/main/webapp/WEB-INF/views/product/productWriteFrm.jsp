@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>중 고 사 자</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
     .img-box>td{
         width: calc(100%/6);
@@ -24,6 +25,21 @@
         font-family: nn-b;
         color: #4b4b4b;
     }
+    ul>li>img{
+    	width: 24px;
+    	height: 24px;
+    	margin-right: 5px;
+    }
+    
+    ul>li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    }
+	
+	.hiddenFile{
+	display: none;
+	}
 </style>
 </head>
 <body>
@@ -40,7 +56,11 @@
 		<input type="hidden" name="productWriter" value="<%=m.getMemberId()%>">
 		<input type="hidden" name="memberAddr" value="<%=m.getMemberAddr()%>">
 		<input type="hidden" name="productPrice">
-		<input type="file" name="upfile">
+		<ul style="list-style: none;">
+			<li><input type="hidden" name = "status" value="0"><input type="file" name="upfile1" class="upfile"><img class="plusBtn" src="/img/plus.png"></li>
+			<li class="hiddenFile"><input type="file" name="upfile2" class="upfile"><img class="plusBtn" src="/img/plus.png"><img class="minusBtn" src="/img/minus.png"></li>
+			<li class="hiddenFile"><input type="file" name="upfile3" class="upfile"><img class="minusBtn" src="/img/minus.png"></li>
+		</ul>
 			<table class="tbl" id="productWrite">
 				<!-- 한 행에 6칸 -->
                 <tr class="tr-1 img-box">
@@ -106,6 +126,32 @@
 	
 	
 	<script>
+	
+
+	
+		$(".plusBtn").on('click',function(){
+			const index = $('.plusBtn').index(this);
+			const val = $('[name=status]').val();
+			$('.hiddenFile').eq(index).show();
+			$('[name=status]').val(Number(val)+1);			
+			console.log($('[name=status]').val());
+		});
+		
+		$(".minusBtn").on('click',function(){
+			const index = $('.minusBtn').index(this);
+			const val = $('[name=status]').val();
+			const val = $('.upfile').val();
+			if(val == 2 && index == 1 ){
+			$('.hiddenFile').eq(index).hide();	
+			$('[name=status]').val(Number(val)-1);	
+			}else if(val == 1 && index == 0){
+			$('.hiddenFile').eq(index).hide();
+			$('[name=status]').val(Number(val)-1);	
+			}
+		});
+	
+	
+	
 		// 숨겨진 textarea에 본문 내용 작성후 submit
 		$("#productContent").summernote({
 			height : 400,
