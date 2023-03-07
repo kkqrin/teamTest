@@ -266,4 +266,12 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+
+	public ArrayList<Product> selectPopularProduct() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.selectPopularProduct(conn);
+
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }
