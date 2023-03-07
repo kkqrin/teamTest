@@ -20,7 +20,7 @@
     text-align: center;
     font-size: 24px;
     font-weight: bold;
-    border-bottom: 1px solid #fff;
+    border-bottom: 2px solid #fff;
     color: #fff;
 }
 .admin-menu a{
@@ -31,7 +31,7 @@
     text-decoration: none;
     text-align: center;
     color: #fff;
-    font-weight: 200;
+    font-weight: bold;
 
 }
 a{
@@ -60,6 +60,11 @@ li{
 
 .table-title{
     padding-top: 30px;
-    padding-left: 350px;
+    padding-left: 300px;
 }
-
+.title{
+	margin-bottom:20px;
+}
+.header-top{
+	margig-left:350px
+}

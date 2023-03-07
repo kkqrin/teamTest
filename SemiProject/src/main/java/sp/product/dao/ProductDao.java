@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import common.JDBCTemplate;
 import sp.product.vo.Category;
 import sp.product.vo.Product;
+import sp.product.vo.ProductComment;
 
 public class ProductDao {
 
@@ -239,6 +240,206 @@ public class ProductDao {
 		}
 		
 		return cn;
+	}
+
+	public int updateViewCount(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "update product set view_count = view_count+1 where product_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Product selectOneProduct(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Product p = null;
+		
+		String query = "select * from product where product_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				p = new Product();
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setFilename(rset.getString("filename"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setProductContent(rset.getString("product_content"));
+				p.setProductNo(rset.getInt("product_no"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setViewCount(rset.getInt("view_count"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return p;
+	}
+
+	public ArrayList<ProductComment> selectProductComment(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ProductComment> list = new ArrayList<ProductComment>();
+		
+		// 댓글만 조회 (null)
+		String query = "select * from product_comment where product_ref=? and pd_ref is null order by 1";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ProductComment pc = new ProductComment();
+				pc.setPdContent(rset.getString("pd_content"));
+				pc.setPdDate(rset.getString("pd_date"));
+				pc.setPdNo(rset.getInt("pd_no"));
+				pc.setPdRef(rset.getInt("pd_ref"));
+				pc.setPdWriter(rset.getString("pd_writer"));
+				pc.setProductRef(rset.getInt("product_ref"));
+				list.add(pc);
+			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<ProductComment> selectProductReComment(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<ProductComment> list = new ArrayList<ProductComment>();
+		
+		// 대댓글만 조회(not null)
+		String query = "select * from product_comment where product_ref=? and pd_ref is not null order by 1";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ProductComment pc = new ProductComment();
+				pc.setPdContent(rset.getString("pd_content"));
+				pc.setPdDate(rset.getString("pd_date"));
+				pc.setPdNo(rset.getInt("pd_no"));
+				pc.setPdRef(rset.getInt("pd_ref"));
+				pc.setPdWriter(rset.getString("pd_writer"));
+				pc.setProductRef(rset.getInt("product_ref"));
+				list.add(pc);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+	public int insertProductComment(Connection conn, ProductComment pc) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "insert into product_comment values(product_comment_seq.nextval, ?, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pc.getPdWriter());
+			pstmt.setString(2, pc.getPdContent());
+			pstmt.setInt(3, pc.getProductRef());
+			if(pc.getPdRef() == 0) {
+				pstmt.setString(4, null);
+			}else {
+				pstmt.setInt(4, pc.getPdRef());
+			}
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateProductComment(Connection conn, ProductComment pc) {
+		PreparedStatement pstmt = null;
+		int result = 0; 
+		
+		String query = "update product_comment set pd_content=? where pd_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pc.getPdContent());
+			pstmt.setInt(2, pc.getPdNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteProductComment(Connection conn, int pdNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = "delete from product_comment where pd_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, pdNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Product> selectMyWishProduct(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "";
+		
+		return null;
 	}
 
 }

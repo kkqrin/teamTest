@@ -190,8 +190,7 @@ table th, .post-id, .post-content, .post-time {
 
     }
     
-    
-    
+   
     .areabox>textarea{
     	width: 470px;
     	height: 300px;
@@ -268,7 +267,7 @@ table th, .post-id, .post-content, .post-time {
 				</div>
 				<div class="modal-content">
 					<div class="input-box heightbox shortbox">
-						<span>보낸 사람 : </span> <span class="senderId">아이디</span> <span
+						<span>보낸 사람 : </span> <span class="senderId"></span> <span
 							class="time">보낸시간 <span></span></span>
 					</div>
 					<div class="input-box heightbox">
@@ -327,7 +326,7 @@ table th, .post-id, .post-content, .post-time {
 						if(data != 0){
 						const title = $('.post-title').eq(
 								$('.modalOpen').index(this)).text();
-						$('.title-post').text(title);
+						$('.title-post').val(title);
 						const senderId = $('.post-id').eq($('.modalOpen').index(this)).text();
 						$('.senderId').text(senderId);
 						const content = $('.post-content').eq(
@@ -358,11 +357,11 @@ table th, .post-id, .post-content, .post-time {
 			console.log($('.letterBox').index(this));
 			$('.message').eq($('.letterBox').index(this) - 1).show();
 			if (($('.letterBox').index(this) - 1) == 0) {
-				location.href = "/postListNotRead.do?reqPage=1&memberId=admin"
+				location.href = "/postListNotRead.do?reqPage=1&memberId=<%=m.getMemberId()%>"
 			} else if (($('.letterBox').index(this) - 1) == 1) {
-				location.href = "/postSendList.do?reqPage=1&memberId=admin"
+				location.href = "/postSendList.do?reqPage=1&memberId=<%=m.getMemberId()%>"
 			} else if (($('.letterBox').index(this) - 1) == 2){
-				location.href = "/postList.do?reqPage=1&memberId=admin"
+				location.href = "/postList.do?reqPage=1&memberId=<%=m.getMemberId()%>"
 			}
 		});
 

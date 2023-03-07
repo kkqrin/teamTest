@@ -7,7 +7,9 @@ import common.JDBCTemplate;
 import sp.product.dao.ProductDao;
 import sp.product.vo.Category;
 import sp.product.vo.Product;
+import sp.product.vo.ProductComment;
 import sp.product.vo.ProductPageData;
+import sp.product.vo.ProductViewData;
 
 public class ProductService {
 	private ProductDao dao;
@@ -150,6 +152,84 @@ public class ProductService {
 	public ArrayList<Category> selectSubCategoryList() {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Category> list = dao.selectSubCategoryList(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	public ProductViewData selectOneProduct(int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		
+		// 조회수 올리기
+		int result = dao.updateViewCount(conn, productNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+			// 게시글 상세 보기
+			Product p = dao.selectOneProduct(conn, productNo);
+			
+			// 댓글창
+			// 1. 일반 댓글
+			ArrayList<ProductComment> commentList = dao.selectProductComment(conn, productNo);
+			// 2. 대댓글
+			ArrayList<ProductComment> reCommentList = dao.selectProductReComment(conn, productNo);
+			
+			ProductViewData pvd = new ProductViewData(p, commentList, reCommentList);
+			
+			JDBCTemplate.close(conn);
+			return pvd;
+		}else {
+			JDBCTemplate.rollback(conn);
+			JDBCTemplate.close(conn);
+			return null;
+		}
+	}
+
+	public int insertProductComment(ProductComment pc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertProductComment(conn, pc);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int updateProductComment(ProductComment pc) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateProductComment(conn, pc);
+
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteProductComment(int pdNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.deleteProductComment(conn, pdNo);
+		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Product> selectMyWishProduct(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.selectMyWishProduct(conn, memberNo);
 		
 		JDBCTemplate.close(conn);
 		return list;

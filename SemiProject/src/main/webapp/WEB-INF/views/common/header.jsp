@@ -17,18 +17,25 @@
     <!-- 기본 js -->
     <script src="/js/default.js"></script>
     <script src="/js/sweetalert.min.js"></script>
-
+	<style>
+	.pc{
+		color: red;
+		font-size: 12px;
+		margin-left: 2px; 
+	}
+</style>
 
     <header>
         <div class="header-link">
-            <a href="/postList.do?reqPage=1&memberId=admin" class="btn bc0">쪽지함</a>
             <%if(m==null){ %>
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <%}else if(m.getMemberGrade()==1){%>
+            <a href="/postList.do?reqPage=1&memberId=<%=m.getMemberId() %>" class="btn bc0">쪽지함<span class="pc"></span></a>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/adminPageGrade.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%}else{ %>
+            <a href="/postList.do?reqPage=1&memberId=<%=m.getMemberId() %>" class="btn bc0">쪽지함<span class="pc"></span></a>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/myPage.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>
@@ -54,7 +61,7 @@
 		               		<span class="material-symbols-outlined">account_circle</span>
 		                    <p>마이페이지</p> 
 		               </a>
-                <a href="#" class="btn">
+                <a href="/myWishProduct.do?memberNo=<%=m.getMemberNo() %>" class="btn">
                     <span class="material-symbols-outlined">favorite</span>
                     <p>관심상품</p>
                 </a>
@@ -76,7 +83,7 @@
                 <li class="category">
                     <a href="#">카테고리</a>
                 </li>
-                <li><a href="#">메뉴-3</a></li>
+                <li><a href="/boardList.do?reqPage=1&npp=10">커뮤니티</a></li>
                 <li><a href="#">메뉴-4</a></li>
                 <li><a href="#">메뉴-5</a></li>
             </ul>
@@ -85,25 +92,43 @@
             <div>
                 <p>CATEGORY</p>
                 <li><a href="/productList.do?category=1&reqPage=1">수입명품</a></li>
-                <li><a href="#">패션의류</a></li>
-                <li><a href="#">모바일/태블릿</a></li>
-                <li><a href="#">가구/인테리어</a></li>
-                <li><a href="#">도서/음반/문구</a></li>
+                <li><a href="/productList.do?category=2&reqPage=1">패션의류</a></li>
+                <li><a href="/productList.do?category=3&reqPage=1">패션잡화</a></li>
+                <li><a href="/productList.do?category=4&reqPage=1">뷰티</a></li>
+                <li><a href="/productList.do?category=5&reqPage=1">출산/유아동</a></li>
                 
-                <li><a href="#">패션잡화</a></li>
-                <li><a href="#">가전제품</a></li>
-                <li><a href="#">노트북/PC</a></li>
-                <li><a href="#">카메라/캠코더</a></li>
+                <li><a href="/productList.do?category=6&reqPage=1">모바일/태블릿</a></li>
+                <li><a href="/productList.do?category=7&reqPage=1">가전제품</a></li>
+                <li><a href="/productList.do?category=8&reqPage=1">노트북/PC</a></li>
+                <li><a href="/productList.do?category=9&reqPage=1">카메라/캠코더</a></li>
+                <li><a href="/productList.do?category=10&reqPage=1">가구/인테리어</a></li>                
                 
-                <li><a href="#">뷰티</a></li>
-                <li><a href="#">리빙/생활</a></li>
-                <li><a href="#">게임</a></li>
-                <li><a href="#">반려동물/취미</a></li>
+                <li><a href="/productList.do?category=11&reqPage=1">리빙/생활</a></li>
+                <li><a href="/productList.do?category=12&reqPage=1">게임</a></li>
+                <li><a href="/productList.do?category=13&reqPage=1">반려동물/취미</a></li>
+                <li><a href="/productList.do?category=14&reqPage=1">도서/음반/문구</a></li>
+                <li><a href="/productList.do?category=15&reqPage=1">티켓/쿠폰</a></li>
                 
-                <li><a href="#">출산/유아동</a></li>
-                <li><a href="#">티켓/쿠폰</a></li>
-                <li><a href="#">스포츠</a></li>
-                <li><a href="#">레저/여행</a></li>
+                <li><a href="/productList.do?category=16&reqPage=1">스포츠</a></li>
+                <li><a href="/productList.do?category=17&reqPage=1">레저/여행</a></li>
+                <li><a href="/productList.do?category=18&reqPage=1">공구/산업용품</a></li>
             </div>
         </ul>
     </header>
+<script>
+<%if(m!= null){%>
+ $(document).ready(function(){
+	 
+	 const memberId = '<%=m.getMemberId()%>';
+	 $.ajax({
+		 url: "/postReadCount.do",
+		 type : "POST",
+		 data : {memberId : memberId},
+		 success : function(data){
+			 $('.pc').text(data);
+		 }
+	 });
+ });
+ <%}%>
+
+</script>

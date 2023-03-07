@@ -37,29 +37,14 @@ public class ReporSelectServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-//		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-//		세선에서 memberNo 데이터 추출
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("m");
-		int memberNo  = m.getMemberNo();
-		//3. 비즈니스로직
-//		MemberService service = new MemberService();
-//		Member m = service.selectMemberNo(memberNo);
-		
+		//3. 비즈니스로직		
 		ReportService service = new ReportService();
-//		Report r = service.selectAllReport(memberNo);
-		ArrayList<Report> list = service.selectAllReport(memberNo);
+		ArrayList<Report> list = service.selectAllReport();
 		//4. 결과처리
-//		if (m != null & m.getMemberGrade() == 1) {
 			RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/report.jsp");
 			request.setAttribute("list", list);
 			view.forward(request, response);
-//			request.setAttribute("r", r);
-//			view.forward(request, response);
-//			request.setAttribute("m", m);
-//			view.forward(request, response);
-//		}
 	}
 
 	/**

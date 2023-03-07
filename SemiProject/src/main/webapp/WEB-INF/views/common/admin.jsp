@@ -1,3 +1,4 @@
+<%@page import="sp.member.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="/css/admin.css"></link>
@@ -16,7 +17,7 @@
        		</a>
                 <ul class="sub-menu">
                     <li><a href="/adminPageGrade.do">회원등급 변경</a></li>
-                    <li><a href="#">전체 거래내역 조회</a></li>
+                    <li><a href="/dealList.do">전체 거래내역 조회</a></li>
                     <li><a href="/reportSelect.do">신고접수 리스트</a></li>
                 </ul>
             </li>
@@ -35,8 +36,15 @@
         </ul>
     </div>
     <div>
-        <div style="margin-left: 250px;"></div>
+        <div style="margin-left: 250px;">
+			 <div class="site-logo">
+                <a href="/">중고사자
+                	<div class="site-img"><img src="/img/lion.png"></div>
+                </a>
+     </div>
+		</div>
     </div>
+    
 <script>
     $(".more").on("click", function(){
         $(this).next().slideToggle();
