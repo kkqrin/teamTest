@@ -87,6 +87,7 @@
                               </div>
                               <div>
                                   <input type="password" name="memberPw" id="memberPw" class = "long-input" placeholder="영문,숫자,특수문자 조합 8-16자" value="<%=m.getMemberPw() %>" required>
+                                  <br>
                                   <span class = "comment"></span>
                               </div>
                           </div>
@@ -100,6 +101,8 @@
                               </div>
                               <div>
                                   <input type="text" name="memberName" id="memberName" class = "long-input" value="<%=m.getMemberName() %>" required>
+                              	  <br>
+                              	  <span class="comment"></span>
                               </div>
                           </div>
                           <div class="join-input-wrap">
@@ -108,6 +111,8 @@
                               </div>
                               <div>
                                   <input type="text" name="memberPhone" id="memberPhone" class = "long-input" value="<%=m.getMemberPhone() %>">
+								  <br>
+                                  <span class = "comment"></span>
                               </div>
                           </div>
                           <div class="join-input-wrap">
@@ -175,7 +180,51 @@
             $(".long-input").on("focusout",function(event){
                 $(this).css("border-bottom", "1px solid #ccc");
             });
+            
+            const result = [false,false,false];
+            $("[name = memberPw]").on("change",function(){
+                const pwReg = /^[a-zA-Z0-9!@#$^]{8,16}$/;
+                const inputPw = $(this).val();
+                const check = pwReg.test(inputPw);
+                if(check){
+                    $(this).next().next().text("안전한 비밀번호 입니다.");
+                    $(this).next().next().css("color","green");
+                    result[0]=true;
+                }else{
+                     $(this).next().next().text("비밀번호는 영어 소문자, 대문자, 숫자로 8~16글자 입니다.");
+                    $(this).next().next().css("color","red");
+                    result[0]=false;
+                }
+            });
 
+            $("#memberName").on("change",function(){
+            	const memberNameReg = /^[가-힣]{2,4}$/;
+            	const memberName=$(this).val();
+            	const memberNameCheck=memberNameReg.test(memberName);
+            	if(!memberNameCheck){
+            		$(this).next().next().text("아이디는 한글로 2글자이상 4글자이하입니다.");
+            		$(this).next().next().css("color","red");
+            		result[1]=true;
+            	}else{
+            		result[1]=false;
+            	}
+            	
+            });
+            
+            $("#memberPhone").on("change",function(){
+            	const memberPhoneReg = /^010-([0-9]{3,4})-([0-9]){4}$/;
+            	const inputPhone = $(this).val();
+            	const phoneCheck = memberPhoneReg.test(inputPhone);
+            	$(this).next().next().empty();
+            	if(!phoneCheck){
+            		$(this).next().next().text("사용 불가능한 양식입니다.");
+            		$(this).next().next().css("color","red");
+            		result[2]=false;	
+            	}else{
+            		result[2]=true;
+            	}
+            	});
+            
         </script>
         <script src = "js/emailApi.js"></script>
         <%@include file="/WEB-INF/views/common/footer.jsp" %>

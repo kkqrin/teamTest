@@ -30,6 +30,7 @@ let mailCode;
 				$("#authMsg").text("인증완료");
 				$("#authMsg").css("color","green");
 				window.clearInterval(intervalId)
+				
 			}else{
 				$("#authMsg").text("인증실패");
 				$("#authMsg").css("color","red");

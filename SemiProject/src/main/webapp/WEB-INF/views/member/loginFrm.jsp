@@ -86,11 +86,6 @@ h1 {
 	font-weight: bold;
 }
 
-button {
-	border-radius: 10px;
-	border: none;
-	cursor: pointer;
-}
 
 .modal2 {
 	/*position을 absolute에서 fixed로 변경
@@ -200,8 +195,6 @@ h1 {
 					<a href="/joinFrm.do" class="f-regular">회원가입</a>
 				</div>
 				<div class="findId">
-					<!--  <a href="/searchIdFrm.do" id="open" class="f-regular">아이디 찾기</a>-->
-
 					<a class="f-regular" id="open" style="cursor: pointer;">아이디 찾기</a>
 					<div class="modal hidden">
 						<div class="modal_overlay"></div>
@@ -254,7 +247,7 @@ h1 {
 									<input type="email" name="email" id="email"
 										placeholder="예) secondhandlion@lion.com">
 									<button type="button" class="bc1 dup-btn" id="sendBtn"
-										style="width: 100%; height: 30px;">메일전송</button>
+										style="width: 100%; height: 30px; margin-top:5px;">메일전송</button>
 								</div>
 								<div class="find-content2" style="margin-top: 20px;">
 								</div>
