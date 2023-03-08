@@ -72,8 +72,8 @@ a {
 
 /* 헤더 */
 header {
-    width: 1200px;
-    margin: 0 auto;
+    /*width: 1200px;*/
+    /*margin: 0 auto;*/
     height: 150px;
 }
 
@@ -207,10 +207,12 @@ header>.sub-navi {
     background-color: #fff;
     z-index: 100;
     position: relative;
+    width: 100vw;
 }
 
 .sub-navi>div {
     margin: 0 auto;
+    width: 1200px;
 }
 
 .sub-navi>div>li {
@@ -834,7 +836,13 @@ textarea.input-form {
     font-size: 18px;
     padding-top: 10px;
     box-sizing: border-box;
-    height: 60px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 .posting-title>p{
     /* 말줄임 */

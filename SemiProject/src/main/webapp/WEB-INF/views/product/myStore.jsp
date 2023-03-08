@@ -10,12 +10,20 @@
 <head>
 <meta charset="UTF-8">
 <title>내 상점</title>
+<style>
+	.page-content>.page-title{
+		text-align: center;
+    	margin: 50px auto;
+    	margin-top: 0px;
+    	padding: 30px;
+	}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
 		<div class="page-title">내 상점</div>
-		<div class="posting-wrap">
+		<div class="posting-wrap" style="margin-top: 50px;">
 			<%for(Product p : list) {%>
             <div class="posting-item">
             	<div class="hover-posting-item"></div>
