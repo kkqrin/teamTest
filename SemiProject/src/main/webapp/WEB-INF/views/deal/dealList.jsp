@@ -35,21 +35,14 @@
                 <td><%=d.getSellerId() %></td>
                 <td><%=d.getProductPrice() %></td>
                 <td><%=d.getMemberId() %></td>
-                <td>
-                	<%if(d.getProductStatus()== 1) {%>
-                    <select class="btn bc0 bs1">
-                        <option value="1">판매중</option>   
-                        <option value="2" selected>예약중</option>   
-                        <option value="3">거래완료</option>   
-                    </select>
-                    <%}else if(d.getProductStatus() == 2){ %>
-                    <select class="btn bc0 bs1">
-                        <option value="1">판매중</option>   
-                        <option value="2">예약중</option>   
-                        <option value="3" selected>거래완료</option> 
-                    </select>
-                    <%} %>
-                </td>
+                
+                <%if(d.getProductStatus()== 0) {%>
+                <td>판매중</td>
+                <%}else if(d.getProductStatus()== 1) {%>
+                <td>예약중</td>   
+                <%}else if(d.getProductStatus() == 2){ %>
+                <td>거래완료</td>   										
+                <%} %>
                 
                 <%if(d.getReserveDate()==null){ %>
                 <td>-</td>

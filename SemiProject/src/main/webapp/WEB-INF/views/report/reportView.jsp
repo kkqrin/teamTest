@@ -68,7 +68,7 @@
 				<td><%=r.getReportMember() %></td>
 				<th class="td-4">작성일</th>
 				<td><%=r.getEnrollDate() %></td>
-				<th class="td-4">사기꾼</th>
+				<th class="td-4">판매자아이디</th>
 				<td><%=r.getMemberId() %></td>
 			</tr>
 			<tr class="tr-0">
