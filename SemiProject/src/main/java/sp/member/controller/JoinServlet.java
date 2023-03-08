@@ -50,7 +50,6 @@ public class JoinServlet extends HttpServlet {
 
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {
-			
 				request.setAttribute("title", "회원가입 성공");
 				request.setAttribute("msg", "사랑합니다 고객님 중고사자 입니다.");
 				request.setAttribute("icon", "success");

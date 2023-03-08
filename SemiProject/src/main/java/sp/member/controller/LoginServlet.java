@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
-		
+		System.out.println("1"+memberId);
 		
 		Member m = new Member();
 		m.setMemberId(memberId);
@@ -54,20 +54,19 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("icon", "error");
 					request.setAttribute("loc", "/");
 				} else if(member.getMemberGrade() == 4) {
-					if (member.getMemberGrade() == 4) {
+
 						request.setAttribute("title", "사기회원");
 						request.setAttribute("msg", "사기꾼은 로그인 할 수 없습니다");
 						request.setAttribute("icon", "warning");
 						request.setAttribute("loc", "/");
-					} else {
-						HttpSession session = request.getSession();
-						session.setAttribute("m", member);
-						PostService pservice = new PostService();
-						request.setAttribute("title", "로그인 성공");
-						request.setAttribute("msg", "환영합니다");
-						request.setAttribute("icon", "success");
-						request.setAttribute("loc", "/");
-					}
+
+				}else {
+					HttpSession session = request.getSession();
+					session.setAttribute("m", member);
+					request.setAttribute("title", "로그인 성공");
+					request.setAttribute("msg", "환영합니다");
+					request.setAttribute("icon", "success");
+					request.setAttribute("loc", "/");
 				}
 				view.forward(request, response);
 
