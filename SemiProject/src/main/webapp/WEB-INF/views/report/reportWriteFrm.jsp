@@ -234,7 +234,7 @@
 			});
 		});
 		
-		//modla 확인버튼
+		//modal 확인버튼
 		$(".modalCheck").on("click",function(){
 			 $(this).parents(".modal-wrap").parent().css("display", "none");
 			 ////const check = $("[name=modalRadio]");
@@ -256,7 +256,7 @@
 					console.log(data)
 					//const p = data;
 					const input = $("<input>");
-					input.attr("type","hidden");
+					input.attr("type","text");
 					input.attr("name","memberNo");
 					input.attr("value",data.memberNo);
 					result.append(input);

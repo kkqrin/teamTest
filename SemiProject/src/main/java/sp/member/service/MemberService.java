@@ -142,6 +142,18 @@ public class MemberService {
 		return memberEmail;
 	}
 
+	public int updateMemberTemp(int memberNo, int memberTemp) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.updateMemberTemp(conn, memberNo, memberTemp);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 	
 }
