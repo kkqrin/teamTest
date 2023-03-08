@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>중 고 사 자</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <style>
     .img-box>td{
         width: calc(100%/6);
@@ -24,6 +25,21 @@
         font-family: nn-b;
         color: #4b4b4b;
     }
+    ul>li>img{
+    	width: 24px;
+    	height: 24px;
+    	margin-right: 5px;
+    }
+    
+    ul>li{
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    }
+	
+	.hiddenFile{
+	display: none;
+	}
 </style>
 </head>
 <body>
@@ -40,16 +56,18 @@
 		<input type="hidden" name="productWriter" value="<%=m.getMemberId()%>">
 		<input type="hidden" name="memberAddr" value="<%=m.getMemberAddr()%>">
 		<input type="hidden" name="productPrice">
-		<input type="file" name="upfile">
+		<ul style="list-style: none;">
+			<li><input type="hidden" name = "status" class="status" value="1"><input type="file" accept=".jsp,.png,.jpeg" name="upfile1" class="upfile1"><img class="plusBtn" src="/img/plus.png"></li>
+		</ul>
 			<table class="tbl" id="productWrite">
 				<!-- 한 행에 6칸 -->
                 <tr class="tr-1 img-box">
-                    <td colspan="2"><img src="#"></td>
-                    <td colspan="2"><img src="#"></td>
-                    <td colspan="2"><img src="#"></td>
+                    <td colspan="2"><img class="img1" src="#"></td>
+                    <td colspan="2"><img class="img2"  src="#"></td>
+                    <td colspan="2"><img class="img3"  src="#"></td>
                 </tr>
 				<tr class="tr-0">
-					<td colspan="6"><button type="button" class="btn bc2 bs1">사진등록</button></td>
+					<td colspan="6"><button type="button" class="btn bc2 bs1 imgBtn">사진등록</button></td>
 				</tr>
 				<tr class="tr-1">
 					<td colspan="6">
@@ -106,6 +124,68 @@
 	
 	
 	<script>
+		$('.upfile1').on('change',function(){
+			const data = document.querySelector("[name=upfile1]").files;
+			if(data.length == 0){
+				$(".img1").remove();
+				const img = $("<img class='img1'  src='#'>")
+				$('.img-box').children().eq(0).append(img); 
+				
+			}
+
+		});
+		
+		$('.imgBtn').on('click',function(){
+			const value = $('[name=status]').val();
+			for(var i=0 ; i<value ; i++ ){
+			const data = document.querySelector("[name=upfile"+(i+1)+"]").files[0];
+			if(data != null){
+			const form = new FormData();
+			const index = i;
+			form.append("file",data);
+				 $.ajax({
+					url : "/uploadImg.do",
+					type : "POST",
+					data : form,
+					processData : false,
+					contentType : false,
+					success : function(data){
+						$(".img"+(index+1)).attr("src",data);
+						$(".img"+(index+1)).css({"width":"360px","height":"200px"});
+					}//success
+				});//ajax  
+			}else{
+				$(".img"+(i+1)).attr("src","#");
+				$(".img"+(i+1)).css({"width":"16px","height":"16px"});
+			}
+			}//for문
+		}); 
+
+
+		//+이미지 클릭시 input file show
+		$(".plusBtn").on('click',function(){
+		if($('[name=status]').val() != 3){
+			$('[name=status]').val(Number($('[name=status]').val())+1);
+			const val = $('[name=status]').val();
+			const li = $("<li class='hFile'>");
+			const input = $("<input type='file' accept=''.jsp,.png,.jpeg' name='upfile"+val+"'><img class='minusBtn' onclick='minusBtn(this);' src='/img/minus.png'>");
+			li.append(input);
+			$(this).parent().parent().append(li);
+			}else{
+				alert("사진은 최대 3장까지 가능합니다.");
+			}
+		});
+		
+		function minusBtn(obj){
+			$(obj).parent().remove();
+			const index = $('[name=status]').val();
+			$(".img"+(index)).remove();
+			const img = $("<img class='img2'  src='#'>")
+			$('.img-box').children().eq(index-1).append(img);
+			$('[name=status]').val(Number($('[name=status]').val())-1);
+		}
+	
+	
 		// 숨겨진 textarea에 본문 내용 작성후 submit
 		$("#productContent").summernote({
 			height : 400,

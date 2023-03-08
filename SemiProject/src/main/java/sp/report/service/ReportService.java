@@ -94,13 +94,11 @@ public class ReportService {
 		JDBCTemplate.close(conn);
 		return check;
 	}
-
 	public int countPact(Member m) {
 		Connection conn = JDBCTemplate.getConnection();
 		int pact = dao.countCheck(conn, m);
 		JDBCTemplate.close(conn);
 		return pact;
-
 	}
 
 }
