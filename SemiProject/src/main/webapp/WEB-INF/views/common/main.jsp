@@ -15,6 +15,7 @@
 .page-content>div>.carousel-inner{
     width: 60%;
     margin: 0 auto;
+    z-index : 0;
 }
 .posting-wrap{
 	margin-bottom: 200px;
