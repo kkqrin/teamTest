@@ -1,6 +1,7 @@
-package sp.report.controller;
+package sp.product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,19 +9,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.View;
+
+import sp.product.service.ProductService;
+import sp.product.vo.Product;
 
 /**
- * Servlet implementation class ReportWriteFrmServlet
+ * Servlet implementation class MyStoreServlet
  */
-@WebServlet(name = "ReportWriteFrm", urlPatterns = { "/reportWriteFrm.do" })
-public class ReportWriteFrmServlet extends HttpServlet {
+@WebServlet(name = "myStore", urlPatterns = { "/myStore.do" })
+public class MyStoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportWriteFrmServlet() {
+    public MyStoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,12 +32,17 @@ public class ReportWriteFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//1. 인코딩
+		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		//2. 값추출
-		//3. 비즈니스로직
-		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/reportWriteFrm.jsp");
+		// 2. 값 추출
+		String sellerId = request.getParameter("sellerId");
+		// 3. 비즈니스 로직
+		ProductService service = new ProductService();
+		ArrayList<Product> list = service.selectMyStore(sellerId);
+		
+		// 4. 결과 처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/myStore.jsp");
+		request.setAttribute("list", list);
 		view.forward(request, response);
 	}
 

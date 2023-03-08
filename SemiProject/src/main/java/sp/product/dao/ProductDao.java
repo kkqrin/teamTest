@@ -84,10 +84,10 @@ public class ProductDao {
 		
 		if(clickCategory == 0) {
 			// 상위카테고리 category_ref기준
-			query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, ENROLL_DATE, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) WHERE CATEGORY_ref=? ORDER BY 1 DESC )N) WHERE RNUM BETWEEN ? AND ?";			
+			query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) WHERE CATEGORY_ref=? ORDER BY 1 DESC )N) WHERE RNUM BETWEEN ? AND ?";			
 		}else if(clickCategory == 1) {
 			// 하위카테고리 category_no기준
-			query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, ENROLL_DATE, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) WHERE CATEGORY_NO=? ORDER BY 1 DESC )N) WHERE RNUM BETWEEN ? AND ?";
+			query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) WHERE CATEGORY_NO=? ORDER BY 1 DESC )N) WHERE RNUM BETWEEN ? AND ?";
 		}
 		
 		try {
@@ -107,7 +107,9 @@ public class ProductDao {
 				p.setProductPrice(rset.getInt("product_price"));
 				p.setViewCount(rset.getInt("view_count"));
 				p.setProductArea(rset.getString("product_area"));
-				p.setEnrollDate(rset.getString("enroll_date"));
+//				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
 				p.setFilepath(rset.getString("filepath"));
 				list.add(p);
 			}
@@ -437,7 +439,7 @@ public class ProductDao {
 		ResultSet rset = null;
 		ArrayList<Product> list = new ArrayList<Product>();
 		
-		String query = "SELECT WISH_PRODUCT_NO, PRODUCT_NO, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, ENROLL_DATE, FILEPATH, MEMBER_NO FROM WISH_PRODUCT LEFT JOIN PRODUCT USING (PRODUCT_NO) WHERE MEMBER_NO=?";
+		String query = "SELECT WISH_PRODUCT_NO, PRODUCT_NO, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH, MEMBER_NO, view_count FROM WISH_PRODUCT LEFT JOIN PRODUCT USING (PRODUCT_NO) WHERE MEMBER_NO=?";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -451,9 +453,12 @@ public class ProductDao {
 				p.setProductTitle(rset.getString("product_title"));
 				p.setProductStatus(rset.getInt("product_status"));
 				p.setProductPrice(rset.getInt("product_price"));
-				p.setEnrollDate(rset.getString("enroll_date"));
+//				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
 				p.setFilepath(rset.getString("filepath"));
 				p.setMemberNo(rset.getInt("member_no"));
+				p.setViewCount(rset.getInt("view_count"));
 				list.add(p);
 			}
 		} catch (SQLException e) {
@@ -536,5 +541,150 @@ public class ProductDao {
 		
 		return result;
 	}
+
+	public ArrayList<Product> selectPopularProduct(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "select * from (select rownum as rnum, n.* from (select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day,product_area,filename,filepath,wish_count from (select p.*,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by wish_count desc) where wish_count != 0)n) where rnum between 1 and 8";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductContent(rset.getString("product_content"));
+//				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setFilename(rset.getString("filename"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setWishCount(rset.getInt("wish_count"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+	public Category selectCategoryNames(Connection conn, int categoryNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Category c = null;
+		
+		String query = "select c.category_name as fc_name, sub.category_name as sc_name from category c join category sub on (c.category_no = sub.category_ref) where sub.category_no = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, categoryNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Category();
+				c.setfCategoryName(rset.getString("fc_name"));
+				c.setCategoryName(rset.getString("sc_name"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return c;
+	}
+
+	public ArrayList<Product> selectNewProduct(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+//		String query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) ORDER BY 1 DESC )N) WHERE RNUM BETWEEN 1 AND 8";
+		String query = "select * from (select rownum as rnum, n.* from (select p.*,(SELECT count(*) FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by 1 desc)n) where rnum between 1 and 8";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setWishCount(rset.getInt("wish_count"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+	public ArrayList<Product> selectMyStore(Connection conn, String sellerId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "select product_no, category_no, seller_id, product_title, product_status, product_price, view_count, product_area, enroll_date, filepath from product where seller_id=?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, sellerId);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setFilepath(rset.getString("filepath"));
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+
+
 
 }

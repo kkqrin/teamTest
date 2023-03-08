@@ -176,9 +176,10 @@ public class ProductService {
 			// 3. 관심상품
 			// SELECT MEMBER_NO FROM WISH_PRODUCT WHERE PRODUCT_NO=171에서 조회한 MEMBER_NO랑 로그인세션의 MEMBER_NO랑 맞는 지 비교 -> 맞으면 하트 칠함
 			ArrayList<Product> wishMemberList = dao.selectProductWishTable(conn, productNo);
+			// 4. 카테고리 이름
+			Category c = dao.selectCategoryNames(conn, p.getCategoryNo());
 			
-			
-			ProductViewData pvd = new ProductViewData(p, commentList, reCommentList, wishMemberList);
+			ProductViewData pvd = new ProductViewData(p, commentList, reCommentList, wishMemberList, c);
 			
 			JDBCTemplate.close(conn);
 			return pvd;
@@ -265,5 +266,29 @@ public class ProductService {
 		
 		JDBCTemplate.close(conn);
 		return result;
+	}
+
+	public ArrayList<Product> selectPopularProduct() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.selectPopularProduct(conn);
+
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	public ArrayList<Product> selectNewProduct() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.selectNewProduct(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+
+	public ArrayList<Product> selectMyStore(String sellerId) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.selectMyStore(conn, sellerId);
+		
+		JDBCTemplate.close(conn);
+		return list;
 	}
 }

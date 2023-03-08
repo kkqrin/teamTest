@@ -1,4 +1,4 @@
-package sp.report.controller;
+package sp.notice.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.text.View;
+
+import sp.notice.service.NoticeService;
+import sp.notice.vo.Notice;
 
 /**
- * Servlet implementation class ReportWriteFrmServlet
+ * Servlet implementation class NoticeUpdateFrmServlet
  */
-@WebServlet(name = "ReportWriteFrm", urlPatterns = { "/reportWriteFrm.do" })
-public class ReportWriteFrmServlet extends HttpServlet {
+@WebServlet(name = "NoticeUpdateFrm", urlPatterns = { "/noticeUpdateFrm.do" })
+public class NoticeUpdateFrmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportWriteFrmServlet() {
+    public NoticeUpdateFrmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,9 +34,13 @@ public class ReportWriteFrmServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
-		//3. 비즈니스로직
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		//3. 비지니스로직
+		NoticeService service = new NoticeService();
+		Notice n = service.getNotice(noticeNo);
 		//4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/report/reportWriteFrm.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeUpdateFrm.jsp");
+		request.setAttribute("n", n);
 		view.forward(request, response);
 	}
 

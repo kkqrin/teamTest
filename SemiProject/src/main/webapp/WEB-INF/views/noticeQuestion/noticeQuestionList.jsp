@@ -6,6 +6,7 @@
     	ArrayList<NoticeQuestion> list = (ArrayList<NoticeQuestion>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
     	int start = (int)request.getAttribute("start");
+    	int index = 1;
     %>
 <!DOCTYPE html>
 <html>
@@ -32,10 +33,10 @@
     	cursor: pointer;
 	}
 	.tab>ul>li.active-tab{
-    	border-top: 3px solid black;
+    	border : 3px solid black;
     	color: #000;
     	font-weight: bold;
-    	border-bottom: none;
+    	
 	}
 	.tab-content>div{
     	padding: 50px 30px;
@@ -53,9 +54,6 @@
 	.page-title{
 		font-size : 40px;
 		font-weight : bold;
-	}
-	.tr-0{
-		border-bottom : 1px solid black;
 	}
 	.common{
 		display : none;
@@ -89,20 +87,7 @@
 		</div>
 		<div class="tab-content">
 			<div class="nq-detail">
-			<% for(NoticeQuestion nq : list) { %>
-				<%if(nq.getFaqCategory() == 0){ %>
-					<div class="common category"><%= nq.getFaqTitle() %></div>	
-				<%}else if(nq.getFaqCategory() == 1){ %>
-					<div class="use category"><%= nq.getFaqTitle() %></div>
-				<%}else if(nq.getFaqCategory() == 2){ %>
-					<div class="buy category"><%= nq.getFaqTitle() %></div>
-				<%}else if(nq.getFaqCategory() == 3){ %>
-					<div class="sell category"><%= nq.getFaqTitle() %></div>
-				<%}else { %>
-					<div class="all category"><%= nq.getFaqTitle() %></div>
-				<% } %>
-			<% } %>
-			
+			<%-- for --%>
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
@@ -114,10 +99,12 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index=1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 			<tr class="tr-1">
-				<th><%=i+start %></th>
+				<th><%=index++ %></th>
 				<th>
 					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 					<%=nq.getFaqTitle() %></a>
@@ -138,7 +125,7 @@
 			</tr>
 			<%} %>
 			</table>
-				<p>전체</p>
+				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
 			<div>
 			<%-- for
@@ -154,31 +141,31 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index = 1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
-			<tr class="tr-1">
-				<th><%=i+start %></th>
-				<th>
-					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
-					<%=nq.getFaqTitle() %></a>
-				</th>
-				<%if(nq.getFaqCategory() == 0){ %>
-				<th>공통</th>
-				<%}else if(nq.getFaqCategory() == 1){ %>
-				<th>이용정책</th>
-				<%}else if(nq.getFaqCategory() == 2){ %>
-				<th>구매</th>
-				<%}else if(nq.getFaqCategory() == 3){ %>
-				<th>판매</th>
+				<% if(nq.getFaqCategory() == 0){ %>
+				<tr class="tr-1">
+					<th>
+						<a><%=index++ %></a>
+					</th>
+					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+						<%= nq.getFaqTitle() %>
+						</a>
+					</td>
+					<%if(nq.getFaqCategory() == 0){ %>
+					<th>공통</th>
+					<%} %>
+					<% if(nq.getMemberNo() == 1) {%>
+					<th>중고사자 관리자</th>
+					<%} %>
+					<th><%= nq.getFaqCount() %></th>
+				</tr>
 				<%} %>
-				<% if(nq.getMemberNo() == 1) {%>
-				<th>중고사자 관리자</th>
-				<%} %>
-				<th><%=nq.getFaqCount()  %></th>
-			</tr>
 			<%} %>
 			</table>
-				<p>공통</p>
+				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
 			<div>
 			<%-- for
@@ -194,31 +181,31 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index = 1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
-			<tr class="tr-1">
-				<th><%=i+start %></th>
-				<th>
-					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
-					<%=nq.getFaqTitle() %></a>
-				</th>
-				<%if(nq.getFaqCategory() == 0){ %>
-				<th>공통</th>
-				<%}else if(nq.getFaqCategory() == 1){ %>
-				<th>이용정책</th>
-				<%}else if(nq.getFaqCategory() == 2){ %>
-				<th>구매</th>
-				<%}else if(nq.getFaqCategory() == 3){ %>
-				<th>판매</th>
+				<% if(nq.getFaqCategory() == 1){ %>
+				<tr class="tr-1">
+					<th>
+						<a><%=index++ %></a>
+					</th>
+					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+						<%= nq.getFaqTitle() %>
+						</a>
+					</td>
+					<%if(nq.getFaqCategory() == 1){ %>
+					<th>이용정책</th>
+					<%} %>
+					<% if(nq.getMemberNo() == 1) {%>
+					<th>중고사자 관리자</th>
+					<%} %>
+					<th><%= nq.getFaqCount() %></th>
+				</tr>
 				<%} %>
-				<% if(nq.getMemberNo() == 1) {%>
-				<th>중고사자 관리자</th>
-				<%} %>
-				<th><%=nq.getFaqCount()  %></th>
-			</tr>
 			<%} %>
 			</table>
-				<p>이용정책</p>
+				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
 			<div>
 			<%-- for
@@ -234,31 +221,31 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index=1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
-			<tr class="tr-1">
-				<th><%=i+start %></th>
-				<th>
-					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
-					<%=nq.getFaqTitle() %></a>
-				</th>
-				<%if(nq.getFaqCategory() == 0){ %>
-				<th>공통</th>
-				<%}else if(nq.getFaqCategory() == 1){ %>
-				<th>이용정책</th>
-				<%}else if(nq.getFaqCategory() == 2){ %>
-				<th>구매</th>
-				<%}else if(nq.getFaqCategory() == 3){ %>
-				<th>판매</th>
+				<% if(nq.getFaqCategory() == 2){ %>
+				<tr class="tr-1">
+					<th>
+						<a><%=index++ %></a>
+					</th>
+					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+						<%= nq.getFaqTitle() %>
+						</a>
+					</td>
+					<%if(nq.getFaqCategory() == 2){ %>
+					<th>구매</th>
+					<%} %>
+					<% if(nq.getMemberNo() == 1) {%>
+					<th>중고사자 관리자</th>
+					<%} %>
+					<th><%= nq.getFaqCount() %></th>
+				</tr>
 				<%} %>
-				<% if(nq.getMemberNo() == 1) {%>
-				<th>중고사자 관리자</th>
-				<%} %>
-				<th><%=nq.getFaqCount()  %></th>
-			</tr>
 			<%} %>
 			</table>
-				<p>구매</p>				
+				<div id="pageNavi"><%=pageNavi %></div>				
 			</div>
 			<div>
 			<%-- for
@@ -274,31 +261,31 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index=1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
-			<tr class="tr-1">
-				<th><%=i+start %></th>
-				<th>
-					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
-					<%=nq.getFaqTitle() %></a>
-				</th>
-				<%if(nq.getFaqCategory() == 0){ %>
-				<th>공통</th>
-				<%}else if(nq.getFaqCategory() == 1){ %>
-				<th>이용정책</th>
-				<%}else if(nq.getFaqCategory() == 2){ %>
-				<th>구매</th>
-				<%}else if(nq.getFaqCategory() == 3){ %>
-				<th>판매</th>
+				<% if(nq.getFaqCategory() == 3){ %>
+				<tr class="tr-1">
+					<th>
+						<a><%=index++ %></a>
+					</th>
+					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+						<%= nq.getFaqTitle() %>
+						</a>
+					</td>
+					<%if(nq.getFaqCategory() == 3){ %>
+					<th>판매</th>
+					<%} %>
+					<% if(nq.getMemberNo() == 1) {%>
+					<th>중고사자 관리자</th>
+					<%} %>
+					<th><%= nq.getFaqCount() %></th>
+				</tr>
 				<%} %>
-				<% if(nq.getMemberNo() == 1) {%>
-				<th>중고사자 관리자</th>
-				<%} %>
-				<th><%=nq.getFaqCount()  %></th>
-			</tr>
 			<%} %>
 			</table>
-				<p>판매</p>
+				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
 		</div>		
  	</div>
@@ -323,12 +310,6 @@
 		const activeLi = document.querySelector(".tab>ul>li:first-child");
 		const activeContent = document.querySelector(".tab-content>div:first-child");
 		activeLi.classList.add("active-tab");
-		const list = $(".category");
-		for(let i=0;i<list.length;i++){
-			if(list.eq(i).hasClass(activeLi.innerText) )		
-				list.eq(i).css("display","block");
-		}
-		
 		activeContent.classList.add("active-content");
 	}
 	</script>

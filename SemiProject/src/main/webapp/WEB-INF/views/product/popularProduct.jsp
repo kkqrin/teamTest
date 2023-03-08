@@ -9,44 +9,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관심 상품</title>
-<style>
-	header>.sub-navi {
-		z-index: 1;
-	}
-	.wish-product-status{
-		text-align: center;
-	}
-/*    .posting-item{
-        position: relative;
-    }
-    .hover-posting-item{
-    	position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-    }
-    .posting-item:hover>.hover-posting-item{
-        background-color: #eee;
-        opacity: 0.5;
-        display: block;
-    }
-    .wish-product-status{
-        position: absolute;
-        left: 100px;
-        top: 200px;
-    }*/
-</style>
+<title>인기상품</title>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<div class="page-title"><%=m.getMemberName() %>님의 관심 상품</div>
+		<div class="page-title">인기 상품</div>
 		<div class="posting-wrap">
 			<%for(Product p : list) {%>
             <div class="posting-item">
-            	<!--<div class="hover-posting-item"></div>-->
+            	<div class="hover-posting-item"></div>
 			<a href="/productView.do?productNo=<%=p.getProductNo()%>">
 
 	            	<div class="posting-img">
@@ -57,14 +29,18 @@
 	                    <p class="posting-title"><%=p.getProductTitle() %></p>
 	                    <div class="posting-detail">
 	                        <div class="posting-icon">
+	                            <div class="heart-div">
+	                                <span class="material-symbols-outlined">favorite</span>
+	                                <span class="heart-count"><%=p.getWishCount() %></span>
+	                            </div>
 	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined" style="color:#4e4e4e;">visibility</span>
-	                                <span class="heart-count"><%=p.getViewCount() %></span>
+	                                <span class="material-symbols-outlined">chat_bubble</span>
+	                                <span class="comment-count">?</span>
 	                            </div>
 	                        </div>
 	                        <div class="posting-info">
-	                            <span class="posting-area">??동</span>
-	                            <span class="posting-time"><%=p.getEnrollMonth() %>월 <%=p.getEnrollDay() %>일</span>
+	                            <span class="posting-area"><%=p.getProductArea() %></span>
+	                            <span class="posting-time"><%=p.getEnrollDate() %></span>
 	                        </div>
 	                    </div>
 	                </div>
@@ -85,18 +61,6 @@
 			<%} %>
         </div>
 	</div>
-<!--	<script>
-	$(".wish-product-status").hide();
-		$(".hover-posting-item").on("mouseenter", function(){
-			$(".wish-product-status").show();
-		});
-		$(".wish-product-status").on("mouseenter", function(){
-			$(".wish-product-status").show();
-		});
-		$(".hover-posting-item").on("mouseleave", function(){
-			$(".wish-product-status").hide();
-		});
-	</script> -->
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

@@ -16,6 +16,10 @@ public class Product {
 
 	private int memberNo;
 	private int wishProductNo;
+	private int wishCount;
+
+	private String enrollMonth;
+	private String enrollDay;
 
 	public Product() {
 		super();
@@ -24,7 +28,8 @@ public class Product {
 
 	public Product(int productNo, int categoryNo, String sellerId, String productTitle, int productStatus,
 			int productPrice, int viewCount, String productContent, String enrollDate, String productArea,
-			String filename, String filepath, int memberNo, int wishProductNo) {
+			String filename, String filepath, int memberNo, int wishProductNo, int wishCount, String enrollMonth,
+			String enrollDay) {
 		super();
 		this.productNo = productNo;
 		this.categoryNo = categoryNo;
@@ -40,6 +45,9 @@ public class Product {
 		this.filepath = filepath;
 		this.memberNo = memberNo;
 		this.wishProductNo = wishProductNo;
+		this.wishCount = wishCount;
+		this.enrollMonth = enrollMonth;
+		this.enrollDay = enrollDay;
 	}
 
 	public int getProductNo() {
@@ -152,6 +160,30 @@ public class Product {
 
 	public void setWishProductNo(int wishProductNo) {
 		this.wishProductNo = wishProductNo;
+	}
+
+	public int getWishCount() {
+		return wishCount;
+	}
+
+	public void setWishCount(int wishCount) {
+		this.wishCount = wishCount;
+	}
+
+	public String getEnrollMonth() {
+		return enrollMonth;
+	}
+
+	public void setEnrollMonth(String enrollMonth) {
+		this.enrollMonth = enrollMonth;
+	}
+
+	public String getEnrollDay() {
+		return enrollDay;
+	}
+
+	public void setEnrollDay(String enrollDay) {
+		this.enrollDay = enrollDay;
 	}
 
 }

@@ -83,13 +83,14 @@
         </div>
         <nav>
             <ul class="navi naviHide">
-                <li><a href="#">메뉴-1</a></li>
+                <li><a href="/">홈</a></li>
                 <li class="category">
                     <a href="#">카테고리</a>
                 </li>
                 <li><a href="/boardList.do?reqPage=1&npp=10">커뮤니티</a></li>
-                <li><a href="#">메뉴-4</a></li>
-                <li><a href="#">메뉴-5</a></li>
+                <li><a href="/popularProduct.do">인기상품</a></li>
+                
+                <li><a href="#">사기조회</a></li>
             </ul>
         </nav>
         <ul class="sub-navi naviHide">

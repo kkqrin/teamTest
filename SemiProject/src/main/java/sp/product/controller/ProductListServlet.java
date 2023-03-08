@@ -51,6 +51,7 @@ public class ProductListServlet extends HttpServlet {
 		ArrayList<Category> cList = service.selectCategoryList();
 		ArrayList<Category> cSubList = service.selectSubCategoryList();
 		
+		
 		// 4. 결과 처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/productList.jsp");
 		
