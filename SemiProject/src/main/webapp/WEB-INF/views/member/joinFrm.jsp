@@ -202,7 +202,7 @@ padding:10px 0;
                         <button type="button" class="bc1 dup-btn"id="authBtn">인증하기</button>
                          <span id="timeZone"></span>
                         <span id="authMsg"></span>
-                        <input type="text" name="memberGrade" id=memberGrade >
+                        <input type="text" name="memberGrade" id=memberGrade value=3 style="display:none;">
                     </div>
                 </div>
                 <div class="join-input-wrap">
@@ -561,7 +561,7 @@ padding:10px 0;
 				$("#authMsg").prop("readonly",true);
 				$("#authMsg").text("인증완료");
 				$("#authMsg").css("color","green");
-				//$("#memberGrade").val(2);
+				$("#memberGrade").val(2);
 				window.clearInterval(intervalId)
 			}else{
 				$("#authMsg").text("인증실패");

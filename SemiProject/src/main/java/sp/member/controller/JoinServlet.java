@@ -40,7 +40,7 @@ public class JoinServlet extends HttpServlet {
 		m.setMemberName(request.getParameter("memberName"));
 		m.setMemberPhone(request.getParameter("memberPhone"));
 		m.setMemberEmail(request.getParameter("email"));
-		//m.setMemberGrade(Integer.getInteger(request.getParameter("memberGrade")));
+		m.setMemberGrade(Integer.parseInt(request.getParameter("memberGrade")));
 		m.setPostNumber(request.getParameter("postcode"));
 		m.setMemberAddr(request.getParameter("address"));
 		m.setMemberAddr2(request.getParameter("detailAddress"));
