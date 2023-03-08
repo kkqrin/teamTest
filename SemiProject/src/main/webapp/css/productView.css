@@ -13,17 +13,14 @@
 }
 
 .view-product-info {
-    background-color: lemonchiffon;
     width: 550px;
 }
 
 .view-product-info-top {
     /* height: 400px; */
-    background-color: aquamarine;
 }
 
 .view-product-btn {
-    background-color: cornflowerblue;
     height: 100px;
     line-height: 100px;
     /* line-height: 300px; */
@@ -41,20 +38,17 @@
     padding: 0 30px;
     font-size: 24px;
     height: 120px;
-    background-color: lightgray;
     box-sizing: border-box;
 }
 
 .view-product-short {
     padding: 0 30px;
-    background-color: aliceblue;
-    text-align: right;
+   /* text-align: right;*/
     height: 30px;
     box-sizing: border-box;
 }
 
 .view-product-price {
-    background-color: hotpink;
     padding: 30px;
     font-size: 32px;
     height: 120px;
@@ -91,7 +85,6 @@
     width: calc(100%/2);
     height: 100%;
     float: left;
-    background-color: yellow;
     padding: 15px;
     box-sizing: border-box;
     line-height: 30px;
@@ -99,14 +92,12 @@
 
 .wish-box {
     float: right;
-    background-color: beige;
     width: calc(100%/2);
     height: 100%;
     text-align: right;
 }
 
 .view-product-info-mid {
-    background-color: darksalmon;
     height: 160px;
     text-align: center;
 }

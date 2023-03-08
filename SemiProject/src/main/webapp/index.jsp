@@ -3,15 +3,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index</title>
+<title>중 고 사 자</title>
 
 </head>
 <body>
 	<script>location.href="/main.do";</script>
 	<%@ include file="/WEB-INF/views/common/header.jsp" %>
-	
+	<div class="page-content">
+		
 	
 
+
+	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

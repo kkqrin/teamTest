@@ -14,7 +14,10 @@
 	header>.sub-navi {
 		z-index: 1;
 	}
-    .posting-item{
+	.wish-product-status{
+		text-align: center;
+	}
+/*    .posting-item{
         position: relative;
     }
     .hover-posting-item{
@@ -33,8 +36,7 @@
         position: absolute;
         left: 100px;
         top: 200px;
-	
-    }
+    }*/
 </style>
 </head>
 <body>
@@ -44,7 +46,7 @@
 		<div class="posting-wrap">
 			<%for(Product p : list) {%>
             <div class="posting-item">
-            	<div class="hover-posting-item"></div>
+            	<!--<div class="hover-posting-item"></div>-->
 			<a href="/productView.do?productNo=<%=p.getProductNo()%>">
 
 	            	<div class="posting-img">
@@ -55,18 +57,14 @@
 	                    <p class="posting-title"><%=p.getProductTitle() %></p>
 	                    <div class="posting-detail">
 	                        <div class="posting-icon">
-	                            <div class="heart-div">
-	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count">1</span>
-	                            </div>
 	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">3</span>
+	                                <span class="material-symbols-outlined" style="color:#4e4e4e;">visibility</span>
+	                                <span class="heart-count"><%=p.getViewCount() %></span>
 	                            </div>
 	                        </div>
 	                        <div class="posting-info">
-	                            <span class="posting-area">영등포동</span>
-	                            <span class="posting-time">1시간전</span>
+	                            <span class="posting-area">??동</span>
+	                            <span class="posting-time"><%=p.getEnrollMonth() %>월 <%=p.getEnrollDay() %>일</span>
 	                        </div>
 	                    </div>
 	                </div>
@@ -77,9 +75,9 @@
                     <%if(p.getProductStatus() == 0) {%>
 	                    <div class="btn bs2 fc-8" style="border-radius: 42%;">판매중</div>
                     <%}else if(p.getProductStatus() == 1) {%>
-                    	<div class="btn bc5 bs6 fc-8" style="border-radius: 10px;">예약중</div>
+                    	<div class="btn bs2 fc-9" style="border-radius: 10px;">예약중</div>
                     <%}else if(p.getProductStatus() == 2) {%>
-                    	<div>거래완료</div>
+                    	<div class="btn bs2 fc-3" style="border-radius: 10px;">거래완료</div>
                     <%} %>
                     </div>
           </a>
@@ -87,7 +85,7 @@
 			<%} %>
         </div>
 	</div>
-	<script>
+<!--	<script>
 	$(".wish-product-status").hide();
 		$(".hover-posting-item").on("mouseenter", function(){
 			$(".wish-product-status").show();
@@ -98,7 +96,7 @@
 		$(".hover-posting-item").on("mouseleave", function(){
 			$(".wish-product-status").hide();
 		});
-	</script>
+	</script> -->
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

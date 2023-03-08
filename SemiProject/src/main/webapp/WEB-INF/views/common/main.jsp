@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
     <%
     ArrayList<Product> popularList = (ArrayList<Product>)request.getAttribute("popularList");
+    ArrayList<Product> newList = (ArrayList<Product>)request.getAttribute("newList");
     %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,9 @@
     width: 60%;
     margin: 0 auto;
 }
-
+.posting-wrap{
+	margin-bottom: 200px;
+}
 </style>
 <link rel="stylesheet" href="/css/carousel.css">
 </head>
@@ -51,9 +54,11 @@
             </button>
         </div>
 
-		<div class="page-title">인기 상품</div>
-		<div class="posting-wrap popular-wrap">
-			<%for(Product p : popularList) {%>
+
+
+		<div class="page-title">최신 등록 상품</div>
+		<div class="posting-wrap new-wrap">
+			<%for(Product p : newList) {%>
             <div class="posting-item">
             	<div class="hover-posting-item"></div>
 			<a href="/productView.do?productNo=<%=p.getProductNo()%>">
@@ -68,40 +73,67 @@
 	                        <div class="posting-icon">
 	                            <div class="heart-div">
 	                                <span class="material-symbols-outlined">favorite</span>
-	                                <span class="heart-count"><%=p.getWishCount() %></span>
+	                                <span class="heart-count"><%=p.getWishCount()%></span>
 	                            </div>
 	                            <div class="comment-div">
-	                                <span class="material-symbols-outlined">chat_bubble</span>
-	                                <span class="comment-count">?</span>
+	                                 <span class="material-symbols-outlined" style="color:#4e4e4e;">visibility</span>
+	                                <span class="heart-count"><%=p.getViewCount() %></span>
 	                            </div>
 	                        </div>
 	                        <div class="posting-info">
-	                            <span class="posting-area"><%=p.getProductArea() %></span>
+	                            <!-- <span class="posting-area"><%--p.getProductArea() --%></span> -->
 	                            <span class="posting-time"><%=p.getEnrollDate() %></span>
 	                        </div>
 	                    </div>
 	                </div>
-	          	
-	          		
-                    <!-- 0:거래중 1:예약중 2:거래완료 -->
-                    <div class="wish-product-status">
-                    <%if(p.getProductStatus() == 0) {%>
-	                    <div class="btn bs2 fc-8" style="border-radius: 42%;">판매중</div>
-                    <%}else if(p.getProductStatus() == 1) {%>
-                    	<div class="btn bc5 bs6 fc-8" style="border-radius: 10px;">예약중</div>
-                    <%}else if(p.getProductStatus() == 2) {%>
-                    	<div>거래완료</div>
-                    <%} %>
-                    </div>
           </a>
           </div>
 			<%} %>
         </div>
 
-	<%if(m!=null) {%>
-		ajsdfklakdlfjklsdafjklsdafkasdklflkasjfsdjfal
-	<%} %>
 
+
+
+
+
+
+		<div class="page-title">인기 상품</div>
+		<div class="posting-wrap popular-wrap">
+			<%for(Product p : popularList) {%>
+	            <div class="posting-item">
+	            	<div class="hover-posting-item"></div>
+				<a href="/productView.do?productNo=<%=p.getProductNo()%>">
+	
+		            	<div class="posting-img">
+		                    <img src="/upload/product/<%=p.getFilepath()%>">
+		                </div>
+		                <div class="posting-content">
+		                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
+		                    <p class="posting-title"><%=p.getProductTitle() %></p>
+		                    <div class="posting-detail">
+		                        <div class="posting-icon">
+		                            <div class="heart-div">
+		                                <span class="material-symbols-outlined">favorite</span>
+		                                <span class="heart-count"><%=p.getWishCount() %></span>
+		                            </div>
+		                            <div class="comment-div">
+		                                <span class="material-symbols-outlined" style="color:#4e4e4e;">visibility</span>
+	                                <span class="heart-count"><%=p.getViewCount() %></span>
+		                            </div>
+		                        </div>
+		                        <div class="posting-info">
+		                            <!-- <span class="posting-area"><%--p.getProductArea() --%></span> -->
+		                            <span class="posting-time"><%=p.getEnrollMonth() %>월 <%=p.getEnrollDay() %>일</span>
+		                        </div>
+		                    </div>
+		                </div>
+	         	 </a>
+	          	</div>
+			<%} %>
+        </div>
+
+		
+       
 
 
 

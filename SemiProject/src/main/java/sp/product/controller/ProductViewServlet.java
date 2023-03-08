@@ -55,6 +55,7 @@ public class ProductViewServlet extends HttpServlet {
 			request.setAttribute("commentList", pvd.getCommentList());
 			request.setAttribute("reCommentList", pvd.getReCommentList());
 			request.setAttribute("wishList", pvd.getWishList());
+			request.setAttribute("c", pvd.getC());
 			view.forward(request, response);
 		}
 	}

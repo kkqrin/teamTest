@@ -26,7 +26,7 @@
                         <div class="sub-title">쇼핑 정보</div>
                         <ul class="sub-menu">
                             <li><a href="#">거래 내역</a></li>
-                            <li><a href="#">관심 상품</a></li>
+                            <li> <a href="/myStore.do?sellerId=<%=m.getMemberId()%>">내 상점</a></li>
                         </ul>
                     </div>
                     <div class="mypage-content-list more">

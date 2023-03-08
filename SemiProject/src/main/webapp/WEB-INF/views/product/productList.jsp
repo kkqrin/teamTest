@@ -88,22 +88,22 @@
 				                <img src="upload/product/<%=p.getFilepath()%>">
 				                </div>
 				                <div class="posting-content">
-				                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
+				                    <p class="posting-price"><%=p.getProductPrice() %></p>
 				                    <p class="posting-title"><%=p.getProductTitle() %></p>
 				                    <div class="posting-detail">
-				                       <!--<div class="posting-icon">
+				                       <div class="posting-icon">
 				                            <div class="heart-div">
 				                                <span class="material-symbols-outlined">favorite</span>
-				                                <span class="heart-count">0</span>
+				                                <span class="heart-count">?</span>
 				                            </div>
 				                            <div class="comment-div">
 				                                <span class="material-symbols-outlined">chat_bubble</span>
-				                                <span class="comment-count">댓글수 그냥조회수로할까</span>
+				                                <span class="comment-count">?</span>
 				                            </div>
-				                        </div> --> 
+				                        </div> 
 				                        <div class="posting-info">
-				                            <span class="posting-area"><%=p.getProductArea() %></span>
-				                            <span class="posting-time"><%=p.getEnrollDate() %></span>
+				                            <!--<span class="posting-area"><%--p.getProductArea() --%></span>-->
+				                            <span class="posting-time"><%=p.getEnrollMonth() %>월 <%=p.getEnrollDay() %>일</span>
 				                        </div>
 				                    </div>
 				                </div>

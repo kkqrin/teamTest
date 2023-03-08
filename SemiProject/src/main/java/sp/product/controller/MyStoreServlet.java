@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sp.member.service.MemberService;
-import sp.member.vo.Member;
 import sp.product.service.ProductService;
 import sp.product.vo.Product;
 
 /**
- * Servlet implementation class MainServlet
+ * Servlet implementation class MyStoreServlet
  */
-@WebServlet(name = "Main", urlPatterns = { "/main.do" })
-public class MainServlet extends HttpServlet {
+@WebServlet(name = "myStore", urlPatterns = { "/myStore.do" })
+public class MyStoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainServlet() {
+    public MyStoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,19 +35,14 @@ public class MainServlet extends HttpServlet {
 		// 1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		// 2. 값 추출
-		
+		String sellerId = request.getParameter("sellerId");
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
-		// 인기상품
-		ArrayList<Product> popularList = service.selectPopularProduct();
-		// 최신상품
-		ArrayList<Product> newList = service.selectNewProduct();
-		//ArrayList<Product> list = service.selectMyWishProduct(memberNo);
-
-		// 4. 결과처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/main.jsp");
-		request.setAttribute("popularList", popularList);
-		request.setAttribute("newList", newList);
+		ArrayList<Product> list = service.selectMyStore(sellerId);
+		
+		// 4. 결과 처리
+		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/myStore.jsp");
+		request.setAttribute("list", list);
 		view.forward(request, response);
 	}
 
