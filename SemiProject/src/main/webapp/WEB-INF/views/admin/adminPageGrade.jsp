@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 <style>
 .grad-table{
-	font-size: 14px;
+	font-size: 12px;
 }
 .grad-table th{
 	width:100px;
@@ -18,6 +18,9 @@
 .grad-table th.th-long{
 	width:150px;
 }
+.title>h1{
+	font-size : 20px;
+	}
 </style>
 
 </head>
@@ -25,7 +28,7 @@
 	<%@include file="/WEB-INF/views/common/admin.jsp" %>
 	<div class="member-grade table-title">
         <div class="title"><h1>회원관리</h1></div>
-        <table class="grad-table tbl tbl-hover" style="width:1200px;">
+        <table class="grad-table tbl tbl-hover" style="width:1350px;">
             <tr class="tr-1">
                 <th>선택</th>
                 <th>회원번호</th>
@@ -79,13 +82,13 @@
                     
                 </td>
                 <td>
-                    <button class="changeGrade btn bc11 bs1" >등급변경</button>
+                    <button class="changeGrade btn bc11 bs1" style="font-size:12px;" >등급변경</button>
                 </td>
             </tr>
             <%} %>
             <tr>
                 <th colspan="9">
-                    <button class="checkedChangeGrade btn bc1 bs4">회원등급변경</button>
+                    <button class="checkedChangeGrade btn bc1 bs1">회원등급변경</button>
                 </th>
             </tr>
         </table>

@@ -11,6 +11,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.report-table{
+	font-size: 12px;
+}
+.title>h1{
+	font-size : 20px;
+	}
+</style>
  	<link rel="stylesheet" href="css/report.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
@@ -19,7 +27,7 @@
 	 <%@include file="/WEB-INF/views/common/admin.jsp" %>
 	    <div class="report-list table-title">
         <div class="title"><h1>신고접수 리스트</h1></div>
-        <table class="report-table tbl tbl-hover" style="width:90%;">
+        <table class="report-table tbl tbl-hover" style="width:95%;">
             <tr class="tr-1" >
             	<th>선택</th>
                 <th>신고번호</th>
@@ -33,9 +41,9 @@
             <%for(Report report : list){ %>
             <tr class="tr-0">
             	<td><input type="checkbox" class="chk"></td>
-                <td>
+                <td style="text-decoration: underline;">
             	<a href="reportView.do?reportNo=<%=report.getReportNo() %>">
-				<%=report.getReportNo() %>
+				<%=report.getReportNo() %> 
      			</a>
 				</td>
                 <td><%=report.getReportMember() %></td>
@@ -74,7 +82,7 @@
             <%} %>
             <tr>
                 <th colspan="9">
-                    <button class="checkedChangePactCheck btn bc1 bs4">전체정보변경</button>
+                    <button class="checkedChangePactCheck btn bc1 bs1">전체정보변경</button>
                 </th>
             </tr>
         </table>

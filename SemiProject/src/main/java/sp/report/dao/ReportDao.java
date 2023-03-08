@@ -242,7 +242,7 @@
 				ResultSet rset = null;
 				ArrayList<Report> list = new ArrayList<Report>();
 				//select report_no,report_member,report_type, member_id,pact_check from member_tbl join report_recevied using(member_no) where member_no=2;
-				String query = "select * from member_tbl join report_recevied using(member_no)";
+				String query = "select * from member_tbl join report_recevied using(member_no) order by report_no";
 				
 				try {
 					pstmt = conn.prepareStatement(query);
@@ -357,7 +357,6 @@
 						r.setReportContent(rset.getString("report_content"));
 						r.setReportMember(rset.getString("report_member"));
 						r.setReportNo(rset.getInt("report_no"));
-						r.setReportPrice(rset.getInt("report_price"));
 						r.setReportType(rset.getInt("report_type"));
 					}
 				} catch (SQLException e) {
