@@ -57,6 +57,13 @@ public class DealService {
 		return result;
 	}
 
+	public Deal selectProducNo(int memberNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Deal d = dao.selectProductNo(conn, memberNo);
+		JDBCTemplate.close(conn);
+		return d;
+	}
+
 
 
 }

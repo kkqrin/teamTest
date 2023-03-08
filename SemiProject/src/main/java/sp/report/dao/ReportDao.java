@@ -258,7 +258,6 @@
 						r.setReportContent(rset.getString("report_Content"));
 						r.setReportMember(rset.getString("report_Member"));
 						r.setReportNo(rset.getInt("report_No"));
-						r.setReportPrice(rset.getInt("report_Price"));
 						r.setReportType(rset.getInt("report_Type"));
 						r.setMemberId(rset.getString("member_Id"));
 						list.add(r);
@@ -449,6 +448,28 @@
 
 				return result;
 		}
+
+			public int insertReport(Connection conn, Report r) {
+				PreparedStatement pstmt = null;
+				int result =0;
+				String query = "insert into report_recevied values(report_recevied_seq.nextval,?,?,to_char(sysdate,'yyyy-mm-dd hh:mi:ss'),?,?,?,?,0)";
+				try {
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, r.getMemberNo());
+					pstmt.setString(2, r.getReportMember());
+					pstmt.setInt(3, r.getReportType());
+					pstmt.setString(4, r.getReportContent());
+					pstmt.setString(5, r.getFilename());
+					pstmt.setString(6, r.getFilepath());
+					result = pstmt.executeUpdate();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}finally {
+					JDBCTemplate.close(pstmt);
+				}
+				return result;
+			}
 	}
 
 					

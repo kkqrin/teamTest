@@ -607,9 +607,33 @@ public class ProductDao {
 			JDBCTemplate.close(pstmt);
 			JDBCTemplate.close(rset);
 		}
-		
 		return c;
 	}
+	public Product selectProductMemberNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Product p = null;
+		String query = "select member_no from product p left join member_tbl m on (p.seller_id = m.member_id)where product_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p = new Product();
+				p.setMemberNo(rset.getInt("member_No"));
+			}
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return p;
+	}
+
+	
 
 	public ArrayList<Product> selectNewProduct(Connection conn) {
 		PreparedStatement pstmt = null;
@@ -684,7 +708,8 @@ public class ProductDao {
 		
 		return list;
 	}
+		
 
 
 
-}
+

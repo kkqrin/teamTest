@@ -116,4 +116,26 @@ public class DealDao {
 		}
 		return result;
 	}
+
+	public Deal selectProductNo(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Deal d = null;
+		String query = "select product_no from deal where member_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				d = new Deal();
+				d.setProductNo(rset.getInt("product_no"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return d;
+	}
 }
