@@ -1,3 +1,4 @@
+<%@page import="sp.product.vo.Category"%>
 <%@page import="sp.product.vo.ProductComment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="sp.product.vo.Product"%>
@@ -8,6 +9,7 @@
     ArrayList<ProductComment> commentList = (ArrayList<ProductComment>)request.getAttribute("commentList");
     ArrayList<ProductComment> reCommentList = (ArrayList<ProductComment>)request.getAttribute("reCommentList");
     ArrayList<Product> wishList = (ArrayList<Product>)request.getAttribute("wishList");
+    Category c = (Category)request.getAttribute("c");
     %>
 <!DOCTYPE html>
 <html>
@@ -77,15 +79,15 @@
                 </div>
                 <div class="view-product-info">
 	                    <div class="view-product-info-top">
-	                        <div class="view-category">홈 > 수입명품 > 여성신발</div>
+	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %></div>
 	                        <div class="view-product-title"><%=p.getProductTitle() %></div>
-	                        <div class="view-product-short">
+	                        <div class="view-product-short" style="display:flex;">
 	                            <div class="material-symbols-outlined view-icon">schedule</div>
-	                            <span class="view-cnt">1시간전</span>
+	                            <div class="view-cnt" style="margin-top: 2px;margin-left: 7px;"><%=p.getEnrollDate() %></div>
 	                        </div>
 	                        <div class="view-product-price">
 	                            <div id="view-product-price">
-	                                <span><%=p.getProductPrice() %>원</span>
+	                                <span><%=p.getProductPrice() %></span>
 	                            </div>
 	                            <div class="wish-box">
 	                            
@@ -113,17 +115,24 @@
 	                    </div>
 	                    <div class="view-product-info-mid">
 	                        <div>
-	                            <div class="view-product-status btn bs2 fc-8" style="border-radius: 42%;">판매중인 상품입니다.</div>
+	                        	<!-- 상품상태 / 0:거래중 1:예약중 2:거래완료 -->
+	                        	<%if(p.getProductStatus() == 0) {%>
+		                            <div class="view-product-status btn bs2 fc-8" style="border-radius: 42%;">판매중인 상품입니다.</div>                        	
+	                        	<%}else if (p.getProductStatus() == 1) {%>
+	                        		<div class="view-product-status btn bs2 fc-9" style="border-radius: 42%;">예약중인 상품입니다.</div>
+	                        	<%}else if (p.getProductStatus() == 2) {%>
+	                        		<div class="view-product-status btn bs2 fc-3" style="border-radius: 42%;">거래완료된 상품입니다.</div>
+	                        	<%} %>
 	                            <div class="view-product-detail">
-	                                <div>
-	                                    <span class="material-symbols-outlined view-icon">location_on</span>
-	                                    <span class="view-cnt"><%=p.getProductArea() %></span>
+	                                <div style="display: flex;justify-content: center;margin-bottom: 10px;">
+	                                    <div class="material-symbols-outlined view-icon">location_on</div>
+	                                    <div class="view-cnt" style="margin-top: 3px;margin-left: 7px;"><%=p.getProductArea() %></div>
 	                                </div>
-	                                <div class="view-product-icon">
-	                                    <span class="material-symbols-outlined view-icon">visibility</span>
-	                                    <span class="view-cnt"><%=p.getViewCount() %></span>
-	                                    <span class="material-symbols-outlined view-icon">chat_bubble</span>
-	                                    <span class="view-cnt">3</span>
+	                                <div class="view-product-icon" style="display:flex;justify-content: center;">
+	                                    <div class="material-symbols-outlined view-icon">visibility</div>
+	                                    <div class="view-cnt" style="margin-top: 1px; margin-left: 5px;"><%=p.getViewCount() %></div>
+	                                    <div class="material-symbols-outlined view-icon" style="margin-left: 10px;">chat_bubble</div>
+	                                    <div class="view-cnt" style="margin-left: 5px;">?</div>
 	                                </div>
 	                            </div>
 	                        </div>
@@ -143,20 +152,7 @@
             <div class="view-product-content">
                 <div class="page-title">상품 내용</div>
                 <div class="view-content-text">
-                	<li><%=p.getProductContent() %></li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
-                    <li>어쩌고 저쩌고</li>
+                	<div><%=p.getProductContent() %></div>
                 </div>
             </div>
             <div class="view-product-seller">
@@ -165,8 +161,9 @@
                     <span class="material-icons seller">face_1</span>
                     <div class="view-seller-desc">
                         <div class="view-seller-name"><%=p.getSellerId() %>님</div>
-                        <div class="view-seller-grade">이메일인증회원</div>
-                        <div class="view-seller-temper">온도 36.5 ℃</div>
+                        <!-- 1:관리자 2:이메일 인증회원 3:이메일 미인증회원 4:사기회원 -->
+                        <div class="view-seller-grade">이메일 인증 회원</div>
+                        <div class="view-seller-temper">온도 ??.? ℃</div>
                     </div>
                 </div>
                 <div class="view-seller-box">
@@ -468,6 +465,16 @@
 				location.href="/deleteProductComment.do?pdNo="+pdNo+"&productNo="+productNo;
 			}
 		}
+		
+		
+		$(document).ready(function(){
+		// 화폐 표시
+		const productMoney = $("#view-product-price>span");
+		console.log(productMoney);
+		const commaMoney = productMoney.text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		productMoney.text(commaMoney+"원");
+		console.log(commaMoney);
+        });
 		
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

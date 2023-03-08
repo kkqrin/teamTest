@@ -7,6 +7,7 @@ public class ProductViewData {
 	private ArrayList<ProductComment> commentList;
 	private ArrayList<ProductComment> reCommentList;
 	private ArrayList<Product> wishList;
+	private Category c;
 
 	public ProductViewData() {
 		super();
@@ -14,12 +15,13 @@ public class ProductViewData {
 	}
 
 	public ProductViewData(Product p, ArrayList<ProductComment> commentList, ArrayList<ProductComment> reCommentList,
-			ArrayList<Product> wishList) {
+			ArrayList<Product> wishList, Category c) {
 		super();
 		this.p = p;
 		this.commentList = commentList;
 		this.reCommentList = reCommentList;
 		this.wishList = wishList;
+		this.c = c;
 	}
 
 	public Product getP() {
@@ -52,6 +54,14 @@ public class ProductViewData {
 
 	public void setWishList(ArrayList<Product> wishList) {
 		this.wishList = wishList;
+	}
+
+	public Category getC() {
+		return c;
+	}
+
+	public void setC(Category c) {
+		this.c = c;
 	}
 
 }

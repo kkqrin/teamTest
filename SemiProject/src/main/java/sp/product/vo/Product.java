@@ -18,6 +18,9 @@ public class Product {
 	private int wishProductNo;
 	private int wishCount;
 
+	private String enrollMonth;
+	private String enrollDay;
+
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -25,7 +28,8 @@ public class Product {
 
 	public Product(int productNo, int categoryNo, String sellerId, String productTitle, int productStatus,
 			int productPrice, int viewCount, String productContent, String enrollDate, String productArea,
-			String filename, String filepath, int memberNo, int wishProductNo, int wishCount) {
+			String filename, String filepath, int memberNo, int wishProductNo, int wishCount, String enrollMonth,
+			String enrollDay) {
 		super();
 		this.productNo = productNo;
 		this.categoryNo = categoryNo;
@@ -42,6 +46,8 @@ public class Product {
 		this.memberNo = memberNo;
 		this.wishProductNo = wishProductNo;
 		this.wishCount = wishCount;
+		this.enrollMonth = enrollMonth;
+		this.enrollDay = enrollDay;
 	}
 
 	public int getProductNo() {
@@ -162,6 +168,22 @@ public class Product {
 
 	public void setWishCount(int wishCount) {
 		this.wishCount = wishCount;
+	}
+
+	public String getEnrollMonth() {
+		return enrollMonth;
+	}
+
+	public void setEnrollMonth(String enrollMonth) {
+		this.enrollMonth = enrollMonth;
+	}
+
+	public String getEnrollDay() {
+		return enrollDay;
+	}
+
+	public void setEnrollDay(String enrollDay) {
+		this.enrollDay = enrollDay;
 	}
 
 }
