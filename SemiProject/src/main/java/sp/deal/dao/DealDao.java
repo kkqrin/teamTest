@@ -102,11 +102,10 @@ public class DealDao {
 	public int insertDeal2(Connection conn, int productNo, int memberNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into deal values(deal_seq.nextval,?,?,null,to_char(sysdate, 'yyyy-mm-dd hh:mi:ss'))";
+		String query = "update deal set complete_date = TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS') where product_no=?";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, productNo);
-			pstmt.setInt(2, memberNo);
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

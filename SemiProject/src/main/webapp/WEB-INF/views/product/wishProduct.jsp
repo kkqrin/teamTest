@@ -17,6 +17,12 @@
 	.wish-product-status{
 		text-align: center;
 	}
+	.page-content>.page-title{
+		text-align: center;
+    	margin: 50px auto;
+    	margin-top: 0px;
+    	padding: 30px;
+	}
 	
 	
 /*    .posting-item{

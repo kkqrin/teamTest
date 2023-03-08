@@ -16,6 +16,7 @@
 </head>
     <body>
     <%@include file="/WEB-INF/views/common/header.jsp" %>
+    	<div class="page-content">
         <div class="myPage-wrap">
             <div class="myPage-menu">
                 <div class="myPage-title">
@@ -25,7 +26,7 @@
                     <div class="mypage-content-list more">
                         <div class="sub-title">쇼핑 정보</div>
                         <ul class="sub-menu">
-                            <li><a href="#">거래 내역</a></li>
+                            <li><a href="/selectMydeal.do?memberNo=<%=m.getMemberNo()%>">거래 내역</a></li>
                             <li> <a href="/myStore.do?sellerId=<%=m.getMemberId()%>&loginId=<%=m.getMemberId()%>">내 상점</a></li>
                         </ul>
                     </div>
@@ -102,6 +103,7 @@
                   <button type="button" class="bc3" style="border-radius:10px;">SHOP바로가기</button>
                 </div>
             </div> -->
+        </div>
         </div>
         <script>
             $(".sub-title").on("click", function(){
