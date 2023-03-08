@@ -182,13 +182,33 @@
 	                        <%if(p.getProductStatus()== 0) {%>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
 	                        <%}else if(p.getProductStatus()== 1) {%>
-	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 done-btn">구매확정</a>
+	                        <a <%--href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" --%> class="btn bc1 bs3 done-btn modal-open-btn moaal-btn" id="modal-ajax" target="#test-modal">구매확정</a>
 	                        <%}%>
 	                    </div>
 	                    <%} %>
 	                </div>
 	        </div>
 	    </div>
+	    
+	    
+	    <div id="test-modal" class="modal-bg">
+			<div class="modal-wrap">
+				<div class="modal-head">
+					<h2>거래 내역 조회</h2>
+					<span class="material-icons close-icon modal-close">close</span>
+				</div>
+				<div class="modal-content">
+					<table class="tbl" id="result">
+					</table>
+				</div>
+				<div class="modal-foot">
+					<button class="btn bc11 modalCheck">확인</button>
+					<button class="btn bc1 modal-close">취소</button>
+				</div>
+			</div>
+		</div>
+	
+	
 	    <div class="view-container-bottom">
             <div class="view-product-content">
                 <div class="page-title">상품 내용</div>
@@ -519,7 +539,10 @@
 		console.log(commaMoney);
         });
 		
+	//거래완료 모달창
+	$("#modal-ajax").on("click",function(){
 		
+	});
 
 		
 	</script>

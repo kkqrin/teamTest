@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import sp.member.vo.Member;
 
 /**
  * Servlet implementation class NoticeWriteFrmServlet
@@ -31,6 +34,31 @@ public class NoticeWriteFrmServlet extends HttpServlet {
 		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
 		//2. 값추출
+		HttpSession session = request.getSession(false);
+		Member m = (Member) session.getAttribute("m");
+		
+		if (m != null) {
+			// 로그인 된 경우
+				if(m.getMemberGrade() != 1) {
+					RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
+					request.setAttribute("title", "???");
+					request.setAttribute("msg", "관리자만 이용 가능합니다.");
+					request.setAttribute("icon", "warning");
+					request.setAttribute("loc", "/");
+					view.forward(request, response);
+					return;
+				}
+				
+		}else {
+			// 로그인을 하지 않은 상태
+					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
+					request.setAttribute("title", "접근제한");
+					request.setAttribute("msg", "로그인 후 이용 가능합니다.");
+					request.setAttribute("icon", "info");
+					request.setAttribute("loc", "/");
+					view.forward(request, response);
+					return;
+		}
 		//3. 비지니스로직
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeWriteFrm.jsp");
