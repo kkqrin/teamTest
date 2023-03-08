@@ -53,7 +53,7 @@
 			<tr class="td-0">
 				<th colspan="6">
 					<div id="noticeQuestionContent">
-						<%=nq.getFaqContent() %>
+						<%=nq.getFaqContentBr() %>
 					</div>
 				</th>
 			</tr>

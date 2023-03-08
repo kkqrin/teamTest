@@ -47,6 +47,9 @@ public class NoticeQuestion {
 	public String getFaqContent() {
 		return faqContent;
 	}
+	public String getFaqContentBr() {
+		return faqContent.replaceAll("\r\n", "<br>");
+	}
 	public void setFaqContent(String faqContent) {
 		this.faqContent = faqContent;
 	}
