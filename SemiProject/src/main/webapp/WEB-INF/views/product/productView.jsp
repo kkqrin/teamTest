@@ -141,8 +141,11 @@
 	                    <div class="view-product-btn">
 	                        <a class="btn bc1 bs3 modal-open-btn" target="#login-modal">사기 조회</a>
 	                        <a href="#" class="btn bc1 bs3">판매자에게 쪽지보내기</a>
-	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3">예약하기</a>
-	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3" style="display:none;">거래완료</a>
+	                        <%if(p.getProductStatus()== 0) {%>
+	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
+	                        <%}else if(p.getProductStatus()== 1) {%>
+	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 done-btn">구매확정</a>
+	                        <%}%>
 	                    </div>
 	                    <%} %>
 	                </div>
@@ -166,9 +169,11 @@
                         <div class="view-seller-temper">온도 ??.? ℃</div>
                     </div>
                 </div>
+                <%if(m != null) {%>
                 <div class="view-seller-box">
-                    <button class="btn bc3 bs4" style="padding:20px; font-size:16px">판매자 상점 가기</button>
+                    <a href="/myStore.do?sellerId=<%=p.getSellerId() %>&loginId=<%=m.getMemberId() %>" class="btn bc3 bs4" style="padding:20px; font-size:16px">판매자 상점 가기</a>
                 </div>
+                <%} %>
             </div>
         </div>
         
@@ -475,6 +480,9 @@
 		productMoney.text(commaMoney+"원");
 		console.log(commaMoney);
         });
+		
+		
+
 		
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

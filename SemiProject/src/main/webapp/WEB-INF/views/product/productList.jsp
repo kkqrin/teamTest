@@ -45,6 +45,7 @@
     #pageNavi{
     	padding-top: 30px;
     	padding-bottom: 30px;
+    	margin: 30px auto;
     }
     .naviHide {
 	display: none;
@@ -79,7 +80,7 @@
 			</div>	
 			
 			<div class="div-posting-wrap">
-		        <div class="posting-wrap">        
+		        <div class="posting-wrap" style="margin-top: 50px;">        
 					<%for(int i=0; i<list.size();i++) {%>
 						<%Product p = list.get(i); %>
 			            <div class="posting-item">

@@ -36,14 +36,24 @@ public class MyStoreServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		// 2. 값 추출
 		String sellerId = request.getParameter("sellerId");
+		String loginId = request.getParameter("loginId");
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
 		ArrayList<Product> list = service.selectMyStore(sellerId);
 		
 		// 4. 결과 처리
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/myStore.jsp");
-		request.setAttribute("list", list);
-		view.forward(request, response);
+		if(sellerId.equals(loginId)) {
+			// 판매자 = 로그인아이디 같으면 내 상점
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/myStore.jsp");
+			request.setAttribute("list", list);
+			view.forward(request, response);			
+		}else {
+			// 다르면 판매자 상점
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/sellerStore.jsp");
+			request.setAttribute("list", list);
+			request.setAttribute("sellerId", sellerId);
+			view.forward(request, response);
+		}
 	}
 
 	/**

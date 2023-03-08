@@ -17,6 +17,8 @@
 	.wish-product-status{
 		text-align: center;
 	}
+	
+	
 /*    .posting-item{
         position: relative;
     }
@@ -63,7 +65,7 @@
 	                            </div>
 	                        </div>
 	                        <div class="posting-info">
-	                            <span class="posting-area">??동</span>
+	                            <span class="posting-area"></span>
 	                            <span class="posting-time"><%=p.getEnrollMonth() %>월 <%=p.getEnrollDay() %>일</span>
 	                        </div>
 	                    </div>
