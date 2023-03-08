@@ -167,7 +167,7 @@
 		if($('[name=status]').val() != 3){
 			$('[name=status]').val(Number($('[name=status]').val())+1);
 			const val = $('[name=status]').val();
-			const li = $("<li class='hFile'>");
+			const li = $("<li>");
 			const input = $("<input type='file' accept=''.jsp,.png,.jpeg' name='upfile"+val+"'><img class='minusBtn' onclick='minusBtn(this);' src='/img/minus.png'>");
 			li.append(input);
 			$(this).parent().parent().append(li);
@@ -177,12 +177,18 @@
 		});
 		
 		function minusBtn(obj){
-			$(obj).parent().remove();
-			const index = $('[name=status]').val();
-			$(".img"+(index)).remove();
-			const img = $("<img class='img2'  src='#'>")
-			$('.img-box').children().eq(index-1).append(img);
+			const index = $(".minusBtn").index(obj);
+			console.log(index);
+			const status = $('[name=status]').val();
+			if(status == 3 && index == 0){
+				alert('순서대로 삭제해주세요');
+			}else{
+			$(".img"+(index+2)).remove();
+			const img = $("<img class='img"+(index+2)+"'  src='#'>")
+			$('.img-box').children().eq(index+1).append(img);
 			$('[name=status]').val(Number($('[name=status]').val())-1);
+			$(obj).parent().remove();
+			}
 		}
 	
 	
