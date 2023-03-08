@@ -38,6 +38,9 @@
     	font-weight: bold;
     	
 	}
+	.tab-content{
+		height: 100%;
+	}
 	.tab-content>div{
     	padding: 50px 30px;
     	box-sizing: border-box;
@@ -49,24 +52,13 @@
 	.nq-detail{
     	height: 100%;
     	overflow: hidden;
-    	position: relative;
+    	position : relative;
 	}
 	.page-title{
 		font-size : 40px;
 		font-weight : bold;
 	}
-	.common{
-		display : none;
-	}
-	.use{
-		display : none;
-	}
-	.buy{
-		display : none;
-	}
-	.sell{
-		display : none;
-	}
+	
 </style>
 </head>
 <body>
@@ -87,24 +79,21 @@
 		</div>
 		<div class="tab-content">
 			<div class="nq-detail">
-			<%-- for --%>
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
 			<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:15%">번호</th>
-				<th style="width:35%">질문제목</th>
+				<th style="width:35%">제목</th>
 				<th style="width:20%">유형</th>
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%
-			index=1;
-			for(int i=0;i<list.size();i++) {%>
+			<%for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 			<tr class="tr-1">
-				<th><%=index++ %></th>
+				<th><%=i+start %></th>
 				<th>
 					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 					<%=nq.getFaqTitle() %></a>
@@ -127,16 +116,14 @@
 			</table>
 				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
-			<div>
-			<%-- for
-					if() --%>
+			<div class="nq-detail">
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
 			<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:15%">번호</th>
-				<th style="width:35%">질문제목</th>
+				<th style="width:35%">제목</th>
 				<th style="width:20%">유형</th>
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
@@ -150,7 +137,8 @@
 					<th>
 						<a><%=index++ %></a>
 					</th>
-					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+					<td>
+						<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
 						</a>
 					</td>
@@ -165,18 +153,15 @@
 				<%} %>
 			<%} %>
 			</table>
-				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
-			<div>
-			<%-- for
-					if() --%>
+			<div class="nq-detail">
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
 			<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:15%">번호</th>
-				<th style="width:35%">질문제목</th>
+				<th style="width:35%">제목</th>
 				<th style="width:20%">유형</th>
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
@@ -190,7 +175,8 @@
 					<th>
 						<a><%=index++ %></a>
 					</th>
-					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+					<td>
+						<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
 						</a>
 					</td>
@@ -205,18 +191,15 @@
 				<%} %>
 			<%} %>
 			</table>
-				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
-			<div>
-			<%-- for
-					if() --%>
+			<div class="nq-detail">
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
 			<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:15%">번호</th>
-				<th style="width:35%">질문제목</th>
+				<th style="width:35%">제목</th>
 				<th style="width:20%">유형</th>
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
@@ -230,7 +213,8 @@
 					<th>
 						<a><%=index++ %></a>
 					</th>
-					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+					<td>
+						<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
 						</a>
 					</td>
@@ -245,18 +229,15 @@
 				<%} %>
 			<%} %>
 			</table>
-				<div id="pageNavi"><%=pageNavi %></div>				
 			</div>
-			<div>
-			<%-- for
-					if() --%>
+			<div class="nq-detail">
 			<%if(m!=null && m.getMemberNo() == 1) {%>
 			<a class="btn bc1 bs1" href="/noticeQuestionWriteFrm.do">글쓰기</a>
 			<%} %>
 			<table class="tbl tbl-hover notice-tbl">
 			<tr class="tr-1">
 				<th style="width:15%">번호</th>
-				<th style="width:35%">질문제목</th>
+				<th style="width:35%">제목</th>
 				<th style="width:20%">유형</th>
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
@@ -270,7 +251,8 @@
 					<th>
 						<a><%=index++ %></a>
 					</th>
-					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
+					<td>
+						<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
 						</a>
 					</td>
@@ -285,7 +267,6 @@
 				<%} %>
 			<%} %>
 			</table>
-				<div id="pageNavi"><%=pageNavi %></div>
 			</div>
 		</div>		
  	</div>
@@ -312,6 +293,7 @@
 		activeLi.classList.add("active-tab");
 		activeContent.classList.add("active-content");
 	}
+	
 	</script>
 </body>
 </html>
