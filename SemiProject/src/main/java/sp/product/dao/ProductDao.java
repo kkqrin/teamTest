@@ -53,7 +53,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into product values(product_seq.nextval, ?, ?, ?, 0, ?, 0, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?, ?)";
+		String query = "insert into product values(product_seq.nextval, ?, ?, ?, 0, ?, 0, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -65,6 +65,10 @@ public class ProductDao {
 			pstmt.setString(6, p.getProductArea());
 			pstmt.setString(7, p.getFilename());
 			pstmt.setString(8, p.getFilepath());
+			pstmt.setString(9, p.getFilename2());
+			pstmt.setString(10, p.getFilepath2());
+			pstmt.setString(11, p.getFilename3());
+			pstmt.setString(12, p.getFilepath3());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -289,6 +293,10 @@ public class ProductDao {
 				p.setProductTitle(rset.getString("product_title"));
 				p.setSellerId(rset.getString("seller_id"));
 				p.setViewCount(rset.getInt("view_count"));
+				p.setFilename2(rset.getString("filename2"));
+				p.setFilepath2(rset.getString("filepath2"));
+				p.setFilename3(rset.getString("filename3"));
+				p.setFilepath3(rset.getString("filepath3"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -547,7 +555,7 @@ public class ProductDao {
 		ResultSet rset = null;
 		ArrayList<Product> list = new ArrayList<Product>();
 		
-		String query = "select * from (select rownum as rnum, n.* from (select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day,product_area,filename,filepath,wish_count from (select p.*,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by wish_count desc) where wish_count != 0)n) where rnum between 1 and 8";
+		String query = "select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,month,day,product_area,filename,filepath,wish_count from (select rownum as rnum, n.* from (select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day,product_area,filename,filepath,wish_count from (select p.*,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by wish_count desc) where wish_count != 0)n) where rnum between 1 and 8";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -607,9 +615,33 @@ public class ProductDao {
 			JDBCTemplate.close(pstmt);
 			JDBCTemplate.close(rset);
 		}
-		
 		return c;
 	}
+	public Product selectProductMemberNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Product p = null;
+		String query = "select member_no from product p left join member_tbl m on (p.seller_id = m.member_id)where product_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p = new Product();
+				p.setMemberNo(rset.getInt("member_No"));
+			}
+					
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return p;
+	}
+
+	
 
 	public ArrayList<Product> selectNewProduct(Connection conn) {
 		PreparedStatement pstmt = null;
@@ -617,7 +649,7 @@ public class ProductDao {
 		ArrayList<Product> list = new ArrayList<Product>();
 		
 //		String query = "SELECT * FROM (SELECT ROWNUM AS RNUM, N.* FROM ( SELECT PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH FROM PRODUCT LEFT JOIN CATEGORY USING (CATEGORY_NO) ORDER BY 1 DESC )N) WHERE RNUM BETWEEN 1 AND 8";
-		String query = "select * from (select rownum as rnum, n.* from (select p.*,(SELECT count(*) FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by 1 desc)n) where rnum between 1 and 8";
+		String query = "select rnum,product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day,product_area,filename,filepath,wish_count from (select rownum as rnum, n.* from (select p.*,(SELECT count(*) FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by 1 desc)n) where rnum between 1 and 8";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -633,7 +665,9 @@ public class ProductDao {
 				p.setProductPrice(rset.getInt("product_price"));
 				p.setViewCount(rset.getInt("view_count"));
 				p.setProductArea(rset.getString("product_area"));
-				p.setEnrollDate(rset.getString("enroll_date"));
+				//p.setEnrollDate(rset.getString("enroll_date"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
 				p.setFilepath(rset.getString("filepath"));
 				p.setWishCount(rset.getInt("wish_count"));
 				list.add(p);
@@ -683,8 +717,7 @@ public class ProductDao {
 		}
 		
 		return list;
-	}
-
-
-
+	}		
 }
+
+

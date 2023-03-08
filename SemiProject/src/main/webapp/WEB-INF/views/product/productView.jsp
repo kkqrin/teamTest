@@ -74,7 +74,45 @@
 	<div class="page-content">
         <div class="view-container">
             <div class="view-product">
-                <div class="view-product-img">
+            
+            
+        <div class="view-product-img">
+            
+            
+            
+            <!-- 캐러셀 -->
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="2000">
+                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">arrow_back_ios</span>
+                </span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true">
+                    <span class="material-symbols-outlined">arrow_forward_ios</span>
+                </span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+            
+            
+            
+            
+            
                     <img src="/upload/product/<%=p.getFilepath()%>">
                 </div>
                 <div class="view-product-info">
@@ -141,8 +179,11 @@
 	                    <div class="view-product-btn">
 	                        <a class="btn bc1 bs3 modal-open-btn" target="#login-modal">사기 조회</a>
 	                        <a href="#" class="btn bc1 bs3">판매자에게 쪽지보내기</a>
-	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3">예약하기</a>
-	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3" style="display:none;">거래완료</a>
+	                        <%if(p.getProductStatus()== 0) {%>
+	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
+	                        <%}else if(p.getProductStatus()== 1) {%>
+	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 done-btn">구매확정</a>
+	                        <%}%>
 	                    </div>
 	                    <%} %>
 	                </div>
@@ -166,9 +207,11 @@
                         <div class="view-seller-temper">온도 ??.? ℃</div>
                     </div>
                 </div>
+                <%if(m != null) {%>
                 <div class="view-seller-box">
-                    <button class="btn bc3 bs4" style="padding:20px; font-size:16px">판매자 상점 가기</button>
+                    <a href="/myStore.do?sellerId=<%=p.getSellerId() %>&loginId=<%=m.getMemberId() %>" class="btn bc3 bs4" style="padding:20px; font-size:16px">판매자 상점 가기</a>
                 </div>
+                <%} %>
             </div>
         </div>
         
@@ -475,6 +518,9 @@
 		productMoney.text(commaMoney+"원");
 		console.log(commaMoney);
         });
+		
+		
+
 		
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

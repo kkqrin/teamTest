@@ -17,7 +17,7 @@ public class DealDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Deal> list = new ArrayList<Deal>();
-		String query = "select * from deal left join member_tbl using (member_no) left join product using (product_no)";
+		String query = "select * from deal left join member_tbl using (member_no) left join product using (product_no) order by deal_no";
 		try {
 			pstmt = conn.prepareStatement(query);
 			rset = pstmt.executeQuery();
@@ -93,7 +93,7 @@ public class DealDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			JDBCTemplate.close(conn);
+			JDBCTemplate.close(pstmt);
 		}
 		return result;
 		
@@ -115,5 +115,27 @@ public class DealDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
+	}
+
+	public Deal selectProductNo(Connection conn, int memberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Deal d = null;
+		String query = "select product_no from deal where member_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				d = new Deal();
+				d.setProductNo(rset.getInt("product_no"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return d;
 	}
 }

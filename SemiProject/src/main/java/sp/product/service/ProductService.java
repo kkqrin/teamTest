@@ -291,4 +291,10 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	public Product selectProductMemberNo(int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Product p = dao.selectProductMemberNo(conn,productNo);
+		JDBCTemplate.close(conn);
+		return p;
+	}
 }

@@ -101,4 +101,16 @@ public class ReportService {
 		return pact;
 	}
 
+	public int insertReport(Report r) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = dao.insertReport(conn, r);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 }

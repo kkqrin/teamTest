@@ -23,20 +23,20 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="page-content">
-		<div class="page-title">신고게시판 작성</div>
-		<%--사진 첨부시 post, multipart 항상 고정 --%>
 		<%if (m != null) {%>
+		<div class="page-title">신고접수</div>
+		<%--사진 첨부시 post, multipart 항상 고정 --%>
 		<form action="reportWrite.do" method="post" enctype="multipart/form-data">
 			<table class="tbl reportWrite">
 				<tr class="tr-1">
 					<th class="td-2">신고유형</th>
 					<td colspan="3" style="padding-left: 20px; font-size: 14px">
 						<label for="report-type1">
-						<input type="radio" id="report-type1" name="report" values="0">
+						<input type="radio" id="report-type1" name="reportType" value="0">
 						입금
 						</label>
 					 	<label for="report-type2"style="margin-left: 30px;">
-					 	<input type="radio" id="report-type2" name="report" values="1">
+					 	<input type="radio" id="report-type2" name="reportType" value="1">
 					 	배송
 					 	</label>
 					 </td>
@@ -44,13 +44,18 @@
 				</tr>
 				<tr class="tr-1">
 					<th class="td-2">거래 내역</th>
-					<td colspan="3">
+					<td colspan="3" class="td-hidden">
 						<span class="modal-result" style="font-family:nn-b;">거래 내역을 선택해주세요▶</span>
-						<%--회원번호 호출(사기꾼) --%>
+						<%--내 거래내역 조회(모달출력), select * from deal where member_no=2; -- 상품번호 출력 --%>
 						<input type="hidden" id="memberNo" name="memberNo" value="<%=m.getMemberNo()%>">
 						<button type="button" class="btn bc11 modal-open-btn"id="modal-ajax" target="#test-modal" style="margin-left: 10px;">
 						거래 내역 조회
 						</button>
+						<%-- 거래 내역 조회 --%>
+						<input type="hidden" name="productNo">
+						<input type="hidden" name="productTitle">
+						<input type="hidden" name="sellerId">				
+						
 					</td>
 				</tr>
 				<tr class="tr-1">
@@ -99,11 +104,7 @@
 				<span class="material-icons close-icon modal-close">close</span>
 			</div>
 			<div class="modal-content">
-				<%-- 거래 내역 조회 --%>
-				<input type="text" name="productNo">
-				<input type="text" name="productTitle">
-				<input type="text" name="sellerId">				
-				
+
 				<table class="tbl" id="result">
 				</table>
 			</div>
@@ -113,8 +114,8 @@
 			</div>
 		</div>
 	</div>
-	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 		<%}%>
+	<%@include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 		function loadImg(f) {
 			//첨부파일이 여러개일 수 있어서 항상 배열처리
@@ -134,7 +135,7 @@
 				$("#img-view").attr("src", "");
 			}
 		}
-		//ajax
+		//ajax 모달출력
 		$("#modal-ajax").on("click", function() {
 			const memberNo = $("#memberNo").val();
 			const result = $("#result");
@@ -243,6 +244,28 @@
 			 const productTitle = $("[name=productTitle]").val();
 			 const sellerId = $("[name=sellerId]").val();
 			 $(".modal-result").text("상품번호 : "+productNo+" / "+" 상품제목 : "+productTitle+" / "+" 판매자 : "+sellerId);
+			 
+			 //ajax 판매자 회원번호 출력
+			 const result = $(".td-hidden");
+			 $.ajax({
+				url : "/ajaxProductMemberNo.do",
+				type : "post",
+				data : {productNo : productNo},
+				dataType : "json",
+				success : function(data){
+					console.log(data)
+					//const p = data;
+					const input = $("<input>");
+					input.attr("type","hidden");
+					input.attr("name","memberNo");
+					input.attr("value",data.memberNo);
+					result.append(input);
+				},
+				error : function(){
+						console.log("서버 호출 실패");
+				}
+			 });
+			 
 		});
 		
 		

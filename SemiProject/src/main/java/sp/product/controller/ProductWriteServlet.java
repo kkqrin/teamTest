@@ -51,8 +51,12 @@ public class ProductWriteServlet extends HttpServlet {
 		int productPrice = Integer.parseInt(mRequest.getParameter("productPrice"));
 		String productContent = mRequest.getParameter("productContent");
 		String memberAddr = mRequest.getParameter("memberAddr");
-		String filename = mRequest.getOriginalFileName("upfile");
-		String filepath = mRequest.getFilesystemName("upfile");
+		String filename = mRequest.getOriginalFileName("upfile1");
+		String filepath = mRequest.getFilesystemName("upfile1");
+		String filename2 = mRequest.getOriginalFileName("upfile2");
+		String filepath2 = mRequest.getFilesystemName("upfile2");
+		String filename3 = mRequest.getOriginalFileName("upfile3");
+		String filepath3 = mRequest.getFilesystemName("upfile3");
 		
 		Product p = new Product();
 		p.setCategoryNo(categoryNo);
@@ -64,6 +68,10 @@ public class ProductWriteServlet extends HttpServlet {
 		p.setProductArea(memberAddr);
 		p.setFilename(filename);
 		p.setFilepath(filepath);
+		p.setFilename2(filename2);
+		p.setFilepath2(filepath2);
+		p.setFilename3(filename3);
+		p.setFilepath3(filepath3);
 		
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();

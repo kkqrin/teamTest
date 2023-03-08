@@ -15,9 +15,18 @@
 .page-content>div>.carousel-inner{
     width: 60%;
     margin: 0 auto;
+    z-index : 0;
 }
 .posting-wrap{
 	margin-bottom: 200px;
+}
+.posting-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
 }
 </style>
 <link rel="stylesheet" href="/css/carousel.css">
@@ -56,7 +65,7 @@
 
 
 
-		<div class="page-title">최신 등록 상품</div>
+		<div class="page-title" style="margin-top:50px;">최신 등록 상품</div>
 		<div class="posting-wrap new-wrap">
 			<%for(Product p : newList) {%>
             <div class="posting-item">
@@ -82,7 +91,7 @@
 	                        </div>
 	                        <div class="posting-info">
 	                            <!-- <span class="posting-area"><%--p.getProductArea() --%></span> -->
-	                            <span class="posting-time"><%=p.getEnrollDate() %></span>
+	                            <span class="posting-time"><%=p.getEnrollMonth() %>월 <%=p.getEnrollDay() %>일</span>
 	                        </div>
 	                    </div>
 	                </div>

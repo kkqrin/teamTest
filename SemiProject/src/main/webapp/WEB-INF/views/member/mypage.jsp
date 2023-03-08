@@ -26,7 +26,7 @@
                         <div class="sub-title">쇼핑 정보</div>
                         <ul class="sub-menu">
                             <li><a href="#">거래 내역</a></li>
-                            <li> <a href="/myStore.do?sellerId=<%=m.getMemberId()%>">내 상점</a></li>
+                            <li> <a href="/myStore.do?sellerId=<%=m.getMemberId()%>&loginId=<%=m.getMemberId()%>">내 상점</a></li>
                         </ul>
                     </div>
                     <div class="mypage-content-list more">
@@ -93,7 +93,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="mypage-home-content mypage-home-content2 wish">
+            <!--<div class="mypage-home-content mypage-home-content2 wish">
                 <div class="mypage-home-title mypage-home-title2">
                     <h3>관심상품</h3>
                 </div>
@@ -101,7 +101,7 @@
                   <p>추가하신 관심 상품이 없습니다</p>
                   <button type="button" class="bc3" style="border-radius:10px;">SHOP바로가기</button>
                 </div>
-            </div>
+            </div> -->
         </div>
         <script>
             $(".sub-title").on("click", function(){

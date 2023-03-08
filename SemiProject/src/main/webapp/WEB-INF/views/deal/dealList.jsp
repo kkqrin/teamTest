@@ -10,18 +10,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.deal-table{
+	font-size: 12px;
+}
+.member-grade>.title>h1{
+	fon-size:16px
+}
+.title>h1{
+	font-size : 20px;
+	}
+</style>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/common/admin.jsp" %>
 	<div class="member-grade table-title">
         <div class="title"><h1>예약/거래완료 내역 조회</h1></div>
-        <table class="grad-table tbl tbl-hover" style="width:90%;">
+        <table class="deal-table tbl tbl-hover" style="width:95%;">
             <tr class="tr-1">
                 <th>거래번호</th>
+                <th>판매자</th>
                 <th>상품번호</th>
                 <th>상품제목</th>
-                <th>판매자</th>
-                <th>상품금액</th>
                 <th>구매자</th>
                 <th>거래상태</th>
                 <th>예약완료일</th>
@@ -30,26 +40,18 @@
             <%for (Deal d : list){ %>
             <tr class="tr-0">
                 <td><%=d.getDealNo() %></td>
+                <td><%=d.getSellerId() %></td>
                 <td><%=d.getProductNo()%></td>
                 <td><%=d.getProductTitle() %></td>
-                <td><%=d.getSellerId() %></td>
-                <td><%=d.getProductPrice() %></td>
                 <td><%=d.getMemberId() %></td>
-                <td>
-                	<%if(d.getProductStatus()== 1) {%>
-                    <select class="btn bc0 bs1">
-                        <option value="1">판매중</option>   
-                        <option value="2" selected>예약중</option>   
-                        <option value="3">거래완료</option>   
-                    </select>
-                    <%}else if(d.getProductStatus() == 2){ %>
-                    <select class="btn bc0 bs1">
-                        <option value="1">판매중</option>   
-                        <option value="2">예약중</option>   
-                        <option value="3" selected>거래완료</option> 
-                    </select>
-                    <%} %>
-                </td>
+                
+                <%if(d.getProductStatus()== 0) {%>
+                <td>판매중</td>
+                <%}else if(d.getProductStatus()== 1) {%>
+                <td>예약중</td>   
+                <%}else if(d.getProductStatus() == 2){ %>
+                <td>거래완료</td>   										
+                <%} %>
                 
                 <%if(d.getReserveDate()==null){ %>
                 <td>-</td>
