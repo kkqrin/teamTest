@@ -13,7 +13,12 @@ public class Product {
 	private String productArea;
 	private String filename;
 	private String filepath;
-
+	private String filename2;
+	private String filepath2;
+	private String filename3;
+	private String filepath3;
+	
+	
 	private int memberNo;
 	private int wishProductNo;
 	private int wishCount;
@@ -43,7 +48,34 @@ public class Product {
 		this.wishProductNo = wishProductNo;
 		this.wishCount = wishCount;
 	}
+	
+	public Product(int productNo, int categoryNo, String sellerId, String productTitle, int productStatus,
+			int productPrice, int viewCount, String productContent, String enrollDate, String productArea,
+			String filename, String filepath, String filename2, String filepath2, String filename3, String filepath3,
+			int memberNo, int wishProductNo, int wishCount) {
+		super();
+		this.productNo = productNo;
+		this.categoryNo = categoryNo;
+		this.sellerId = sellerId;
+		this.productTitle = productTitle;
+		this.productStatus = productStatus;
+		this.productPrice = productPrice;
+		this.viewCount = viewCount;
+		this.productContent = productContent;
+		this.enrollDate = enrollDate;
+		this.productArea = productArea;
+		this.filename = filename;
+		this.filepath = filepath;
+		this.filename2 = filename2;
+		this.filepath2 = filepath2;
+		this.filename3 = filename3;
+		this.filepath3 = filepath3;
+		this.memberNo = memberNo;
+		this.wishProductNo = wishProductNo;
+		this.wishCount = wishCount;
+	}
 
+	
 	public int getProductNo() {
 		return productNo;
 	}
@@ -163,5 +195,38 @@ public class Product {
 	public void setWishCount(int wishCount) {
 		this.wishCount = wishCount;
 	}
+
+	public String getFilename2() {
+		return filename2;
+	}
+
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
+	}
+
+	public String getFilepath2() {
+		return filepath2;
+	}
+
+	public void setFilepath2(String filepath2) {
+		this.filepath2 = filepath2;
+	}
+
+	public String getFilename3() {
+		return filename3;
+	}
+
+	public void setFilename3(String filename3) {
+		this.filename3 = filename3;
+	}
+
+	public String getFilepath3() {
+		return filepath3;
+	}
+
+	public void setFilepath3(String filepath3) {
+		this.filepath3 = filepath3;
+	}
+
 
 }

@@ -14,6 +14,7 @@
 .page-content>div>.carousel-inner{
     width: 60%;
     margin: 0 auto;
+    z-index : 0;
 }
 
 </style>
@@ -98,9 +99,6 @@
 			<%} %>
         </div>
 
-	<%if(m!=null) {%>
-		ajsdfklakdlfjklsdafjklsdafkasdklflkasjfsdjfal
-	<%} %>
 
 
 

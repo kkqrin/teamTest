@@ -22,11 +22,12 @@
 		color: red;
 		font-size: 12px;
 		margin-left: 2px; 
-		  transition-duration: 0.5s;
+		transition-duration: 0.5s;
 	}
 	a:hover>.pc{
 	color: #eee;	
-}
+}	
+
 </style>
 
     <header>
@@ -120,6 +121,7 @@
         </ul>
     </header>
 <script>
+
 <%if(m!= null){%>
  $(document).ready(function(){
 	 

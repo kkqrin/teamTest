@@ -53,7 +53,7 @@ public class ProductDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into product values(product_seq.nextval, ?, ?, ?, 0, ?, 0, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?, ?)";
+		String query = "insert into product values(product_seq.nextval, ?, ?, ?, 0, ?, 0, ?, TO_CHAR(SYSDATE,'YYYY-MM-DD HH:mi:SS'), ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -65,6 +65,10 @@ public class ProductDao {
 			pstmt.setString(6, p.getProductArea());
 			pstmt.setString(7, p.getFilename());
 			pstmt.setString(8, p.getFilepath());
+			pstmt.setString(9, p.getFilename2());
+			pstmt.setString(10, p.getFilepath2());
+			pstmt.setString(11, p.getFilename3());
+			pstmt.setString(12, p.getFilepath3());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -287,6 +291,10 @@ public class ProductDao {
 				p.setProductTitle(rset.getString("product_title"));
 				p.setSellerId(rset.getString("seller_id"));
 				p.setViewCount(rset.getInt("view_count"));
+				p.setFilename2(rset.getString("filename2"));
+				p.setFilepath2(rset.getString("filepath2"));
+				p.setFilename3(rset.getString("filename3"));
+				p.setFilepath3(rset.getString("filepath3"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

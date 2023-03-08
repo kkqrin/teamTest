@@ -275,9 +275,9 @@
 	
 		
 		// 사진 업로드 여부 유효성 검사
-		$("[name=upfile]").on("change", function(){
+		$("[name=upfile1]").on("change", function(){
 			
-			console.log($("[name=upfile]").val());
+			console.log($("[name=upfile1]").val());
 			
 			if(!($(this).val())){
 				// console.log("첨부파일 없음");
