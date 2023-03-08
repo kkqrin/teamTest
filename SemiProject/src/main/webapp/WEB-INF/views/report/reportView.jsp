@@ -60,19 +60,19 @@
  		<div class="page-content" style="margin:0; margin-left: 290px;">
 		<div class="page-title">신고게시판</div>
 		<table class="tbl" id="boardView">
-			<tr class="tr-4">
+			<tr class="tr-1" style="background-color: rgba(238, 238, 238, 0.7);">
 				<th colspan="6">신고게시판</th>
 			</tr>
 			<tr class="tr-0">
-				<th class="td-4">신고자</th>
+				<th class="td-1">신고자</th>
 				<td><%=r.getReportMember() %></td>
-				<th class="td-4">작성일</th>
+				<th class="td-1">작성일</th>
 				<td><%=r.getEnrollDate() %></td>
-				<th class="td-4">판매자아이디</th>
+				<th class="td-1">판매자아이디</th>
 				<td><%=r.getMemberId() %></td>
 			</tr>
 			<tr class="tr-0">
-				<th class="td-4">첨부파일</th>
+				<th class="td-1">첨부파일</th>
 				<td colspan="5">
 					<%if(r.getFilename() != null){ %>
 					<img src="/img/file.png" width="16px">
