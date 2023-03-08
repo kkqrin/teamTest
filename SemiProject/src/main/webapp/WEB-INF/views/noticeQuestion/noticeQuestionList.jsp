@@ -6,6 +6,7 @@
     	ArrayList<NoticeQuestion> list = (ArrayList<NoticeQuestion>)request.getAttribute("list");
     	String pageNavi = (String)request.getAttribute("pageNavi");
     	int start = (int)request.getAttribute("start");
+    	int index = 1;
     %>
 <!DOCTYPE html>
 <html>
@@ -98,10 +99,12 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index=1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 			<tr class="tr-1">
-				<th><%=i+start %></th>
+				<th><%=index++ %></th>
 				<th>
 					<a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 					<%=nq.getFaqTitle() %></a>
@@ -138,14 +141,14 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index = 1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 				<% if(nq.getFaqCategory() == 0){ %>
 				<tr class="tr-1">
 					<th>
-						<a>
-							<%=i+start %>				
-						</a>
+						<a><%=index++ %></a>
 					</th>
 					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
@@ -178,14 +181,14 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index = 1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 				<% if(nq.getFaqCategory() == 1){ %>
 				<tr class="tr-1">
 					<th>
-						<a>
-							<%=i+start %>				
-						</a>
+						<a><%=index++ %></a>
 					</th>
 					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
@@ -218,14 +221,14 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index=1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 				<% if(nq.getFaqCategory() == 2){ %>
 				<tr class="tr-1">
 					<th>
-						<a>
-							<%=i+start %>				
-						</a>
+						<a><%=index++ %></a>
 					</th>
 					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>
@@ -258,14 +261,14 @@
 				<th style="width:20%">작성자</th>
 				<th style="width:10%">조회수</th>
 			</tr>
-			<%for(int i=0;i<list.size();i++) {%>
+			<%
+			index=1;
+			for(int i=0;i<list.size();i++) {%>
 				<%NoticeQuestion nq = list.get(i); %>
 				<% if(nq.getFaqCategory() == 3){ %>
 				<tr class="tr-1">
 					<th>
-						<a>
-							<%=i+start %>				
-						</a>
+						<a><%=index++ %></a>
 					</th>
 					<td><a href="/noticeQuestionView.do?faqNo=<%=nq.getFaqNo() %>">
 						<%= nq.getFaqTitle() %>

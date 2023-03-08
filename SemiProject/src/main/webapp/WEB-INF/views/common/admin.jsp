@@ -28,7 +28,7 @@
                 <span class="material-symbols-outlined chevron" style="color:#fff;">chevron_right</span>
             </a>
             <ul class="sub-menu">
-                <li><a href="#">공지사항</a></li>
+                <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
                 <li><a href="#">자유게시판</a></li>
                 <li><a href="#">자주묻는질문</a></li>
             </ul>
