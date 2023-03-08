@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("msg", "아이디 또는 비밀번호 확인해주세요");
 					request.setAttribute("icon", "error");
 					request.setAttribute("loc", "/");
-				} else {
+				} else if(member.getMemberGrade() == 4) {
 					if (member.getMemberGrade() == 4) {
 						request.setAttribute("title", "사기회원");
 						request.setAttribute("msg", "사기꾼은 로그인 할 수 없습니다");

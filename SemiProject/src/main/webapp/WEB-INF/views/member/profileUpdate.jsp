@@ -121,7 +121,7 @@
                               </div>
                               <div>
                                   <input type="text" name="email" id="email" class="mid-input" placeholder="예) secondhandlion@lion.com" value="<%=m.getMemberEmail()%>">
-                                  <button type="button" class="bc2 dup-btn" id="sendBtn">메일변경</button>
+                                  <button type="button" class="bc1 dup-btn" id="sendBtn">메일변경</button>
                               </div>
                           </div>
                           <div class="join-input-wrap emailCheck">
@@ -157,11 +157,11 @@
                               </div>
                               <div>
                                   <input type="text" name="detailAddress" id="detailAddress" class="mid-input" value="<%=m.getMemberAddr2()%>">
-                                  <button type="button" class="bc2 dup-btn" onclick="searchAddr();">주소변경</button>
+                                  <button type="button" class="bc1 dup-btn" onclick="searchAddr();">주소변경</button>
                               </div>
                           </div>
                           <div class="updateComplete">
-                              <button type="submit" class="bc2">수정하기</button>
+                              <button type="submit" class="bc1" id="updateComplete">수정하기</button>
                           </div>
                   </form>
         </div>
@@ -181,11 +181,12 @@
                 $(this).css("border-bottom", "1px solid #ccc");
             });
             
-            const result = [false,false,false];
+            const result = [true,true,true];
             $("[name = memberPw]").on("change",function(){
                 const pwReg = /^[a-zA-Z0-9!@#$^]{8,16}$/;
                 const inputPw = $(this).val();
                 const check = pwReg.test(inputPw);
+                $(this).next().next().empty();
                 if(check){
                     $(this).next().next().text("안전한 비밀번호 입니다.");
                     $(this).next().next().css("color","green");
@@ -201,12 +202,13 @@
             	const memberNameReg = /^[가-힣]{2,4}$/;
             	const memberName=$(this).val();
             	const memberNameCheck=memberNameReg.test(memberName);
+            	$(this).next().next().empty();
             	if(!memberNameCheck){
             		$(this).next().next().text("아이디는 한글로 2글자이상 4글자이하입니다.");
             		$(this).next().next().css("color","red");
-            		result[1]=true;
-            	}else{
             		result[1]=false;
+            	}else{
+            		result[1]=true;
             	}
             	
             });
@@ -224,6 +226,15 @@
             		result[2]=true;
             	}
             	});
+            
+            $("#updateComplete").on("click",function(event){
+            	if(!(result[0]&&result[1]&&result[2])){
+            		event.preventDefault();
+            		return false;
+            	}
+            });
+            
+            
             
         </script>
         <script src = "js/emailApi.js"></script>

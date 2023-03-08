@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel = "stylesheet" href= "/css/join.css">
-    <script src = "js/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href= "/css/join.css">
+    <script src="js/jquery-3.6.3.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
    <style>
             .modalCloseImg{
@@ -118,6 +118,10 @@ padding:10px 0;
     font-size: 18px;
     font-weight: bold;
 }
+
+.join-input-wrap input{
+	padding-top: 20px;
+}
     </style>
 </head>
 <body>
@@ -176,7 +180,7 @@ padding:10px 0;
                         <label for="memberPhone">전화번호<sup>*</sup></label>
                     </div>
                     <div>
-                        <input type="text" name="memberPhone" id="memberPhone" class = "long-input" placeholder="전화번호는 010으로 시작 - 포함 ex)010-1234-5678" required="required";>
+                        <input type="text" name="memberPhone" id="memberPhone" class = "long-input" placeholder="전화번호는 010으로 시작 - 포함 예) 010-1234-5678" required="required";>
                         <span class = "comment"></span>
                     </div>
                 </div>
@@ -198,6 +202,7 @@ padding:10px 0;
                         <button type="button" class="bc1 dup-btn"id="authBtn">인증하기</button>
                          <span id="timeZone"></span>
                         <span id="authMsg"></span>
+                        <input type="text" name="memberGrade" id=memberGrade >
                     </div>
                 </div>
                 <div class="join-input-wrap">
@@ -380,12 +385,15 @@ padding:10px 0;
                     </div>
                 </div>
                 <div class = "join-btn-wrap">
-                    <button type="submit" id="joinComplete">회원가입</button>
+                    <button class="bc1" type="submit" id="joinComplete">회원가입</button>
                 </div>
             </form>
         </div>
         </div>
  			<script>
+ 		
+ 			
+ 			
  			const result = [false,false,false,false,false,false,false];
  			
 			$("#memberId").on("keyup",function(){
@@ -423,8 +431,7 @@ padding:10px 0;
  			$("#memberPw2").on("change",function(){
  				const inputPw =$("#memberPw").val();
  				const memberPw2Val=$(this).val();
- 				console.log(inputPw);
- 				console.log(memberPw2Val);
+ 				$(this).next().empty();
  				if(inputPw == memberPw2Val){
  					$(this).next().text("비밀번호가 일치합니다.");
  					$(this).next().css("color","green");
@@ -469,7 +476,6 @@ padding:10px 0;
  			
  			$("#necessarycheck").on("click",function(){
  				const check = $(this).is(":checked");
- 				console.log(check);
  				if(check==true){
  					result[5]=true;
  				}else{
@@ -479,7 +485,6 @@ padding:10px 0;
  			
  			$("#subcheck1").on("click",function(){
  				const subchecked1 = $(this).is(":checked");
- 				console.log(subchecked1);
  				if(subchecked1==true){
  					result[6]=true;
  				}else{
@@ -499,19 +504,13 @@ padding:10px 0;
  			
  			
  			$("#joinComplete").on("click",function(event){
- 				if(!(result[0]&&result[1]&&result[2]&&result[3]&&result[4]&&result[5]&&result[6]&&result[7])){
+ 				if(!(result[0]&&result[1]&&result[2]&&result[3]&&result[4]&&(result[5]||result[6]&&result[7]))){
  					event.preventDefault();
  					return false;
  				}
  			});
- 			
- 			
- 			
-
-
 
  			$("#idChkBtn").on("click",function(){
- 				
  				const memberId =$("#memberId").val();
  				if(memberId==""){
  					alert("아이디를 입력하세요");
@@ -555,16 +554,19 @@ padding:10px 0;
 			if(mailCode==null){
 				$("#authMsg").text("인증 시간 만료");
 				$("#authMsg").css("color","red");
+				$("#memberGrade").val(3);
 			}else{
 			const authCode=$("#authCode").val();
 			if(authCode==mailCode){
 				$("#authMsg").prop("readonly",true);
 				$("#authMsg").text("인증완료");
 				$("#authMsg").css("color","green");
+				//$("#memberGrade").val(2);
 				window.clearInterval(intervalId)
 			}else{
 				$("#authMsg").text("인증실패");
 				$("#authMsg").css("color","red");
+				$("#memberGrade").val(3);
 			}
 			}
 		});

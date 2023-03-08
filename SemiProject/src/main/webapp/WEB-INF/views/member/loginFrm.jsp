@@ -208,7 +208,7 @@ h1 {
 								</div>
 								<div class="find-input">
 									<input type="text" name="memberPhone">
-									<button type="submit" class=".bc4" name="search"
+									<button type="submit" class="bc1" name="search"
 										style="margin-top: 10px; width: 100%; height: 30px;">찾기</button>
 								</div>
 								<div class="find-id">
@@ -217,7 +217,7 @@ h1 {
 									<p></p>
 								</div>
 							</div>
-							<button type="button" class=".bc4" id="close1"
+							<button type="button" class="bc1" id="close1"
 								style="width: 100%; height: 30px;">닫기</button>
 						</div>
 					</div>

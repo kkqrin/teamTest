@@ -87,7 +87,8 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "insert into member_tbl values(member_tbl_seq.nextval,?,?,?,?,?,3,to_char(sysdate,'yyyy-mm-dd'),?,?,?,0,36.5)";
+		
+		String query = "insert into member_tbl values(member_tbl_seq.nextval,?,?,?,?,?,?,to_char(sysdate,'yyyy-mm-dd'),?,?,?,0,36.5)";
 		
 		try {
 			pstmt =conn.prepareStatement(query);
@@ -96,9 +97,10 @@ public class MemberDao {
 			pstmt.setString(3,m.getMemberName());
 			pstmt.setString(4,m.getMemberPhone());
 			pstmt.setString(5,m.getMemberEmail());
-			pstmt.setString(6, m.getPostNumber());
-			pstmt.setString(7, m.getMemberAddr());
-			pstmt.setString(8, m.getMemberAddr2());
+			pstmt.setInt(6, m.getMemberGrade());
+			pstmt.setString(7, m.getPostNumber());
+			pstmt.setString(8, m.getMemberAddr());
+			pstmt.setString(9, m.getMemberAddr2());
 			result=pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -257,7 +259,7 @@ public class MemberDao {
 			pstmt.setString(1, m.getMemberPhone());
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
-				//이제 조회한 결과를 member객체로 member라는 변수에 모든 정보를 세팅함
+				
 				member = new Member();
 				member.setEnrollDate(rset.getString("enroll_date"));
 				member.setMemberAddr(rset.getString("member_addr"));
@@ -294,7 +296,7 @@ public class MemberDao {
 			pstmt.setString(1, memberId);
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
-				//이제 조회한 결과를 member객체로 member라는 변수에 모든 정보를 세팅함
+			
 				memberPhone = rset.getString("member_phone");
 			}
 		} catch (SQLException e) {
@@ -318,7 +320,7 @@ public class MemberDao {
 			pstmt.setString(1, memberId);
 			rset=pstmt.executeQuery();
 			if(rset.next()) {
-				//이제 조회한 결과를 member객체로 member라는 변수에 모든 정보를 세팅함
+			
 				memberEmail = rset.getString("member_email");
 			}
 		} catch (SQLException e) {
