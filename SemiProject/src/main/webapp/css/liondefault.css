@@ -81,6 +81,7 @@ header {
 
 header>.header-link {
     text-align: right;
+    width: 80vw;
 }
 
 header>.header-link>a {
@@ -155,7 +156,8 @@ header>.header-top {
     margin-top: 10px;
     position: absolute;
     top: 12px;
-    left: 450px;
+    left: 475px;
+    cursor: pointer;
 }
 
 .search-icon>span {

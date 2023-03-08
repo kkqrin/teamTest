@@ -18,6 +18,8 @@
 <title><%=p.getProductTitle() %> | 중 고 사 자</title>
     <!-- 상품 상세보기 css-->
     <link rel="stylesheet" href="/css/productView.css">
+    <!-- 캐러셀 -->
+    <link rel="stylesheet" href="/css/carousel.css">
     
 <style>
 	.inputCommentBox{
@@ -67,6 +69,12 @@
 		color : red;
 		font-size: 30px;
 	}
+	.w-100{
+		height: 600px;
+	}
+	.view-content-text>div>p>img{
+		width: 70% !important;
+	}
 </style>
 </head>
 <body>
@@ -80,41 +88,56 @@
             
             
             
-            <!-- 캐러셀 -->
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="2000">
-                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true">
-                    <span class="material-symbols-outlined">arrow_back_ios</span>
-                </span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true">
-                    <span class="material-symbols-outlined">arrow_forward_ios</span>
-                </span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+            <!-- 캐러셀 -->            
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+		  <div class="carousel-indicators">
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		    <%if(p.getFilepath2() != null) {%>
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		    <%} %>
+		    <%if(p.getFilepath3() != null) {%>
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		    <%} %>
+		  </div>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
+		    </div>
+		    <%if(p.getFilepath2() != null) {%>
+		    <div class="carousel-item">
+		      <img src="/upload/product/<%=p.getFilepath2()%>" class="d-block w-100" alt="...">
+		    </div>
+		    <%} %>
+		    <%if(p.getFilepath3() != null) {%>
+		    <div class="carousel-item">
+		      <img src="/upload/product/<%=p.getFilepath3()%>" class="d-block w-100" alt="...">
+		    </div>
+		    <%} %>
+		  </div>
+		  
+		  
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true">
+		  <%if(p.getFilepath2() != null ) {%>
+		    	<span class="material-symbols-outlined">arrow_back_ios</span>
+         <%} %>
+		    </span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true">
+		    <%if(p.getFilepath2() != null ) {%>
+		    	<span class="material-symbols-outlined">arrow_forward_ios</span>
+		    <%} %>
+		    </span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>    
+         
+          </div>
+         
             
-            
-            
-            
-            
-                    <img src="/upload/product/<%=p.getFilepath()%>">
-                </div>
+               
                 <div class="view-product-info">
 	                    <div class="view-product-info-top">
 	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %></div>
@@ -190,7 +213,7 @@
 	        </div>
 	    </div>
 	    <div class="view-container-bottom">
-            <div class="view-product-content">
+            <div class="view-product-content" style="width: 770px;">
                 <div class="page-title">상품 내용</div>
                 <div class="view-content-text">
                 	<div><%=p.getProductContent() %></div>
