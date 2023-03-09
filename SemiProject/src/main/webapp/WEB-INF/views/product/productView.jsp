@@ -69,6 +69,7 @@
 		color : red;
 		font-size: 30px;
 	}
+
 	.w-100{
 		height: 600px;
 	}
