@@ -189,7 +189,7 @@ padding:10px 0;
                         <label for="email" >이메일</label>
                     </div>
                     <div>
-                        <input type="email" name="email" id="email" class="mid-input" placeholder="예) secondhandlion@lion.com">
+                        <input type="email" name="email" id="email" class="mid-input" placeholder="예) secondhandlion@lion.com" required="required;">
                         <button type="button" class="bc1 dup-btn" id="sendBtn">메일전송</button>
                     </div>
                 </div>
@@ -233,7 +233,7 @@ padding:10px 0;
                 <div class="agree-check">
                     <input type="checkbox" name="check" id="necessarycheck">
                     <label for="necessarycheck" name="necessarycheck"></label>
-                    <lable class = "check-message">
+                    <lable class = "check-message" name="check-message1">
                         [필수]만 14세 이상이며 모두 동의합니다.
                     </lable>
                     
@@ -360,7 +360,7 @@ padding:10px 0;
                 <div class="agree-check">
                     <input type="checkbox" name="check" id="choicecheck">
                     <label for="choicecheck"></label>
-                    <lable class = "check-message">
+                    <lable class = "check-message" name="check-message2">
                         [선택]광고성 정보수신에 모두 동의합니다.
                     </lable>
                     <div class="plusImg">
@@ -655,7 +655,16 @@ padding:10px 0;
 	        modalCloseImg2.addEventListener("click",closeModal2);
 	        opentag.addEventListener("click",openModal2);
 
-	
+			
+	       
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+
 		</script>
       <script src = "/js/join.js"></script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

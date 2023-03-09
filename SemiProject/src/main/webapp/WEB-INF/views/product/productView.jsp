@@ -11,6 +11,7 @@
     ArrayList<Product> wishList = (ArrayList<Product>)request.getAttribute("wishList");
     Category c = (Category)request.getAttribute("c");
     Product h = (Product)request.getAttribute("Heart");
+    String sellerTemp = (String)request.getAttribute("sellerTemp");
     %>
 <!DOCTYPE html>
 <html>
@@ -84,6 +85,8 @@
 	
 }
 .modal-content{
+
+	overflow: hidden;
 }
 .input-radio input[type=radio]{
     display: none;
@@ -92,14 +95,15 @@
 .input-radio input[type=radio]+label{
     width: 20%;
     text-align: center;
-    padding: 10px;
-    border: 2px solid #252a34ab;
-    color: #252a34;
+    padding: 20px;
+    border: 2px solid #fff;
     font-family: nn-b;
     cursor: pointer;
     display: block;
+    float : left;
     box-sizing: border-box;
     margin-right :15px;
+    border-radius :20px
 }
 	.input-radio input[type=radio]:checked+label{
     background-color: #252a34;
@@ -276,7 +280,7 @@
                         <div class="view-seller-name"><%=p.getSellerId() %>님</div>
                         <!-- 1:관리자 2:이메일 인증회원 3:이메일 미인증회원 4:사기회원 -->
                         <div class="view-seller-grade">이메일 인증 회원</div>
-                        <div class="view-seller-temper">온도 ??.? ℃</div>
+                        <div class="view-seller-temper">온도 <%=sellerTemp %>℃</div>
                     </div>
                 </div>
                 <%if(m != null) {%>
@@ -448,25 +452,25 @@
 			<div id="complete-modal" class="modal-bg">
 			<div class="modal-wrap">
 				<div class="modal-head">
-					<h2>거래 내역 조회</h2>
+					<h2>구매평가</h2>
 					<span class="material-icons close-icon modal-close">close</span>
 				</div>
 				<div class="modal-content">
 					<div class=modal-title>
-						<h2>판매자님과의 거래는 어떠셨나요? 평가해주세요 ^ㅡ^</h2>
+						<h3 style="height:31px; text-align:center;"><%=p.getSellerId() %>님과의 거래는 어떠셨나요? 평가해주세요!</h2>
 					</div>
 					<div class="input-radio">
-						<input type="radio" name="temp" id="temp1" value="0">
-						<label for="temp1">별로</label>
+						<input type="radio" name="temp" id="temp1" value="0" >
+						<label for="temp1" class="btn bc8">별로에요</label>
 						
 						<input type="radio" name="temp" id="temp2" value="1">
-						<label for="temp2">보통</label>
+						<label for="temp2" class="btn bc6">보통</label>
 						
 						<input type="radio" name="temp" id="temp3" value="2">
-						<label for="temp3">좋아요</label>
+						<label for="temp3" class="btn bc7">좋아요</label>
 						
 						<input type="radio" name="temp" id="temp4" value="3">
-						<label for="temp4">최고예요</label>
+						<label for="temp4" class="btn bc5">최고예요</label>
 						
 						<input type="hidden" name="input-productNo" value="<%=p.getProductNo() %>">
 						<%--판매자 회원번호 --%>
