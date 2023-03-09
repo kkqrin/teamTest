@@ -15,24 +15,24 @@
 	<div class="page-content">
 	<div class="page-title"></div>
 			<form action="/boardWrite.do" method="post" enctype="multipart/form-data">
-				<table class="tbl"id="noticeWrite">
+				<table class="tbl"id="boardWrite">
 					<tr class="tr-1">
 						<th class="td-1">제목</th>
 						<td colspan="3">
-							<input type="text" name="noticeTitle" class="input-form">
+							<input type="text" name="boardTitle" class="input-form">
 						</td>
 					</tr>
 					<tr class="tr-1">
 						<th class="td-1">작성자</th>
 						<td><%=m.getMemberId()%>
-						<input type="hidden" name="noticeWriter" value="<%=m.getMemberId()%>">
+						<input type="hidden" name="boardWriter" value="<%=m.getMemberId()%>">
 						</td>
 						<th class="td-1">첨부파일</th>
 						<td><input type="file" name="upfile"></td>
 					</tr>
 					<tr class="tr-1">
 						<td colspan="4" style="text-align : left;">
-							<textarea id="noticeContent" name="noticeContent" class="input-form"></textarea>
+							<textarea id="boardContent" name="boardContent" class="input-form"></textarea>
 						</td>
 					</tr>
 					<tr class="tr-1">

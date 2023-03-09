@@ -72,7 +72,7 @@ public class BoardDao {
 	public int insertBoard(Connection conn, Board b) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into board values(board_seq.nextval,?,?,?,0,to_char(sysdate,'YYYY-DD-MM HH:mi:SS'),?,?)";
+		String query = "insert into board values(board_seq.nextval,?,?,?,0,to_char(sysdate,'YYYY-MM-DD HH:mi:SS'),?,?)";
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, b.getBoardWriter());
@@ -284,8 +284,6 @@ public class BoardDao {
 	public int updateBoardComment(Connection conn, BoardComment bc) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		System.out.println(bc.getBcContent());
-		System.out.println(bc.getBcNo());
 		String query = "update board_comment set bc_content =? where bc_no =?";
 		try {
 			pstmt = conn.prepareStatement(query);
