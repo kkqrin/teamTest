@@ -43,6 +43,10 @@
             </div>
         </div>
 		<div class="posting-wrap" style="margin-top: 50px;padding-left: 50px;">
+		
+		<%if(list.size() == 0) {%>
+			<div class="posting-title" style="width:800px;margin-top: 50px;padding-left: 50px;text-align: center;font-family: nn-b;">판매중인 상품이 없습니다.</div>
+		<%} else {%>
 			<%for(Product p : list) {%>
             <div class="posting-item" style="width:300px;">
             	<div class="hover-posting-item"></div>
@@ -74,6 +78,7 @@
 		       </a>
           </div>
 			<%} %>
+		  <%} %>
         </div>
 	</div>
 	<script>

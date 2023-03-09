@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <footer>
+    <footer style="margin-top: 100px;">
         <div class="footer-wrap">
             <div class="sns-img">
                 <a href="#"><img src="/img/in.png" style="width: 20px;"></a>
