@@ -634,7 +634,6 @@
 		$(document).ready(function(){
 		// 화폐 표시
 		const productMoney = $("#view-product-price>span");
-		console.log(productMoney);
 		const commaMoney = productMoney.text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 		productMoney.text(commaMoney+"원");
 		console.log(commaMoney);
