@@ -31,12 +31,13 @@ public class PostSendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String memberId = request.getParameter("memberId");
 		String reseiver = request.getParameter("postReseiver");
 		String postTitle = request.getParameter("post-title");
 		String postContent = request.getParameter("post-content");
 		
 		PostService service = new PostService();
-		int result = service.insertPost(reseiver,postTitle,postContent);
+		int result = service.insertPost(reseiver,postTitle,postContent,memberId);
 		if(result == 0 ) {
 			request.setAttribute("title", "메세지 전송 실패");
 			request.setAttribute("msg", "관리자에게 문의하세요");

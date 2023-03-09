@@ -1,7 +1,6 @@
-package sp.post.controller;
+package sp.member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import sp.post.service.PostService;
-import sp.post.vo.Post;
+import sp.member.service.MemberService;
 
 /**
- * Servlet implementation class PostViewFrmServlet
+ * Servlet implementation class UpdateMemberTempServlet
  */
-@WebServlet(name = "PostViewFrm", urlPatterns = { "/postViewFrm.do" })
-public class PostViewFrmServlet extends HttpServlet {
+@WebServlet(name = "UpdateMemberTemp", urlPatterns = { "/updateMemberTemp.do" })
+public class UpdateMemberTempServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostViewFrmServlet() {
+    public UpdateMemberTempServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +30,23 @@ public class PostViewFrmServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//1. 인코딩
 		request.setCharacterEncoding("utf-8");
-		int postNo = Integer.parseInt(request.getParameter("postNo"));
-		int index = Integer.parseInt(request.getParameter("index"));
-		PostService service = new PostService();
-		int result = 0;
-		if(index != 2) {
-		result = service.updatePostCount(postNo);
+		//2. 값추출
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int memberTemp = Integer.parseInt(request.getParameter("memberTemp"));
+		int productNo = Integer.parseInt(request.getParameter("productNo"));
+		int hiddenMemberNo = Integer.parseInt(request.getParameter("hiddenMemberNo"));
+		//3. 비즈니스로직
+		MemberService service = new MemberService();
+		int result = service.updateMemberTemp(memberNo, memberTemp);
+		//4. 결과처리
+		if(result>0) {
+			response.sendRedirect("/complete.do?productNo="+productNo+"&memberNo="+hiddenMemberNo);		
 		}else {
-		result = index;
+			
 		}
-		response.setCharacterEncoding("utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(result);
-		}
-
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

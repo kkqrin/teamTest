@@ -297,4 +297,17 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return p;
 	}
+
+	public Product deleteProduct(int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Product p = dao.selectOneProduct(conn, productNo);
+		int result = dao.deleteProduct(conn,productNo);
+		if(result == 0) {
+			JDBCTemplate.rollback(conn);
+		}else {
+			JDBCTemplate.commit(conn);
+		}
+		JDBCTemplate.close(conn);
+		return p;
+	}
 }

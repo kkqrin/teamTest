@@ -334,4 +334,30 @@ public class MemberDao {
 		return memberEmail;
 	}
 
+	public int updateMemberTemp(Connection conn, int memberNo, int memberTemp) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = null;
+		if(memberTemp==0) {
+			query = "update member_tbl set member_temp=(member_temp-1) where member_no=?";
+		}else if(memberTemp==1) {
+			query = "update member_tbl set member_temp=(member_temp-0) where member_no=?";			
+		}else if(memberTemp==2) {
+			query = "update member_tbl set member_temp=(member_temp+1) where member_no=?";						
+		}else if(memberTemp==3) {
+			 query = "update member_tbl set member_temp=(member_temp+2) where member_no=?";						
+		}
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
 }

@@ -29,6 +29,7 @@
     word-break: break-all;
 }
 </style>
+<!-- 캐러셀 css -->
 <link rel="stylesheet" href="/css/carousel.css">
 </head>
 <body>
@@ -149,7 +150,6 @@
 
 
     </div>
-
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>

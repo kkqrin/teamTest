@@ -18,6 +18,8 @@
 <title><%=p.getProductTitle() %> | 중 고 사 자</title>
     <!-- 상품 상세보기 css-->
     <link rel="stylesheet" href="/css/productView.css">
+    <!-- 캐러셀 -->
+    <link rel="stylesheet" href="/css/carousel.css">
     
 <style>
 	.inputCommentBox{
@@ -67,6 +69,53 @@
 		color : red;
 		font-size: 30px;
 	}
+
+	.w-100{
+		height: 600px;
+	}
+	.view-content-text>div>p>img{
+		width: 70% !important;
+	}
+.input-radio{
+	overflow: hidden;
+	margin-top : 15px;
+	margin-left : 50px;
+	
+}
+.modal-content{
+}
+.input-radio input[type=radio]{
+    display: none;
+}
+
+/*라이오 타입 다음 라벨..*/
+.input-radio input[type=radio]+label{
+    width: 20%;
+    text-align: center;
+    padding: 10px;
+    border: 2px solid #252a34ab;
+    color: #252a34;
+    font-family: nn-b;
+    cursor: pointer;
+    display: block; /*너비(크기)조정을 위해 인라인 요소에서 블록으로 변경*/
+    float: left;
+    box-sizing: border-box; /*합쳐서 250이 될 수 있게..너비가 부족해 옆으로 튕굼..*/
+    margin-right :15px;
+}
+	.input-radio input[type=radio]:checked+label{
+    background-color: #252a34;
+    color: #fff;
+}
+[name=temp2]>label{
+	z-index : 1000;
+}
+
+	.view-category>input[type=button]{
+		float: right;
+		display:flex;
+		align-items: center;
+	}
+
 </style>
 </head>
 <body>
@@ -80,44 +129,63 @@
             
             
             
-            <!-- 캐러셀 -->
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-bs-interval="2000">
-                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item" data-bs-interval="2000">
-                    <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true">
-                    <span class="material-symbols-outlined">arrow_back_ios</span>
-                </span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true">
-                    <span class="material-symbols-outlined">arrow_forward_ios</span>
-                </span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
+            <!-- 캐러셀 -->            
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+		  <div class="carousel-indicators">
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		    <%if(p.getFilepath2() != null) {%>
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		    <%} %>
+		    <%if(p.getFilepath3() != null) {%>
+		    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+		    <%} %>
+		  </div>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img src="/upload/product/<%=p.getFilepath()%>" class="d-block w-100" alt="...">
+		    </div>
+		    <%if(p.getFilepath2() != null) {%>
+		    <div class="carousel-item">
+		      <img src="/upload/product/<%=p.getFilepath2()%>" class="d-block w-100" alt="...">
+		    </div>
+		    <%} %>
+		    <%if(p.getFilepath3() != null) {%>
+		    <div class="carousel-item">
+		      <img src="/upload/product/<%=p.getFilepath3()%>" class="d-block w-100" alt="...">
+		    </div>
+		    <%} %>
+		  </div>
+		  
+		  
+		  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true">
+		  <%if(p.getFilepath2() != null ) {%>
+		    	<span class="material-symbols-outlined">arrow_back_ios</span>
+         <%} %>
+		    </span>
+		    <span class="visually-hidden">Previous</span>
+		  </button>
+		  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true">
+		    <%if(p.getFilepath2() != null ) {%>
+		    	<span class="material-symbols-outlined">arrow_forward_ios</span>
+		    <%} %>
+		    </span>
+		    <span class="visually-hidden">Next</span>
+		  </button>
+		</div>    
+         
+          </div>
+         
             
-            
-            
-            
-            
-                    <img src="/upload/product/<%=p.getFilepath()%>">
-                </div>
+               
                 <div class="view-product-info">
 	                    <div class="view-product-info-top">
-	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %></div>
+	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %>
+	                        <%if(m.getMemberId().equals(p.getSellerId())){ %>
+	                        <input type="button" class="btn bc1 bs1" value ="삭제">
+	                        <%} %>
+	                        </div>
 	                        <div class="view-product-title"><%=p.getProductTitle() %></div>
 	                        <div class="view-product-short" style="display:flex;">
 	                            <div class="material-symbols-outlined view-icon">schedule</div>
@@ -182,15 +250,20 @@
 	                        <%if(p.getProductStatus()== 0) {%>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
 	                        <%}else if(p.getProductStatus()== 1) {%>
-	                        <a href="/complete.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 done-btn">구매확정</a>
+	                        <a class="btn bc1 bs3 modal-open-btn" target="#complete-modal">구매확정</a>
 	                        <%}%>
 	                    </div>
 	                    <%} %>
 	                </div>
 	        </div>
 	    </div>
+	    
+	    
+	    
+	
+	
 	    <div class="view-container-bottom">
-            <div class="view-product-content">
+            <div class="view-product-content" style="width: 770px;">
                 <div class="page-title">상품 내용</div>
                 <div class="view-content-text">
                 	<div><%=p.getProductContent() %></div>
@@ -371,8 +444,52 @@
 				</div>
 			</div>
 			</div>
+			
+			<%--거래완료 모달창 --%>
+			<div id="complete-modal" class="modal-bg">
+			<div class="modal-wrap">
+				<div class="modal-head">
+					<h2>거래 내역 조회</h2>
+					<span class="material-icons close-icon modal-close">close</span>
+				</div>
+				<div class="modal-content">
+					<div class=modal-title>
+						<h2>판매자님과의 거래는 어떠셨나요? 평가해주세요 ^ㅡ^</h2>
+					</div>
+					<div class="input-radio">
+						<input type="radio" name="temp" id="temp1" value="0">
+						<label for="temp1">별로</label>
+						
+						<input type="radio" name="temp" id="temp2" value="1">
+						<label for="temp2">보통</label>
+						
+						<input type="radio" name="temp" id="temp3" value="2">
+						<label for="temp3">좋아요</label>
+						
+						<input type="radio" name="temp" id="temp4" value="3">
+						<label for="temp4">최고예요</label>
+						
+						<input type="hidden" name="input-productNo" value="<%=p.getProductNo() %>">
+						<%--판매자 회원번호 --%>
+						<input type="hidden" name="input-memberNo">
+						<%--구매자 회원번호 --%>
+						<input type="hidden" class="hidden-memberNo" value="<%=m.getMemberNo() %>">
+					</div>
+				</div>
+				<div class="modal-foot">
+					<button class="btn bc11 modalCheck">확인</button>
+					<button class="btn bc1 modal-close">취소</button>
+				</div>
+			</div>
+		</div>
 	
 	<script>
+
+	
+		$('.view-category>input[type=button]').on('click',function(){
+			location.href = "/deleteProduct.do?productNo=<%=p.getProductNo()%>";
+		})
+	
 		$('.modal-open-btn').on('click',function(){
 			const memberId = $('#sellerId').val();
 			$.ajax({
@@ -519,8 +636,35 @@
 		console.log(commaMoney);
         });
 		
+	//거래완료 모달창
+	//상품 회원번호 출력(판매자)
+	$(".modal-open-btn").on("click",function(){
+		$(".carousel-control-next").hide();		
+		const productNo = $("[name=input-productNo]").val();
+		$.ajax({
+			url : "/productMemberSelect.do",
+			type : "get",
+			data : {productNo : productNo},
+			dataType : "JSON",
+			success(data){
+				const no = data.memberNo;
+				$("[name=input-memberNo]").val(no);
+				}
+		});
+	});
+	// 모달 값 전송 radio(val),memberNo(판매자)
+	$(".modalCheck").on("click",function(){
+		$(this).parents(".modal-wrap").parent().css("display", "none");
+		//판매자 회원번호
+		const memberNo = $("[name=input-memberNo]").val();
+		const productNo = $("[name=input-productNo]").val();
+		var memberTemp = $('input[name=temp]:checked').val();
+		//구매자 회원번호
+		const hiddenMemberNo = $(".hidden-memberNo").val();
+		//평가완료 > 구매확정
+		location.href="/updateMemberTemp.do?memberNo="+memberNo+"&memberTemp="+memberTemp+"&productNo="+productNo+"&hiddenMemberNo="+hiddenMemberNo;
 		
-
+	});	
 		
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

@@ -74,13 +74,14 @@ a {
 
 /* 헤더 */
 header {
-    /*width: 1200px;*/
-    /*margin: 0 auto;*/
+    width: 1200px;
+    margin: 0 auto;
     height: 150px;
 }
 
 header>.header-link {
     text-align: right;
+    width: 80vw;
 }
 
 header>.header-link>a {
@@ -155,7 +156,8 @@ header>.header-top {
     margin-top: 10px;
     position: absolute;
     top: 12px;
-    left: 450px;
+    left: 475px;
+    cursor: pointer;
 }
 
 .search-icon>span {
@@ -207,14 +209,12 @@ header>.sub-navi {
     transition-duration: 1s;
     border-bottom: 1px solid #ccc;
     background-color: #fff;
-    z-index: 100;
+    z-index: 10;
     position: relative;
-    width: 100vw;
 }
 
 .sub-navi>div {
     margin: 0 auto;
-    width: 1200px;
 }
 
 .sub-navi>div>li {
@@ -838,13 +838,7 @@ textarea.input-form {
     font-size: 18px;
     padding-top: 10px;
     box-sizing: border-box;
-    height: 50px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    word-break: break-all;
+    height: 60px;
 }
 .posting-title>p{
     /* 말줄임 */
