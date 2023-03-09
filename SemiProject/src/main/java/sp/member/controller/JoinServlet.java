@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sp.member.service.MemberService;
 import sp.member.vo.Member;
+import sp.post.service.PostService;
 
 /**
  * Servlet implementation class JoinServlet
@@ -57,6 +58,8 @@ public class JoinServlet extends HttpServlet {
 				request.setAttribute("msg", "사랑합니다 고객님 중고사자 입니다.");
 				request.setAttribute("icon", "success");
 				request.setAttribute("loc", "/");//성공시 메인페이지로 넘어감
+				PostService pservice = new PostService();
+				/* int joinPost = pservice.joinPost(m); */
 			}else {
 				request.setAttribute("title", "회원가입 실패");
 				request.setAttribute("msg", "아이디 또는 비밀번호를 다시 입력하세요");

@@ -717,6 +717,22 @@ public class ProductDao {
 		}
 		
 		return list;
+	}
+
+	public int deleteProduct(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = "delete from product where product_no = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}JDBCTemplate.close(pstmt);
+		
+		return result;
 	}		
 }
 

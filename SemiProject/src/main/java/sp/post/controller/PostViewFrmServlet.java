@@ -34,8 +34,14 @@ public class PostViewFrmServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		int index = Integer.parseInt(request.getParameter("index"));
 		PostService service = new PostService();
-		int result = service.updatePostCount(postNo);
+		int result = 0;
+		if(index != 2) {
+		result = service.updatePostCount(postNo);
+		}else {
+		result = index;
+		}
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);

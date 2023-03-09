@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.member.vo.Member;
 import sp.post.dao.PostDao;
 import sp.post.vo.Post;
 import sp.post.vo.PostPageData;
@@ -16,7 +17,7 @@ public class PostService {
 		dao = new PostDao();
 	}
 
-	public PostPageData selectPostAllList(int reqPage,String memberId) {
+	public PostPageData selectPostAllList(int reqPage,String memberId,int index) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 10;
 		int end = numPerPage*reqPage;
@@ -49,23 +50,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(1)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(1)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+				pageNavi += "<a class='page-item active-page' href='/postList.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId"+memberId+"'>";
+				pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId"+memberId+"&index="+index+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -77,11 +78,11 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(totalPage)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postList.do?reqPage="+(totalPage)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -106,7 +107,7 @@ public class PostService {
 		}
 	}
 
-	public PostPageData selectPostNoReadList(int reqPage, String memberId) {
+	public PostPageData selectPostNoReadList(int reqPage, String memberId,int index) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 10;
 		int end = numPerPage*reqPage;
@@ -139,23 +140,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(1)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(1)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+				pageNavi += "<a class='page-item active-page' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+				pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -167,11 +168,11 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(totalPage)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postListNotRead.do?reqPage="+(totalPage)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -182,9 +183,9 @@ public class PostService {
 		return ppd1;
 	}
 
-	public int insertPost(String reseiver, String postTitle, String postContent) {
+	public int insertPost(String reseiver, String postTitle, String postContent, String memberId) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = dao.insertPost(conn,reseiver,postTitle,postContent);
+		int result = dao.insertPost(conn,reseiver,postTitle,postContent,memberId);
 		if(result == 0 ) {
 			JDBCTemplate.rollback(conn);
 		}else {
@@ -194,7 +195,7 @@ public class PostService {
 		return result;
 	}
 
-	public PostPageData selectPostSendList(int reqPage, String memberId) {
+	public PostPageData selectPostSendList(int reqPage, String memberId,int index) {
 		Connection conn = JDBCTemplate.getConnection();
 		int numPerPage = 10;
 		int end = numPerPage*reqPage;
@@ -227,23 +228,23 @@ public class PostService {
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(1)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(1)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo-1)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+				pageNavi += "<a class='page-item active-page' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+				pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -255,11 +256,11 @@ public class PostService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(pageNo)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(totalPage)+"&memberId="+memberId+"'>";
+			pageNavi += "<a class='page-item' href='/postSendList.do?reqPage="+(totalPage)+"&memberId="+memberId+"&index="+index+"'>";
 			pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 			pageNavi += "</a></li>";
 		}
@@ -301,6 +302,10 @@ public class PostService {
 		return result;
 	}
 
+	/*
+	 * public int joinPost(Member m) { Connection conn =
+	 * JDBCTemplate.getConnection(); int result = dao.joinPost(conn,m); return 0; }
+	 */
 
 }
 	

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.member.vo.Member;
 import sp.post.vo.Post;
 
 public class PostDao {
@@ -194,15 +195,16 @@ public class PostDao {
 		return result;
 	}
 
-	public int insertPost(Connection conn, String reseiver, String postTitle, String postContent) {
+	public int insertPost(Connection conn, String reseiver, String postTitle, String postContent, String memberId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String query = "insert into post values(post_seq.nextval,'admin',?,?,?,to_char(sysdate,'YYYY-MM-DD HH:mi:SS'),1)";
+		String query = "insert into post values(post_seq.nextval,?,?,?,?,to_char(sysdate,'YYYY-MM-DD HH:mi:SS'),1)";
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, reseiver);
-			pstmt.setString(2, postTitle);
-			pstmt.setString(3, postContent);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, reseiver);
+			pstmt.setString(3, postTitle);
+			pstmt.setString(4, postContent);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -287,5 +289,9 @@ public class PostDao {
 		
 		return result;
 	}
+	/*
+	 * public int joinPost(Connection conn, Member m) { PreparedStatement pstmt =
+	 * null; int result = 0; String query = "insert into post values()" return 0; }
+	 */
 
 }

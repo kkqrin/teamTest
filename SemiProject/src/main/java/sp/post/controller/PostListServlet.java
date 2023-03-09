@@ -33,9 +33,10 @@ public class PostListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		int reqPage = Integer.parseInt(request.getParameter("reqPage"));
+		int index = Integer.parseInt(request.getParameter("index"));
 		String memberId = request.getParameter("memberId");
 		PostService service = new PostService();
-		PostPageData ppd = service.selectPostAllList(reqPage,memberId);
+		PostPageData ppd = service.selectPostAllList(reqPage,memberId,index);
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/post/postList.jsp");
 		
 		request.setAttribute("list", ppd.getList());
@@ -44,6 +45,7 @@ public class PostListServlet extends HttpServlet {
 		request.setAttribute("totalCount", ppd.getTotalCount());
 		request.setAttribute("notRead", ppd.getNotRead());
 		request.setAttribute("allCount", ppd.getAllCount());
+		request.setAttribute("index", index);
 		view.forward(request, response);
 	}
 
