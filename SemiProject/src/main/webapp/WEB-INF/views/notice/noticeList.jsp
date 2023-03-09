@@ -54,7 +54,7 @@
 			</tr>
 			<%} %>
 		</table>
-		<div id="pageNavi"><%=pageNavi %></div>
+		<div id="pageNavi" style="padding:30px;"><%=pageNavi %></div>
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
