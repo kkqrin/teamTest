@@ -154,6 +154,10 @@ h1 {
 	font-size: 18px;
 	font-weight: bold;
 }
+
+.login-top>h1{
+	font-family: ONE-Mobile-Title;
+}
 </style>
 </head>
 <body>
@@ -164,7 +168,7 @@ h1 {
 	<div class="login-wrap">
 		<div class="login-top">
 			<h1 class="f-exbold">중고사자</h1>
-			<h2 class="f-exbold">secondhand Lion</h2>
+			<!--<h2 class="f-exbold">secondhand Lion</h2>-->
 		</div>
 		<div class="login-content-wrap">
 			<form action="/login.do" method="post">
