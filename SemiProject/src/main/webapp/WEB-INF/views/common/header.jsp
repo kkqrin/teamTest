@@ -53,12 +53,14 @@
                 </a>
             </div>
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="검색어를 입력하세요.">
+            	<form action="/search.do" type="get">
+                <input type="text" class="search-input" name="search" placeholder="검색어를 입력하세요.">
                 <button type="submit" class="search-icon">
                     <span class="material-symbols-outlined">
                         search
                     </span>
                 </button>
+            	</form>
             </div>
             <div class="member-link">
                <%if(m !=null && (m.getMemberGrade()==2||m.getMemberGrade()==3)){ %>

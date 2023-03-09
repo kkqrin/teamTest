@@ -336,4 +336,12 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return m;
 	}
+
+	public ArrayList<Product> searchProduct(String search) {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.searchProduct(conn,search);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
 }

@@ -4,12 +4,13 @@
     pageEncoding="UTF-8"%>
     <%
     ArrayList<Product> list = (ArrayList<Product>)request.getAttribute("list");
+    String search = (String)request.getAttribute("search");
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관심 상품</title>
+<title><%=search %></title>
 <style>
 	.wish-product-status{
 		text-align: center;
@@ -33,13 +34,11 @@
 <body>
 	<%@include file="/WEB-INF/views/common/header.jsp" %>
 	<div class="page-content">
-		<div class="page-title"><%=m.getMemberName() %>님의 관심 상품</div>
+		<div class="page-title">[ <%=search%> ]</div>
 		<div class="posting-wrap">
 			<%for(Product p : list) {%>
             <div class="posting-item">
-            	<!--<div class="hover-posting-item"></div>-->
 			<a href="/productView.do?productNo=<%=p.getProductNo()%>">
-
 	            	<div class="posting-img">
 	                    <img src="/upload/product/<%=p.getFilepath()%>">
 	                </div>
@@ -61,16 +60,7 @@
 	                </div>
 	          	
 	          		
-                    <!-- 0:거래중 1:예약중 2:거래완료 -->
-                    <div class="wish-product-status">
-                    <%if(p.getProductStatus() == 0) {%>
-	                    <div class="btn bs2 fc-8" style="border-radius: 42%;">판매중</div>
-                    <%}else if(p.getProductStatus() == 1) {%>
-                    	<div class="btn bs2 fc-9" style="border-radius: 10px;">예약중</div>
-                    <%}else if(p.getProductStatus() == 2) {%>
-                    	<div class="btn bs2 fc-3" style="border-radius: 10px;">거래완료</div>
-                    <%} %>
-                    </div>
+
           </a>
           </div>
 			<%} %>

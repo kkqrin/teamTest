@@ -822,6 +822,44 @@ public class ProductDao {
 			JDBCTemplate.close(rset);
 		}
 		return m;
+	}
+
+	public ArrayList<Product> searchProduct(Connection conn, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "select PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH from product where product_title like '%' || ? || '%'";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, search);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
+				p.setFilepath(rset.getString("filepath"));
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
 	}		
 }
 
