@@ -134,13 +134,10 @@ ul{
 }
 
 .login-info{
-padding-top: 50px;
-    margin-left: 366.6px;
 }
 .login-info2{
    
     margin-top: 50px;
-    margin-left: 366.6px;
 
 }
 
@@ -184,18 +181,14 @@ padding-top: 50px;
 }
 .updateComplete{
     width:500px;
-    margin-bottom: 150px;
+    margin: 80px auto;
 }
 
 .updateComplete>button{
-    width: 500px;
-    height: 72px;
-    border: none;
-    border-radius: 10px;
+
 }
 
 input[type=text]{
-    margin-top: 10px;
 }
 input[type=password]{
     margin-top: 10px;
