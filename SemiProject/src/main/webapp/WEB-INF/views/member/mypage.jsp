@@ -15,13 +15,15 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
         .closebtn{
-            all:unset;
-            background-color: steelblue;
-            color: white;
+            
             padding: 5px 20px;
             border-radius: 10px;
             cursor: pointer;
             text-align:center;
+        }
+        
+        .retireBtn{
+         text-align:center;
         }
         .modal{
             /*position을 absolute에서 fixed로 변경
@@ -59,6 +61,7 @@
         }
         h3{
            text-align: center;
+           margin:10px 0;
         }
         
         .hidden{
@@ -125,16 +128,16 @@
                    
                     <div class="login-content">
                         <div class="pw">
-                            <label for="memberPw">비밀번호 입력</label>
+                            <label for="memberPw" style="font-size:18px;"">비밀번호 입력</label>
                         </div>
                         <div>
-                            <input type="password" name="memberPw" id="memberPw" class = "long-input">
+                            <input type="password" name="memberPw" id="memberPw" class = "long-input" style="width:400px; height:30px; border:none; border-bottom:1px solid black; margin-bottom:10px;" >
                             <input type = "text" name="checkPw" id=checkPw style="display:none;" >
                         </div>
                     </div>
-                   <button type="button" class="bc1" name="search">확인</button>
                    
-                    <button name=retire ><a href="/deleteMember.do"name="retire" style="display:none;">탈퇴하기</a></button>
+                   			<button type="button" class="bc1" name="search">확인</button>
+		                    <button name=retireBtn><a href="/deleteMember.do"name="retire" style="display:none; text-align:center; ">탈퇴하기</a></button>
                 <button name="closeBtn">닫기</button>
             </div>
         </div>
