@@ -10,6 +10,7 @@
     ArrayList<ProductComment> reCommentList = (ArrayList<ProductComment>)request.getAttribute("reCommentList");
     ArrayList<Product> wishList = (ArrayList<Product>)request.getAttribute("wishList");
     Category c = (Category)request.getAttribute("c");
+    Product h = (Product)request.getAttribute("Heart");
     %>
 <!DOCTYPE html>
 <html>
@@ -88,7 +89,6 @@
     display: none;
 }
 
-/*라이오 타입 다음 라벨..*/
 .input-radio input[type=radio]+label{
     width: 20%;
     text-align: center;
@@ -97,9 +97,8 @@
     color: #252a34;
     font-family: nn-b;
     cursor: pointer;
-    display: block; /*너비(크기)조정을 위해 인라인 요소에서 블록으로 변경*/
-    float: left;
-    box-sizing: border-box; /*합쳐서 250이 될 수 있게..너비가 부족해 옆으로 튕굼..*/
+    display: block;
+    box-sizing: border-box;
     margin-right :15px;
 }
 	.input-radio input[type=radio]:checked+label{
@@ -237,8 +236,8 @@
 	                                <div class="view-product-icon" style="display:flex;justify-content: center;">
 	                                    <div class="material-symbols-outlined view-icon">visibility</div>
 	                                    <div class="view-cnt" style="margin-top: 1px; margin-left: 5px;"><%=p.getViewCount() %></div>
-	                                    <div class="material-symbols-outlined view-icon" style="margin-left: 10px;">chat_bubble</div>
-	                                    <div class="view-cnt" style="margin-left: 5px;">?</div>
+	                                    <div class="material-symbols-outlined view-icon" style="margin-left: 10px;color:#e92626">favorite</div>
+	                                    <div class="view-cnt" style="margin-left: 5px;"><%=h.getWishCount() %></div>
 	                                </div>
 	                            </div>
 	                        </div>
