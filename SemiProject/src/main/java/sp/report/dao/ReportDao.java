@@ -387,6 +387,7 @@
 						r.setCompleteDate(rset.getString("complete_date"));
 						r.setReserveDate(rset.getString("reserve_date"));
 						r.setMemberNo(rset.getInt("member_no"));
+						r.setFilepath(rset.getString("filepath"));
 						list.add(r);
 						}
 				} catch (SQLException e) {
@@ -400,6 +401,7 @@
 				
 				return list;
 			}
+			
 
 			public int countCheck(Connection conn, Member m) {
 				PreparedStatement pstmt = null;

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sp.product.service.ProductService;
 import sp.product.vo.Category;
+import sp.product.vo.Product;
 import sp.product.vo.ProductPageData;
 
 /**
@@ -50,7 +51,6 @@ public class ProductListServlet extends HttpServlet {
 		ProductPageData ppd = service.selectProductList(categoryRef, reqPage, 0);
 		ArrayList<Category> cList = service.selectCategoryList();
 		ArrayList<Category> cSubList = service.selectSubCategoryList();
-		
 		
 		// 4. 결과 처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/product/productList.jsp");

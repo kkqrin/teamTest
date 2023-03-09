@@ -1,13 +1,15 @@
+<%@page import="sp.product.vo.Product"%>
+<%@page import="sp.report.vo.Report"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
     <link rel="stylesheet" href="css/mypage.css">
-    <link rel="stylesheet" href="css/liondefault.css">
-    <script src="/js/jquery-3.6.3.min.js"></script>
     <style>
     .mypage-home-title1{
     	padding-left:200px;
@@ -16,100 +18,53 @@
 </head>
     <body>
     <%@include file="/WEB-INF/views/common/header.jsp" %>
-    	<div class="page-content">
-        <div class="myPage-wrap">
-            <div class="myPage-menu">
-                <div class="myPage-title">
-                    <h2>마이페이지</h2>
+        <div class="page-content">
+        <div class="mypage-navi-wrap">
+            <div class="page-title">마이페이지</div>
+            <div class="mypage-navi">
+                <div class="mypage-navi-box more">
+                    <div class="mypage-navi-title">거래 정보</div>
+                    <ul class="mypage-subnavi">
+                        <li><a href="/selectMyDeal.do?memberNo=<%=m.getMemberNo()%>">구매 내역</a></li>
+                        <li><a href="/myStore.do?sellerId=<%=m.getMemberId()%>&loginId=<%=m.getMemberId()%>">판매 내역</a></li>
+                    </ul>
                 </div>
-                <div class="mypage-content">
-                    <div class="mypage-content-list more">
-                        <div class="sub-title">쇼핑 정보</div>
-                        <ul class="sub-menu">
-                            <li><a href="/selectMydeal.do?memberNo=<%=m.getMemberNo()%>">거래 내역</a></li>
-                            <li> <a href="/myStore.do?sellerId=<%=m.getMemberId()%>&loginId=<%=m.getMemberId()%>">내 상점</a></li>
-                        </ul>
-                    </div>
-                    <div class="mypage-content-list more">
-                        <div class="sub-title">내 정보</div>
-                        <ul class="sub-menu">
-                            <li><a href="/myPage.do">내 정보보기</a></li>
-                             <li><a href="/deleteMember.do">회원탈퇴</a></li>
-                        </ul>
-                    </div>
+                <div class="mypage-navi-box more">
+                    <div class="mypage-navi-title">내 정보</div>
+                    <ul class="mypage-subnavi">
+                        <li><a href="/profileUpdate.do">내 정보 수정</a></li>
+                        <li><a href="/deleteMember.do">회원탈퇴</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="myPage-info">
-                <div class="myPage-info-box">
-                    <div class="myPage-info-image">
-                        <img src="/img/user-100.png">
+        </div>
+        <div class="mypage-content">
+            <div class="mypage-user-wrap">
+                <div class="mypage-user-profile">
+                    <div class="mypage-user-image">
+                        <div class="material-icons" style="font-size:80px;color:#4e4e4e;">face</div>
                     </div>
-                    <div class="myPage-info-user">
-                        <div><%=m.getMemberName() %></div>
-                        <p><%=m.getMemberEmail() %></p>
-                        <button><a href="/profileUpdate.do">프로필수정</a></button>
+                    <div class="mypage-user-info">
+                        <div>[<%=m.getMemberName() %>]님</div>
                     </div>
-                </div>
-
-                <div class="mypage-info-right">
-                    <div class="myPage-info-grade">
-                    <%if(m.getMemberGrade()==2){%>
-                        <p>이메일 인증회원</p>
+                    <div class="mypage-user-text">
+                        <div>온도 <%=m.getMemberTemp()%>도</div>
+                        <%if(m.getMemberGrade()==2){%>
+                        <div class="fc-7">이메일 인증 회원입니다.</div>
                     <%}else{ %>
-                    	<p>이메일 미인증회원</p>
+                    	<div class="fc-6">이메일 미인증 회원입니다.</div>
                     <%} %>
                     </div>
-                    <div class="bank">
-                        <p>예치금 <span class="fc-6"><%=m.getMemberPoint() %></span>원</p>
-                    </div>
-                    <div class="temp">
-                        <p>온도 <span class="fc-9"><%=m.getMemberTemp() %></span>도</p>
-                    </div>  
                 </div>
             </div>
-            <div class="mypage-home-title mypage-home-title1">
-                <h3>거래내역</h3>
-            </div>
-            <div class="mypage-home-content">
-                <div class="deal">
-                    <ul>
-                        <li><a href="#">전체 <span>0</span></a></li>
-                        <li><a href="#">판매중 <span>0</span></a></li>
-                        <li><a href="#">예약중 <span>0</span></a></li>
-                        <li><a href="#">거래완료 <span>0</span></a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="mypage-home-content mypage-home-content2">
-                <div class="mypage-home-title mypage-home-title2">
-                    <h3>판매내역</h3>
-                </div>
-                <div class="deal deal2">
-                    <ul>
-                        <li><a href="#">전체 <span>0</span></a></li>
-                        <li><a href="#">판매중 <span>0</span></a></li>
-                        <li><a href="#">예약중 <span>0</span></a></li>
-                        <li><a href="#">거래완료 <span>0</span></a></li>
-                    </ul>
-                </div>
-            </div>
-            <!--<div class="mypage-home-content mypage-home-content2 wish">
-                <div class="mypage-home-title mypage-home-title2">
-                    <h3>관심상품</h3>
-                </div>
-                <div class=" deal3">
-                  <p>추가하신 관심 상품이 없습니다</p>
-                  <button type="button" class="bc3" style="border-radius:10px;">SHOP바로가기</button>
-                </div>
-            </div> -->
         </div>
-        </div>
-        <script>
-            $(".sub-title").on("click", function(){
-                $(this).next().slideToggle();
-            });
-        </script>
-        <%@include file="/WEB-INF/views/common/footer.jsp" %>
+
+    </div>
+	 <script>
+        $(".mypage-navi-title").on("click", function(){
+            $(this).next().slideToggle();
+        });
+     </script>
+     <%@include file="/WEB-INF/views/common/footer.jsp" %>
     </body>
     </html>
