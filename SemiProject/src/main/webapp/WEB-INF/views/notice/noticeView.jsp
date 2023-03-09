@@ -63,6 +63,7 @@
 				</th>
 			</tr>
 			<%}%>
+			<a href="/noticeList.do?reqPage=1" class="btn bc11">목록보기</a>
 		</table>
 		<script>
 			function noticeDelete(noticeNo){

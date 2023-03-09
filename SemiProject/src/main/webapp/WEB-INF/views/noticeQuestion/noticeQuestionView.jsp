@@ -65,6 +65,7 @@
 				</th>
 			</tr>
 			<%}%>
+			<a href="/noticeQuestionList.do?reqPage=1" class="btn bc11">목록보기</a>
 		</table>
 		<script>
 			function noticeQuestionDelete(faqNo){
