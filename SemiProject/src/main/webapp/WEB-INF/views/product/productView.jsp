@@ -1,3 +1,4 @@
+<%@page import="sp.deal.vo.Deal"%>
 <%@page import="sp.product.vo.Category"%>
 <%@page import="sp.product.vo.ProductComment"%>
 <%@page import="java.util.ArrayList"%>
@@ -12,6 +13,7 @@
     Category c = (Category)request.getAttribute("c");
     Product h = (Product)request.getAttribute("Heart");
     String sellerTemp = (String)request.getAttribute("sellerTemp");
+    Deal d = (Deal)request.getAttribute("d");
     %>
 <!DOCTYPE html>
 <html>
@@ -268,7 +270,7 @@
 	                        <a class="btn bc1 bs3 modal-open-btn" target = "#post-modal">판매자에게 쪽지보내기</a>
 	                        <%if(p.getProductStatus()== 0) {%>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
-	                        <%}else if(p.getProductStatus()== 1) {%>
+	                        <%}else if(p.getProductStatus()== 1 && d.getMemberNo() == m.getMemberNo()) {%>
 	                        <a class="btn bc1 bs3 modal-open-btn" target="#complete-modal">구매확정</a>
 	                        <%}%>
 	                    </div>
