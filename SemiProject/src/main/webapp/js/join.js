@@ -20,6 +20,49 @@ necessarycheck.addEventListener("change",function(){
     }
 });
 
+$("[name=check-message1]").on("click",function(){
+	
+	$("#necessarycheck").prop("checked", true);	
+	$("[name=subcheck]").prop("checked", true);
+});
+
+
+$("[name=check-message2]").on("click",function(){
+	
+	$("#choicecheck").prop("checked", true);	
+	$("[name=subcheck2]").prop("checked", true);
+});
+
+
+
+
+
+$("[name=subcheck]").on("change", function(){
+	console.log($(this).is(":checked"));
+	if( !($(this).is(":checked")) ){
+		$("#necessarycheck").prop("checked", false);				
+	}else{
+		const subcheck = $("[name=subcheck]:checked").length;
+		if(subcheck == 2){
+			$("#necessarycheck").prop("checked", true);	
+		}
+	}
+});
+
+
+$("[name=subcheck2]").on("change", function(){
+	console.log($(this).is(":checked"));
+	if( !($(this).is(":checked")) ){
+		$("#choicecheck").prop("checked", false);				
+	}else{
+		const subcheck = $("[name=subcheck2]:checked").length;
+		if(subcheck == 2){
+			$("#choicecheck").prop("checked", true);	
+		}
+	}
+});
+
+
 
 const choicecheck = document.querySelector("#choicecheck");
 choicecheck.addEventListener("change",function(){
@@ -55,6 +98,7 @@ $(".plus2").on("click",function(){
         $(".sub-agree-check2").css("display","none");
     }
 });
+
 
 
 
