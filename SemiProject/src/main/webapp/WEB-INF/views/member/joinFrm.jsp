@@ -250,7 +250,7 @@ padding:10px 0;
                             이용약관 동의 <a href="#" id="open">전체보기</a>
 					    <!--overlay는 배경색이 될 어두운 부분-->
 					    <div class="modal hidden"><!--모달창을 처음에 안보이게하다가
-					                                보여주는걸 하기 위해서 처음엔 히든 클래스를 넣어 히드을 해주기 위해-->
+					                                보여주는걸 하기 위해서 처음엔 히든 클래스를 넣어 히든을 해주기 위해-->
 					        <div class="modal_overlay"></div>
 					        <div class="modal_content">
 					            <img src="img/lion.png" width="50px" height="50px">
@@ -494,7 +494,7 @@ padding:10px 0;
  			
  			$("#subcheck2").on("click",function(){
  				const subchecked2 = $(this).is(":checked");
- 				console.log(subchecked2);
+ 				
  				if(subchecked2==true){
  					result[7]=true;
  				}else{
@@ -655,8 +655,7 @@ padding:10px 0;
 	        modalCloseImg2.addEventListener("click",closeModal2);
 	        opentag.addEventListener("click",openModal2);
 
-			
-
+	
 		</script>
       <script src = "/js/join.js"></script>
 <%@include file="/WEB-INF/views/common/footer.jsp" %>

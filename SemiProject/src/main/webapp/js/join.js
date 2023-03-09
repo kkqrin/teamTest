@@ -20,6 +20,7 @@ necessarycheck.addEventListener("change",function(){
     }
 });
 
+
 const choicecheck = document.querySelector("#choicecheck");
 choicecheck.addEventListener("change",function(){
     const status = this.checked;
