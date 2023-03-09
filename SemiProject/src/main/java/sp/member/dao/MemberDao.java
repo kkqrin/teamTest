@@ -33,7 +33,7 @@ public class MemberDao {
 				m.setMemberNo(rset.getInt("member_no"));
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberPw(rset.getString("member_pw"));
-				m.setMemberTemp(rset.getInt("member_temp"));
+				m.setMemberTemp(rset.getString("member_temp"));
 				m.setMemberPoint(rset.getInt("member_point"));
 				m.setPostNumber(rset.getString("post_number"));
 				list.add(m);
@@ -69,7 +69,7 @@ public class MemberDao {
 				m.setMemberNo(rset.getInt("member_no"));
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberPoint(rset.getInt("member_point"));
-				m.setMemberTemp(rset.getInt("member_temp"));
+				m.setMemberTemp(rset.getString("member_temp"));
 				m.setPostNumber(rset.getString("post_number"));
 				m.setMemberPw(rset.getString("member_pw"));
 			}
@@ -136,7 +136,7 @@ public class MemberDao {
 				member.setMemberNo(rset.getInt("member_no"));
 				member.setMemberPhone(rset.getString("member_phone"));
 				member.setMemberPoint(rset.getInt("member_point"));
-				member.setMemberTemp(rset.getInt("member_temp"));
+				member.setMemberTemp(rset.getString("member_temp"));
 				member.setPostNumber(rset.getString("post_number"));
 				member.setMemberPw(rset.getString("member_pw"));
 			}
@@ -189,7 +189,7 @@ public class MemberDao {
 				m.setMemberNo(rset.getInt("member_no"));
 				m.setMemberPhone(rset.getString("member_phone"));
 				m.setMemberPoint(rset.getInt("member_point"));
-				m.setMemberTemp(rset.getInt("member_temp"));
+				m.setMemberTemp(rset.getString("member_temp"));
 				m.setPostNumber(rset.getString("post_number"));
 			}
 		} catch (SQLException e) {
@@ -273,7 +273,7 @@ public class MemberDao {
 				member.setMemberNo(rset.getInt("member_no"));
 				member.setMemberPhone(rset.getString("member_phone"));
 				member.setMemberPoint(rset.getInt("member_point"));
-				member.setMemberTemp(rset.getInt("member_temp"));
+				member.setMemberTemp(rset.getString("member_temp"));
 				member.setPostNumber(rset.getString("post_number"));
 			}
 		} catch (SQLException e) {
@@ -340,13 +340,13 @@ public class MemberDao {
 		int result = 0;
 		String query = null;
 		if(memberTemp==0) {
-			query = "update member_tbl set member_temp=(member_temp-1) where member_no=?";
+			query = "update member_tbl set member_temp=(member_temp-0.5) where member_no=?";
 		}else if(memberTemp==1) {
 			query = "update member_tbl set member_temp=(member_temp-0) where member_no=?";			
 		}else if(memberTemp==2) {
-			query = "update member_tbl set member_temp=(member_temp+1) where member_no=?";						
+			query = "update member_tbl set member_temp=(member_temp+0.5) where member_no=?";						
 		}else if(memberTemp==3) {
-			 query = "update member_tbl set member_temp=(member_temp+2) where member_no=?";						
+			 query = "update member_tbl set member_temp=(member_temp+1) where member_no=?";						
 		}
 		try {
 			pstmt = conn.prepareStatement(query);
