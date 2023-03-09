@@ -24,6 +24,22 @@
     <link rel="stylesheet" href="/css/carousel.css">
     
 <style>
+	    .modal-content>.areabox{
+    	height: 300px;
+    	padding: 10px;
+	    line-height: 30px;
+	    text-align: center;
+
+    }
+      .areabox>textarea{
+    	width: 470px;
+    	height: 300px;
+    	float : right;
+    	resize: none;
+    	overflow: auto;
+    	padding: 10px;
+    }
+    
 	.inputCommentBox{
 		margin : 50px;
 	}
@@ -249,7 +265,7 @@
 	                    <%if(m != null) {%>
 	                    <div class="view-product-btn">
 	                        <a class="btn bc1 bs3 modal-open-btn" target="#login-modal">사기 조회</a>
-	                        <a href="#" class="btn bc1 bs3">판매자에게 쪽지보내기</a>
+	                        <a class="btn bc1 bs3 modal-open-btn" target = "#post-modal">판매자에게 쪽지보내기</a>
 	                        <%if(p.getProductStatus()== 0) {%>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
 	                        <%}else if(p.getProductStatus()== 1) {%>
@@ -488,7 +504,41 @@
 					<button class="btn bc1 modal-close">취소</button>
 				</div>
 			</div>
+			</div>
+			
+			<div id="post-modal" class="modal-bg">
+			<div class="modal-wrap hide-content">
+			<div class="modal-head">
+				<h2>받은쪽지</h2>
+				<span class="material-icons close-icon modal-close">close</span>
+			</div>
+			<form action="/postSend.do" method="post">
+			<div class="modal-content">
+				<div class="input-box heightbox shortbox">
+					<span>받을 사람 : </span> <span class="senderId"><%=p.getSellerId() %></span>
+						<input type="hidden" id="postReseiver" name="postReseiver" value=<%=p.getSellerId() %>>
+						<input type="hidden" id="memberId" name="memberId" 
+						<%if(m != null){ %>
+						value="<%=m.getMemberId()%>">
+						<%} %>
+				</div>
+				<div class="input-box heightbox">
+					<label for="title">제목</label> <input type="text" name="post-title"
+						id="post-title" class="input-form midbox">
+				</div>
+				<div class="input-box heightbox areabox">
+					<label for="content">내용</label>
+					<textarea id="post-content" name="post-content"></textarea>
+				</div>
+			</div>
+			<div class="modal-foot">
+				<button type="submit" class="btn bc11">보내기</button>
+				<button type="button" class="btn bc11 modal-close">취소</button>
+			</div>
+			</form>
 		</div>
+		</div>
+	
 	
 	<script>
 

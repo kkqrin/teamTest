@@ -496,7 +496,7 @@ padding:10px 0;
  			
  			$("#subcheck2").on("click",function(){
  				const subchecked2 = $(this).is(":checked");
- 				
+ 				/* console.log(subchecked2); */
  				if(subchecked2==true){
  					result[7]=true;
  				}else{
@@ -547,9 +547,9 @@ padding:10px 0;
 						authTime();
 					}
 				},
-				error:function(){
+				/* error:function(){
 					console.log("에러");
-				}
+				} */
 			});
 		});
 		$("#authBtn").on("click",function(){

@@ -109,8 +109,8 @@
      			pact.push(pactCheck);
      		});
      		location.href="/checkedChangePactCheck.do?no="+no.join("/")+"&pact="+pact.join("/");
-     		console.log(no);
-     		console.log(pact);
+     		/* console.log(no);
+     		console.log(pact); */
      	});
     </script>
 </body>

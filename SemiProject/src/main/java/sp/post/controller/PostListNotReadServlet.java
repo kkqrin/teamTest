@@ -44,7 +44,11 @@ public class PostListNotReadServlet extends HttpServlet {
 		request.setAttribute("totalCount", ppd.getTotalCount());
 		request.setAttribute("notRead", ppd.getNotRead());
 		request.setAttribute("allCount", ppd.getAllCount());
-		request.setAttribute("index", index);
+		if(index == 0) {
+			index = 1;
+		}
+			request.setAttribute("index", index);
+		
 		view.forward(request, response);
 	}
 

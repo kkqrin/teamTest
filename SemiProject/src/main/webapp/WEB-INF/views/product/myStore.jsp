@@ -43,6 +43,10 @@
             </div>
         </div>
 		<div class="posting-wrap" style="margin-top: 50px;padding-left: 50px;">
+		
+		<%if(list.size() == 0) {%>
+			<div class="posting-title" style="width:800px;margin-top: 50px;padding-left: 50px;text-align: center;font-family: nn-b;">판매중인 상품이 없습니다.</div>
+		<%} else {%>
 			<%for(Product p : list) {%>
             <div class="posting-item" style="width:300px;">
             	<div class="hover-posting-item"></div>
@@ -74,16 +78,15 @@
 		       </a>
           </div>
 			<%} %>
+		  <%} %>
         </div>
 	</div>
 	<script>
 	//화폐 표시						
 	for(let i=0; i<100 ; i++){				
 		const productMoney = $(".posting-price").eq(i);
-		console.log(productMoney.text());
 		let commaMoney = $(".posting-price").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 		$(".posting-price").eq(i).text(commaMoney+"원");
-		console.log(commaMoney);				
 	}
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>

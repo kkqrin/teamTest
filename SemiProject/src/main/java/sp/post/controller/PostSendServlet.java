@@ -47,7 +47,7 @@ public class PostSendServlet extends HttpServlet {
 			request.setAttribute("title", "메세지 전송 성공");
 			request.setAttribute("msg", "메세지 전송에 성공했습니다.");
 			request.setAttribute("icon", "success");
-			request.setAttribute("loc", "/postListNotRead.do?reqPage=1&memberId=admin");
+			request.setAttribute("loc", "/postListNotRead.do?reqPage=1&memberId="+memberId+"&index=1");
 		}
 		RequestDispatcher view = request.getRequestDispatcher("WEB-INF/views/common/msg.jsp");
 		view.forward(request, response);

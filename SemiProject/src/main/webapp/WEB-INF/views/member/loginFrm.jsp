@@ -154,6 +154,10 @@ h1 {
 	font-size: 18px;
 	font-weight: bold;
 }
+
+.login-top>h1{
+	font-family: ONE-Mobile-Title;
+}
 </style>
 </head>
 <body>
@@ -164,7 +168,7 @@ h1 {
 	<div class="login-wrap">
 		<div class="login-top">
 			<h1 class="f-exbold">중고사자</h1>
-			<h2 class="f-exbold">secondhand Lion</h2>
+			<!--<h2 class="f-exbold">secondhand Lion</h2>-->
 		</div>
 		<div class="login-content-wrap">
 			<form action="/login.do" method="post">
@@ -294,7 +298,7 @@ h1 {
 			  findId.children().first().next().next().empty();
 			  findId.children().first().empty();
 			  if(data != null){
-				  console.log(data);
+				/*   console.log(data); */
 				  const p = $("<p></p>");
 				  const p2 = $("<p></p>");
 				  const p3 = $("<p></p>");
@@ -366,7 +370,7 @@ h1 {
 			 	
 				  if(data != null){
 				
-					  console.log(data);
+					/*   console.log(data); */
 					  const p = $("<p></p>");
 					  const p2 = $("<p></p>");
 					  const p3 = $("<p></p>");
@@ -377,9 +381,9 @@ h1 {
 					  findPw.children().first().append(p2);
 					  findPw.children().first().next().next().append(p3);
 				 
-			  }else if(data==0){
+			  }/* else if(data==0){
 				  console.log("실패");
-			  }
+			  } */
 			  }
 			
 		 
@@ -419,10 +423,10 @@ h1 {
 					$("#auth").slideDown();
 					authTime();
 				}
-			},
+			}/* ,
 			error:function(){
 				console.log("에러");
-			}
+			} */
 		});
 	});
 	$("#authBtn").on("click",function(){

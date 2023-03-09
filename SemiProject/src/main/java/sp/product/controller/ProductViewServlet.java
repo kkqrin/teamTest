@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sp.post.service.PostService;
+import sp.post.vo.Post;
 import sp.member.vo.Member;
 import sp.product.service.ProductService;
 import sp.product.vo.Product;
