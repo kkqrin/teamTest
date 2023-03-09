@@ -178,7 +178,6 @@
 		
 		function minusBtn(obj){
 			const index = $(".minusBtn").index(obj);
-			console.log(index);
 			const status = $('[name=status]').val();
 			if(status == 3 && index == 0){
 				alert('순서대로 삭제해주세요');
@@ -277,8 +276,7 @@
 		// 사진 업로드 여부 유효성 검사
 		$("[name=upfile1]").on("change", function(){
 			
-			console.log($("[name=upfile1]").val());
-			
+
 			if(!($(this).val())){
 				// console.log("첨부파일 없음");
 				result[0] =  false;
@@ -356,8 +354,6 @@
 				$(this).attr("placeholder", "상품 가격은 숫자로 입력해주세요.");
 			}
 			
-			console.log(result);
-			console.log($("[name=upfile]").val());
 		});
 		
 

@@ -131,10 +131,8 @@
 			// 화폐 표시						
 			for(let i=0; i<20 ; i++){				
 				const productMoney = $(".posting-price").eq(i);
-				console.log(productMoney.text());
 				let commaMoney = $(".posting-price").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 				$(".posting-price").eq(i).text(commaMoney+"원");
-				console.log(commaMoney);				
 			}
 			
 	</script>
