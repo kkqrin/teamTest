@@ -44,7 +44,7 @@ body>.page-content {
 	color: #252a34;
 	padding-right: 10px;
 	border-top: 0;
-	border-right: 0;
+    border-right: 1px solid #787f86;
 }
 
 .content-main {
@@ -191,6 +191,17 @@ table th, .post-id, .post-content, .post-time {
 
     }
     
+    .notReadText{
+    	width: 850px;
+    	height: 30px;
+    	text-align: center;
+    	font-size: 25px;
+    	border-bottom: 1px solid black;
+    }
+    
+    .letterBox{
+    	border-right: 1px solid black;
+    }
    
     .areabox>textarea{
     	width: 470px;
@@ -199,6 +210,8 @@ table th, .post-id, .post-content, .post-time {
     	resize: none;
     	overflow: auto;
     }
+    
+
 
 </style>
 </head>
@@ -218,6 +231,13 @@ table th, .post-id, .post-content, .post-time {
 				] 통
 			</div>
 			<div class="message">
+				<%if(list.size() == 0){ %>
+				<table>
+					<tr>
+						<td colspan="8" class="notReadText">안읽은 쪽지가 없습니다.</td>
+					</tr>
+					</table>
+				<%} %>
 				<table>
 					<%
 					for (int i = 0; i < list.size(); i++) {
@@ -377,7 +397,7 @@ table th, .post-id, .post-content, .post-time {
 
 
 	</script>
-
+	
 
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 

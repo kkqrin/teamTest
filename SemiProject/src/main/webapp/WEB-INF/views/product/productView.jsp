@@ -182,7 +182,7 @@
                 <div class="view-product-info">
 	                    <div class="view-product-info-top">
 	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %>
-	                        <%if(m.getMemberId().equals(p.getSellerId())){ %>
+	                        <%if(m !=null && m.getMemberId().equals(p.getSellerId())){ %>
 	                        <input type="button" class="btn bc1 bs1" value ="삭제">
 	                        <%} %>
 	                        </div>
@@ -473,7 +473,11 @@
 						<%--판매자 회원번호 --%>
 						<input type="hidden" name="input-memberNo">
 						<%--구매자 회원번호 --%>
-						<input type="hidden" class="hidden-memberNo" value="<%=m.getMemberNo() %>">
+						<input type="hidden" class="hidden-memberNo" 
+						<%if(m!=null){ %>
+						value="<%=m.getMemberNo() %>"
+						<%} %>
+						>
 					</div>
 				</div>
 				<div class="modal-foot">
