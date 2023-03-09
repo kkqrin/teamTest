@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import sp.product.service.ProductService;
+import sp.product.vo.Product;
 import sp.product.vo.ProductViewData;
 
 /**
@@ -40,6 +41,8 @@ public class ProductViewServlet extends HttpServlet {
 		ProductService service = new ProductService();
 		// 게시글, 댓글, 대댓글, 관심상품 테이블에 있는지 조회
 		ProductViewData pvd = service.selectOneProduct(productNo);
+		// 하트수 조회
+		Product p = service.selectHeartCount(productNo);
 		
 		// 4. 결과 처리
 		if(pvd == null) {
@@ -56,6 +59,7 @@ public class ProductViewServlet extends HttpServlet {
 			request.setAttribute("reCommentList", pvd.getReCommentList());
 			request.setAttribute("wishList", pvd.getWishList());
 			request.setAttribute("c", pvd.getC());
+			request.setAttribute("Heart", p);
 			view.forward(request, response);
 		}
 	}
