@@ -206,7 +206,7 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "update member_tbl set member_pw=?, member_name=?, member_phone=?, member_email=?, post_number=?, member_addr=?, member_addr2=? where member_id=?";
+		String query = "update member_tbl set member_pw=?, member_name=?, member_phone=?, member_email=?, post_number=?, member_addr=?, member_addr2=?, member_grade=?  where member_id=?";
 		
 		try {
 			pstmt=conn.prepareStatement(query);
@@ -217,7 +217,8 @@ public class MemberDao {
 			pstmt.setString(5, member.getPostNumber());
 			pstmt.setString(6, member.getMemberAddr());
 			pstmt.setString(7, member.getMemberAddr2());
-			pstmt.setString(8, member.getMemberId());
+			pstmt.setInt(8, member.getMemberGrade());
+			pstmt.setString(9, member.getMemberId());
 			
 			result=pstmt.executeUpdate();
 			

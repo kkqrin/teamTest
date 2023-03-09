@@ -54,14 +54,14 @@ public class UpdateInfoServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			
 			Member m = (Member)session.getAttribute("m");
-			m.setMemberPw(m.getMemberPw());
-			m.setMemberName(m.getMemberName());
-			m.setMemberPhone(m.getMemberPhone());
-			m.setMemberEmail(m.getMemberEmail());
-			m.setPostNumber(m.getPostNumber());
-			m.setMemberAddr(m.getMemberAddr());
-			m.setMemberAddr2(m.getMemberAddr2());
-			m.setMemberGrade(m.getMemberGrade());
+			m.setMemberPw(member.getMemberPw());
+			m.setMemberName(member.getMemberName());
+			m.setMemberPhone(member.getMemberPhone());
+			m.setMemberEmail(member.getMemberEmail());
+			m.setPostNumber(member.getPostNumber());
+			m.setMemberAddr(member.getMemberAddr());
+			m.setMemberAddr2(member.getMemberAddr2());
+			m.setMemberGrade(member.getMemberGrade());
 			request.setAttribute("title", "수정완료");
 			request.setAttribute("msg", "정보 수정이 완료되었습니다.");
 			request.setAttribute("icon", "success");

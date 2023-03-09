@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -131,8 +132,8 @@
                               <div>
                                   <input type="text" name="email" id="authCode" class="mid-input" placeholder="인증번호 입력">
                                   <button type="button" class="bc2 dup-btn"id="authBtn">인증하기</button>
-                    
-                                  <input type="text" name="memberGrade" id=memberGrade value="<%=m.getMemberGrade() %>" >
+                                  <input type="text" name="memberGrade" id=memberGrade value="<%=m.getMemberGrade() %>" style="display:none;">
+                                  <br>
                                   <span id="timeZone"></span>
                                   <span id="authMsg"></span>
                               </div>
@@ -261,17 +262,20 @@
     			if(mailCode==null){
     				$("#authMsg").text("인증 시간 만료");
     				$("#authMsg").css("color","red");
+    				$("#memberGrade").val(3);
     			}else{
     			const authCode=$("#authCode").val();
     			if(authCode==mailCode){
     				$("#authMsg").prop("readonly",true);
     				$("#authMsg").text("인증완료");
     				$("#authMsg").css("color","green");
+    				$("#memberGrade").val(2);
     				window.clearInterval(intervalId)
     				
     			}else{
     				$("#authMsg").text("인증실패");
     				$("#authMsg").css("color","red");
+    				$("#memberGrade").val(3);
     			}
     			}
     		});
@@ -309,6 +313,20 @@
     			}
     		}
             
+    		function searchAddr(){
+    			new daum.Postcode({
+    		        oncomplete: function(data) {
+    		        	$("#postcode").val(data.zonecode);
+    		        	$("#address").val(data.address);
+    		        	$("#detailAddress").focus();
+    		            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+    		            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+    		        }
+    		    }).open();		
+    		}
+    		
+    		
+    		
         </script>
      
         <%@include file="/WEB-INF/views/common/footer.jsp" %>
