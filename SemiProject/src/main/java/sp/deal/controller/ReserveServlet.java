@@ -39,6 +39,8 @@ public class ReserveServlet extends HttpServlet {
 		DealService service = new DealService();
 		int result = service.updateReserve(productNo, memberNo);
 		
+		// 
+		
 		//4. 결과처리
 		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp");
 		if(result>0) {

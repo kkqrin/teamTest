@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.deal.vo.Deal;
 import sp.member.vo.Member;
 import sp.product.dao.ProductDao;
 import sp.product.vo.Category;
@@ -343,5 +344,13 @@ public class ProductService {
 		
 		JDBCTemplate.close(conn);
 		return list;
+	}
+
+	public Deal selectReservingMemberNo(int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Deal d = dao.selectReservingMemberNo(conn, productNo);
+		
+		JDBCTemplate.close(conn);
+		return d;
 	}
 }
