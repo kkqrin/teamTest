@@ -93,13 +93,9 @@
 				                    <p class="posting-title"><%=p.getProductTitle() %></p>
 				                    <div class="posting-detail">
 				                       <div class="posting-icon">
-				                            <div class="heart-div">
-				                                <span class="material-symbols-outlined">favorite</span>
-				                                <span class="heart-count">?</span>
-				                            </div>
 				                            <div class="comment-div">
-				                                <span class="material-symbols-outlined">chat_bubble</span>
-				                                <span class="comment-count">?</span>
+				                                <span class="material-symbols-outlined" style="color:#4e4e4e;">visibility</span>
+	                                			<span class="heart-count"><%=p.getViewCount() %></span>
 				                            </div>
 				                        </div> 
 				                        <div class="posting-info">
