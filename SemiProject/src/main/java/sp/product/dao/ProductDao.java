@@ -589,6 +589,7 @@ public class ProductDao {
 		
 		return list;
 	}
+	
 
 	public Category selectCategoryNames(Connection conn, int categoryNo) {
 		PreparedStatement pstmt = null;
