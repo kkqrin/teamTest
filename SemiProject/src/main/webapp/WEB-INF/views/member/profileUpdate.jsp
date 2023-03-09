@@ -5,20 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <link rel="stylesheet" href="css/liondefault.css">
+    <title>내 정보 수정 | 중 고 사 자</title>
     <link rel="stylesheet" href="css/profileUpdate.css">
-    <script src="/js/jquery-3.6.3.min.js"></script>
-     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <link rel="stylesheet" href="/css/mypage.css">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    
     <style>
     .emailCheck{
     	display:none;
+    }
+    .join-input-wrap>div{
+    	margin: 10px;
     }
     </style>
 </head>
     <body>
      <%@include file="/WEB-INF/views/common/header.jsp" %>
-<div class="page-content">
+	<div class="page-content">
         <div class="mypage-navi-wrap">
             <div class="page-title">마이페이지</div>
             <div class="mypage-navi">
@@ -32,7 +35,7 @@
                 <div class="mypage-navi-box more">
                     <div class="mypage-navi-title">내 정보</div>
                     <ul class="mypage-subnavi">
-                        <li><a href="/profileUpdate.do">내 정보 수정</a></li>
+                        <li><a href="/profileUpdate.do" class="mypage-active">내 정보 수정</a></li>
                         <li><a href="/deleteMember.do">회원탈퇴</a></li>
                     </ul>
                 </div>
@@ -45,9 +48,10 @@
 
 
 
-
-            <form action="/updateInfo.do" method="post">
-                <div class="login-info">
+		<div class="mypage-content">
+			<div class="mypage-user-wrap">
+        	    <form action="/updateInfo.do" method="post">
+                	<div class="login-info">
                           <div class="join-input-wrap">
                               <h3>로그인 정보</h3>
                               <br>
@@ -69,8 +73,8 @@
                                   <span class = "comment"></span>
                               </div>
                           </div>
-                      </div>       
-                      <div class="login-info2">
+                    </div>       
+                    <div class="login-info2">
                           <div class="join-input-wrap">
                               <h3>개인정보</h3>
                               <br>
@@ -141,18 +145,19 @@
                               </div>
                           </div>
                           <div class="updateComplete">
-                              <button type="submit" class="bc1" id="updateComplete">수정하기</button>
+                              <button type="submit" class="btn bc1 bs6" id="updateComplete">수정하기</button>
                           </div>
+                    </div>
                   </form>
+            </div>
         </div>
+       </div>
+        
         <script>
         	$("#sendBtn").on("click",function(){
         		$(".emailCheck").css("display","block");
         	});
         	
-            $(".sub-title").on("click", function(){
-                $(this).next().slideToggle();
-            });
                     
             $(".long-input").on("focusin",function(event){
                 $(this).css("border-bottom", "2px solid black");
