@@ -82,7 +82,7 @@
 					<div class="modal-content">
 						<div class="input-box heightbox shortbox">
 							<span>보낸 사람 : </span> <span class="senderId">아이디</span>
-							<span class="time">보낸시간 2023-03-01 11:22:34</span>
+							<span class="time">보낸시간 <%=p.getRegDate() %></span>
 						</div>
 						<div class="input-box heightbox">
 							<label for="title">제목</label> <input type="text"

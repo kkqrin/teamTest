@@ -21,7 +21,7 @@ int index = (int) request.getAttribute("index");
 	display: none;
 }
 
-body>.page-content {
+body>.page-modal {
 	width: 1000px;
 	overflow: hidden;
 	background-color: #fff;
@@ -282,7 +282,7 @@ table th, .post-id, .post-content, .post-time {
 		</div>
 	</div>
 		<div id="login-modal" class="modal-bg">
-			<div class="modal-wrap page-content">
+			<div class="modal-wrap page-modal">
 				<div class="modal-head">
 					<h2>받은쪽지</h2>
 					<span class="material-icons close-icon modal-close">close</span>
@@ -385,9 +385,9 @@ table th, .post-id, .post-content, .post-time {
 			}
 		});
 
-		$('.page-content>.modal-foot>button').on('click',function(){
-			if($('.page-content>.modal-foot>button').index(this) == 0){
-				$('#login-modal>.page-content').hide();
+		$('.page-modal>.modal-foot>button').on('click',function(){
+			if($('.page-modal>.modal-foot>button').index(this) == 0){
+				$('#login-modal>.page-modal').hide();
 				$('.hide-content').show();
 			}
 			
