@@ -138,6 +138,7 @@ public class MemberDao {
 				member.setMemberPoint(rset.getInt("member_point"));
 				member.setMemberTemp(rset.getInt("member_temp"));
 				member.setPostNumber(rset.getString("post_number"));
+				member.setMemberPw(rset.getString("member_pw"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

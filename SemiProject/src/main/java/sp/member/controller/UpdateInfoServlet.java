@@ -43,7 +43,9 @@ public class UpdateInfoServlet extends HttpServlet {
 		member.setPostNumber(request.getParameter("postcode"));
 		member.setMemberAddr(request.getParameter("address"));
 		member.setMemberAddr2(request.getParameter("detailAddress"));
-		
+		member.setMemberGrade(Integer.parseInt(request.getParameter("memberGrade")));
+	
+		System.out.println(member.getMemberPw());
 		MemberService service = new MemberService();
 		int result = service.updateInfo(member);
 		
@@ -59,7 +61,7 @@ public class UpdateInfoServlet extends HttpServlet {
 			m.setPostNumber(m.getPostNumber());
 			m.setMemberAddr(m.getMemberAddr());
 			m.setMemberAddr2(m.getMemberAddr2());
-
+			m.setMemberGrade(m.getMemberGrade());
 			request.setAttribute("title", "수정완료");
 			request.setAttribute("msg", "정보 수정이 완료되었습니다.");
 			request.setAttribute("icon", "success");

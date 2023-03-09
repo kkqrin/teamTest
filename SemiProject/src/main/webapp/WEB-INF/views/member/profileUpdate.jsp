@@ -131,6 +131,8 @@
                               <div>
                                   <input type="text" name="email" id="authCode" class="mid-input" placeholder="인증번호 입력">
                                   <button type="button" class="bc2 dup-btn"id="authBtn">인증하기</button>
+                    
+                                  <input type="text" name="memberGrade" id=memberGrade value="<%=m.getMemberGrade() %>" >
                                   <span id="timeZone"></span>
                                   <span id="authMsg"></span>
                               </div>
@@ -234,10 +236,81 @@
             	}
             });
             
-            
+            let mailCode;
+    		$("#sendBtn").on("click",function(){
+    			const email = $("#email").val();
+    			$.ajax({
+    				url:"/sendMail.do",
+    				data:{email:email},
+    				type:"post",
+    				success:function(data){
+    					if(data=="null"){
+    						alert("이메일 주소를 똑바로 입력하세요");
+    					}else{
+    						mailCode=data;
+    						$("#auth").slideDown();
+    						authTime();
+    					}
+    				},
+    				error:function(){
+    					console.log("에러");
+    				}
+    			});
+    		});
+    		$("#authBtn").on("click",function(){
+    			if(mailCode==null){
+    				$("#authMsg").text("인증 시간 만료");
+    				$("#authMsg").css("color","red");
+    			}else{
+    			const authCode=$("#authCode").val();
+    			if(authCode==mailCode){
+    				$("#authMsg").prop("readonly",true);
+    				$("#authMsg").text("인증완료");
+    				$("#authMsg").css("color","green");
+    				window.clearInterval(intervalId)
+    				
+    			}else{
+    				$("#authMsg").text("인증실패");
+    				$("#authMsg").css("color","red");
+    			}
+    			}
+    		});
+    		let intervalId;
+    		function authTime(){
+    			$("#timeZone").html("<span id='min'>03</span> : <span id='sec'>00</span>");
+    			intervalId = window.setInterval(function(){
+    				timeCount();
+    			},1000);
+    			
+    		}
+    		function timeCount() {
+    			const min=$("#min").text();
+    			const sec =$("#sec").text();
+    			if(sec=="00"){
+    				if(min!="0"){
+    					const newMin=Number(min)-1;
+    					$("#min").text(newMin);
+    					$("#sec").text(59);		
+    				}else{
+    					window.clearInterval(intervalId);
+    					mailCode = null;
+    					$("#authMsg").text("인증 시간 만료");
+    					$("#authMsg").css("color","red");
+    				}
+    			}else{
+    				const newSec = Number(sec) - 1;
+    				if(newSec<10){
+    					$("#sec").text("0"+newSec);
+
+    				}else{
+    					$("#sec").text(newSec);
+
+    				}
+    			}
+    		}
             
         </script>
-        <script src = "js/emailApi.js"></script>
+     
         <%@include file="/WEB-INF/views/common/footer.jsp" %>
     </body>
     </html>

@@ -39,7 +39,7 @@ let mailCode;
 		});
 		let intervalId;
 		function authTime(){
-			$("#timeZone").html("<span id='min'>0</span> : <span id='sec'>30</span>");
+			$("#timeZone").html("<span id='min'>03</span> : <span id='sec'>00</span>");
 			intervalId = window.setInterval(function(){
 				timeCount();
 			},1000);
