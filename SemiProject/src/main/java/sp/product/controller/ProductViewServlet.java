@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sp.deal.vo.Deal;
 import sp.member.vo.Member;
 import sp.product.service.ProductService;
 import sp.product.vo.Product;
@@ -46,6 +47,8 @@ public class ProductViewServlet extends HttpServlet {
 		Product p = service.selectHeartCount(productNo);
 		// 판매자의 온도 조회
 		Member m = service.selectSellerTemp(productNo);
+		// 거래내역에서 해당하는 상품번호를 예약한 회원번호 조회
+		Deal d = service.selectReservingMemberNo(productNo);
 		
 		// 4. 결과 처리
 		if(pvd == null) {
@@ -64,6 +67,7 @@ public class ProductViewServlet extends HttpServlet {
 			request.setAttribute("c", pvd.getC());
 			request.setAttribute("Heart", p);
 			request.setAttribute("sellerTemp", m.getMemberTemp());
+			request.setAttribute("d", d);
 			view.forward(request, response);
 		}
 	}

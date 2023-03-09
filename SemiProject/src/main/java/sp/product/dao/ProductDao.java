@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.deal.vo.Deal;
 import sp.member.vo.Member;
 import sp.product.vo.Category;
 import sp.product.vo.Product;
@@ -860,6 +861,29 @@ public class ProductDao {
 		}
 		
 		return list;
+	}
+
+	public Deal selectReservingMemberNo(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Deal d = null;
+		String query = "select member_no from deal where product_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				d = new Deal(); 
+				d.setMemberNo(rset.getInt("member_no"));
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return d;
 	}		
 }
 
