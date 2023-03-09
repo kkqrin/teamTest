@@ -108,6 +108,13 @@
 [name=temp2]>label{
 	z-index : 1000;
 }
+
+	.view-category>input[type=button]{
+		float: right;
+		display:flex;
+		align-items: center;
+	}
+
 </style>
 </head>
 <body>
@@ -173,7 +180,11 @@
                
                 <div class="view-product-info">
 	                    <div class="view-product-info-top">
-	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %></div>
+	                        <div class="view-category">홈 > <%=c.getfCategoryName() %> > <%=c.getCategoryName() %>
+	                        <%if(m.getMemberId().equals(p.getSellerId())){ %>
+	                        <input type="button" class="btn bc1 bs1" value ="삭제">
+	                        <%} %>
+	                        </div>
 	                        <div class="view-product-title"><%=p.getProductTitle() %></div>
 	                        <div class="view-product-short" style="display:flex;">
 	                            <div class="material-symbols-outlined view-icon">schedule</div>
@@ -472,6 +483,12 @@
 		</div>
 	
 	<script>
+
+	
+		$('.view-category>input[type=button]').on('click',function(){
+			location.href = "/deleteProduct.do?productNo=<%=p.getProductNo()%>";
+		})
+	
 		$('.modal-open-btn').on('click',function(){
 			const memberId = $('#sellerId').val();
 			$.ajax({

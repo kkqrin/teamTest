@@ -9,6 +9,7 @@ int start = (int) request.getAttribute("start");
 int totalCount = (int) request.getAttribute("totalCount");
 int notRead = (int) request.getAttribute("notRead");
 int allCount = (int) request.getAttribute("allCount");
+int index = (int) request.getAttribute("index");
 %>
 <!DOCTYPE html>
 <html>
@@ -212,6 +213,7 @@ table th, .post-id, .post-content, .post-time {
 		</div>
 		<div class="content-main">
 			<div class="main-title">
+				<input type="hidden" class="index" value="<%=index%>">
 				<span>알림</span>안읽은쪽지[ <span><%=notRead%></span> ]통 | 전체 쪽지 [ <span><%=allCount%></span>
 				] 통
 			</div>
@@ -296,6 +298,7 @@ table th, .post-id, .post-content, .post-time {
 					<span>받을 사람 : </span> <span class="senderId">아이디</span> <span
 						class="time">보낸시간 <span></span></span>
 						<input type="hidden" id="postReseiver" name="postReseiver" >
+						<input type="hidden" id="memberId" name="memberId" value="<%=m.getMemberId()%>">
 				</div>
 				<div class="input-box heightbox">
 					<label for="title">제목</label> <input type="text" name="post-title"
@@ -317,24 +320,26 @@ table th, .post-id, .post-content, .post-time {
 	<script>
 		$('.modalOpen').on('click',function() {
 				const postNo = $('.modalOpen').eq($('.modalOpen').index(this)).children().val();
+				const index = $('.index').val();
 				console.log(postNo);
 				$.ajax({
 					url : "/postViewFrm.do",
 					type : "post",
-					data : {postNo : postNo},
+					data : {postNo : postNo,index : index},
 					success : function(data){
 						if(data != 0){
 						const title = $('.post-title').eq(
-								$('.modalOpen').index(this)).text();
+						$('.modalOpen').index(this)).text();
 						$('.title-post').val(title);
 						const senderId = $('.post-id').eq($('.modalOpen').index(this)).text();
 						$('.senderId').text(senderId);
 						const content = $('.post-content').eq(
-								$('.modalOpen').index(this)).text();
+						$('.modalOpen').index(this)).text();
 						$('.content-post').text(content);
 						const time = $('.post-time').eq($('.modalOpen').index(this)).text();
 						$('.time>span').text(time);
 						$('#postReseiver').val(senderId);
+						
 						}
 					}
 				});
@@ -347,21 +352,18 @@ table th, .post-id, .post-content, .post-time {
 			if(confirm("쪽지를 삭제하시겠습니까?")){
 				location.href = "/deletePost.do?postNo="+postNo;
 			}
-			
 		});
 		
-		$('.letterBox').eq(1).click();
-
 		$('.letterBox').on('click', function() {
 			$('.message').hide();
 			console.log($('.letterBox').index(this));
 			$('.message').eq($('.letterBox').index(this) - 1).show();
 			if (($('.letterBox').index(this) - 1) == 0) {
-				location.href = "/postListNotRead.do?reqPage=1&memberId=<%=m.getMemberId()%>"
+				location.href = "/postListNotRead.do?reqPage=1&memberId=<%=m.getMemberId()%>&index=1"
 			} else if (($('.letterBox').index(this) - 1) == 1) {
-				location.href = "/postSendList.do?reqPage=1&memberId=<%=m.getMemberId()%>"
+				location.href = "/postSendList.do?reqPage=1&memberId=<%=m.getMemberId()%>&index=2"
 			} else if (($('.letterBox').index(this) - 1) == 2){
-				location.href = "/postList.do?reqPage=1&memberId=<%=m.getMemberId()%>"
+				location.href = "/postList.do?reqPage=1&memberId=<%=m.getMemberId()%>&index=3"
 			}
 		});
 
@@ -370,10 +372,10 @@ table th, .post-id, .post-content, .post-time {
 				$('#login-modal>.page-content').hide();
 				$('.hide-content').show();
 			}
+			
 		});
-		$('.modal-close').on('click',function(){
-				location.reload();
-		});
+
+
 	</script>
 
 

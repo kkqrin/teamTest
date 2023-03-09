@@ -36,11 +36,11 @@
             <a href="/loginFrm.do"class="btn bc0">로그인</a>
             <a href="/joinFrm.do" class="btn bc0">회원가입</a>
             <%}else if(m.getMemberGrade()==1){%>
-            <a href="/postList.do?reqPage=1&memberId=<%=m.getMemberId() %>" class="btn bc0">쪽지함<span class="pc"></span></a>
+            <a href="/postListNotRead.do?reqPage=1&memberId=<%=m.getMemberId() %>&index=1" class="btn bc0">쪽지함<span class="pc"></span></a>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/adminPageGrade.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%}else{ %>
-            <a href="/postList.do?reqPage=1&memberId=<%=m.getMemberId() %>" class="btn bc0">쪽지함<span class="pc"></span></a>
+            <a href="/postListNotRead.do?reqPage=1&memberId=<%=m.getMemberId() %>&index=1" class="btn bc0">쪽지함<span class="pc"></span></a>
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/myPage.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>
@@ -122,6 +122,7 @@
         </ul>
     </header>
 <script>
+
 
 <%if(m!= null){%>
  $(document).ready(function(){
