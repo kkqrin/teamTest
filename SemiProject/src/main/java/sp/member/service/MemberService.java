@@ -155,6 +155,15 @@ public class MemberService {
 	}
 
 
+	public Member selectRetireMember(String memberPw) {
+		Connection conn =JDBCTemplate.getConnection();
+		Member member =dao.selectRetireMember(conn,memberPw);
+		JDBCTemplate.close(conn);
+		return member;
+	}
+	
+	
+	
 	
 }
 

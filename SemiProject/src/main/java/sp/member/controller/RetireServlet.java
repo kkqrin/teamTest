@@ -13,16 +13,16 @@ import sp.member.service.MemberService;
 import sp.member.vo.Member;
 
 /**
- * Servlet implementation class SearchPwServlet
+ * Servlet implementation class RetireServlet
  */
-@WebServlet(name = "SearchPw", urlPatterns = { "/searchPw.do" })
-public class SearchPwServlet extends HttpServlet {
+@WebServlet(name = "Retire", urlPatterns = { "/retire.do" })
+public class RetireServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchPwServlet() {
+    public RetireServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +31,21 @@ public class SearchPwServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("utf-8");
-		//2.값추출
-		String memberId2= request.getParameter("memberId2");
 		
-		//3.비즈니스로직
+		String memberPw= request.getParameter("memberPw");
+		
+		Member m = new Member();
+		m.setMemberPw(memberPw);
 		MemberService service = new MemberService();
-		Member m = service.selectOneMember(memberId2);
+		Member member = service.selectOneMemberPhone(m);
 		
 		PrintWriter out = response.getWriter();
-		if (m == null) {
-			out.print(0);
+		if (member == null) {
+		
 		}else {
-			out.print(m.getMemberPw());
+			
+			out.print(member.getMemberPw());
 		}
 	
 	}

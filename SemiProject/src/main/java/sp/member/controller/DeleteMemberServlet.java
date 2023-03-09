@@ -49,7 +49,7 @@ public class DeleteMemberServlet extends HttpServlet {
 			request.setAttribute("loc","/logout.do");
 		}else {
 			request.setAttribute("title","탈퇴실패");
-			request.setAttribute("msg","가지마세요. 잘해 들릴게요.");
+			request.setAttribute("msg","가지마세요. 잘해 드릴게요.");
 			request.setAttribute("icon","error");
 			request.setAttribute("loc","/mypage2.do?memberId="+memberId);
 		}

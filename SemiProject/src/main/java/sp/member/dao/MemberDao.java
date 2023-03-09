@@ -361,4 +361,41 @@ public class MemberDao {
 		return result;
 	}
 
+	public Member selectRetireMember(Connection conn, String memberPw) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member member = null;
+	
+		String query = "select * from member_tbl where member_pw=?";
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberPw());
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				
+				member = new Member();
+				member.setEnrollDate(rset.getString("enroll_date"));
+				member.setMemberAddr(rset.getString("member_addr"));
+				member.setMemberAddr2(rset.getString("member_addr2"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberGrade(rset.getInt("member_grade"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberName(rset.getString("member_name"));
+				member.setMemberNo(rset.getInt("member_no"));
+				member.setMemberPhone(rset.getString("member_phone"));
+				member.setMemberPoint(rset.getInt("member_point"));
+				member.setMemberTemp(rset.getString("member_temp"));
+				member.setPostNumber(rset.getString("post_number"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(rset);
+		}
+		return member;
+	}
+
 }
