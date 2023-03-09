@@ -75,7 +75,6 @@
 	                <span class="material-symbols-outlined">edit</span>
                     <p>판매하기</p>
                 </a>
-                
                 <%} %>
                <%}else if(m !=null && m.getMemberGrade()==1) { %>
 	                <a href="/adminPageGrade.do" class="btn">

@@ -404,7 +404,7 @@ padding:10px 0;
  				$("#idChkBtn").prop("disabled",true);
  				if(!memberIdCheck){
  					$(this).next().next().text("아이디는 영어 소문자, 숫자 4~8글자 입니다.");
- 					$(this).next().next().css("color","red");
+ 					$(this).next().next().css("color","#EB3C4E");
  					result[0]=false;
  				}else{
  					$("#idChkBtn").prop("disabled",false);
@@ -419,11 +419,11 @@ padding:10px 0;
  			    const check = pwReg.test(inputPw);
  			    if(check){
  			        $(this).next().text("안전한 비밀번호 입니다.");
- 			        $(this).next().css("color","green");
+ 			        $(this).next().css("color","#236CDA");
  			        result[1]=true;
  			    }else{
  			         $(this).next().text("비밀번호는 영어 소문자, 대문자, 숫자로 8~16글자 입니다.");
- 			        $(this).next().css("color","red");
+ 			        $(this).next().css("color","#EB3C4E");
  			        result[1]=false;
  			    }
  			});
@@ -434,11 +434,11 @@ padding:10px 0;
  				$(this).next().empty();
  				if(inputPw == memberPw2Val){
  					$(this).next().text("비밀번호가 일치합니다.");
- 					$(this).next().css("color","green");
+ 					$(this).next().css("color","#236CDA");
  					result[2]=true;
  				} else{
  					$(this).next().text("비밀번호가 일치하지 않습니다.");
- 					$(this).next().css("color","red");
+ 					$(this).next().css("color","#EB3C4E");
  					result[2]=false;
  				}
  			});
@@ -450,7 +450,7 @@ padding:10px 0;
 			     	$(this).next().empty();
 			         if(!memberNameCheck){
 			          	$(this).next().text("아이디는 한글로 2글자이상 4글자이하입니다.");
-			            $(this).next().css("color","red");
+			            $(this).next().css("color","#EB3C4E");
 			           result[3]=false;
 			         }else{
 			        	 result[3]=true;
@@ -465,7 +465,7 @@ padding:10px 0;
  				$(this).next().empty();
  				if(!phoneCheck){
  					$(this).next().text("사용 불가능한 양식입니다.");
- 					$(this).next().css("color","red");
+ 					$(this).next().css("color","#EB3C4E");
  					result[4]=false;	
  				}else{
  					result[4]=true;
@@ -553,19 +553,19 @@ padding:10px 0;
 		$("#authBtn").on("click",function(){
 			if(mailCode==null){
 				$("#authMsg").text("인증 시간 만료");
-				$("#authMsg").css("color","red");
+				$("#authMsg").css("color","#EB3C4E");
 				$("#memberGrade").val(3);
 			}else{
 			const authCode=$("#authCode").val();
 			if(authCode==mailCode){
 				$("#authMsg").prop("readonly",true);
 				$("#authMsg").text("인증완료");
-				$("#authMsg").css("color","green");
+				$("#authMsg").css("color","#236CDA");
 				$("#memberGrade").val(2);
 				window.clearInterval(intervalId)
 			}else{
 				$("#authMsg").text("인증실패");
-				$("#authMsg").css("color","red");
+				$("#authMsg").css("color","#EB3C4E");
 				$("#memberGrade").val(3);
 			}
 			}
@@ -590,7 +590,7 @@ padding:10px 0;
 					window.clearInterval(intervalId);
 					mailCode = null;
 					$("#authMsg").text("인증 시간 만료");
-					$("#authMsg").css("color","red");
+					$("#authMsg").css("color","#EB3C4E");
 				}
 			}else{
 				const newSec = Number(sec) - 1;
