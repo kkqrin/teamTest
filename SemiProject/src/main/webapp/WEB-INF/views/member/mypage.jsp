@@ -9,12 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link rel="stylesheet" href="css/mypage.css">
-    <style>
-    .mypage-home-title1{
-    	padding-left:200px;
-    }
-    </style>   
+    <link rel="stylesheet" href="css/mypage.css"> 
 </head>
     <body>
     <%@include file="/WEB-INF/views/common/header.jsp" %>
