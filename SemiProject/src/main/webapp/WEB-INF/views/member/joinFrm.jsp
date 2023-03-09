@@ -407,6 +407,8 @@ padding:10px 0;
  					$(this).next().next().css("color","#EB3C4E");
  					result[0]=false;
  				}else{
+ 					$(this).next().next().text("중복체크를 눌러주세요.");
+ 					$(this).next().next().css("color","#236CDA");
  					$("#idChkBtn").prop("disabled",false);
  					result[0]=true;
  				}
@@ -572,7 +574,7 @@ padding:10px 0;
 		});
 		let intervalId;
 		function authTime(){
-			$("#timeZone").html("<span id='min'>03</span> : <span id='sec'>00</span>");
+			$("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
 			intervalId = window.setInterval(function(){
 				timeCount();
 			},1000);
