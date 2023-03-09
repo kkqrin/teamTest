@@ -206,7 +206,6 @@
 				$('.boardDelete').on('click',function(){
 					if(confirm("게시글을 삭제하시겠습니까?")){
 						location.href="/boardDelete.do?boardNo="+<%=b.getBoardNo()%>;
-						console.log("삭제");
 					}
 				});
 

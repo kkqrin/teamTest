@@ -88,7 +88,6 @@
 			$('#listCount').on('change',function(){
 				const reqPage = $('.active-page').text();
 				const npp = $(this).val();
-				console.log(npp);
 				location.href="/boardList.do?reqPage="+reqPage+"&npp="+npp;
 			});
 			
