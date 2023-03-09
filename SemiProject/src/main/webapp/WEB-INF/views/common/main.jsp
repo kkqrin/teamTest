@@ -77,7 +77,7 @@
 	                    <img src="/upload/product/<%=p.getFilepath()%>">
 	                </div>
 	                <div class="posting-content">
-	                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
+	                    <p class="posting-price"><%=p.getProductPrice() %></p>
 	                    <p class="posting-title"><%=p.getProductTitle() %></p>
 	                    <div class="posting-detail">
 	                        <div class="posting-icon">
@@ -118,7 +118,7 @@
 		                    <img src="/upload/product/<%=p.getFilepath()%>">
 		                </div>
 		                <div class="posting-content">
-		                    <p class="posting-price"><%=p.getProductPrice() %>원</p>
+		                    <p class="posting-price"><%=p.getProductPrice() %></p>
 		                    <p class="posting-title"><%=p.getProductTitle() %></p>
 		                    <div class="posting-detail">
 		                        <div class="posting-icon">
@@ -145,7 +145,17 @@
 		
        
 
+<script>
+//화폐 표시						
+for(let i=0; i<16 ; i++){				
+	const productMoney = $(".posting-price").eq(i);
+	console.log(productMoney.text());
+	let commaMoney = $(".posting-price").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+	$(".posting-price").eq(i).text(commaMoney+"원");
+	console.log(commaMoney);				
+}
 
+</script>
 
 
 

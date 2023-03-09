@@ -38,6 +38,7 @@
     }
     .list-subCategory>li{
     	padding: 10px 30px;
+    	cursor: pointer;
     }
     .list-subCategory>li>a{
     	font-size: 14px;
@@ -49,6 +50,9 @@
     }
     .naviHide {
 	display: none;
+	}
+	.list-firstCategory>li{
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -122,6 +126,15 @@
 			$(".list-subCategory").hide();			
 			$(this).next().toggle();
 		});
+		
+			
+			// 화폐 표시						
+			for(let i=0; i<20 ; i++){				
+				const productMoney = $(".posting-price").eq(i);
+				let commaMoney = $(".posting-price").eq(i).text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+				$(".posting-price").eq(i).text(commaMoney+"원");
+			}
+			
 	</script>
 	<%@include file="/WEB-INF/views/common/footer.jsp" %>
 </body>

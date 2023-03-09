@@ -13,14 +13,14 @@ public class Member {
 	private String memberAddr;
 	private String memberAddr2;
 	private int	memberPoint;
-	private int memberTemp;
+	private String memberTemp;
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Member(int memberNo, String memberId, String memberPw, String memberName, String memberPhone,
 			String memberEmail, int memberGrade, String enrollDate, String postNumber, String memberAddr,
-			String memberAddr2, int memberPoint, int memberTemp) {
+			String memberAddr2, int memberPoint, String memberTemp) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -108,10 +108,10 @@ public class Member {
 	public void setMemberPoint(int memberPoint) {
 		this.memberPoint = memberPoint;
 	}
-	public int getMemberTemp() {
+	public String getMemberTemp() {
 		return memberTemp;
 	}
-	public void setMemberTemp(int memberTemp) {
+	public void setMemberTemp(String memberTemp) {
 		this.memberTemp = memberTemp;
 	}
 

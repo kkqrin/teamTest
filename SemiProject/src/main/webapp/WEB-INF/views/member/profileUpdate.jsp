@@ -18,57 +18,34 @@
 </head>
     <body>
      <%@include file="/WEB-INF/views/common/header.jsp" %>
-        <div class="myPage-wrap">     
-            <div class="myPage-menu">
-                <div class="myPage-title">
-                    <h2>마이 페이지</h2>
+<div class="page-content">
+        <div class="mypage-navi-wrap">
+            <div class="page-title">마이페이지</div>
+            <div class="mypage-navi">
+                <div class="mypage-navi-box more">
+                    <div class="mypage-navi-title">거래 정보</div>
+                    <ul class="mypage-subnavi">
+                        <li><a href="/selectMyDeal.do?memberNo=<%=m.getMemberNo()%>">구매 내역</a></li>
+                        <li><a href="/myStore.do?sellerId=<%=m.getMemberId()%>&loginId=<%=m.getMemberId()%>">판매 내역</a></li>
+                    </ul>
                 </div>
-                <div class="mypage-content">
-                    <div class="mypage-content-list more">
-                        <div class="sub-title">쇼핑 정보</div>
-                        <ul class="sub-menu">
-                            <li><a href="#">거래 내역</a></li>
-                            <li><a href="#">관심 상품</a></li>
-                        </ul>
-                    </div>
-                    <div class="mypage-content-list more">
-                        <div class="sub-title">내 정보</div>
-                        <ul class="sub-menu">
-                              <li><a href="/myPage.do">내 정보보기</a></li>
-                             <li><a href="/deleteMember.do">회원탈퇴</a></li>
-                        </ul>
-                    </div>
+                <div class="mypage-navi-box more">
+                    <div class="mypage-navi-title">내 정보</div>
+                    <ul class="mypage-subnavi">
+                        <li><a href="/profileUpdate.do">내 정보 수정</a></li>
+                        <li><a href="/deleteMember.do">회원탈퇴</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="myPage-info">
-                <div class="myPage-info-box">
-                    <div class="myPage-info-image">
-                        <img src="/img/user-100.png">
-                    </div>
-                    <div class="myPage-info-user">
-                        <div><%=m.getMemberName() %></div>
-                        <p><%=m.getMemberEmail() %></p>
-                        <button><a href="#">사진 변경</a></button>
-                        <button><a href="#">사진 삭제</a></button>
-                    </div>
-                </div>
+        </div>
 
-                <div class="mypage-info-right">
-                    <div class="myPage-info-grade">
-                    <%if(m.getMemberGrade()==2){%>
-                        <p>이메일 인증회원</p>
-                    <%}else{ %>
-                    	<p>이메일 미인증회원</p>
-                    <%} %>
-                    </div>
-                    <div class="bank">
-                        <p>예치금 <span class="fc-6"><%=m.getMemberPoint() %></span>원</p>
-                    </div>
-                    <div class="temp">
-                        <p>온도 <span class="fc-9"><%=m.getMemberTemp() %></span>도</p>
-                    </div>    
-                </div>
-            </div>
+
+
+
+
+
+
+
             <form action="/updateInfo.do" method="post">
                 <div class="login-info">
                           <div class="join-input-wrap">

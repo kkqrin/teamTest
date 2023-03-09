@@ -341,7 +341,6 @@ table th, .post-id, .post-content, .post-time {
 		$('.modalOpen').on('click',function() {
 				const postNo = $('.modalOpen').eq($('.modalOpen').index(this)).children().val();
 				const index = $('.index').val();
-				console.log(postNo);
 				$.ajax({
 					url : "/postViewFrm.do",
 					type : "post",
@@ -376,7 +375,6 @@ table th, .post-id, .post-content, .post-time {
 		
 		$('.letterBox').on('click', function() {
 			$('.message').hide();
-			console.log($('.letterBox').index(this));
 			$('.message').eq($('.letterBox').index(this) - 1).show();
 			if (($('.letterBox').index(this) - 1) == 0) {
 				location.href = "/postListNotRead.do?reqPage=1&memberId=<%=m.getMemberId()%>&index=1"

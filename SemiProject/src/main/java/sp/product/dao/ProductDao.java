@@ -734,6 +734,29 @@ public class ProductDao {
 		}JDBCTemplate.close(pstmt);
 		
 		return result;
+	}
+
+	public Product selectHeartCount(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Product p = null;
+		String query = "select p.product_no,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p where product_no=? order by wish_count desc";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				p = new Product();
+				p.setWishCount(rset.getInt("wish_count"));
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return p;
 	}		
 }
 

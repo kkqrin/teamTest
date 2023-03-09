@@ -134,7 +134,6 @@
         const index = $('.modal-foot>button').index(this);
             $('.page-content').hide();
             $('.hide-content').show();
-		console.log(index);
     });
 
 
