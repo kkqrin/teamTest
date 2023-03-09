@@ -490,7 +490,9 @@
 
 	
 		$('.view-category>input[type=button]').on('click',function(){
+			if(confirm("상품을 삭제하시겠습니까?")){
 			location.href = "/deleteProduct.do?productNo=<%=p.getProductNo()%>";
+			}
 		})
 	
 		$('.modal-open-btn').on('click',function(){
@@ -513,14 +515,12 @@
 	
 		$('.modal-foot>button').eq(0).on('click',function(){
 			const memberId = $('#sellerId').val();
-			console.log(memberId); 
 			$.ajax({
 				url : "/findReportUser.do",
 				type : "POST",
 				data : {memberId : memberId},
 				dataType : "JSON",
 				success(data){
-					console.log(data);
 					const check = data.check;
 					$('.check').text(check);
 					const pact = data.pact;
@@ -635,7 +635,6 @@
 		const productMoney = $("#view-product-price>span");
 		const commaMoney = productMoney.text().toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 		productMoney.text(commaMoney+"원");
-		console.log(commaMoney);
         });
 		
 	//거래완료 모달창
