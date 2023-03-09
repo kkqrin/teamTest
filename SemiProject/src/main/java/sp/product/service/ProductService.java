@@ -311,4 +311,12 @@ public class ProductService {
 		JDBCTemplate.close(conn);
 		return p;
 	}
+
+	public Product selectHeartCount(int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Product p = dao.selectHeartCount(conn, productNo);
+		
+		JDBCTemplate.close(conn);
+		return p;
+	}
 }
