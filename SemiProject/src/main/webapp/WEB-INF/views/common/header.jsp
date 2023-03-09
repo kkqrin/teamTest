@@ -44,7 +44,7 @@
             <a href="/logout.do" class="btn bc0">로그아웃</a>
 			<a href="/myPage.do" class="btn bc0"><%=m.getMemberName() %></a>
             <%} %>
-            <a href="/custmoService.do" class="btn bc0">고객센터</a>
+            <a href="/noticeList.do?reqPage=1" class="btn bc0">고객센터</a>
         </div>
         <div class="header-top">
             <div class="site-logo">
