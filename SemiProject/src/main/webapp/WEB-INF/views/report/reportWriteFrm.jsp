@@ -51,7 +51,7 @@
 						<button type="button" class="btn bc11 modal-open-btn"id="modal-ajax" target="#test-modal" style="margin-left: 10px;">
 						거래 내역 조회
 						</button>
-						<%-- 거래 내역 조회 --%>
+						<%-- my거래 내역 출력 --%>
 						<input type="hidden" name="productNo">
 						<input type="hidden" name="productTitle">
 						<input type="hidden" name="sellerId">				
@@ -135,7 +135,7 @@
 				$("#img-view").attr("src", "");
 			}
 		}
-		//ajax 모달출력
+		//ajax my거래내역 모달출력
 		$("#modal-ajax").on("click", function() {
 			const memberNo = $("#memberNo").val();
 			const result = $("#result");
@@ -216,7 +216,7 @@
 
 						result.append(tr2);
 
-					
+					//클릭한(radio) 거래내역 출력(hidden)
 					$("[name=modalRadio]").eq(i).on("click", function(){
 						
 						$("[name=productNo]").val(p.productNo);
@@ -237,9 +237,8 @@
 		//modal 확인버튼
 		$(".modalCheck").on("click",function(){
 			 $(this).parents(".modal-wrap").parent().css("display", "none");
-			 ////const check = $("[name=modalRadio]");
-			 //const checkVal = check.val();
-			// console.log(checkVal);
+			 
+			//클릭한 거래내역 출력
 			 const productNo = $("[name=productNo]").val();
 			 const productTitle = $("[name=productTitle]").val();
 			 const sellerId = $("[name=sellerId]").val();
