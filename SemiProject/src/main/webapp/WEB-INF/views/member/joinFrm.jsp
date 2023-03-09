@@ -189,7 +189,7 @@ padding:10px 0;
                         <label for="email" >이메일</label>
                     </div>
                     <div>
-                        <input type="email" name="email" id="email" class="mid-input" placeholder="예) secondhandlion@lion.com">
+                        <input type="email" name="email" id="email" class="mid-input" placeholder="예) secondhandlion@lion.com" required="required;">
                         <button type="button" class="bc1 dup-btn" id="sendBtn">메일전송</button>
                     </div>
                 </div>

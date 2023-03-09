@@ -35,8 +35,6 @@ $("[name=check-message2]").on("click",function(){
 
 
 
-
-
 $("[name=subcheck]").on("change", function(){
 	console.log($(this).is(":checked"));
 	if( !($(this).is(":checked")) ){
