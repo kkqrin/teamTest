@@ -48,7 +48,7 @@
                         <div>[<%=m.getMemberName() %>]님</div>
                     </div>
                     <div class="mypage-user-text">
-                        <div>온도 <%=m.getMemberTemp()%>도</div>
+                        <div>온도 <%=m.getMemberTemp()%>도     </div>
                         <%if(m.getMemberGrade()==2){%>
                         <div class="fc-7">이메일 인증 회원입니다.</div>
                     <%}else{ %>
