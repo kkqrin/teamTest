@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.member.vo.Member;
 import sp.product.vo.Category;
 import sp.product.vo.Product;
 import sp.product.vo.ProductComment;
@@ -555,6 +556,47 @@ public class ProductDao {
 		ResultSet rset = null;
 		ArrayList<Product> list = new ArrayList<Product>();
 		
+		String query = "select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,month,day,product_area,filename,filepath,wish_count from (select rownum as rnum, n.* from (select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day,product_area,filename,filepath,wish_count from (select p.*,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by wish_count desc) where wish_count != 0)n)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductContent(rset.getString("product_content"));
+//				p.setEnrollDate(rset.getString("enroll_date"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setFilename(rset.getString("filename"));
+				p.setFilepath(rset.getString("filepath"));
+				p.setWishCount(rset.getInt("wish_count"));
+				list.add(p);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
+	}
+	
+	
+	public ArrayList<Product> selectMainPopularProduct(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
 		String query = "select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,month,day,product_area,filename,filepath,wish_count from (select rownum as rnum, n.* from (select product_no,category_no,seller_id,product_title,product_status,product_price,view_count,product_content,substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day,product_area,filename,filepath,wish_count from (select p.*,(SELECT count(*)  FROM WISH_PRODUCT wp where wp.product_no=p.product_no) as wish_count from product p order by wish_count desc) where wish_count != 0)n) where rnum between 1 and 8";
 		
 		try {
@@ -757,6 +799,67 @@ public class ProductDao {
 			JDBCTemplate.close(rset);
 		}
 		return p;
+	}
+
+	public Member selectSellerTemp(Connection conn, int productNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Member m = null;
+		String query = "select * from (select * from member_tbl left join product on (member_id = seller_id)) where product_no=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, productNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setMemberTemp(rset.getString("member_temp"));
+			}
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		return m;
+	}
+
+	public ArrayList<Product> searchProduct(Connection conn, String search) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Product> list = new ArrayList<Product>();
+		
+		String query = "select PRODUCT_NO, CATEGORY_NO, SELLER_ID, PRODUCT_TITLE, PRODUCT_STATUS, PRODUCT_PRICE, VIEW_COUNT, PRODUCT_AREA, substr(enroll_date,6,2) as month, substr(enroll_date,9,2) as day, FILEPATH from product where product_title like '%' || ? || '%'";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, search);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Product p = new Product();
+				p.setProductNo(rset.getInt("product_no"));
+				p.setCategoryNo(rset.getInt("category_no"));
+				p.setSellerId(rset.getString("seller_id"));
+				p.setProductTitle(rset.getString("product_title"));
+				p.setProductStatus(rset.getInt("product_status"));
+				p.setProductPrice(rset.getInt("product_price"));
+				p.setViewCount(rset.getInt("view_count"));
+				p.setProductArea(rset.getString("product_area"));
+				p.setEnrollMonth(rset.getString("month"));
+				p.setEnrollDay(rset.getString("day"));
+				p.setFilepath(rset.getString("filepath"));
+				list.add(p);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+			JDBCTemplate.close(rset);
+		}
+		
+		return list;
 	}		
 }
 
