@@ -23,28 +23,15 @@
     	margin-top: 0px;
     	padding: 30px;
 	}
-	
-	
-/*    .posting-item{
-        position: relative;
-    }
-    .hover-posting-item{
-    	position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-    }
-    .posting-item:hover>.hover-posting-item{
-        background-color: #eee;
-        opacity: 0.5;
-        display: block;
-    }
-    .wish-product-status{
-        position: absolute;
-        left: 100px;
-        top: 200px;
-    }*/
+	.posting-title{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+}
+
 </style>
 </head>
 <body>

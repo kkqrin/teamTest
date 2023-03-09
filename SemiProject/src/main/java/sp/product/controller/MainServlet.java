@@ -41,7 +41,7 @@ public class MainServlet extends HttpServlet {
 		// 3. 비즈니스 로직
 		ProductService service = new ProductService();
 		// 인기상품
-		ArrayList<Product> popularList = service.selectPopularProduct();
+		ArrayList<Product> popularList = service.selectMainPopularProduct();
 		// 최신상품
 		ArrayList<Product> newList = service.selectNewProduct();
 		//ArrayList<Product> list = service.selectMyWishProduct(memberNo);

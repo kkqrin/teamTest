@@ -11,6 +11,7 @@
     ArrayList<Product> wishList = (ArrayList<Product>)request.getAttribute("wishList");
     Category c = (Category)request.getAttribute("c");
     Product h = (Product)request.getAttribute("Heart");
+    String sellerTemp = (String)request.getAttribute("sellerTemp");
     %>
 <!DOCTYPE html>
 <html>
@@ -276,7 +277,7 @@
                         <div class="view-seller-name"><%=p.getSellerId() %>님</div>
                         <!-- 1:관리자 2:이메일 인증회원 3:이메일 미인증회원 4:사기회원 -->
                         <div class="view-seller-grade">이메일 인증 회원</div>
-                        <div class="view-seller-temper">온도 ??.? ℃</div>
+                        <div class="view-seller-temper">온도 <%=sellerTemp %>℃</div>
                     </div>
                 </div>
                 <%if(m != null) {%>
