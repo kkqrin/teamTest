@@ -119,7 +119,7 @@
 	<script>
 		function loadImg(f) {
 			//첨부파일이 여러개일 수 있어서 항상 배열처리
-			console.log(f.files);
+			/* console.log(f.files); */
 			//파일 갯수가 0개가 아니고 && 첫 번째 파일이 정상파일이면
 			if (f.files.length != 0 && f.files[0] != 0) {
 				const reader = new FileReader();//파일정보를 얻어올 수 있는 객체
@@ -227,10 +227,10 @@
 					
 					
 					
-				},
+				}/* ,
 				error : function() {
 					console.log("서버 호출 실패")
-				}
+				} */
 			});
 		});
 		
@@ -252,17 +252,17 @@
 				data : {productNo : productNo},
 				dataType : "json",
 				success : function(data){
-					console.log(data)
+				/* 	console.log(data) */
 					//const p = data;
 					const input = $("<input>");
 					input.attr("type","text");
 					input.attr("name","memberNo");
 					input.attr("value",data.memberNo);
 					result.append(input);
-				},
+				}/* ,
 				error : function(){
 						console.log("서버 호출 실패");
-				}
+				} */
 			 });
 			 
 		});
