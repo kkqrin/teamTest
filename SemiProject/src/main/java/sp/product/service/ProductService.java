@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import common.JDBCTemplate;
+import sp.member.vo.Member;
 import sp.product.dao.ProductDao;
 import sp.product.vo.Category;
 import sp.product.vo.Product;
@@ -276,6 +277,14 @@ public class ProductService {
 		return list;
 	}
 
+	public ArrayList<Product> selectMainPopularProduct() {
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Product> list = dao.selectMainPopularProduct(conn);
+
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
 	public ArrayList<Product> selectNewProduct() {
 		Connection conn = JDBCTemplate.getConnection();
 		ArrayList<Product> list = dao.selectNewProduct(conn);
@@ -318,5 +327,13 @@ public class ProductService {
 		
 		JDBCTemplate.close(conn);
 		return p;
+	}
+
+	public Member selectSellerTemp(int productNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		Member m = dao.selectSellerTemp(conn, productNo);
+		
+		JDBCTemplate.close(conn);
+		return m;
 	}
 }
