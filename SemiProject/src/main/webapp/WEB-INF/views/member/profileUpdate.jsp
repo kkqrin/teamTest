@@ -234,10 +234,10 @@
     						$("#auth").slideDown();
     						authTime();
     					}
-    				},
+    				}/* ,
     				error:function(){
     					console.log("에러");
-    				}
+    				} */
     			});
     		});
     		$("#authBtn").on("click",function(){
