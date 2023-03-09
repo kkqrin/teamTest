@@ -24,6 +24,22 @@
     <link rel="stylesheet" href="/css/carousel.css">
     
 <style>
+	    .modal-content>.areabox{
+    	height: 300px;
+    	padding: 10px;
+	    line-height: 30px;
+	    text-align: center;
+
+    }
+      .areabox>textarea{
+    	width: 470px;
+    	height: 300px;
+    	float : right;
+    	resize: none;
+    	overflow: auto;
+    	padding: 10px;
+    }
+    
 	.inputCommentBox{
 		margin : 50px;
 	}

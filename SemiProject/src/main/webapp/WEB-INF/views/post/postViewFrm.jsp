@@ -106,8 +106,7 @@
 				</div>
 					<div class="modal-content">
 						<div class="input-box heightbox shortbox">
-							<span>받을 사람 : </span> <span class="senderId">아이디</span>
-							<span class="time">보낸시간 2023-03-01 11:22:34</span>
+							<span>받을 사람 : </span> <span class="senderId"><%=p.getPostSender() %></span>
 						</div>
 						<div class="input-box heightbox">
 							<label for="title">제목</label> <input type="text"
@@ -120,7 +119,7 @@
 
 					</div>
 					<div class="modal-foot">
-						<button type="button" class="btn bc11">하잇</button>
+						<button type="button" class="btn bc11">전송</button>
 						<button type="button" class="btn bc1 modal-close">취소</button>
 					</div>
 			</div>

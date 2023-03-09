@@ -209,6 +209,8 @@ table th, .post-id, .post-content, .post-time {
     	float : right;
     	resize: none;
     	overflow: auto;
+    	padding: 10px;
+    	margin-bottom: 10px;
     }
     
 
