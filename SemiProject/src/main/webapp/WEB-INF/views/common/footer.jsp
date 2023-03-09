@@ -13,7 +13,7 @@
                 <strong>고객센터 1577 - 1234</strong>
                 <p>평일 : 9:00 - 18:00</p>
                 <p>점심시간 : 13:00 - 14:00제외, 주말/공휴일 제외</p>
-                <a href="/noticeQuestionList.do?reqPage=1" class="btn bc11">자주묻는질문</a><br>
+                <a href="/noticeQuestionList.do?reqPage=1" class="btn bc11 bs1" style="margin-top:15px;">자주묻는질문</a><br>
             </div>
             <div class="footer-content">
                 <p>(주)중고사자 <span class="divder"></span> 대표자 : 김규린</p>
