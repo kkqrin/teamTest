@@ -38,6 +38,7 @@
     }
     .list-subCategory>li{
     	padding: 10px 30px;
+    	cursor: pointer;
     }
     .list-subCategory>li>a{
     	font-size: 14px;
@@ -49,6 +50,9 @@
     }
     .naviHide {
 	display: none;
+	}
+	.list-firstCategory>li{
+		cursor: pointer;
 	}
 </style>
 </head>
