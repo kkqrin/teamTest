@@ -264,12 +264,12 @@
 	                            </div>
 	                        </div>
 	                    </div>
-	                    <%if(m != null) {%>
+	                    <%if(m != null && !p.getSellerId().equals(m.getMemberId())) {%>
 	                    <div class="view-product-btn">
 	                        <a class="btn bc1 bs3 modal-open-btn" target="#login-modal">사기 조회</a>
-	                        <%if(!p.getSellerId().equals(m.getMemberId())) {%>
+	                      <%--   <%if(!p.getSellerId().equals(m.getMemberId())) {%> --%>
 	                        <a class="btn bc1 bs3 modal-open-btn" target = "#post-modal">판매자에게 쪽지보내기</a>
-	                        <%} %>
+	                     <%--    <%} %> --%>
 	                        <%if(p.getProductStatus()== 0) {%>
 	                        <a href="/reserve.do?productNo=<%=p.getProductNo()%>&memberNo=<%=m.getMemberNo() %>" class="btn bc1 bs3 reserve-btn">예약하기</a>
 	                        <%}else if(p.getProductStatus()== 1 && d.getMemberNo() == m.getMemberNo()) {%>

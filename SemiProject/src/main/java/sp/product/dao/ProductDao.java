@@ -774,7 +774,8 @@ public class ProductDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}JDBCTemplate.close(pstmt);
+		}
+		JDBCTemplate.close(pstmt);
 		
 		return result;
 	}
