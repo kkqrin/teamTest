@@ -140,7 +140,7 @@ padding:10px 0;
                         <label for="memberId">아이디 <sup>*</sup></label>
                     </div>
                     <div>
-                        <input type="text" name="memberId" id="memberId" class = "mid-input" required="required">
+                        <input type="text" name="memberId" id="memberId" class = "mid-input" required="required" placeholder="아이디는 영어 소문자, 숫자 4~8글자 입니다.">
                         <button type="button" class="bc1 dup-btn" id=idChkBtn disabled>중복체크</button>
                         <span class = "comment" id="ajaxCheckId"></span>
                     </div>
@@ -391,9 +391,7 @@ padding:10px 0;
         </div>
         </div>
  			<script>
- 		
- 			
- 			
+ 		 			
  			const result = [false,false,false,false,false,false,false];
  			
 			$("#memberId").on("keyup",function(){
@@ -431,6 +429,7 @@ padding:10px 0;
  			});
  			
  			$("#memberPw2").on("change",function(){
+ 				
  				const inputPw =$("#memberPw").val();
  				const memberPw2Val=$(this).val();
  				$(this).next().empty();
@@ -444,6 +443,23 @@ padding:10px 0;
  					result[2]=false;
  				}
  			});
+ 			
+		$("[name=memberPw]").on("change",function(){
+ 				
+ 				const inputPw =$(this).val();
+ 				const memberPw2Val=$("#memberPw").val();
+ 				$("#memberPw2").next().empty();
+ 				if(inputPw == memberPw2Val){
+ 					$("#memberPw2").next().text("비밀번호가 일치합니다.");
+ 					$("#memberPw2").next().css("color","#236CDA");
+ 					result[2]=true;
+ 				} else{
+ 					$("#memberPw2").next().text("비밀번호가 일치하지 않습니다.");
+ 					$("#memberPw2").next().css("color","#EB3C4E");
+ 					result[2]=false;
+ 				}
+ 			});
+ 			
  			
  			$("[name=memberName]").on("change",function(){
 			     const memberNameReg = /^[가-힣]{2,4}$/;
@@ -656,16 +672,6 @@ padding:10px 0;
 	        overlay2.addEventListener("click",closeModal2);
 	        modalCloseImg2.addEventListener("click",closeModal2);
 	        opentag.addEventListener("click",openModal2);
-
-			
-	       
-	        
-	        
-	        
-	        
-	        
-	        
-	        
 
 		</script>
       <script src = "/js/join.js"></script>
