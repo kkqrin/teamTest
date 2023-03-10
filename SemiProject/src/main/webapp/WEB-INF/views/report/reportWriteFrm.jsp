@@ -255,7 +255,7 @@
 				/* 	console.log(data) */
 					//const p = data;
 					const input = $("<input>");
-					input.attr("type","text");
+					input.attr("type","hidden");
 					input.attr("name","memberNo");
 					input.attr("value",data.memberNo);
 					result.append(input);
