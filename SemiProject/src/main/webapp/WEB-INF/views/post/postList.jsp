@@ -233,11 +233,23 @@ table th, .post-id, .post-content, .post-time {
 				] 통
 			</div>
 			<div class="message">
-				<%if(list.size() == 0){ %>
+				<%if(list.size() == 0 && index == 1){ %>
 				<table>
 					<tr>
-						<td colspan="8" class="notReadText">안읽은 쪽지가 없습니다.</td>
+						<td colspan="8" class="notReadText"> 안읽은 쪽지가 없습니다.</td>
 					</tr>
+					</table>
+				<%}else if(list.size() == 0 && index == 2){%>
+					<table>
+					<tr>
+						<td colspan="8" class="notReadText"> 보낸 쪽지가 없습니다.</td>
+					</tr>
+					</table>
+				<%}else if(list.size() == 0 && index == 3){ %>
+					<table>
+						<tr>
+							<td colspan="8" class="notReadText"> 받은 쪽지가 없습니다.</td>
+						</tr>
 					</table>
 				<%} %>
 				<table>

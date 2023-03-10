@@ -155,8 +155,8 @@
 					}//success
 				});//ajax  
 			}else{
-				$(".img"+(i+1)).attr("src","#");
-				$(".img"+(i+1)).css({"width":"16px","height":"16px"});
+				$(".img"+(i)).attr("src","#");
+				$(".img"+(i)).css({"width":"16px","height":"16px"});
 			}
 			}//for문
 		}); 
