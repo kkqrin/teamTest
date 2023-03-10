@@ -44,7 +44,7 @@
 			</form>
 	</div>
 	<script>
-			$('#noticeContent').summernote({
+			$('#boardContent').summernote({
 				height : 300,
 				lang : "ko-KR",
 				callbacks : {
